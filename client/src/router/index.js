@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import Menu from '@/components/Menu'
+import Products from '@/components/Products'
 import Locals from '@/views/Locals'
 
 const routes = [
   { path: '/', name: 'Locals', component: Locals },
-  { path: '/:test', name: 'Menu', component: Menu }
+  { path: '/:id', name: 'Products', component: Products }
 ]
 
 const router = createRouter({

@@ -1,5 +1,5 @@
 <template lang="pug">
-button(@click="goToMenu(local.name)") {{ local.name }}
+button(@click="goToMenu(local.id)") {{ local.name }}
 </template>
 
 <script>
@@ -10,9 +10,8 @@ export default {
   },
 
   methods: {
-    goToMenu (name) {
-      const test = name.replace(/ /g, '-').toLowerCase()
-      this.$router.push({ name: 'Menu', params: { test } })
+    goToMenu (id) {
+      this.$router.push({ name: 'Products', params: { id } })
     }
   }
 }
