@@ -1,10 +1,10 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import Products from '@/components/Products'
-import Locals from '@/views/Locals'
+import Products from '@/views/Products'
+import Restaurants from '@/views/Restaurants'
 
 const routes = [
-  { path: '/', name: 'Locals', component: Locals },
+  { path: '/', name: 'Restaurants', component: Restaurants },
   { path: '/:id', name: 'Products', component: Products }
 ]
 
