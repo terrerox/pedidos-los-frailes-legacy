@@ -10,14 +10,14 @@
           </div>
         </div>
         <div class="mt-12">
-          <p class="font-medium text-xl">My Order 😎</p>
+          <p class="font-medium text-xl">Mi carrito 🛒</p>
         </div>
         <div
           class="mt-12 p-6 bg-purple-800 custom-rounded font-hairline text-xs"
         >
           <div class="flex justify-between items-center">
-            <p class="text-white">625 St Marks Ave</p>
-            <p class="text-yellow-400 cursor-pointer">Edit</p>
+            <p class="text-white">Los Frailes calle #3</p>
+            <p class="text-yellow-400 cursor-pointer">Editar</p>
           </div>
           <div class="flex items-center mt-4">
             <div class="rounded-lg px-2 py-1 timer">

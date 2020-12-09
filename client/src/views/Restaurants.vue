@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import localDB from '@/api/db.js'
-
 import pfRestaurant from '@/components/Restaurant'
 
 export default {
@@ -35,13 +33,22 @@ export default {
   components: { pfRestaurant },
   data () {
     return {
-      title: 'Chukwudi',
-      restaurantsItems: []
+      title: 'Chukwudi'
     }
   },
 
   created () {
-    this.restaurantsItems = localDB
+    try {
+      this.$store.dispatch('getRestaurants')
+    } catch (error) {
+      console.error(error)
+    }
+  },
+
+  computed: {
+    restaurantsItems () {
+      return this.$store.state.restaurants
+    }
   }
 }
 </script>

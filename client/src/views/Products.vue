@@ -26,8 +26,7 @@
 </template>
 
 <script>
-import localDB from '@/api/db.js'
-
+// import { mapActions } from 'vuex'
 import pfProduct from '@/components/Product'
 
 export default {
@@ -35,16 +34,22 @@ export default {
 
   components: { pfProduct },
 
-  data () {
-    return {
-      productsItems: []
+  created () {
+    const id = Number(this.$route.params.id)
+    this.getProducts({ id })
+  },
+
+  methods: {
+    // ...mapActions(['getProducts'])
+    getProducts (id) {
+      this.$store.dispatch('getProducts', id)
     }
   },
 
-  created () {
-    const id = Number(this.$route.params.id)
-    const result = localDB.find(restaurant => restaurant.id === id)
-    this.productsItems = result.products
+  computed: {
+    productsItems () {
+      return this.$store.state.products
+    }
   }
 }
 </script>
