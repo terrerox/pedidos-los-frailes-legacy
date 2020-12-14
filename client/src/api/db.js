@@ -17,7 +17,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -25,7 +25,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]
@@ -47,7 +47,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -55,7 +55,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]
@@ -77,7 +77,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -85,7 +85,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]
@@ -107,7 +107,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -115,7 +115,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]
@@ -137,7 +137,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -145,7 +145,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]
@@ -167,7 +167,7 @@ const _restaurants = [
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 200,
+        price: 200,
         prepTime: '30'
       },
       {
@@ -175,7 +175,7 @@ const _restaurants = [
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
-        prize: 500,
+        price: 500,
         prepTime: '30'
       }
     ]

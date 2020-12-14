@@ -1,6 +1,5 @@
 <template>
   <div
-    @click="goToMenu(product.id)"
     class="shadow-lg relative h-40 custom-rounded cursor-pointer"
     :style="{
       backgroundSize: 'cover',
@@ -15,7 +14,7 @@
       {{ product.prepTimeUnit }}
     </div>
     <div style="bottom: -20px;" class="absolute right-0 w-10 mr-2">
-      <button href="#" class="rounded-full border-2 border-black bg-white">
+      <button class="rounded-full border-2 border-black bg-white" @click="addToCart(product)">
         <svg
           viewBox="0 0 20 20"
           enable-background="new 0 0 20 20"
@@ -51,6 +50,12 @@ export default {
   name: 'Product',
   props: {
     product: { type: Object, required: true }
+  },
+
+  methods: {
+    addToCart (product) {
+      this.$store.dispatch('addProductToCart', product)
+    }
   }
 }
 </script>

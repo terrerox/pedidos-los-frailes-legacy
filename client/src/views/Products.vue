@@ -20,19 +20,19 @@
       v-for="product in productsItems"
       :key="product.id"
     >
-      <pfProduct :product="product" />
+      <Product :product="product" />
     </div>
   </div>
 </template>
 
 <script>
 // import { mapActions } from 'vuex'
-import pfProduct from '@/components/Product'
+import Product from '@/components/Product'
 
 export default {
   name: 'Products',
 
-  components: { pfProduct },
+  components: { Product },
 
   created () {
     const id = Number(this.$route.params.id)

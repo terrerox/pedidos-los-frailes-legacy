@@ -20,17 +20,17 @@
       v-for="restaurant in restaurantsItems"
       :key="restaurant.id"
     >
-      <pfRestaurant :restaurant="restaurant" />
+      <Restaurant :restaurant="restaurant" />
     </div>
   </div>
 </template>
 
 <script>
-import pfRestaurant from '@/components/Restaurant'
+import Restaurant from '@/components/Restaurant'
 
 export default {
   name: 'Restaurants',
-  components: { pfRestaurant },
+  components: { Restaurant },
   data () {
     return {
       title: 'Chukwudi'

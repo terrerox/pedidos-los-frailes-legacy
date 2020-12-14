@@ -1,20 +1,20 @@
 <template>
   <div class="flex" v-cloak id="dribbleShot">
     <div class="main px-16 border-r border-gray-200">
-      <pfHeader/>
+      <Header/>
       <router-view/>
     </div>
-   <pfSidebar/>
+   <Cart/>
   </div>
 </template>
 
 <script>
-import pfHeader from '@/components/layout/Header'
-import pfSidebar from '@/components/layout/Sidebar'
+import Header from '@/components/layout/Header'
+import Cart from '@/components/cart/Cart'
 
 export default {
   name: 'App',
-  components: { pfSidebar, pfHeader }
+  components: { Cart, Header }
 }
 </script>
 

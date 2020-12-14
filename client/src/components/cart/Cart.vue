@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-100 sidebar flex flex-col">
+    <div class="bg-gray-500 sidebar flex flex-col fixed-right">
       <div class="px-6">
         <div class="h-12 mt-8 flex justify-end items-center">
           <i class="fa fa-user"></i>
@@ -27,32 +27,12 @@
             <p class="text-yellow-400 cursor-pointer ml-auto">Choose time</p>
           </div>
         </div>
-        <div
-          v-for="(item, index) in cartItems"
-          :key="index"
-          class="grid grid-cols-4 gap-1 mb-5"
-          :class="{ 'mt-12': index == 0 }"
-        >
-          <div
-            class="h-10 rounded-lg"
-            :style="{
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundImage: 'url(\'' + item.image + '\')'
-            }"
-          ></div>
-          <div class="col-span-2 grid grid-cols-3 text-xxs font-semibold ">
-            <p class="flex justify-center items-center">
-              {{ item.quantity }} <span class="ml-1">x</span>
-            </p>
-            <p class="col-span-2 flex items-center">{{ item.title }}</p>
-          </div>
-          <div
-            class="flex justify-end items-center text-gray-600 font-hairline text-xs"
-          >
-            ${{ item.price }}
-          </div>
-        </div>
+        <cart-item
+          v-for="(cartItem, $index) in cartItems"
+          :cart-item="cartItem"
+          :index="$index"
+          :key="cartItem.id"
+        />
         <div class="grid grid-cols-4 gap-1 mb-5">
           <div class="h-10 rounded-lg bg-orange-200 flex">
             <i class="fa fa-car m-auto text-orange-500"></i>
@@ -71,16 +51,10 @@
       <div class="flex-grow flex flex-col pl-6 justify-end">
         <div class="flex justify-between items-center border-b-2 pb-2">
           <span>Total:</span>
-          <span class="text-xl font-medium pr-6">$25.97</span>
+          <span class="text-xl font-medium pr-6">RD$ {{ cartTotal }}</span>
         </div>
         <div class="flex justify-between pt-4 text-xs font-bold">
           <div class="flex flex-col">
-            <span>Persons</span>
-            <div class="flex items-center mt-3">
-              <span class="border border-r-0 p-2 rounded-l-lg">-</span>
-              <span class="border-b border-t p-2 ">1</span>
-              <span class="border border-l-0 p-2 rounded-r-lg">+</span>
-            </div>
           </div>
           <div class="ml-auto bg-yellow-400 p-6 rounded-l-lg">
             Checkout <i class="ml-3 fa fa-arrow-right"></i>
@@ -91,32 +65,17 @@
 </template>
 
 <script>
+import CartItem from './CartItem'
+import { currency } from '@/filters/currency'
+
 export default {
-  data () {
-    return {
-      cartItems: [
-        {
-          title: 'BBQ Burger',
-          image:
-            'https://hips.hearstapps.com/pop.h-cdn.co/assets/cm/15/05/54ca71fb94ad3_-_5summer_skills_burger_470_0808-de.jpg?crop=1xw:1.0xh;center,top&resize=480:*',
-          quantity: 1,
-          price: 14.99
-        },
-        {
-          title: 'French Fries',
-          image:
-            'https://recipes.timesofindia.com/thumb/54659021.cms?width=1200&height=1200',
-          quantity: 1,
-          price: 9.99
-        },
-        {
-          title: 'Cheese Sauce',
-          image:
-            'https://www.pepperscale.com/wp-content/uploads/2017/10/spicy-nacho-cheese.jpeg',
-          quantity: 1,
-          price: 0.99
-        }
-      ]
+  components: { CartItem },
+  computed: {
+    cartItems () {
+      return this.$store.getters.productsOnCart
+    },
+    cartTotal () {
+      return currency(this.$store.getters.cartTotal)
     }
   }
 }
