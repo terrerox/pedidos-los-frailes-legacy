@@ -14,14 +14,14 @@
       />
     </div>
     <img
-      :src="cartItem.image"
+      :src="cartItem.product.image"
       class="w-12 h-12 my-auto"
       alt="Product image"
     />
     <div class="flex flex-col w-full mx-2 truncate">
-      <span class="text-black-400 truncate">{{ cartItem.title }} </span>
+      <span class="text-black-400 truncate">{{ cartItem.product.title }} </span>
       <div>
-        <span class="text-black-500">RD$ {{ cartItem.price }}</span>
+        <span class="text-black-500">RD$ {{ cartItem.product.price }}</span>
       </div>
     </div>
     <div class="flex items-center text-lg font-bold text-black-500 bg-button">

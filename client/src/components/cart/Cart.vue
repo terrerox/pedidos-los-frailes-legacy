@@ -31,7 +31,7 @@
           v-for="(cartItem, $index) in cartItems"
           :cart-item="cartItem"
           :index="$index"
-          :key="cartItem.id"
+          :key="cartItem.product.id"
         />
         <div class="grid grid-cols-4 gap-1 mb-5">
           <div class="h-10 rounded-lg bg-orange-200 flex">

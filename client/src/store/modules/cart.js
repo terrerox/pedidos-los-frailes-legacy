@@ -1,6 +1,7 @@
+
 export default {
   state: {
-    cart: []
+    cart: JSON.parse(localStorage.getItem('cart')) || []
   },
   mutations: {
     incrementProductQuantity (state, item) {
@@ -13,9 +14,10 @@ export default {
 
     addProductToCart (state, product) {
       state.cart.push({
-        id: product.id,
+        product: product,
         quantity: 1
       })
+      console.log(state.cart)
     },
 
     removeProductFromCart (state, index) {
@@ -24,28 +26,35 @@ export default {
 
     emptyCart (state) {
       state.cart = []
+    },
+
+    setStorage ({ cart }) {
+      const cartItems = JSON.stringify(cart)
+      localStorage.setItem('cart', cartItems)
     }
   },
   actions: {
     addProductToCart (context, product) {
-      const item = context.state.cart.find(item => item.id === product.id)
+      const item = context.state.cart.find(item => item.product.id === product.id)
 
       if (item) {
         context.commit('incrementProductQuantity', item)
       } else {
         context.commit('addProductToCart', product)
       }
+      context.commit('setStorage')
     },
 
     incrementProductQuantity (context, cartItem) {
-      const item = context.state.cart.find(product => product.id === cartItem.id)
+      const item = context.state.cart.find(item => item.product.id === cartItem.product.id)
       if (item) {
         context.commit('incrementProductQuantity', item)
       }
+      context.commit('setStorage')
     },
 
     decrementProductQuantity (context, cartItem) {
-      const item = context.state.cart.find(product => product.id === cartItem.id)
+      const item = context.state.cart.find(item => item.product.id === cartItem.product.id)
       if (!item || item.quantity < 1) {
         return
       }
@@ -54,32 +63,23 @@ export default {
       } else {
         context.commit('decrementProductQuantity', item)
       }
+      context.commit('setStorage')
     },
 
     removeProductFromCart (context, index) {
       context.commit('removeProductFromCart', index)
+      context.commit('setStorage')
     }
 
   },
   getters: {
     productsOnCart (state, getters, rootState) {
-      return state.cart.map((item) => {
-        const product = rootState.products.find(
-          (product) => product.id === item.id
-        )
-        return {
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          image: product.image,
-          quantity: item.quantity
-        }
-      })
+      return state.cart
     },
 
     cartTotal (state, getters) {
-      return getters.productsOnCart.reduce(
-        (total, current) => total + current.price * current.quantity,
+      return state.cart.reduce(
+        (total, current) => total + current.product.price * current.quantity,
         0
       )
     }
