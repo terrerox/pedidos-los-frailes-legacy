@@ -117,6 +117,14 @@ const _restaurants = [
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
         prepTime: '30'
+      },
+      {
+        id: 3,
+        title: 'Pica pollo2',
+        image:
+        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
+        price: 500,
+        prepTime: '30'
       }
     ]
   },

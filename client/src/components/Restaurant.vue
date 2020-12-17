@@ -1,7 +1,7 @@
 <template>
   <div
   @click="goToMenu(restaurant.id)"
-    class="shadow-lg relative h-40 custom-rounded cursor-pointer"
+    class="shadow-lg relative h-40 custom-rounded cursor-pointer hover:opacity-75"
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',

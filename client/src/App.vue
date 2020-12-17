@@ -1,20 +1,10 @@
 <template>
-  <div class="flex" v-cloak id="dribbleShot">
-    <div class="main px-16 border-r border-gray-200">
-      <Header/>
-      <router-view/>
-    </div>
-   <Cart/>
-  </div>
+  <router-view/>
 </template>
 
 <script>
-import Header from '@/components/layout/Header'
-import Cart from '@/components/cart/Cart'
-
 export default {
-  name: 'App',
-  components: { Cart, Header }
+  name: 'App'
 }
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div
-    class="shadow-lg relative h-40 custom-rounded cursor-pointer"
+    @click="addToCart(product)"
+    class="shadow-lg relative h-40 custom-rounded cursor-pointer hover:opacity-75"
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -14,7 +15,7 @@
       {{ product.prepTimeUnit }}
     </div>
     <div style="bottom: -20px;" class="absolute right-0 w-10 mr-2">
-      <button class="rounded-full border-2 border-black bg-white" @click="addToCart(product)">
+      <button class="rounded-full border-2 border-black bg-white">
         <svg
           viewBox="0 0 20 20"
           enable-background="new 0 0 20 20"

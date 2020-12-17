@@ -1,4 +1,3 @@
-
 export default {
   state: {
     cart: JSON.parse(localStorage.getItem('cart')) || []
@@ -17,11 +16,10 @@ export default {
         product: product,
         quantity: 1
       })
-      console.log(state.cart)
     },
 
-    removeProductFromCart (state, index) {
-      state.cart.splice(index, 1)
+    removeProductFromCart (state, id) {
+      state.cart = state.cart.filter(cart => cart.product.id !== id)
     },
 
     emptyCart (state) {
@@ -59,7 +57,7 @@ export default {
         return
       }
       if (item.quantity === 1) {
-        context.commit('removeProductFromCart', item.indexOf)
+        context.commit('removeProductFromCart', item.product.id)
       } else {
         context.commit('decrementProductQuantity', item)
       }
@@ -67,7 +65,7 @@ export default {
     },
 
     removeProductFromCart (context, index) {
-      context.commit('removeProductFromCart', index)
+      context.commit('removeProductFromCart', index.product.id)
       context.commit('setStorage')
     }
 
