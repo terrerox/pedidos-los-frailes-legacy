@@ -47,11 +47,11 @@
           <div class="flex justify-between pt-4 text-xs font-bold mt-5">
             <div class="flex flex-col"></div>
             <div
-              class="ml-auto bg-yellow-400 p-6 rounded-l-lg cursor-pointer"
+              class="ml-auto bg-yellow-400 p-6 rounded-l-lg cursor-pointer hover:opacity-75"
               @click="goToCheckout"
               v-if="!onCheckout"
             >
-              Checkout <i class="ml-3 fa fa-arrow-right"></i>
+              Ordena ya <i class="ml-3 fa fa-arrow-right"></i>
             </div>
           </div>
         </div>
