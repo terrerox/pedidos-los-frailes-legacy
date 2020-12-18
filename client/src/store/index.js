@@ -2,10 +2,12 @@ import api from '@/api/db.js'
 
 import { createStore } from 'vuex'
 import cart from './modules/cart'
+import shop from './modules/shop'
 
 export default createStore({
   modules: {
-    cart
+    cart,
+    shop
   },
   state: {
     restaurants: [],

@@ -43,6 +43,7 @@
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         type="text"
+        v-model="apartment"
         placeholder="Edificio/Apto/Extensión"
       />
     </div>
@@ -51,6 +52,7 @@
       <input
         class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
         type="text"
+        v-model="additionalNotes"
         placeholder="Agregar notas adicionales"
       />
     </div>
@@ -85,6 +87,11 @@ import { currency } from '@/filters/currency'
 
 export default {
   name: 'CheckoutForm',
+
+  data () {
+    return {
+    }
+  },
 
   methods: {
 
