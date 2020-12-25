@@ -1,17 +1,19 @@
 <template>
-  <form class="bg-white rounded shadow-xl p-5" @submit.prevent="addOrder">
+  <form class="bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="addOrder">
     <div class="inline-block mt-2 w-1/2 pr-1">
       <input
         class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
-        v-model="name"
+        v-model="orderInfo.name"
+        required
         placeholder="Nombre"
       />
     </div>
     <div class="inline-block mt-2 w-1/2 pr-1">
       <input
         class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
-        v-model="tel"
-        type="text"
+        v-model="orderInfo.tel"
+        required
+        v-mask="'(###) ###-####'"
         placeholder="Telefono"
       />
     </div>
@@ -19,31 +21,34 @@
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         type="text"
-        v-model="street"
+        required
+        v-model="orderInfo.street"
         placeholder="Calle"
       />
     </div>
     <div class="inline-block mt-2 w-1/2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-        type="text"
-        v-model="number"
+        required
+        v-model="orderInfo.number"
         placeholder="Numero"
       />
     </div>
     <div class="inline-block mt-2 w-1/2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+        required
         type="text"
-        v-model="reference"
+        v-model="orderInfo.reference"
         placeholder="Referencia"
       />
     </div>
     <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+        required
         type="text"
-        v-model="apartment"
+        v-model="orderInfo.apartment"
         placeholder="Edificio/Apto/Extensión"
       />
     </div>
@@ -51,8 +56,9 @@
     <div class="mt-2">
       <input
         class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
+        required
         type="text"
-        v-model="additionalNotes"
+        v-model="orderInfo.additionalNotes"
         placeholder="Agregar notas adicionales"
       />
     </div>
@@ -68,8 +74,6 @@
             checked
           /><span class="ml-2 text-sm text-gray-700">🛵 Pago en entrega</span>
         </label>
-
-        <span class="text-gray-600 text-sm">RD$ {{ cartTotal }}</span>
       </button>
     </div>
     <div class="mt-4 flex justify-center align-center">
@@ -84,22 +88,67 @@
 </template>
 <script>
 import { currency } from '@/filters/currency'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'CheckoutForm',
 
+  directives: { mask },
+
+  props: {
+    restaurantId: { type: Number, required: true }
+  },
+
   data () {
     return {
+      orderInfo: {
+        name: '',
+        tel: '',
+        street: '',
+        number: '',
+        reference: '',
+        apartment: '',
+        additionalNotes: '',
+        paymentMethod: 'Pago en entrega',
+        cartItems: [],
+        restaurantId: this.restaurantId
+      }
     }
   },
 
-  methods: {
+  created () {
+    this.orderInfo.cartItems = this.cartItems
+  },
 
+  methods: {
+    addOrder () {
+      this.$swal({
+        title: '¿Estás seguro de enviar el pedido?',
+        text: 'No podrás revertir esta acción',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true
+      }).then((result) => {
+        if (result.value) {
+          this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
+          this.$store.dispatch('addOrder', this.orderInfo)
+          this.$refs.form.reset()
+          this.cartItems.forEach(cartItem => {
+            this.$store.dispatch('removeProductFromCart', cartItem)
+          })
+          this.$router.push({ name: 'Products' })
+        }
+      })
+    }
   },
 
   computed: {
     cartTotal () {
       return currency(this.$store.getters.cartTotal)
+    },
+    cartItems () {
+      return this.$store.getters.productsOnCart.filter(item => item.product.restaurantId === this.restaurantId)
     }
   }
 }

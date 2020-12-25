@@ -18,7 +18,12 @@ const _restaurants = [
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        rating: 4.7,
+        restaurantId: 1
       },
       {
         id: 2,
@@ -26,7 +31,11 @@ const _restaurants = [
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        restaurantId: 1
       }
     ]
   },
@@ -43,20 +52,28 @@ const _restaurants = [
     range: '$',
     products: [
       {
-        id: 1,
+        id: 3,
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 2
       },
       {
-        id: 2,
+        id: 4,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 2
       }
     ]
   },
@@ -73,20 +90,28 @@ const _restaurants = [
     range: '$$$',
     products: [
       {
-        id: 1,
+        id: 5,
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 3
       },
       {
-        id: 2,
+        id: 6,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 3
       }
     ]
   },
@@ -103,28 +128,40 @@ const _restaurants = [
     range: '$',
     products: [
       {
-        id: 1,
+        id: 7,
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 4
       },
       {
-        id: 2,
+        id: 8,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 4
       },
       {
-        id: 3,
+        id: 453,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 4
       }
     ]
   },
@@ -141,20 +178,28 @@ const _restaurants = [
     range: '$$$',
     products: [
       {
-        id: 1,
+        id: 9,
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 5
       },
       {
-        id: 2,
+        id: 12,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 5
       }
     ]
   },
@@ -171,20 +216,28 @@ const _restaurants = [
     range: '$$$',
     products: [
       {
-        id: 1,
+        id: 211,
         title: 'Pica pollo',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 200,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 6
       },
       {
-        id: 2,
+        id: 234,
         title: 'Pica pollo2',
         image:
         'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/25008305-442083466194421-4458779521922891776-n-1517333246.jpg?crop=1xw:1xh;center,top&resize=480:*',
         price: 500,
-        prepTime: '30'
+        cat1: 'Deli',
+        cat2: 'Bagels',
+        prepTimeValue: '30',
+        prepTimeUnit: 'min',
+        restaurantId: 6
       }
     ]
   }

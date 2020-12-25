@@ -4,16 +4,20 @@
       <div class="h-12 mt-8 flex justify-end items-center">
         <i class="fa fa-user"></i>
         <div class="rounded-lg bg-yellow-400 px-3 font-bold text-xs py-1 ml-6">
-          3
+          2
         </div>
       </div>
       <div class="mt-12">
         <p class="font-bold text-xl">{{ title }} 🛒</p>
       </div>
       <div class="mt-12 p-6 bg-purple-800 custom-rounded font-hairline text-xs">
-        <div class="flex justify-between items-center">
-          <p class="text-white">Los Frailes calle #3</p>
-          <p class="text-yellow-400 cursor-pointer">Editar</p>
+        <div class="flex justify-between items-center mb-4" v-if="onCheckout">
+          <p class="text-white">{{ currentRestaurant.title }}</p>
+          <router-link :to="{ name:'Products' }" class="text-yellow-400 cursor-pointer">Modificar pedido</router-link>
+        </div>
+        <div class="flex items-center">
+          <div class="rounded-lg px-2 py-1 timer"><i class="fa fa-clock text-yellow-400"></i></div>
+          <p class="text-white mx-3">Lo antes posible</p>
         </div>
       </div>
       <template v-if="cartItems.length">
@@ -77,6 +81,9 @@ export default {
     // If it is true will be disabled some functions of cart for review in checkout view
     onCheckout: {
       type: Boolean
+    },
+    restaurantId: {
+      type: Number
     }
   },
 
@@ -91,10 +98,16 @@ export default {
       return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
     },
     cartItems () {
-      return this.$store.getters.productsOnCart
+      return this.$store.getters.productsOnCart.filter(item => item.product.restaurantId === this.restaurantId)
     },
     cartTotal () {
-      return currency(this.$store.getters.cartTotal)
+      return currency(this.cartItems.reduce(
+        (total, current) => total + current.product.price * current.quantity,
+        0
+      ))
+    },
+    currentRestaurant () {
+      return this.$store.state.restaurants.find(restaurant => restaurant.id === this.restaurantId)
     }
   }
 }

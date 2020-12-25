@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 import cart from './modules/cart'
 import shop from './modules/shop'
 
-export default createStore({
+const store = createStore({
   modules: {
     cart,
     shop
@@ -32,3 +32,7 @@ export default createStore({
   },
   getters: {}
 })
+
+export default store
+
+store.dispatch('getRestaurants')

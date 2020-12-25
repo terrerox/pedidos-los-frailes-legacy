@@ -3,10 +3,10 @@
     <div class="main px-16 border-r border-gray-200">
       <Header />
       <div class="leading-loose m-5">
-         <CheckoutForm/>
+         <CheckoutForm :restaurantId="Number(this.$route.params.id)"/>
       </div>
     </div>
-    <Cart :onCheckout="true" />
+    <Cart :onCheckout="true" :restaurantId="Number(this.$route.params.id)" />
   </div>
 </template>
 <script>

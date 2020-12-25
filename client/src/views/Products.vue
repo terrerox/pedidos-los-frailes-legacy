@@ -2,8 +2,11 @@
   <div class="flex" v-cloak id="dribbleShot">
     <div class="main px-16 border-r border-gray-200">
       <Header/>
-      <div class="flex mt-12 items-end">
-        <h3 class="text-xl font-bold">Productos</h3>
+      <div class="mt-12 flex items-center">
+        <router-link :to="{ name: 'Restaurants' }" class="cursor-pointer mr-3">
+          <li class="fas fa-arrow-left"></li>
+        </router-link>
+        <h3 class="text-xl font-bold">Productos de {{ currentRestaurant.title }}</h3>
         <img
           src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/hamburger_1f354.png"
           class="mx-4 h-8 w-8"
@@ -16,11 +19,11 @@
           v-for="product in productsItems"
           :key="product.id"
         >
-          <Product :product="product" />
+          <Product :product="product"/>
         </div>
       </div>
     </div>
-     <Cart />
+     <Cart :restaurantId="restaurantId"/>
   </div>
 </template>
 
@@ -36,8 +39,15 @@ export default {
 
   components: { Product, Cart, Header },
 
+  data () {
+    return {
+      restaurantId: 0
+    }
+  },
+
   created () {
     const id = Number(this.$route.params.id)
+    this.restaurantId = id
     this.getProducts({ id })
   },
 
@@ -51,6 +61,9 @@ export default {
   computed: {
     productsItems () {
       return this.$store.state.products
+    },
+    currentRestaurant () {
+      return this.$store.state.restaurants.find(restaurant => restaurant.id === this.restaurantId)
     }
   }
 }

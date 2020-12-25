@@ -37,20 +37,8 @@ import Header from '@/components/layout/Header'
 
 export default {
   name: 'Restaurants',
-  components: { Restaurant, Header },
-  data () {
-    return {
-      title: 'Chukwudi'
-    }
-  },
 
-  created () {
-    try {
-      this.$store.dispatch('getRestaurants')
-    } catch (error) {
-      console.error(error)
-    }
-  },
+  components: { Restaurant, Header },
 
   computed: {
     restaurantsItems () {

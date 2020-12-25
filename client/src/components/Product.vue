@@ -50,7 +50,10 @@
 export default {
   name: 'Product',
   props: {
-    product: { type: Object, required: true }
+    product: {
+      type: Object,
+      required: true
+    }
   },
 
   methods: {
