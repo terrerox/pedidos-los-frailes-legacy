@@ -1,6 +1,7 @@
 <template>
-  <form class="bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="addOrder">
-    <div class="inline-block mt-2 w-1/2 pr-1">
+  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="addOrder">
+    <p class="col-span-2 text-gray-800 font-bold m-2">Tu información</p>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
         v-model="orderInfo.name"
@@ -8,7 +9,7 @@
         placeholder="Nombre"
       />
     </div>
-    <div class="inline-block mt-2 w-1/2 pr-1">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
         v-model="orderInfo.tel"
@@ -17,7 +18,7 @@
         placeholder="Telefono"
       />
     </div>
-    <div class="inline-block mt-2 w-1/2 pr-1">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         type="text"
@@ -26,7 +27,7 @@
         placeholder="Calle"
       />
     </div>
-    <div class="inline-block mt-2 w-1/2 pr-1">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         required
@@ -34,7 +35,7 @@
         placeholder="Numero"
       />
     </div>
-    <div class="inline-block mt-2 w-1/2 pr-1">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         required
@@ -43,7 +44,7 @@
         placeholder="Referencia"
       />
     </div>
-    <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <input
         class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
         required
@@ -52,8 +53,8 @@
         placeholder="Edificio/Apto/Extensión"
       />
     </div>
-    <p class="text-gray-800 font-medium mt-2">Notas adicionales</p>
-    <div class="mt-2">
+    <div class="col-span-2 mt-2">
+      <p class="text-gray-800 font-medium mt-2">Notas adicionales</p>
       <input
         class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
         required
@@ -62,8 +63,8 @@
         placeholder="Agregar notas adicionales"
       />
     </div>
-    <p class="mt-4 text-gray-800 font-medium">Métodos de pago</p>
-    <div class="flex flex-col flex-wrap">
+    <div class="col-span-2 flex flex-col flex-wrap">
+      <p class="mt-4 text-gray-800 font-medium">Métodos de pago</p>
       <button
         class="flex items-center justify-between bg-white rounded-md border-2 border-blue-500 p-4 focus:outline-none"
       >
@@ -76,7 +77,7 @@
         </label>
       </button>
     </div>
-    <div class="mt-4 flex justify-center align-center">
+    <div class="mt-4 col-span-2 flex justify-center align-center">
       <button
         class="px-4 py-1 text-white font-bold bg-purple-800 custom-rounded hover:opacity-75"
         type="submit"

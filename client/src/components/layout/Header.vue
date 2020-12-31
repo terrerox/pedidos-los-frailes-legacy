@@ -1,24 +1,28 @@
 <template>
-  <div class="h-12 mt-8 flex items-center">
-    <h6 class="font-bold text-lg mx-10">{{ title }}</h6>
-    <div
-      class="flex items-center ml-auto bg-gray-100 self-stretch custom-rounded px-4 w-2/3"
-    >
-      <i class="fa fa-search"></i>
-      <input
-        type="text"
-        class="px-4 self-stretch bg-transparent flex-grow outline-none"
-        placeholder="Search"
-      />
-    </div>
+  <div class="sticky top-0 w-full p-4 shadow-md z-10 bg-purple-800 flex items-center">
+    <img class="cursor-pointer ml-4" :src="arrowBack" @click="goBack" />
+    <h6 class="font-bold text-lg ml-6 text-white">{{ title }}</h6>
   </div>
 </template>
 
 <script>
+import arrowBack from '@/assets/arrow-back.png'
+
 export default {
+  props: {
+    title: { type: String, required: true },
+    backTo: { type: String, required: true }
+  },
+
   data () {
     return {
-      title: 'Pedidos los Frailes'
+      arrowBack: arrowBack
+    }
+  },
+
+  methods: {
+    goBack () {
+      return this.$router.push({ name: this.backTo })
     }
   }
 }

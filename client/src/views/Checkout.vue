@@ -1,23 +1,34 @@
 <template>
-  <div class="flex" v-cloak id="dribbleShot">
-    <div class="main px-16 border-r border-gray-200">
-      <Header />
-      <div class="leading-loose m-5">
-         <CheckoutForm :restaurantId="Number(this.$route.params.id)"/>
+  <div v-cloak id="dribbleShot">
+    <Header title="Confirmación" backTo="Products"/>
+    <section class="main">
+      <div class="flex flex-col-reverse lg:flex-row">
+        <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
+          <CheckoutForm :restaurantId="curentRestaurantId" />
+        </div>
+        <Cart
+          :onCheckout="true"
+          :restaurantId="curentRestaurantId"
+        />
       </div>
-    </div>
-    <Cart :onCheckout="true" :restaurantId="Number(this.$route.params.id)" />
+    </section>
   </div>
 </template>
 <script>
+import Header from '@/components/layout/Header'
+
 import Cart from '@/components/cart/Cart'
 import CheckoutForm from '@/components/forms/CheckoutForm'
-
-import Header from '@/components/layout/Header'
 
 export default {
   name: 'Checkout',
 
-  components: { Cart, Header, CheckoutForm }
+  components: { Cart, CheckoutForm, Header },
+
+  data () {
+    return {
+      curentRestaurantId: Number(this.$route.params.id)
+    }
+  }
 }
 </script>
