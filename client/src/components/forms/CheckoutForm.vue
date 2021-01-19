@@ -111,8 +111,8 @@ export default {
         apartment: '',
         additionalNotes: '',
         paymentMethod: 'Pago en entrega',
-        cartItems: [],
-        restaurantId: this.restaurantId
+        restaurantId: this.restaurantId,
+        cartItems: []
       }
     }
   },
@@ -135,10 +135,10 @@ export default {
           this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
           this.$store.dispatch('addOrder', this.orderInfo)
           this.$refs.form.reset()
-          this.cartItems.forEach(cartItem => {
+          this.cartItems.map(cartItem => {
             this.$store.dispatch('removeProductFromCart', cartItem)
           })
-          this.$router.push({ name: 'Products' })
+          this.$router.push({ name: 'Shop' })
         }
       })
     }

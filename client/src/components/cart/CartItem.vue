@@ -3,16 +3,11 @@
     class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 bg-purple-800 custom-rounded"
   >
     <div
-      class="absolute top-0 left-0 w-4 h-4 rounded-full cursor-pointer select-none bg-button bg-white"
-      @click="remove"
+      class="absolute top-0 left-0 w-4 h-4 text-center transition bg-purple-800 rounded-full border border-white cursor-pointer shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none"
+      @click="remove(cartItem)"
       v-if="!onCheckout"
     >
-      <img
-        :src="cancel"
-        alt="Remove from cart"
-        draggable="false"
-        class="pointer-events-none"
-      />
+      <svg fill="#ffff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
     </div>
     <img
       :src="cartItem.product.image"
@@ -22,11 +17,11 @@
     <div class="flex flex-col w-full mx-2 truncate">
       <span class="text-white truncate">{{ cartItem.product.title }} </span>
       <div>
-        <span class="text-white">RD$ {{ cartItem.product.price }}</span>
+        <span class="text-white">DOP {{ cartItem.product.price }}</span>
       </div>
     </div>
     <div class="flex items-center text-lg font-bold text-white-500 bg-button">
-      <div class="w-6 cursor-pointer select-none" @click="decrement" v-if="!onCheckout" >
+      <div class="w-6 cursor-pointer select-none" @click="decrement(cartItem)" v-if="!onCheckout" >
         <img
           :src="minus"
           alt="-"
@@ -41,7 +36,7 @@
         :value="cartItem.quantity"
         class="w-8 py-3 font-bold text-center text-white bg-transparent"
       />
-      <div class="w-6 cursor-pointer select-none" @click="increment" v-if="!onCheckout">
+      <div class="w-6 cursor-pointer select-none" @click="increment(cartItem)" v-if="!onCheckout">
         <img
           :src="plus"
           alt="+"
@@ -54,6 +49,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 import plus from '@/assets/plus.png'
 import minus from '@/assets/minus.png'
 import cancel from '@/assets/cancel.png'
@@ -78,16 +75,11 @@ export default {
     }
   },
   methods: {
-    remove () {
-      this.$store.dispatch('removeProductFromCart', this.cartItem)
-    },
-    increment () {
-      this.$store.dispatch('incrementProductQuantity', this.cartItem)
-    },
-    decrement () {
-      this.$store.dispatch('decrementProductQuantity', this.cartItem)
-    }
-
+    ...mapActions({
+      remove: 'removeProductFromCart',
+      increment: 'incrementProductQuantity',
+      decrement: 'decrementProductQuantity'
+    })
   }
 }
 </script>

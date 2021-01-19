@@ -1,6 +1,6 @@
 <template>
   <div v-cloak id="dribbleShot">
-    <Header title="Productos" backTo="Restaurants"/>
+    <Header title="Tienda" backTo="Home"/>
     <section class="main">
       <HeroSection :heroData="currentRestaurant" />
       <div class="flex flex-col-reverse lg:flex-row">
@@ -65,7 +65,7 @@ import Header from '@/components/layout/Header'
 import { currency } from '@/filters/currency'
 
 export default {
-  name: 'Products',
+  name: 'Shop',
 
   components: { Product, Cart, HeroSection, Header },
 
@@ -78,14 +78,11 @@ export default {
   created () {
     const id = Number(this.$route.params.id)
     this.restaurantId = id
-    this.getProducts({ id })
+    this.$store.dispatch('getProducts', id)
+    this.$store.dispatch('getRestaurant', id)
   },
 
   methods: {
-    // ...mapActions(['getProducts'])
-    getProducts (id) {
-      this.$store.dispatch('getProducts', id)
-    },
     goToCheckout () {
       this.$router.push({ name: 'Checkout' })
     }
@@ -93,7 +90,7 @@ export default {
 
   computed: {
     productsItems () {
-      return this.$store.state.products
+      return this.$store.getters.products
     },
     cartItems () {
       return this.$store.getters.productsOnCart.filter(
@@ -109,9 +106,7 @@ export default {
       )
     },
     currentRestaurant () {
-      return this.$store.state.restaurants.find(
-        restaurant => restaurant.id === this.restaurantId
-      )
+      return this.$store.getters.currentRestaurant
     }
   }
 }

@@ -11,4 +11,6 @@ import './styles/tailwind.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
+import 'normalize.css'
+
 createApp(App).use(router).use(store).use(VueSweetalert2).mount('#app')

@@ -9,7 +9,7 @@
         <div class="flex justify-between items-center mb-4" v-if="onCheckout">
           <p class="text-white">{{ currentRestaurant.title }}</p>
           <router-link
-            :to="{ name: 'Products' }"
+            :to="{ name: 'Shop' }"
             class="text-yellow-400 cursor-pointer"
             >Modificar pedido</router-link
           >
@@ -39,7 +39,7 @@
       <div class="grid grid-cols-2 gap-1 mt-2">
         <span class="text-black text-2xl font-bold">Total</span>
         <div class="text-right">
-          <span class="text-black text-xl font-bold">RD$ {{ cartTotal }}</span>
+          <span class="text-black text-xl font-bold">DOP {{ cartTotal }}</span>
         </div>
       </div>
       <div class="max-w-sm my-4 m-auto hidden lg:block" v-if="!onCheckout">
@@ -73,6 +73,10 @@ export default {
     }
   },
 
+  created () {
+    this.$store.dispatch('getRestaurant', this.restaurantId)
+  },
+
   computed: {
     title () {
       return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
@@ -91,9 +95,7 @@ export default {
       )
     },
     currentRestaurant () {
-      return this.$store.state.restaurants.find(
-        restaurant => restaurant.id === this.restaurantId
-      )
+      return this.$store.getters.currentRestaurant
     }
   }
 }

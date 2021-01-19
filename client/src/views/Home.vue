@@ -64,7 +64,7 @@ export default {
 
   computed: {
     restaurantsItems () {
-      return this.$store.state.restaurants
+      return this.$store.getters.restaurants
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div
-  @click="goToMenu(restaurant.id)"
+  @click="goToShop(restaurant.id)"
     class="shadow-lg relative h-40 custom-rounded cursor-pointer hover:opacity-75"
     :style="{
       backgroundSize: 'cover',
@@ -28,8 +28,8 @@ export default {
   },
 
   methods: {
-    goToMenu (id) {
-      this.$router.push({ name: 'Products', params: { id } })
+    goToShop (id) {
+      this.$router.push({ name: 'Shop', params: { id } })
     }
   }
 }

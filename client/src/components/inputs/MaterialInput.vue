@@ -1,31 +1,19 @@
 <template>
-  <div class="mb-4 relative">
-    <input
-      class="input appearance-none outline-none relative bg-transparent rounded w-full px-4 py-3 border focus:border-2 active:border-2 focus:border-opacity-54 active:border-opacity-54"
-      :class="[
-        { filled: value && value.length > 0 },
-        error
-          ? 'border-red-600 placeholder-red-600'
-          : 'border-white border-opacity-38'
-      ]"
-      :id="idName"
-      :type="type"
-      min="0"
-      :step="step"
-      :value="value"
-      @blur="$emit('input', $event.target.value)"
-      :pattern="pattern"
-      :placeholder="placeholder || label"
-    />
-    <span v-if="symbol" :style="getSymbol" class="input-symbol right"></span>
-    <label
-      :for="idName"
-      class="label bg-secondary absolute mb-0 top-0 left-0 mt-3 ml-3 cursor-text"
-      :class="[error ? 'text-red-600' : 'text-white text-opacity-50', labelBg]"
-    >
-      {{ label }}
-    </label>
-    <slot></slot>
+  <div class="md-input-main mb-3">
+    <div class="md-input-box">
+      <input
+        class="md-input"
+        :id="idName"
+        :type="type"
+        min="0"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        :pattern="pattern"
+        :placeholder="placeholder || label"
+      />
+      <label :for="idName" class="md-label">{{ label }}</label>
+      <div class="md-input-underline" />
+    </div>
   </div>
 </template>
 
@@ -34,8 +22,9 @@ import { randomId } from '@/helpers.js'
 
 export default {
   name: 'TextInput',
+
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: null
     },
@@ -53,93 +42,86 @@ export default {
       type: String,
       default: 'text'
     },
-    step: {
-      type: String,
-      default: '1'
-    },
-    error: {
-      default: Boolean
-    },
     idName: {
       type: String,
       default: randomId
     },
     labelBg: {
       type: String
-    },
-    symbol: {
-      type: String,
-      default: null
     }
   },
-  computed: {
-    getSymbol () {
-      return {
-        '--symbol': `'${this.symbol}'`
-      }
+  methods: {
+    updateSelf (name) {
+      this.$emit('input', name)
     }
   }
 }
 </script>
 
-<style scoped>
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type='number'] {
-  -moz-appearance: textfield;
-}
-
-.input {
-  transition: border 0.2s ease-in-out;
-  z-index: 2;
-}
-
-.label {
-  transition: all 0.2s ease-out;
-  transition: all 200ms;
-  opacity: 0;
-  padding: 0 5px;
-  z-index: 1;
-}
-
-.input:focus + .label,
-.input:active + .label,
-.input.filled + .label {
-  font-size: 0.75rem;
-  transition: all 0.2s ease-out;
-  top: -1.3rem;
-  opacity: 1;
-  display: block;
-  z-index: 3;
-}
-
-.input:focus::placeholder {
+<style>
+.md-input::placeholder {
   color: transparent;
 }
 
-.right {
-  top: 50%;
-  right: 5px;
+.md-input-main {
+  width: 100%;
+  font-size: 1.25rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
-.input-symbol input {
-  padding-right: 18px;
-  text-align: end;
+.md-input-box {
+  @apply relative;
+  position: relative;
 }
-
-.input-symbol:before {
+.md-input {
+  @apply w-full;
+  width: 100%;
+  outline: none;
+  height: 50px;
+}
+.md-label {
+  display: block;
   position: absolute;
-  top: 25%;
-  content: var(--symbol);
+  pointer-events: none;
+  transform-origin: top left;
+  transform: translate(0, -40px) scale(1);
+  transition: color 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
-
-.input-symbol.right::before {
-  right: 6px;
+.md-label-focus {
+  color: #3182ce;
+  transform: translate(0, -65px) scale(0.75);
+  transform-origin: top left;
 }
+.md-input-underline {
+  border-bottom: 1px solid #718096;
+}
+.md-input-underline:after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  bottom: -0.05rem;
+  content: "";
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  transform: scaleX(0);
+  border-bottom: 2px solid #805ad5;
+}
+.md-input:focus ~ .md-input-underline:after {
+  transform: scaleX(1);
+}
+.md-input:focus + .md-label,
+.md-input:not(:placeholder-shown) + .md-label {
+  @apply md-label-focus;
+  color: #3182ce;
+  transform: translate(0, -65px) scale(0.75);
+  transform-origin: top left;
+}
+/* enable to leave border-bottom in modified color when the field is populated */
+/*
+.md-input:not(:placeholder-shown) ~ .md-input-underline:after {
+transform: scaleX(1);
+}
+*/
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div v-cloak id="dribbleShot">
-    <Header title="Confirmación" backTo="Products"/>
+    <Header title="Confirmación" backTo="Shop"/>
     <section class="main">
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
-          <CheckoutForm :restaurantId="curentRestaurantId" />
+          <CheckoutForm :restaurantId="currentRestaurantId" />
         </div>
         <Cart
           :onCheckout="true"
-          :restaurantId="curentRestaurantId"
+          :restaurantId="currentRestaurantId"
         />
       </div>
     </section>
@@ -27,7 +27,7 @@ export default {
 
   data () {
     return {
-      curentRestaurantId: Number(this.$route.params.id)
+      currentRestaurantId: Number(this.$route.params.id)
     }
   }
 }

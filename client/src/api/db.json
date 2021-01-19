@@ -1,0 +1,273 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "title": "Bagel Story",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "prepTimeValue": "25 - 30",
+      "prepTimeUnit": "min",
+      "rating": 4.7,
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "range": "$$"
+    },
+    {
+      "id": 2,
+      "title": "Bagel Story",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "prepTimeValue": "25 - 30",
+      "prepTimeUnit": "min",
+      "rating": 4.7,
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "range": "$$"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Pica pollo",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "price": 200,
+      "prepTimeValue": "30",
+      "prepTimeUnit": "min",
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "rating": 4.7,
+      "restaurantId": 1
+    },
+    {
+      "id": 2,
+      "title": "Pica pollo2",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "price": 500,
+      "prepTimeValue": "30",
+      "prepTimeUnit": "min",
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "restaurantId": 1
+    },
+    {
+      "id": 3,
+      "title": "Pica pollo",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "price": 200,
+      "prepTimeValue": "30",
+      "prepTimeUnit": "min",
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "rating": 4.7,
+      "restaurantId": 2
+    },
+    {
+      "id": 4,
+      "title": "Pica pollo2",
+      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+      "price": 500,
+      "prepTimeValue": "30",
+      "prepTimeUnit": "min",
+      "cat1": "Deli",
+      "cat2": "Bagels",
+      "restaurantId": 2
+    },
+    {
+      "title": "klñkñl",
+      "image": "",
+      "price": "ñlkñl",
+      "cat1": "kñlkñl",
+      "cat2": "kñlk",
+      "prepTimeValue": "ñlkñl",
+      "prepTimeUnit": "kñlkñlk",
+      "restaurantId": 2,
+      "id": 5
+    }
+  ],
+  "orders": [
+    {
+      "name": "franci",
+      "tel": "(909) 090-9090",
+      "street": "980980",
+      "number": "8908",
+      "reference": "9809",
+      "apartment": "80980",
+      "additionalNotes": "908098",
+      "paymentMethod": "Pago en entrega",
+      "cartItems": [
+        {
+          "product": {
+            "id": 11,
+            "title": "Pica pollo",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 200,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "rating": 4.7,
+            "restaurantId": 2
+          },
+          "quantity": 1
+        }
+      ],
+      "restaurantId": 2,
+      "id": 1
+    },
+    {
+      "name": "lol",
+      "tel": "(867) 687-6876",
+      "street": "76",
+      "number": "76",
+      "reference": "767",
+      "apartment": "6767",
+      "additionalNotes": "7676",
+      "paymentMethod": "Pago en entrega",
+      "restaurantId": 2,
+      "cartItems": [
+        {
+          "product": {
+            "id": 21,
+            "title": "Pica pollo2",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 500,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "restaurantId": 2
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 11,
+            "title": "Pica pollo",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 200,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "rating": 4.7,
+            "restaurantId": 2
+          },
+          "quantity": 1
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "leslie",
+      "tel": "(809) 382-1920",
+      "street": "6",
+      "number": "9",
+      "reference": "detras de tu culo",
+      "apartment": "E",
+      "additionalNotes": "jodete coñA",
+      "paymentMethod": "Pago en entrega",
+      "restaurantId": 1,
+      "cartItems": [
+        {
+          "product": {
+            "id": 2,
+            "title": "Pica pollo2",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 500,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "restaurantId": 1
+          },
+          "quantity": 6
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "lonely",
+      "tel": "(232) 323-2332",
+      "street": "lol",
+      "number": "lol",
+      "reference": "lol",
+      "apartment": "lol",
+      "additionalNotes": "lol",
+      "paymentMethod": "Pago en entrega",
+      "restaurantId": 2,
+      "cartItems": [
+        {
+          "product": {
+            "id": 21,
+            "title": "Pica pollo2",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 500,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "restaurantId": 2
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 11,
+            "title": "Pica pollo",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 200,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "rating": 4.7,
+            "restaurantId": 2
+          },
+          "quantity": 5
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "nun",
+      "tel": "(566) 666-6666",
+      "street": "fs",
+      "number": "5fs",
+      "reference": "sfsf",
+      "apartment": "sfsf",
+      "additionalNotes": "fff",
+      "paymentMethod": "Pago en entrega",
+      "restaurantId": 2,
+      "cartItems": [
+        {
+          "product": {
+            "id": 11,
+            "title": "Pica pollo",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 200,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "rating": 4.7,
+            "restaurantId": 2
+          },
+          "quantity": 1
+        },
+        {
+          "product": {
+            "id": 21,
+            "title": "Pica pollo2",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 500,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "restaurantId": 2
+          },
+          "quantity": 7
+        }
+      ],
+      "id": 5
+    }
+  ]
+}
