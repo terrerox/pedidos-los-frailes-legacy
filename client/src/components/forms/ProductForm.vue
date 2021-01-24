@@ -1,5 +1,5 @@
 <template>
-  <form class="grid grid-cols-2 gap-2">
+  <form class="grid grid-cols-2 gap-2" ref="form">
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
@@ -8,11 +8,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
-        required
-        label="Precio"
-        v-model="product.price"
-      />
+      <material-input required label="Precio" v-model="product.price" />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
@@ -23,11 +19,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
-        required
-        label="Categoria 2"
-        v-model="product.cat2"
-      />
+      <material-input required label="Categoria 2" v-model="product.cat2" />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
@@ -61,14 +53,17 @@ import MaterialInput from '@/components/inputs/MaterialInput'
 export default {
   name: 'ProductForm',
 
+  components: { MaterialInput },
+
   props: {
-    isEditing: { type: Number },
+    isEditingId: { type: Number },
     resownerId: { type: Number, required: true }
   },
 
   data () {
     return {
       product: {
+        id: 0,
         title: '',
         image: '',
         price: '',
@@ -81,19 +76,56 @@ export default {
     }
   },
 
-  methods: {
-    submitProduct () {
-      if (this.isEditing) {
-        console.log('editing')
-        return
-      }
-      this.$store.dispatch('addProduct', this.product)
+  created () {
+    if (this.isEditingId) {
+      this.getProduct(this.isEditingId)
+      this.setProductForEdit()
     }
   },
-  components: { MaterialInput }
+  computed: {
+    productForEdit () {
+      return this.$store.getters.product
+    }
+  },
+  methods: {
+    submitProduct () {
+      if (this.isEditingId) {
+        this.$store.dispatch('updateProduct', this.product)
+        this.$refs.form.reset()
+        this.$swal('Actualizado', 'Producto actualizado con éxito', 'success')
+        return
+      }
+      this.$store.dispatch('addProduct', {
+        id: Date.now(),
+        title: this.product.title,
+        image: this.product.image,
+        price: this.product.price,
+        cat1: this.product.cat1,
+        cat2: this.product.cat2,
+        prepTimeValue: this.product.prepTimeValue,
+        prepTimeUnit: this.product.prepTimeUnit,
+        restaurantId: this.product.restaurantId
+      })
+      this.$swal('Agregado', 'Producto agregado con éxito', 'success')
+      this.$refs.form.reset()
+      this.$emit('close')
+    },
+    getProduct (productId) {
+      this.$store.commit('setProduct', productId)
+    },
+    setProductForEdit () {
+      this.product.id = this.productForEdit.id
+      this.product.title = this.productForEdit.title
+      this.product.price = this.productForEdit.price
+      this.product.cat1 = this.productForEdit.cat1
+      this.product.cat2 = this.productForEdit.cat2
+      this.product.prepTimeValue = this.productForEdit.prepTimeValue
+      this.product.prepTimeUnit = this.productForEdit.prepTimeUnit
+      this.product.restaurantId = this.productForEdit.restaurantId
+    },
+    isEmpty (obj) {}
+  }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

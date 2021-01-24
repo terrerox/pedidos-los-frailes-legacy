@@ -15,7 +15,7 @@
     </div>
     <div style="top: -20px;" class="absolute right-0 w-7">
       <button
-        @click="this.$emit('openModal')"
+        @click="this.$emit('openModal', product.id)"
         class="inline-block p-3 text-center text-white transition bg-purple-800 rounded-full shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none"
       >
         <svg
@@ -80,20 +80,30 @@ export default {
   },
 
   emits: {
-    openModal: () => {
-      return 1
+    openModal: id => {
+      return id
     }
   },
 
   methods: {
     deleteProduct (id) {
-      const warning = confirm('Are you sure to delete this product?')
-      if (warning) {
-        this.$store.dispatch('deleteProduct', {
-          id,
-          index: this.index
-        })
-      }
+      this.$swal({
+        title: '¿Estás seguro de eliminar este producto?',
+        text: 'No podrás revertir esta acción',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true,
+        icon: 'warning'
+      }).then((result) => {
+        if (result.value) {
+          this.$swal('Eliminado', 'Producto eliminado con éxito', 'success')
+          this.$store.dispatch('deleteProduct', {
+            id,
+            index: this.index
+          })
+        }
+      })
     }
   }
 }

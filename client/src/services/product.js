@@ -7,13 +7,18 @@ productService.getAll = () => {
     .then(res => res.data)
 }
 
-productService.getById = (id) => {
+productService.getById = id => {
   return httpClient.get(`/products/${id}`)
     .then(res => res.data)
 }
 
 productService.addProduct = product => {
   return httpClient.post('/products', product)
+}
+
+productService.updateProduct = product => {
+  return httpClient.put(`/products/${product.id}`, product)
+    .then(res => res.data)
 }
 
 productService.deleteProduct = id => {

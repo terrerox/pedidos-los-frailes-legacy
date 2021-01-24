@@ -17,18 +17,18 @@
               </h3>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                @click="toggleModal()"
+                @click="this.$emit('close')"
               >
                 <span
-                  class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
+                  class="bg-transparent text-red opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
                 >
-                  ×
+                  x
                 </span>
               </button>
             </div>
             <!--body-->
             <div class="relative p-6 flex-auto">
-                <ProductForm :isEditing="isEditing" :resownerId="resownerId" ref="form"/>
+                <ProductForm :isEditingId="isEditingId" :resownerId="resownerId" ref="form"/>
             </div>
             <!--footer-->
             <div
@@ -44,7 +44,7 @@
               </button>
               <button
                 class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
-                @click="$refs.form.submitProduct()"
+                @click="[this.$refs.form.submitProduct(), this.$emit('close')]"
                 style="transition: all .15s ease"
               >
                 {{ btnTitle }}
@@ -66,7 +66,7 @@ export default {
   components: { ProductForm },
 
   props: {
-    isEditing: { type: Number },
+    isEditingId: { type: Number },
     resownerId: { type: Number, required: true }
   },
 
@@ -78,10 +78,10 @@ export default {
 
   computed: {
     modalTitle () {
-      return this.isEditing ? 'Editar producto' : 'Agregar producto'
+      return this.isEditingId ? 'Editar producto' : 'Agregar producto'
     },
     btnTitle () {
-      return this.isEditing ? 'Editar' : 'Agregar'
+      return this.isEditingId ? 'Editar' : 'Agregar'
     }
   }
 }

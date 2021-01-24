@@ -2,7 +2,7 @@
   <div v-cloak id="dribbleShot">
     <Header title="Tienda" backTo="Home" @openModal="showOwnerModal" />
     <section class="main">
-      <ProductModal v-show="isModalVisible" @close="closeModal" :isEditing="isEditing" :resownerId="resownerId" />
+      <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId" :resownerId="resownerId" />
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
       <HeroSectionOwner :heroData="currentRestaurant" />
       <div class="flex flex-col-reverse lg:flex-row">
@@ -85,7 +85,7 @@ export default {
       plus: plus,
       isModalVisible: false,
       isOwnerModalVisible: false,
-      isEditing: 0
+      isEditingId: 0
     }
   },
 
@@ -103,9 +103,9 @@ export default {
     closeOwnerModal () {
       this.isOwnerModalVisible = false
     },
-    showModal (isEditing) {
+    showModal (isEditingId) {
       this.isModalVisible = true
-      this.isEditing = Number(isEditing)
+      this.isEditingId = Number(isEditingId)
     },
     closeModal () {
       this.isModalVisible = false

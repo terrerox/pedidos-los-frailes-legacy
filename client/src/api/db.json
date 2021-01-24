@@ -61,25 +61,25 @@
     },
     {
       "id": 4,
-      "title": "Pica pollo2",
-      "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
-      "price": 500,
-      "prepTimeValue": "30",
-      "prepTimeUnit": "min",
+      "title": "Desserts",
+      "image": "",
+      "price": "5000",
       "cat1": "Deli",
       "cat2": "Bagels",
+      "prepTimeValue": "30",
+      "prepTimeUnit": "min",
       "restaurantId": 2
     },
     {
-      "title": "klñkñl",
+      "id": 1611519982959,
+      "title": "pizza",
       "image": "",
-      "price": "ñlkñl",
-      "cat1": "kñlkñl",
-      "cat2": "kñlk",
-      "prepTimeValue": "ñlkñl",
-      "prepTimeUnit": "kñlkñlk",
-      "restaurantId": 2,
-      "id": 5
+      "price": "200",
+      "cat1": "sdfsdf",
+      "cat2": "sdfsdf",
+      "prepTimeValue": "1",
+      "prepTimeUnit": "hr",
+      "restaurantId": 1
     }
   ],
   "orders": [
@@ -268,6 +268,49 @@
         }
       ],
       "id": 5
+    },
+    {
+      "name": "kakalos",
+      "tel": "(809) 458-4953",
+      "street": "8",
+      "number": "12",
+      "reference": "un carro blanco parao",
+      "apartment": "40",
+      "additionalNotes": "no quiero cachu aguao, mayonesa helmans y mostaza",
+      "paymentMethod": "Pago en entrega",
+      "restaurantId": 2,
+      "cartItems": [
+        {
+          "product": {
+            "id": 3,
+            "title": "Pica pollo",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 200,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "rating": 4.7,
+            "restaurantId": 2
+          },
+          "quantity": 6
+        },
+        {
+          "product": {
+            "id": 4,
+            "title": "Pica pollo2",
+            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
+            "price": 500,
+            "prepTimeValue": "30",
+            "prepTimeUnit": "min",
+            "cat1": "Deli",
+            "cat2": "Bagels",
+            "restaurantId": 2
+          },
+          "quantity": 8
+        }
+      ],
+      "id": 6
     }
   ]
 }
