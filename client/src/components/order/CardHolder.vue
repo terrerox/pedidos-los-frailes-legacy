@@ -2,9 +2,11 @@
   <div class="bg-white rounded shadow transition-all duration-300 px-4 py-4">
     <div v-if="getOrders.length">
       <h2 class="font-bold text-xl textcenter mb-8">Pedidos 📝</h2>
-      <template v-for="order in getOrders" :key="order.name">
-        <CardOrder :order="order" />
-      </template>
+      <transition-group name="order">
+        <template v-for="(order, $index) in getOrders" :key="order.name">
+          <CardOrder :order="order" :index="$index" />
+        </template>
+      </transition-group>
     </div>
     <EmptyOrders v-else />
   </div>
@@ -35,4 +37,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.order-enter,
+.order-leave-to {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+</style>

@@ -78,7 +78,7 @@
       <div class="px-2 flex flex-row justify-between">
         <button
           class="px-4 py-1 text-white font-bold bg-purple-600 custom-rounded hover:opacity-75"
-          type="submit"
+          @click="sendOrder(order.id)"
         >
           Enviar orden
         </button>
@@ -102,7 +102,8 @@ export default {
   components: { OrderCartItem },
 
   props: {
-    order: { type: Object, required: true }
+    order: { type: Object, required: true },
+    index: { type: Number, required: true }
   },
 
   data () {
@@ -110,6 +111,28 @@ export default {
       active: false,
       plus: plus,
       minus: minus
+    }
+  },
+
+  methods: {
+    sendOrder (id) {
+      this.$swal({
+        title: '¿Estás seguro de enviar este producto?',
+        text: 'No podrás revertir esta acción',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true,
+        icon: 'warning'
+      }).then((result) => {
+        if (result.value) {
+          this.$swal('Enviado', 'Producto se ha enviado con éxito', 'success')
+          this.$store.dispatch('deleteOrder', {
+            id,
+            index: this.index
+          })
+        }
+      })
     }
   },
 

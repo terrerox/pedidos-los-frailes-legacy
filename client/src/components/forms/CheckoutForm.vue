@@ -2,65 +2,57 @@
   <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="addOrder">
     <p class="col-span-2 text-gray-800 font-bold m-2">Tu información</p>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
+      <material-input
         v-model="orderInfo.name"
         required
-        placeholder="Nombre"
+        label="Nombre"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-1 text-gray-700 bg-gray-200 rounded"
+      <material-input
         v-model="orderInfo.tel"
         required
         v-mask="'(###) ###-####'"
-        placeholder="Telefono"
+        label="Telefono"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+      <material-input
         type="text"
         required
         v-model="orderInfo.street"
-        placeholder="Calle"
+        label="Calle"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+      <material-input
         required
         v-model="orderInfo.number"
-        placeholder="Numero"
+        label="Numero"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+      <material-input
         required
         type="text"
         v-model="orderInfo.reference"
-        placeholder="Referencia"
+        label="Referencia"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <input
-        class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
+      <material-input
         required
         type="text"
         v-model="orderInfo.apartment"
-        placeholder="Edificio/Apto/Extensión"
+        label="Edificio/Apto/Extensión"
       />
     </div>
     <div class="col-span-2 mt-2">
-      <p class="text-gray-800 font-medium mt-2">Notas adicionales</p>
-      <input
-        class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
+      <material-input
         required
         type="text"
         v-model="orderInfo.additionalNotes"
-        placeholder="Agregar notas adicionales"
+        label="Agregar notas adicionales"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">
@@ -91,10 +83,14 @@
 import { currency } from '@/filters/currency'
 import { mask } from 'vue-the-mask'
 
+import MaterialInput from '@/components/inputs/MaterialInput'
+
 export default {
   name: 'CheckoutForm',
 
   directives: { mask },
+
+  components: { MaterialInput },
 
   props: {
     restaurantId: { type: Number, required: true }
@@ -123,6 +119,11 @@ export default {
 
   methods: {
     addOrder () {
+      if (this.validate(this.orderInfo)) {
+        this.$swal('Debe de llenar todos los campos', '', 'warning')
+        return
+      }
+
       this.$swal({
         title: '¿Estás seguro de enviar el pedido?',
         text: 'No podrás revertir esta acción',
@@ -141,6 +142,9 @@ export default {
           this.$router.push({ name: 'Shop' })
         }
       })
+    },
+    validate (obj) {
+      return !Object.values(obj).every(element => element !== '')
     }
   },
 

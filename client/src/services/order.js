@@ -12,6 +12,10 @@ orderService.getById = (id) => {
     .then(res => res.data)
 }
 
+orderService.deleteOrder = id => {
+  return httpClient.delete(`/orders/${id}`)
+}
+
 orderService.addOrder = order => {
   return httpClient.post('/orders', order)
 }

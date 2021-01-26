@@ -89,6 +89,10 @@ export default {
   },
   methods: {
     submitProduct () {
+      if (this.validate(this.product)) {
+        this.$swal('Debe de llenar todos los campos', '', 'warning')
+        return
+      }
       if (this.isEditingId) {
         this.$store.dispatch('updateProduct', this.product)
         this.$refs.form.reset()
@@ -123,7 +127,9 @@ export default {
       this.product.prepTimeUnit = this.productForEdit.prepTimeUnit
       this.product.restaurantId = this.productForEdit.restaurantId
     },
-    isEmpty (obj) {}
+    validate (obj) {
+      return !Object.values(obj).every(element => element !== '')
+    }
   }
 }
 </script>

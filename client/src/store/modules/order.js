@@ -10,6 +10,9 @@ export default {
     addOrders (state, order) {
       console.log(order)
       state.orders.push({ order })
+    },
+    removeOrder (state, index) {
+      state.orders.splice(index, 1)
     }
   },
   actions: {
@@ -20,8 +23,15 @@ export default {
           commit('setOrders', orders)
         })
     },
+
     addOrder ({ commit }, order) {
       return orderService.addOrder(order)
+    },
+
+    deleteOrder ({ commit }, { id, index }) {
+      return orderService.deleteOrder(id).then(() => {
+        commit('removeOrder', index)
+      })
     }
   },
   getters: {
