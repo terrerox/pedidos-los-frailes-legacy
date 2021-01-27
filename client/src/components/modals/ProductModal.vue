@@ -28,7 +28,7 @@
             </div>
             <!--body-->
             <div class="relative p-6 flex-auto">
-                <ProductForm :isEditingId="isEditingId" :resownerId="resownerId" ref="form"/>
+                <ProductForm :isEditingId="isEditingId" @close="closeModal" :resownerId="resownerId" ref="form"/>
             </div>
             <!--footer-->
             <div
@@ -38,13 +38,13 @@
                 class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style="transition: all .15s ease"
-                @click="this.$emit('close')"
+                @click="closeModal"
               >
                 Cerrar
               </button>
               <button
                 class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
-                @click="[this.$refs.form.submitProduct(), this.$emit('close')]"
+                @click="this.$refs.form.submitProduct()"
                 style="transition: all .15s ease"
               >
                 {{ btnTitle }}
@@ -70,12 +70,11 @@ export default {
     resownerId: { type: Number, required: true }
   },
 
-  data () {
-    return {
-      showModal: false
+  methods: {
+    closeModal () {
+      this.$emit('close')
     }
   },
-
   computed: {
     modalTitle () {
       return this.isEditingId ? 'Editar producto' : 'Agregar producto'

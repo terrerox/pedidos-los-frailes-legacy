@@ -97,6 +97,7 @@ export default {
         this.$store.dispatch('updateProduct', this.product)
         this.$refs.form.reset()
         this.$swal('Actualizado', 'Producto actualizado con éxito', 'success')
+        this.$emit('close')
         return
       }
       this.$store.dispatch('addProduct', {

@@ -1,6 +1,6 @@
 <template>
   <div v-cloak id="dribbleShot">
-    <Header title="Tienda" backTo="Home" @openModal="showOwnerModal" />
+    <OwnerHeader title="Tienda" backTo="Home" @openModal="showOwnerModal" />
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId" :resownerId="resownerId" />
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
@@ -61,7 +61,7 @@ import ProductOwner from '@/components/ProductOwner'
 import CardHolder from '@/components/order/CardHolder'
 
 import HeroSectionOwner from '@/components/layout/HeroSectionOwner'
-import Header from '@/components/layout/Header'
+import OwnerHeader from '@/components/layout/OwnerHeader'
 import ProductModal from '@/components/modals/ProductModal'
 import OwnerProfileModal from '@/components/modals/OwnerProfileModal'
 
@@ -74,7 +74,7 @@ export default {
     ProductOwner,
     CardHolder,
     HeroSectionOwner,
-    Header,
+    OwnerHeader,
     ProductModal,
     OwnerProfileModal
   },

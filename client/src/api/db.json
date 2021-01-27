@@ -80,6 +80,17 @@
       "prepTimeValue": "1",
       "prepTimeUnit": "hr",
       "restaurantId": 1
+    },
+    {
+      "id": 1611718673842,
+      "title": "lol",
+      "image": "C:\\fakepath\\Programa de Ética II.docx",
+      "price": "fghfgh",
+      "cat1": "fghfgh",
+      "cat2": "fghfh",
+      "prepTimeValue": "fghf",
+      "prepTimeUnit": "hfghfh",
+      "restaurantId": 2
     }
   ],
   "orders": [
@@ -110,78 +121,6 @@
         }
       ],
       "id": 3
-    },
-    {
-      "name": "francis",
-      "tel": "(349) 348-3048",
-      "street": "23",
-      "number": "3",
-      "reference": "ewr",
-      "apartment": "fs",
-      "additionalNotes": "dsfssdfsdfsd",
-      "paymentMethod": "Pago en entrega",
-      "restaurantId": 2,
-      "cartItems": [
-        {
-          "product": {
-            "id": 3,
-            "title": "Pica pollo",
-            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
-            "price": 200,
-            "prepTimeValue": "30",
-            "prepTimeUnit": "min",
-            "cat1": "Deli",
-            "cat2": "Bagels",
-            "rating": 4.7,
-            "restaurantId": 2
-          },
-          "quantity": 2
-        }
-      ],
-      "id": 4
-    },
-    {
-      "name": "fghfghf",
-      "tel": "(",
-      "street": "fghfgh",
-      "number": "fghfgh",
-      "reference": "fghfgh",
-      "apartment": "fghfgh",
-      "additionalNotes": "fghfghfghfgh",
-      "paymentMethod": "Pago en entrega",
-      "restaurantId": 2,
-      "cartItems": [
-        {
-          "product": {
-            "id": 3,
-            "title": "Pica pollo",
-            "image": "https://images.mygoodtimes.in/wp-content/uploads/2018/12/08210525/Bakers-Copy.jpg",
-            "price": 200,
-            "prepTimeValue": "30",
-            "prepTimeUnit": "min",
-            "cat1": "Deli",
-            "cat2": "Bagels",
-            "rating": 4.7,
-            "restaurantId": 2
-          },
-          "quantity": 8
-        },
-        {
-          "product": {
-            "id": 4,
-            "title": "Rice",
-            "image": "C:\\fakepath\\me.gif",
-            "price": "5000",
-            "cat1": "Deli",
-            "cat2": "Bagels",
-            "prepTimeValue": "30",
-            "prepTimeUnit": "min",
-            "restaurantId": 2
-          },
-          "quantity": 6
-        }
-      ],
-      "id": 5
     }
   ]
 }
