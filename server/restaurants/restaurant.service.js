@@ -75,7 +75,9 @@ async function _delete(id) {
 // helper functions
 
 async function getRestaurant(id) {
-    const restaurant = await db.Restaurant.findByPk(id);
+    const restaurant = await db.Restaurant.findByPk(id , {
+        include: [db.Product]
+    });
     if (!restaurant) throw 'Restaurant not found';
     return restaurant;
 }

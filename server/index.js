@@ -4,13 +4,17 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
+const formidable = require('express-formidable');
+const fileupload = require('express-fileupload')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(fileupload());
 
 // api routes
 app.use('/restaurants', require('./restaurants/restaurants.controller'));
+app.use('/products', require('./products/products.controller'));
 
 // global error handler
 app.use(errorHandler);

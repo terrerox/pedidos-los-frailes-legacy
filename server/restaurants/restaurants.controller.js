@@ -36,7 +36,7 @@ function registerSchema(req, res, next) {
         cat1: Joi.string().required(),
         cat2: Joi.string().required(),
         rating: Joi.string().required(),
-        image: Joi.string().required(),
+        image: Joi.binary().required(),
         email: Joi.string().required(),
         password: Joi.string().min(6).required()
     });

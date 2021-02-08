@@ -1,14 +1,12 @@
 const { DataTypes } = require("sequelize");
 
-module.exports = model;
-
-function model(sequelize) {
+module.exports = (sequelize) => {
   const attributes = {
     title: { type: DataTypes.STRING, allowNull: false },
     cat1: { type: DataTypes.STRING, allowNull: false },
     cat2: { type: DataTypes.STRING, allowNull: false },
     rating: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.STRING, allowNull: false },
+    image: { type: DataTypes.BLOB, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     hash: { type: DataTypes.STRING, allowNull: false },
   };
@@ -24,5 +22,7 @@ function model(sequelize) {
     },
   };
 
-  return sequelize.define("Restaurant", attributes, options);
-}
+  const Restaurant = sequelize.define("Restaurant", attributes, options);
+
+  return Restaurant;
+};
