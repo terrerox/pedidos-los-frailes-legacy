@@ -6,9 +6,15 @@ function validateRequest(req, next, schema) {
         allowUnknown: true, // ignore unknown props
         stripUnknown: true // remove unknown props
     };
+    let body;
 
-    const { data } = req.files.image
-    const body = {...req.body, image: data}
+    if (req.files) {
+        const { data } = req.files.image
+        body = {...req.body, image: data}
+    } else {
+        body = {...req.body }
+    }
+
     const { error, value } = schema.validate(body, options);
     if (error) {
         next(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
