@@ -9,6 +9,7 @@ const productService = require('./product.service');
 router.post('/create', authorize(), createSchema, create);
 router.get('/', authorize(), getAll);
 router.get('/:id', authorize(), getById);
+router.get('/img/:id', getImage);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
@@ -30,6 +31,7 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     // set restaurantid to body
     req.body.RestaurantId = req.restaurant.id
+    req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
         .then(() => res.json({ message: 'Product created' }))
         .catch(next);
@@ -45,6 +47,13 @@ function getAll(req, res, next) {
 function getById(req, res, next) {
     productService.getById(req.params.id)
         .then(product => res.json(product))
+        .catch(next);
+}
+
+function getImage(req, res, next) {
+    const id = req.params.id;
+    restaurantService.getImage(id)
+        .then(image => res.end(image))
         .catch(next);
 }
 

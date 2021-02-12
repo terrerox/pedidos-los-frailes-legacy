@@ -3,17 +3,23 @@ const db = require('_helpers/db');
 module.exports = {
     getAll,
     getById,
+    getImage,
     create,
     update,
     delete: _delete
 };
 
 async function getAll(restaurantId) {
-    return await db.Product.findAll({ where: { RestaurantId: restaurantId } });
+    return await db.Product.findAll({ where: { RestaurantId: restaurantId }, attributes: { exclude: ["image"] } });
 }
 
 async function getById(id) {
     return await getProduct(id);
+}
+
+async function getImage(id) {
+    const img = getProduct(id);
+    return img.dataValues.image
 }
 
 async function create(params) {
@@ -37,7 +43,9 @@ async function _delete(id) {
 // helper functions
 
 async function getProduct(id) {
-    const product = await db.Product.findByPk(id);
+    const product = await db.Product.findByPk(id, {
+        attributes: { exclude: ["image"] }
+    });
     if (!product) throw 'Product not found';
     return product;
 }

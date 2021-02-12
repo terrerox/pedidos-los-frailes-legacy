@@ -8,9 +8,10 @@ const restaurantService = require('./restaurant.service');
 // routes
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
-router.get('/', authorize(), getAll);
+router.get('/', getAll);
 router.get('/current', authorize(), getCurrent);
-router.get('/:id', authorize(), getById);
+router.get('/:id', getById);
+router.get('/img/:id', getImage);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
@@ -44,6 +45,7 @@ function registerSchema(req, res, next) {
 }
 
 function register(req, res, next) {
+    req.body.imageUrl = `${req.protocol}://${req.headers.host}/restaurants/img/`
     restaurantService.create(req.body)
         .then(() => res.json({ message: 'Registration successful' }))
         .catch(next);
@@ -65,13 +67,20 @@ function getById(req, res, next) {
         .catch(next);
 }
 
+function getImage(req, res, next) {
+    const id = req.params.id;
+    restaurantService.getImage(id)
+        .then(image => res.end(image))
+        .catch(next);
+}
+
 function updateSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().empty(''),
         cat1: Joi.string().empty(''),
         cat2: Joi.string().empty(''),
         rating: Joi.string().empty(''),
-        image: Joi.string().empty(''),
+        image: Joi.binary().empty(''),
         email: Joi.string().empty(''),
         password: Joi.string().min(6).empty('')
     });

@@ -10,8 +10,7 @@ module.exports = (sequelize) => {
     apartment: { type: DataTypes.STRING, allowNull: false },
     additionalNotes: { type: DataTypes.STRING, allowNull: false },
     paymentMethod: { type: DataTypes.STRING, allowNull: false },
-    cartItems: { type: DataTypes.STRING, allowNull: false },
-    RestaurantId: { type: DataTypes.INTEGER, allowNull: false },
+    cartItems: { type: DataTypes.STRING, allowNull: false }
   };
 
   const Order = sequelize.define("Order", attributes);
