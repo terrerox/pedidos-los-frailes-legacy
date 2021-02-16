@@ -17,7 +17,7 @@ orderService.deleteOrder = id => {
 }
 
 orderService.addOrder = order => {
-  return httpClient.post('/orders', order)
+  return httpClient.post('/orders/create', order)
 }
 
 export default orderService

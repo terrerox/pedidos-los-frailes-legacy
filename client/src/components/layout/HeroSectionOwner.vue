@@ -3,8 +3,8 @@
     <div class="w-full h-44 bg-purple-800"></div>
     <div class="flex justify-center -mt-24">
       <img
-        v-if="heroData.image"
-        :src="heroData.image"
+        v-if="heroData.imageUrl"
+        :src="heroData.imageUrl + heroData.id"
         alt="Logo image"
         class="h-48 w-48 m-auto rounded-full"
       />
@@ -13,8 +13,7 @@
       {{ heroData.title }}
     </h1>
     <p class="text-gray-500 mt-2 whitespace-pre-wrap mx-auto max-w-lg">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas,
-      minima.
+      {{ heroData.description }}
     </p>
   </div>
 </template>

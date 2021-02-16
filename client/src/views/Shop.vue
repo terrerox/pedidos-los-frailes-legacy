@@ -20,7 +20,7 @@
           >
             <div
               class="flex flex-col"
-              v-for="product in productsItems"
+              v-for="product in currentRestaurant.Products"
               :key="product.id"
             >
               <Product :product="product" />
@@ -94,7 +94,7 @@ export default {
     },
     cartItems () {
       return this.$store.getters.productsOnCart.filter(
-        item => item.product.restaurantId === this.restaurantId
+        item => item.product.RestaurantId === this.restaurantId
       )
     },
     cartTotal () {

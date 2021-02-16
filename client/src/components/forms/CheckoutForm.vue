@@ -52,7 +52,7 @@
         required
         type="text"
         v-model="orderInfo.additionalNotes"
-        label="Agregar notas adicionales"
+        label="Notas adicionales"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">
@@ -107,7 +107,7 @@ export default {
         apartment: '',
         additionalNotes: '',
         paymentMethod: 'Pago en entrega',
-        restaurantId: this.restaurantId,
+        RestaurantId: this.restaurantId,
         cartItems: []
       }
     }
@@ -153,7 +153,7 @@ export default {
       return currency(this.$store.getters.cartTotal)
     },
     cartItems () {
-      return this.$store.getters.productsOnCart.filter(item => item.product.restaurantId === this.restaurantId)
+      return this.$store.getters.productsOnCart.filter(item => item.product.RestaurantId === this.restaurantId)
     }
   }
 }

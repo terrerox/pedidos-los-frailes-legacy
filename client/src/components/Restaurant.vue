@@ -5,7 +5,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + restaurant.image + '\')'
+      backgroundImage: 'url(\'' + restaurant.imageUrl + restaurant.id + '\')'
     }"
   >
   </div>
@@ -23,6 +23,7 @@
 <script>
 export default {
   name: 'Restaurant',
+
   props: {
     restaurant: { type: Object, required: true }
   },

@@ -39,7 +39,7 @@
           >
             <div
               class="flex flex-col"
-              v-for="(product, $index) in productsItems"
+              v-for="(product, $index) in currentRestaurant.Products"
               :key="product.id"
             >
               <ProductOwner :index="$index" :product="product" @openModal="showModal" />

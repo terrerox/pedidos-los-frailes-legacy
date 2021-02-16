@@ -1,37 +1,46 @@
 import restaurantService from '@/services/restaurant'
-export default {
-  state: {
-    restaurants: [],
-    currentRestaurant: {}
+
+const state = {
+  restaurants: [],
+  currentRestaurant: {}
+}
+
+const mutations = {
+  setRestaurants (state, restaurants) {
+    state.restaurants = restaurants
   },
-  mutations: {
-    setRestaurants (state, restaurants) {
-      state.restaurants = restaurants
-    },
-    setCurrentRestaurant (state, restaurant) {
-      state.currentRestaurant = restaurant
-    }
-  },
-  actions: {
-    getRestaurants ({ commit }) {
-      return restaurantService.getAll()
-        .then(res => {
-          commit('setRestaurants', res)
-        })
-    },
-    getRestaurant (context, id) {
-      return restaurantService.getById(id)
-        .then(res => {
-          context.commit('setCurrentRestaurant', res)
-        })
-    }
-  },
-  getters: {
-    restaurants (state) {
-      return state.restaurants
-    },
-    currentRestaurant (state) {
-      return state.currentRestaurant
-    }
+  setCurrentRestaurant (state, restaurant) {
+    state.currentRestaurant = restaurant
   }
+}
+
+const actions = {
+  getRestaurants ({ commit }) {
+    return restaurantService.getAll()
+      .then(res => {
+        commit('setRestaurants', res)
+      })
+  },
+  getRestaurant (context, id) {
+    return restaurantService.getById(id)
+      .then(res => {
+        context.commit('setCurrentRestaurant', res)
+      })
+  }
+}
+
+const getters = {
+  restaurants (state) {
+    return state.restaurants
+  },
+  currentRestaurant (state) {
+    return state.currentRestaurant
+  }
+}
+
+export const restaurant = {
+  state,
+  mutations,
+  actions,
+  getters
 }

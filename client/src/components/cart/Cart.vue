@@ -83,7 +83,7 @@ export default {
     },
     cartItems () {
       return this.$store.getters.productsOnCart.filter(
-        item => item.product.restaurantId === this.restaurantId
+        item => item.product.RestaurantId === this.restaurantId
       )
     },
     cartTotal () {
