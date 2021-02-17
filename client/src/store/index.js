@@ -14,5 +14,3 @@ const store = createStore({
 })
 
 export default store
-
-store.dispatch('getRestaurants')

@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import Restaurant from '@/home/components/Restaurant'
 
 export default {
@@ -62,10 +63,16 @@ export default {
 
   components: { Restaurant },
 
+  created () {
+    this.getRestaurants()
+  },
   computed: {
-    restaurantsItems () {
-      return this.$store.getters.restaurants
-    }
+    ...mapGetters('restaurant', {
+      restaurantsItems: 'restaurants'
+    })
+  },
+  methods: {
+    ...mapActions('restaurant', ['getRestaurants'])
   }
 }
 </script>

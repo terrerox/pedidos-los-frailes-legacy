@@ -91,7 +91,7 @@
 <script>
 import OrderCartItem from '@/_shared/cart/OrderCartItem'
 
-import { currency } from '@/_helpers/helpers'
+import { currency } from '@/_helpers/index'
 
 import plus from '@/_shared/assets/plus.png'
 import minus from '@/_shared/assets/minus.png'
@@ -127,7 +127,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Enviado', 'Producto se ha enviado con éxito', 'success')
-          this.$store.dispatch('deleteOrder', {
+          this.$store.dispatch('order/deleteOrder', {
             id,
             index: this.index
           })

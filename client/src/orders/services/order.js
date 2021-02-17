@@ -1,4 +1,4 @@
-import { httpClient } from '@/_helpers/httpClient'
+import { httpClient } from '@/_helpers/index'
 
 const orderService = {}
 

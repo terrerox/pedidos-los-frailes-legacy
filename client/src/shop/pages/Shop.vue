@@ -55,14 +55,15 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+
 import Product from '@/shop/components/Product'
 import Cart from '@/_shared/cart/Cart'
 
 import HeroSection from '@/_shared/layout/HeroSection'
 import Header from '@/_shared/layout/Header'
 
-import { currency } from '@/_helpers/helpers'
+import { currency } from '@/_helpers/index'
 
 export default {
   name: 'Shop',
@@ -78,22 +79,23 @@ export default {
   created () {
     const id = Number(this.$route.params.id)
     this.restaurantId = id
-    this.$store.dispatch('getProducts', id)
-    this.$store.dispatch('getRestaurant', id)
+    this.getRestaurant(id)
   },
 
   methods: {
     goToCheckout () {
       this.$router.push({ name: 'Checkout' })
-    }
+    },
+    ...mapActions('restaurant', ['getRestaurant'])
   },
 
   computed: {
-    productsItems () {
-      return this.$store.getters.products
-    },
+    ...mapGetters('restaurant', {
+      currentRestaurant: 'currentRestaurant'
+    }),
+
     cartItems () {
-      return this.$store.getters.productsOnCart.filter(
+      return this.$store.getters['cart/productsOnCart'].filter(
         item => item.product.RestaurantId === this.restaurantId
       )
     },
@@ -104,9 +106,6 @@ export default {
           0
         )
       )
-    },
-    currentRestaurant () {
-      return this.$store.getters.currentRestaurant
     }
   }
 }

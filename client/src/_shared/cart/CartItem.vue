@@ -75,7 +75,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
+    ...mapActions('cart', {
       remove: 'removeProductFromCart',
       increment: 'incrementProductQuantity',
       decrement: 'decrementProductQuantity'

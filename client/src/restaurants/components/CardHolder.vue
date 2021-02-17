@@ -26,12 +26,12 @@ export default {
   },
 
   created () {
-    this.$store.dispatch('getOrders', this.resownerId)
+    this.$store.dispatch('order/getOrders', this.resownerId)
   },
 
   computed: {
     getOrders () {
-      return this.$store.getters.order
+      return this.$store.getters['order/order']
     }
   }
 }

@@ -56,9 +56,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import CartItem from './CartItem'
 import EmptyCart from './EmptyCart'
-import { currency } from '@/_helpers/helpers'
+import { currency } from '@/_helpers/index'
 
 export default {
   components: { CartItem, EmptyCart },
@@ -73,16 +75,15 @@ export default {
     }
   },
 
-  created () {
-    this.$store.dispatch('getRestaurant', this.restaurantId)
-  },
-
   computed: {
     title () {
       return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
     },
+    ...mapGetters('restaurant', {
+      currentRestaurant: 'currentRestaurant'
+    }),
     cartItems () {
-      return this.$store.getters.productsOnCart.filter(
+      return this.$store.getters['cart/productsOnCart'].filter(
         item => item.product.RestaurantId === this.restaurantId
       )
     },
@@ -93,9 +94,6 @@ export default {
           0
         )
       )
-    },
-    currentRestaurant () {
-      return this.$store.getters.currentRestaurant
     }
   }
 }

@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import plus from '@/_shared/assets/plus.png'
 
 import ProductOwner from '@/restaurants/components/ProductOwner'
@@ -65,7 +67,7 @@ import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
 import OwnerProfileModal from '@/_shared/modals/OwnerProfileModal'
 
-import { currency } from '@/_helpers/helpers'
+import { currency } from '@/_helpers/index'
 
 export default {
   name: 'Shop',
@@ -92,11 +94,12 @@ export default {
   created () {
     const id = Number(this.$route.params.id)
     this.resownerId = id
-    this.$store.dispatch('getProducts', id)
-    this.$store.dispatch('getRestaurant', id)
+    this.getRestaurant(id)
   },
 
   methods: {
+    ...mapActions('restaurant', ['getRestaurant']),
+
     showOwnerModal () {
       this.isOwnerModalVisible = true
     },
@@ -113,9 +116,9 @@ export default {
   },
 
   computed: {
-    productsItems () {
-      return this.$store.getters.products
-    },
+    ...mapGetters('restaurant', {
+      currentRestaurant: 'currentRestaurant'
+    }),
     cartTotal () {
       return currency(
         this.cartItems.reduce(
@@ -123,9 +126,6 @@ export default {
           0
         )
       )
-    },
-    currentRestaurant () {
-      return this.$store.getters.currentRestaurant
     }
   }
 }

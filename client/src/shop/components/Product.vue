@@ -58,7 +58,7 @@ export default {
 
   methods: {
     addToCart (product) {
-      this.$store.dispatch('addProductToCart', product)
+      this.$store.dispatch('cart/addProductToCart', product)
     }
   }
 }

@@ -27,7 +27,7 @@ const routes = [
     component: Restaurant
   },
   {
-    path: '*',
+    path: '/:pathMatch(.*)*',
     redirect: '/'
   }
 ]

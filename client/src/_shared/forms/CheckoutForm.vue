@@ -80,7 +80,7 @@
   </form>
 </template>
 <script>
-import { currency } from '@/_helpers/helpers'
+import { currency } from '@/_helpers/index'
 import { mask } from 'vue-the-mask'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
@@ -119,7 +119,7 @@ export default {
 
   methods: {
     addOrder () {
-      if (this.validate(this.orderInfo)) {
+      if (this.isEmpty(this.orderInfo)) {
         this.$swal('Debe de llenar todos los campos', '', 'warning')
         return
       }
@@ -134,26 +134,26 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
-          this.$store.dispatch('addOrder', this.orderInfo)
+          this.$store.dispatch('order/addOrder', this.orderInfo)
           this.$refs.form.reset()
           this.cartItems.map(cartItem => {
-            this.$store.dispatch('removeProductFromCart', cartItem)
+            this.$store.dispatch('cart/removeProductFromCart', cartItem)
           })
           this.$router.push({ name: 'Shop' })
         }
       })
     },
-    validate (obj) {
+    isEmpty (obj) {
       return !Object.values(obj).every(element => element !== '')
     }
   },
 
   computed: {
     cartTotal () {
-      return currency(this.$store.getters.cartTotal)
+      return currency(this.$store.getters['cart/cartTotal'])
     },
     cartItems () {
-      return this.$store.getters.productsOnCart.filter(item => item.product.RestaurantId === this.restaurantId)
+      return this.$store.getters['cart/productsOnCart'].filter(item => item.product.RestaurantId === this.restaurantId)
     }
   }
 }
