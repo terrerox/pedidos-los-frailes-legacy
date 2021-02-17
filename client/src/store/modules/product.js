@@ -1,4 +1,4 @@
-import productService from '@/services/product'
+import productService from '@/shop/services/product'
 
 const state = {
   products: [],
@@ -78,6 +78,7 @@ const getters = {
 }
 
 export const product = {
+  namespaced: true,
   state,
   mutations,
   actions,

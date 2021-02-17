@@ -1,4 +1,4 @@
-import orderService from '@/services/order'
+import orderService from '@/orders/services/order'
 
 const state = {
   orders: []
@@ -46,6 +46,7 @@ const getters = {
 }
 
 export const order = {
+  namespaced: true,
   state,
   mutations,
   actions,

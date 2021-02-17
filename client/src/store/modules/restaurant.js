@@ -1,4 +1,4 @@
-import restaurantService from '@/services/restaurant'
+import restaurantService from '@/restaurants/services/restaurant'
 
 const state = {
   restaurants: [],
@@ -39,6 +39,7 @@ const getters = {
 }
 
 export const restaurant = {
+  namespaced: true,
   state,
   mutations,
   actions,
