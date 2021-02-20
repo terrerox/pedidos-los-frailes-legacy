@@ -23,7 +23,7 @@ async function authenticate({ email, password }) {
 
   // authentication successful
   const token = jwt.sign({ sub: restaurant.id }, config.secret, {
-    expiresIn: "7d",
+    expiresIn: "7s",
   });
   return { token };
 }

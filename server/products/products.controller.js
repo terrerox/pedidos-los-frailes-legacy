@@ -7,11 +7,12 @@ const productService = require('./product.service');
 
 // routes
 router.post('/create', authorize(), createSchema, create);
-router.get('/', authorize(), getAll);
+router.get('/', getAll);
+router.get('/products', authorize(), getRestaurantProduct);
 router.get('/:id', authorize(), getById);
 router.get('/img/:id', getImage);
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.put('/:id', updateSchema, update);
+router.delete('/:id', _delete);
 
 module.exports = router;
 
@@ -23,7 +24,8 @@ function createSchema(req, res, next) {
         rating: Joi.string().required(),
         image: Joi.binary().required(),
         prepTimeValue: Joi.string().required(),
-        prepTimeUnit: Joi.string().required()
+        prepTimeUnit: Joi.string().required(),
+        price: Joi.number().required(),
     });
     validateRequest(req, next, schema);
 }
@@ -38,8 +40,14 @@ function create(req, res, next) {
 }
 
 function getAll(req, res, next) {
+    productService.getAll()
+        .then(products => res.json(products))
+        .catch(next);
+}
+
+function getRestaurantProduct(req, res, next) {
     const currentRestaurantId = req.restaurant.id
-    productService.getAll(currentRestaurantId)
+    productService.getRestaurantProduct(currentRestaurantId)
         .then(products => res.json(products))
         .catch(next);
 }
@@ -52,7 +60,7 @@ function getById(req, res, next) {
 
 function getImage(req, res, next) {
     const id = req.params.id;
-    restaurantService.getImage(id)
+    productService.getImage(id)
         .then(image => res.end(image))
         .catch(next);
 }
@@ -66,6 +74,7 @@ function updateSchema(req, res, next) {
         image: Joi.string().required(),
         prepTimeValue: Joi.string().required(),
         prepTimeUnit: Joi.string().required(),
+        price: Joi.number().required(),
     });
     validateRequest(req, next, schema);
 }

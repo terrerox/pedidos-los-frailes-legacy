@@ -2,6 +2,7 @@ const db = require('_helpers/db');
 
 module.exports = {
     getAll,
+    getRestaurantProduct,
     getById,
     getImage,
     create,
@@ -9,7 +10,11 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll(restaurantId) {
+async function getAll() {
+    return await db.Product.findAll({ attributes: { exclude: ["image"] } });
+}
+
+async function getRestaurantProduct(restaurantId) {
     return await db.Product.findAll({ where: { RestaurantId: restaurantId }, attributes: { exclude: ["image"] } });
 }
 
@@ -18,7 +23,7 @@ async function getById(id) {
 }
 
 async function getImage(id) {
-    const img = getProduct(id);
+    const img = await db.Product.findByPk(id);
     return img.dataValues.image
 }
 

@@ -7,7 +7,8 @@ const orderService = require('./order.service');
 
 // routes
 router.post('/create', createSchema, create);
-router.get('/', authorize(), getAll);
+router.get('/', getAll);
+router.get('/orders', authorize(), getRestaurantOrder);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
@@ -38,8 +39,14 @@ function create(req, res, next) {
 }
 
 function getAll(req, res, next) {
+    orderService.getAll()
+        .then(orders => res.json(orders))
+        .catch(next);
+}
+
+function getRestaurantOrder(req, res, next) {
     const currentRestaurantId = req.restaurant.id
-    orderService.getAll(currentRestaurantId)
+    orderService.getRestaurantOrder(currentRestaurantId)
         .then(orders => res.json(orders))
         .catch(next);
 }

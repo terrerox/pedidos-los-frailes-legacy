@@ -37,6 +37,7 @@ function registerSchema(req, res, next) {
         cat1: Joi.string().required(),
         cat2: Joi.string().required(),
         rating: Joi.string().required(),
+        description: Joi.string().required(),
         image: Joi.binary().required(),
         email: Joi.string().required(),
         password: Joi.string().min(6).required()
@@ -80,6 +81,7 @@ function updateSchema(req, res, next) {
         cat1: Joi.string().empty(''),
         cat2: Joi.string().empty(''),
         rating: Joi.string().empty(''),
+        description: Joi.string().empty(''),
         image: Joi.binary().empty(''),
         email: Joi.string().empty(''),
         password: Joi.string().min(6).empty('')

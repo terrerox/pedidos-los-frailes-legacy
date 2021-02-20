@@ -8,7 +8,11 @@ module.exports = {
     delete: _delete
 };
 
-async function getAll(restaurantId) {
+async function getAll() {
+    return await db.Order.findAll();
+}
+
+async function getRestaurantOrder(restaurantId) {
     return await db.Order.findAll({ where: { RestaurantId: restaurantId } });
 }
 

@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
     image: { type: DataTypes.BLOB, allowNull: false },
     prepTimeValue: { type: DataTypes.STRING, allowNull: false },
     prepTimeUnit: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.INTEGER, allowNull: false },
   };
 
   const Product = sequelize.define("Product", attributes);

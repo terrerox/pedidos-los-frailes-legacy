@@ -8,9 +8,9 @@ module.exports = (sequelize) => {
     number: { type: DataTypes.STRING, allowNull: false },
     reference: { type: DataTypes.STRING, allowNull: false },
     apartment: { type: DataTypes.STRING, allowNull: false },
-    additionalNotes: { type: DataTypes.STRING, allowNull: false },
+    additionalNotes: { type: DataTypes.TEXT, allowNull: false },
     paymentMethod: { type: DataTypes.STRING, allowNull: false },
-    cartItems: { type: DataTypes.STRING, allowNull: false }
+    cartItems: { type: DataTypes.TEXT, allowNull: false }
   };
 
   const Order = sequelize.define("Order", attributes);
