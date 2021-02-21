@@ -51,6 +51,6 @@ async function getProduct(id) {
     const product = await db.Product.findByPk(id, {
         attributes: { exclude: ["image"] }
     });
-    if (!product) throw 'Product not found';
+    if (!product) throw 'Producto no encontrado';
     return product;
 }

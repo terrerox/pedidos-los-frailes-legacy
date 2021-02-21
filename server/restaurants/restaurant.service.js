@@ -19,7 +19,7 @@ async function authenticate({ email, password }) {
   });
 
   if (!restaurant || !(await bcrypt.compare(password, restaurant.hash)))
-    throw "Email or password is incorrect";
+    throw "Correo o contraseña incorrectas";
 
   // authentication successful
   const token = jwt.sign({ sub: restaurant.id }, config.secret, {
@@ -44,7 +44,7 @@ async function getImage(id) {
 async function create(params) {
   // validate
   if (await db.Restaurant.findOne({ where: { email: params.email } })) {
-    throw 'Email "' + params.email + '" is already taken';
+    throw 'Correo "' + params.email + '" ya existe';
   }
 
   // hash password
@@ -65,7 +65,7 @@ async function update(id, params) {
     EmailChanged &&
     (await db.Restaurant.findOne({ where: { email: params.email } }))
   ) {
-    throw 'Email "' + params.email + '" is already taken';
+    throw 'Correo "' + params.email + '" ya existe';
   }
 
   // hash password if it was entered
@@ -98,7 +98,7 @@ async function getRestaurant(id) {
     ],
     attributes: { exclude: ["image"] },
   });
-  if (!restaurant) throw "Restaurant not found";
+  if (!restaurant) throw "Restaurante no encontrado";
   return restaurant;
 }
 

@@ -34,7 +34,7 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     // set restaurantid to body
     orderService.create(req.body)
-        .then(() => res.json({ message: 'order created' }))
+        .then(() => res.json({ message: 'Orden creada con éxito' }))
         .catch(next);
 }
 
@@ -79,6 +79,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     orderService.delete(req.params.id)
-        .then(() => res.json({ message: 'Order deleted successfully' }))
+        .then(() => res.json({ message: 'Orden eliminada con éxito' }))
         .catch(next);
 }

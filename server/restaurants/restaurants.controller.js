@@ -48,7 +48,7 @@ function registerSchema(req, res, next) {
 function register(req, res, next) {
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/restaurants/img/`
     restaurantService.create(req.body)
-        .then(() => res.json({ message: 'Registration successful' }))
+        .then(() => res.json({ message: 'Registrado con éxito' }))
         .catch(next);
 }
 
@@ -97,6 +97,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     restaurantService.delete(req.params.id)
-        .then(() => res.json({ message: 'restaurant deleted successfully' }))
+        .then(() => res.json({ message: 'Restaurante eliminado con éxito' }))
         .catch(next);
 }

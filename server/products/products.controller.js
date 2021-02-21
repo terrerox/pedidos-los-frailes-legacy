@@ -35,7 +35,7 @@ function create(req, res, next) {
     req.body.RestaurantId = req.restaurant.id
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
-        .then(() => res.json({ message: 'Product created' }))
+        .then(() => res.json({ message: 'Producto creado con éxito' }))
         .catch(next);
 }
 
@@ -87,6 +87,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     productService.delete(req.params.id)
-        .then(() => res.json({ message: 'product deleted successfully' }))
+        .then(() => res.json({ message: 'Producto eliminado con éxito' }))
         .catch(next);
 }

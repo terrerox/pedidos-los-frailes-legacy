@@ -42,6 +42,6 @@ async function _delete(id) {
 
 async function getOrder(id) {
     const order = await db.Order.findByPk(id);
-    if (!order) throw 'Order not found';
+    if (!order) throw 'Orden no encontrada';
     return order;
 }
