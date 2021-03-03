@@ -4,13 +4,13 @@
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId" :resownerId="resownerId" />
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
-      <HeroSectionOwner :heroData="currentRestaurant" />
+      <HeroSectionOwner :heroData="loggedRestaurant" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12 flex items-center">
             <button
               @click="showModal"
-              class="inline-block p-3 text-center text-white transition bg-purple-800 rounded-full shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none mr-4"
+              class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none mr-4"
             >
               <svg
                 viewBox="0 0 20 20"
@@ -39,7 +39,7 @@
           >
             <div
               class="flex flex-col"
-              v-for="(product, $index) in currentRestaurant.Products"
+              v-for="(product, $index) in loggedProducts"
               :key="product.id"
             >
               <ProductOwner :index="$index" :product="product" @openModal="showModal" />
@@ -67,7 +67,7 @@ import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
 import OwnerProfileModal from '@/_shared/modals/OwnerProfileModal'
 
-import { currency } from '@/_helpers/index'
+import { currency } from '@/_helpers'
 
 export default {
   name: 'Shop',
@@ -94,11 +94,16 @@ export default {
   created () {
     const id = Number(this.$route.params.id)
     this.resownerId = id
-    this.getRestaurant(id)
+  },
+
+  mounted () {
+    this.getLoggedRestaurant()
+    this.getLoggedProducts()
   },
 
   methods: {
-    ...mapActions('restaurant', ['getRestaurant']),
+    ...mapActions('restaurant', ['getLoggedRestaurant']),
+    ...mapActions('product', ['getLoggedProducts']),
 
     showOwnerModal () {
       this.isOwnerModalVisible = true
@@ -116,9 +121,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters('restaurant', {
-      currentRestaurant: 'currentRestaurant'
-    }),
+    ...mapGetters('restaurant', ['loggedRestaurant']),
+    ...mapGetters('product', ['loggedProducts']),
     cartTotal () {
       return currency(
         this.cartItems.reduce(

@@ -71,7 +71,7 @@
     </div>
     <div class="mt-4 col-span-2 flex justify-center align-center">
       <button
-        class="px-4 py-1 text-white font-bold bg-purple-800 custom-rounded hover:opacity-75"
+        class="px-4 py-1 text-white font-bold color-primary custom-rounded hover:opacity-75"
         type="submit"
       >
         Enviar pedido
@@ -80,7 +80,7 @@
   </form>
 </template>
 <script>
-import { currency } from '@/_helpers/index'
+import { currency } from '@/_helpers'
 import { mask } from 'vue-the-mask'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'

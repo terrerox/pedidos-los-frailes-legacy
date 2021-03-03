@@ -4,7 +4,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + product.imageUrl + product.id + '\')'
+      backgroundImage: 'url(\'' + image + '\')'
     }"
   >
     <div
@@ -16,7 +16,7 @@
     <div style="top: -20px;" class="absolute right-0 w-7">
       <button
         @click="this.$emit('openModal', product.id)"
-        class="inline-block p-3 text-center text-white transition bg-purple-800 rounded-full shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none"
+        class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none"
       >
         <svg
           class="w-6 h-6"
@@ -54,13 +54,7 @@
   <div class="mt-2 flex items-center">
     <span class="text-xs"><i class="fa fa-star"></i> {{ product.rating }}</span>
     <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.cat1
-    }}</span>
-    <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.cat2
-    }}</span>
-    <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.range
+      product.category
     }}</span>
   </div>
 </template>
@@ -84,6 +78,11 @@ export default {
       return id
     }
   },
+  computed: {
+    image () {
+      return `${this.product.imageUrl}${this.product.id}?rand=${Date.now()}`
+    }
+  },
 
   methods: {
     deleteProduct (id) {
@@ -98,7 +97,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Eliminado', 'Producto eliminado con éxito', 'success')
-          this.$store.dispatch('deleteProduct', {
+          this.$store.dispatch('product/deleteProduct', {
             id,
             index: this.index
           })

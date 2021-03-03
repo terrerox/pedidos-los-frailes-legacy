@@ -31,7 +31,7 @@
             :class="cartItems.length ? '' : 'hidden'"
           >
             <router-link
-              class="block w-full px-6 py-4 text-xs font-medium leading-6 text-center text-white uppercase transition bg-purple-800 rounded shadow hover:shadow-lg hover:bg-purple-900 focus:outline-none"
+              class="block w-full px-6 py-4 text-xs font-medium leading-6 text-center text-white uppercase transition color-primary rounded shadow btn-hover focus:outline-none"
               :to="{ name: 'Checkout' }"
             >
               <div class="flex flex-row items-center">
@@ -63,7 +63,7 @@ import Cart from '@/_shared/cart/Cart'
 import HeroSection from '@/_shared/layout/HeroSection'
 import Header from '@/_shared/layout/Header'
 
-import { currency } from '@/_helpers/index'
+import { currency } from '@/_helpers'
 
 export default {
   name: 'Shop',

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-0 w-full p-4 shadow-md z-10 bg-purple-800"
+    class="sticky top-0 w-full p-4 shadow-md z-10 color-primary"
   >
     <div class="flex items-center">
       <img class="cursor-pointer ml-4" :src="arrowBack" @click="goBack" />

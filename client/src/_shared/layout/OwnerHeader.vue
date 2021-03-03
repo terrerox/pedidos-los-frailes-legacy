@@ -1,10 +1,10 @@
 <template>
   <div
-    class="sticky top-0 w-full p-4 shadow-md z-10 bg-purple-800"
+    class="sticky top-0 w-full p-4 shadow-md z-10 color-primary"
   >
     <div class="flex items-center">
-      <a class="mx-4 cursor-pointer"
-        ><svg
+      <a class="mx-4 cursor-pointer" @click="logout">
+        <svg
           class="w-6 h-6"
           fill="none"
           stroke="#ffff"
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import arrowBack from '@/_shared/assets/arrow-back.png'
 
 export default {
@@ -54,6 +55,7 @@ export default {
   },
 
   methods: {
+    ...mapActions('account', ['logout']),
     goBack () {
       return this.$router.push({ name: this.backTo })
     }

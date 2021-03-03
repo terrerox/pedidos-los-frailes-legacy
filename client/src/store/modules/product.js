@@ -22,41 +22,37 @@ const mutations = {
     const {
       id,
       title,
-      image,
-      cat1,
-      cat2,
+      imageUrl,
+      category,
       prepTimeUnit,
       prepTimeValue,
       price
     } = editedProduct
 
     const product = state.products.find(product => product.id === id)
+    product.imageUrl = ''
     product.title = title
-    product.image = image
-    product.cat1 = cat1
-    product.cat2 = cat2
+    product.category = category
     product.prepTimeUnit = prepTimeUnit
     product.prepTimeValue = prepTimeValue
     product.price = price
+    product.imageUrl = imageUrl
   }
 }
 
 const actions = {
-  getProducts (context, id) {
-    return productService.getAll().then(res => {
-      const currentResProducts = res.filter(
-        product => product.restaurantId === id
-      )
-      context.commit('setProducts', currentResProducts)
-    })
+  getLoggedProducts (context, id) {
+    return productService.getLoggedProducts()
+      .then(products => {
+        context.commit('setProducts', products)
+      })
   },
   addProduct ({ commit }, product) {
-    return productService.addProduct(product).then(() => {
-      commit('addProduct', product)
+    return productService.addProduct(product).then(res => {
+      commit('addProduct', res)
     })
   },
   updateProduct ({ commit }, product) {
-    console.log(product)
     return productService.updateProduct(product).then(res => {
       commit('setEditedProduct', res)
     })
@@ -69,7 +65,7 @@ const actions = {
 }
 
 const getters = {
-  products (state) {
+  loggedProducts (state) {
     return state.products
   },
   product (state) {

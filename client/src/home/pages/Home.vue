@@ -15,7 +15,7 @@
               >
                 Bienvenidos a Pedidos los Frailes
               </h1>
-              <hr class="w-12 h-1 bg-purple-800 rounded-full mt-8" />
+              <hr class="w-12 h-1 color-primary rounded-full mt-8" />
               <p
                 class="text-gray-800 text-base leading-relaxed mt-8 font-semibold"
               >

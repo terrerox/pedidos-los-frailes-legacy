@@ -15,7 +15,7 @@
       {{ product.prepTimeUnit }}
     </div>
     <div style="bottom: -20px;" class="absolute right-0 w-10 mr-2">
-      <button class="inline-block p-3 text-center text-white transition bg-purple-800 rounded-full shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none">
+      <button class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none">
         <svg
           viewBox="0 0 20 20"
           enable-background="new 0 0 20 20"

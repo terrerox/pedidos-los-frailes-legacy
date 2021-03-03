@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative items-center px-2 my-2 transition-all duration-300 bg-purple-800 custom-rounded text-white cursor-pointer"
+    class="relative items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded text-white cursor-pointer"
   >
     <div
       class="mb-1 p-4 no-underline text-white flex justify-between rounded "
@@ -91,7 +91,7 @@
 <script>
 import OrderCartItem from '@/_shared/cart/OrderCartItem'
 
-import { currency } from '@/_helpers/index'
+import { currency } from '@/_helpers'
 
 import plus from '@/_shared/assets/plus.png'
 import minus from '@/_shared/assets/minus.png'

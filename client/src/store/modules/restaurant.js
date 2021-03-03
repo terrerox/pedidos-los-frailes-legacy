@@ -2,7 +2,8 @@ import restaurantService from '@/restaurants/services/restaurant'
 
 const state = {
   restaurants: [],
-  currentRestaurant: {}
+  currentRestaurant: {},
+  loggedRestaurant: {}
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
   },
   setCurrentRestaurant (state, restaurant) {
     state.currentRestaurant = restaurant
+  },
+  setLoggedRestaurant (state, restaurant) {
+    state.loggedRestaurant = restaurant
   }
 }
 
@@ -26,6 +30,12 @@ const actions = {
       .then(res => {
         context.commit('setCurrentRestaurant', res)
       })
+  },
+  getLoggedRestaurant (context, id) {
+    return restaurantService.getCurrent()
+      .then(res => {
+        context.commit('setLoggedRestaurant', res)
+      })
   }
 }
 
@@ -35,6 +45,9 @@ const getters = {
   },
   currentRestaurant (state) {
     return state.currentRestaurant
+  },
+  loggedRestaurant (state) {
+    return state.loggedRestaurant
   }
 }
 

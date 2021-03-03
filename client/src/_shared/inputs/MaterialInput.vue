@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { randomId } from '@/_helpers/index'
+import { randomId } from '@/_helpers'
 
 export default {
   name: 'TextInput',

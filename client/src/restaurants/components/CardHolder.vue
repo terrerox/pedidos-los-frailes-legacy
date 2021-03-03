@@ -3,7 +3,7 @@
     <div v-if="getOrders.length">
       <h2 class="font-bold text-xl textcenter mb-8">Pedidos 📝</h2>
       <transition-group name="order">
-        <template v-for="(order, $index) in getOrders" :key="order.name">
+        <template v-for="(order, $index) in getOrders" :key="order.id">
           <CardOrder :order="order" :index="$index" />
         </template>
       </transition-group>

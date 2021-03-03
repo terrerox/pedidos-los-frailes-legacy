@@ -1,15 +1,15 @@
-import { httpClient } from '@/_helpers/index'
+import { httpClient } from '@/_helpers'
 
 const orderService = {}
 
 orderService.getAll = () => {
   return httpClient.get('/orders')
-    .then(res => res.data)
+    .then(res => res)
 }
 
 orderService.getById = (id) => {
   return httpClient.get(`/orders/${id}`)
-    .then(res => res.data)
+    .then(res => res)
 }
 
 orderService.deleteOrder = id => {

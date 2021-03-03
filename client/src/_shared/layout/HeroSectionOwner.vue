@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <div class="w-full h-44 bg-purple-800"></div>
+    <div class="w-full h-44 color-primary"></div>
     <div class="flex justify-center -mt-24">
       <img
         v-if="heroData.imageUrl"

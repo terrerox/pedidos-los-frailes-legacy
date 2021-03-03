@@ -1,20 +1,48 @@
-import { userService } from '../_services'
-import { router } from '../_helpers'
+import accountService from '@/account/services/account'
+import router from '@/router'
 
-const user = JSON.parse(localStorage.getItem('user'))
-const state = user
-  ? { status: { loggedIn: true }, user }
-  : { status: {}, user: null }
+const restaurant = JSON.parse(localStorage.getItem('restaurant'))
+const state = restaurant
+  ? { status: { loggedIn: true }, restaurant }
+  : { status: {}, restaurant: null }
+
+const mutations = {
+  loginRequest (state, restaurant) {
+    state.status = { loggingIn: true }
+    state.restaurant = restaurant
+  },
+  loginSuccess (state, restaurant) {
+    state.status = { loggedIn: true }
+    state.restaurant = restaurant
+  },
+  loginFailure (state) {
+    state.status = {}
+    state.restaurant = null
+  },
+  logout (state) {
+    state.status = {}
+    state.restaurant = null
+  },
+  registerRequest (state, restaurant) {
+    state.status = { registering: true }
+  },
+  registerSuccess (state, restaurant) {
+    state.status = {}
+  },
+  registerFailure (state, error) {
+    state.status = {}
+  }
+}
 
 const actions = {
-  login ({ dispatch, commit }, { username, password }) {
-    commit('loginRequest', { username })
+  login ({ dispatch, commit }, { email, password }) {
+    commit('loginRequest', { email })
 
-    userService.login(username, password)
+    accountService.login(email, password)
       .then(
-        user => {
-          commit('loginSuccess', user)
-          router.push('/')
+        restaurant => {
+          commit('loginSuccess', restaurant)
+          router.push(`/restaurant/${restaurant.id}`)
         },
         error => {
           commit('loginFailure', error)
@@ -23,16 +51,17 @@ const actions = {
       )
   },
   logout ({ commit }) {
-    userService.logout()
+    accountService.logout()
+    router.push('/login')
     commit('logout')
   },
-  register ({ dispatch, commit }, user) {
-    commit('registerRequest', user)
+  register ({ dispatch, commit }, restaurant) {
+    commit('registerRequest', restaurant)
 
-    userService.register(user)
+    accountService.register(restaurant)
       .then(
-        user => {
-          commit('registerSuccess', user)
+        restaurant => {
+          commit('registerSuccess', restaurant)
           router.push('/login')
           setTimeout(() => {
             // display success message after route change completes
@@ -47,37 +76,9 @@ const actions = {
   }
 }
 
-const mutations = {
-  loginRequest (state, user) {
-    state.status = { loggingIn: true }
-    state.user = user
-  },
-  loginSuccess (state, user) {
-    state.status = { loggedIn: true }
-    state.user = user
-  },
-  loginFailure (state) {
-    state.status = {}
-    state.user = null
-  },
-  logout (state) {
-    state.status = {}
-    state.user = null
-  },
-  registerRequest (state, user) {
-    state.status = { registering: true }
-  },
-  registerSuccess (state, user) {
-    state.status = {}
-  },
-  registerFailure (state, error) {
-    state.status = {}
-  }
-}
-
 export const account = {
   namespaced: true,
   state,
-  actions,
-  mutations
+  mutations,
+  actions
 }

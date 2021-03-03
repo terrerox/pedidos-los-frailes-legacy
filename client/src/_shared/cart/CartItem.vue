@@ -1,9 +1,9 @@
 <template>
    <div
-    class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 bg-purple-800 custom-rounded"
+    class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded"
   >
     <div
-      class="absolute top-0 left-0 w-4 h-4 text-center transition bg-purple-800 rounded-full border border-white cursor-pointer shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none"
+      class="absolute top-0 left-0 w-4 h-4 text-center transition color-primary rounded-full border border-white cursor-pointer shadow ripple btn-hover focus:outline-none"
       @click="remove(cartItem)"
       v-if="!onCheckout"
     >

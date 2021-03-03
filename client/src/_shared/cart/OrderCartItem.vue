@@ -1,6 +1,6 @@
 <template>
    <div
-    class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 bg-purple-800 custom-rounded"
+    class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded"
   >
     <img
       :src="cartItem.product.image"

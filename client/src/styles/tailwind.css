@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .color-primary {
+    @apply bg-blue-800;
+  }
+  .color-secondary {
+    @apply bg-blue-100;
+  }
+  .btn-hover {
+    @apply hover:bg-blue-900;
+    @apply hover:shadow-lg;
+  }
+}

@@ -10,16 +10,13 @@
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input required label="Precio" v-model="product.price" />
     </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+    <div class="col-span-2 lg:col-span-2 mt-2 pr-1">
       <material-input
         type="text"
         required
-        label="Categoria 1"
-        v-model="product.cat1"
+        label="Categoria"
+        v-model="product.category"
       />
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input required label="Categoria 2" v-model="product.cat2" />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
@@ -37,18 +34,21 @@
         v-model="product.prepTimeUnit"
       />
     </div>
-    <div class="col-span-2 mt-2">
-      <material-input
-        required
+    <div class="col-span-2 mt-2 combo">
+      <img class="w-20 trigger object-cover object-center" :src="imageUrl+'/11'" alt="Avatar Upload" />
+      <input
         type="file"
-        label="Foto del producto"
-        v-model="product.image"
+        accept="image/*"
+        class="mb-10"
+        @change="handleImage"
       />
     </div>
   </form>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 export default {
   name: 'ProductForm',
@@ -67,10 +67,10 @@ export default {
         title: '',
         image: '',
         price: '',
-        cat1: '',
-        cat2: '',
+        category: '',
         prepTimeValue: '',
         prepTimeUnit: '',
+        imageUrl: '',
         restaurantId: this.resownerId
       }
     }
@@ -83,9 +83,9 @@ export default {
     }
   },
   computed: {
-    productForEdit () {
-      return this.$store.getters.product
-    }
+    ...mapGetters('product', {
+      productForEdit: 'product'
+    })
   },
   methods: {
     submitProduct () {
@@ -94,19 +94,17 @@ export default {
         return
       }
       if (this.isEditingId) {
-        this.$store.dispatch('updateProduct', this.product)
+        this.updateProduct(this.product)
         this.$refs.form.reset()
         this.$swal('Actualizado', 'Producto actualizado con éxito', 'success')
         this.$emit('close')
         return
       }
-      this.$store.dispatch('addProduct', {
-        id: Date.now(),
+      this.addProduct({
         title: this.product.title,
         image: this.product.image,
         price: this.product.price,
-        cat1: this.product.cat1,
-        cat2: this.product.cat2,
+        category: this.product.category,
         prepTimeValue: this.product.prepTimeValue,
         prepTimeUnit: this.product.prepTimeUnit,
         restaurantId: this.product.restaurantId
@@ -115,24 +113,42 @@ export default {
       this.$refs.form.reset()
       this.$emit('close')
     },
+
+    ...mapActions('product', ['updateProduct', 'addProduct']),
+
     getProduct (productId) {
-      this.$store.commit('setProduct', productId)
+      this.$store.commit('product/setProduct', productId)
     },
     setProductForEdit () {
       this.product.id = this.productForEdit.id
       this.product.title = this.productForEdit.title
       this.product.price = this.productForEdit.price
-      this.product.cat1 = this.productForEdit.cat1
-      this.product.cat2 = this.productForEdit.cat2
+      this.product.category = this.productForEdit.category
       this.product.prepTimeValue = this.productForEdit.prepTimeValue
       this.product.prepTimeUnit = this.productForEdit.prepTimeUnit
       this.product.restaurantId = this.productForEdit.restaurantId
+      this.product.imageUrl = this.productForEdit.imageUrl
     },
     validate (obj) {
       return !Object.values(obj).every(element => element !== '')
+    },
+    handleImage (e) {
+      const selectedImage = e.target.files[0] // get first file
+      this.createBase64Image(selectedImage)
+    },
+    createBase64Image (fileObject) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        this.product.image = e.target.result
+      }
+      reader.readAsDataURL(fileObject)
     }
   }
 }
 </script>
 
-<style></style>
+<style scoped>
+.combo { position: relative; }
+.combo .trigger { position: absolute; right: 0%; top: 1px }
+</style>

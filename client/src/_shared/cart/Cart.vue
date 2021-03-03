@@ -5,7 +5,7 @@
   >
     <template v-if="cartItems.length">
       <h3 class="font-bold text-xl textcenter mb-8">{{ title }} 🛒</h3>
-      <div class="mt-12 p-6 bg-purple-800 custom-rounded font-hairline text-xs">
+      <div class="mt-12 p-6 color-primary custom-rounded font-hairline text-xs">
         <div class="flex justify-between items-center mb-4" v-if="onCheckout">
           <p class="text-white">{{ currentRestaurant.title }}</p>
           <router-link
@@ -44,7 +44,7 @@
       </div>
       <div class="max-w-sm my-4 m-auto hidden lg:block" v-if="!onCheckout">
         <router-link
-          class="block w-full px-6 py-4 text-xs font-medium font-bold leading-6 text-center text-white uppercase transition bg-purple-800 rounded shadow ripple hover:shadow-lg hover:bg-purple-900 focus:outline-none"
+          class="block w-full px-6 py-4 text-xs font-medium font-bold leading-6 text-center text-white uppercase transition color-primary rounded shadow ripple btn-hover focus:outline-none"
           :to="{ name: 'Checkout' }"
         >
           Ordena ya
@@ -60,7 +60,7 @@ import { mapGetters } from 'vuex'
 
 import CartItem from './CartItem'
 import EmptyCart from './EmptyCart'
-import { currency } from '@/_helpers/index'
+import { currency } from '@/_helpers'
 
 export default {
   components: { CartItem, EmptyCart },
