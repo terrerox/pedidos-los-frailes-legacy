@@ -34,8 +34,7 @@ function authenticate(req, res, next) {
 function registerSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
-        cat1: Joi.string().required(),
-        cat2: Joi.string().required(),
+        category: Joi.string().required(),
         rating: Joi.string().required(),
         description: Joi.string().required(),
         image: Joi.binary().required(),
@@ -59,7 +58,8 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-    res.json(req.restaurant);
+    const { image, ...restaurantWithoutImage } = req.restaurant
+    res.json(restaurantWithoutImage);
 }
 
 function getById(req, res, next) {

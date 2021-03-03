@@ -28,7 +28,8 @@ async function getImage(id) {
 }
 
 async function create(params) {
-    await db.Product.create(params);
+    const newProduct = await db.Product.create(params);
+    return omitImage(newProduct.dataValues)
 }
 
 async function update(id, params) {
@@ -37,7 +38,7 @@ async function update(id, params) {
     Object.assign(product, params);
     await product.save();
 
-    return product.get();
+    return omitImage(product.get());
 }
 
 async function _delete(id) {
@@ -54,3 +55,8 @@ async function getProduct(id) {
     if (!product) throw 'Producto no encontrado';
     return product;
 }
+
+function omitImage(product) {
+    const { image, ...productWithoutImage } = product;
+    return productWithoutImage;
+  }

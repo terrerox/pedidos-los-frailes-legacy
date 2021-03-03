@@ -8,8 +8,8 @@ const productService = require('./product.service');
 // routes
 router.post('/create', authorize(), createSchema, create);
 router.get('/', getAll);
-router.get('/products', authorize(), getRestaurantProduct);
-router.get('/:id', authorize(), getById);
+router.get('/current', authorize(), getRestaurantProduct);
+router.get('/:id', getById);
 router.get('/img/:id', getImage);
 router.put('/:id', updateSchema, update);
 router.delete('/:id', _delete);
@@ -19,9 +19,8 @@ module.exports = router;
 function createSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
-        cat1: Joi.string().required(),
-        cat2: Joi.string().required(),
-        rating: Joi.string().required(),
+        category: Joi.string().required(),
+        rating: Joi.string(),
         image: Joi.binary().required(),
         prepTimeValue: Joi.string().required(),
         prepTimeUnit: Joi.string().required(),
@@ -35,7 +34,7 @@ function create(req, res, next) {
     req.body.RestaurantId = req.restaurant.id
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
-        .then(() => res.json({ message: 'Producto creado con éxito' }))
+        .then(product => res.json(product))
         .catch(next);
 }
 
@@ -68,10 +67,9 @@ function getImage(req, res, next) {
 function updateSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
-        cat1: Joi.string().required(),
-        cat2: Joi.string().required(),
-        rating: Joi.string().required(),
-        image: Joi.string().required(),
+        category: Joi.string().required(),
+        rating: Joi.string(),
+        image: Joi.binary().required(),
         prepTimeValue: Joi.string().required(),
         prepTimeUnit: Joi.string().required(),
         price: Joi.number().required(),

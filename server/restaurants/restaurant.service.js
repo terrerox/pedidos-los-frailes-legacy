@@ -23,9 +23,9 @@ async function authenticate({ email, password }) {
 
   // authentication successful
   const token = jwt.sign({ sub: restaurant.id }, config.secret, {
-    expiresIn: "7s",
+    expiresIn: "7d",
   });
-  return { token };
+  return { ...omitHashAndImage(restaurant.get()), token };
 }
 
 async function getAll() {
