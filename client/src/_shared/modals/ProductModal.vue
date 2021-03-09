@@ -28,7 +28,9 @@
             </div>
             <!--body-->
             <div class="relative p-6 flex-auto">
-                <ProductForm :isEditingId="isEditingId" @close="closeModal" :resownerId="resownerId" ref="form"/>
+                <ProductForm :isEditingId="isEditingId" @close="closeModal"
+                ref="form"
+                />
             </div>
             <!--footer-->
             <div
@@ -66,8 +68,7 @@ export default {
   components: { ProductForm },
 
   props: {
-    isEditingId: { type: Number },
-    resownerId: { type: Number, required: true }
+    isEditingId: { type: Number }
   },
 
   methods: {

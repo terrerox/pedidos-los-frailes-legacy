@@ -22,7 +22,7 @@ const mutations = {
     const {
       id,
       title,
-      imageUrl,
+      image,
       category,
       prepTimeUnit,
       prepTimeValue,
@@ -30,13 +30,12 @@ const mutations = {
     } = editedProduct
 
     const product = state.products.find(product => product.id === id)
-    product.imageUrl = ''
     product.title = title
     product.category = category
     product.prepTimeUnit = prepTimeUnit
     product.prepTimeValue = prepTimeValue
     product.price = price
-    product.imageUrl = imageUrl
+    product.image = image
   }
 }
 

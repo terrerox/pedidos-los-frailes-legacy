@@ -5,7 +5,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + product.imageUrl + product.id + '\')'
+      backgroundImage: 'url(\'' + product.image + '\')'
     }"
   >
     <div
@@ -35,13 +35,10 @@
   <div class="mt-2 flex items-center">
     <span class="text-xs"><i class="fa fa-star"></i> {{ product.rating }}</span>
     <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.cat1
+      product.category
     }}</span>
     <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.cat2
-    }}</span>
-    <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.range
+      product.price
     }}</span>
   </div>
 </template>

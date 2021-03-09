@@ -4,7 +4,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + image + '\')'
+      backgroundImage: 'url(\'' + product.image + '\')'
     }"
   >
     <div
@@ -76,11 +76,6 @@ export default {
   emits: {
     openModal: id => {
       return id
-    }
-  },
-  computed: {
-    image () {
-      return `${this.product.imageUrl}${this.product.id}?rand=${Date.now()}`
     }
   },
 

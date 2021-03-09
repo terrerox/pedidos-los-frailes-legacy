@@ -5,7 +5,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + restaurant.imageUrl + restaurant.id + '\')'
+      backgroundImage: 'url(\'' + restaurant.image + '\')'
     }"
   >
   </div>
@@ -15,7 +15,7 @@
       ><i class="fa fa-star"></i> {{ restaurant.rating }}</span
     >
     <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      restaurant.cat1
+      restaurant.category
     }}</span>
   </div>
 </template>

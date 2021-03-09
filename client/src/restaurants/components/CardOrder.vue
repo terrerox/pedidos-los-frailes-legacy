@@ -77,10 +77,10 @@
       />
       <div class="px-2 flex flex-row justify-between">
         <button
-          class="px-4 py-1 text-white font-bold bg-purple-600 custom-rounded hover:opacity-75"
+          class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
           @click="sendOrder(order.id)"
         >
-          Enviar orden
+          Enviar pedido
         </button>
         <div class="title font-bold text-lg">Total DOP: {{ cartTotal }}</div>
       </div>

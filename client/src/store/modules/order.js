@@ -6,7 +6,7 @@ const state = {
 
 const mutations = {
   setOrders (state, orders) {
-    state.orders = orders
+    state.orders.push(orders)
   },
   addOrders (state, order) {
     state.orders.push({ order })
@@ -18,10 +18,14 @@ const mutations = {
 
 const actions = {
   getOrders ({ commit }, id) {
-    return orderService.getAll()
+    return orderService.loggedOrders()
       .then(res => {
-        const orders = res.filter(order => order.RestaurantId === id)
-        commit('setOrders', orders)
+        res.map(order => {
+          const { cartItems, ...orders } = order
+          const cartItemsJson = JSON.parse(cartItems)
+          orders.cartItems = cartItemsJson
+          commit('setOrders', orders)
+        })
       })
   },
 

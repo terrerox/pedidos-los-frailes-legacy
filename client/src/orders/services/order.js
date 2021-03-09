@@ -2,8 +2,13 @@ import { httpClient } from '@/_helpers'
 
 const orderService = {}
 
-orderService.getAll = () => {
+orderService.loggedOrders = () => {
   return httpClient.get('/orders')
+    .then(res => res)
+}
+
+orderService.getAll = () => {
+  return httpClient.get('/orders/all')
     .then(res => res)
 }
 

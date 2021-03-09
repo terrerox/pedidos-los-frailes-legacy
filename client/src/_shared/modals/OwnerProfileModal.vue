@@ -17,7 +17,7 @@
               </h3>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                @click="toggleModal()"
+                @click="this.$emit('close')"
               >
                 <span
                   class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none"
@@ -28,7 +28,7 @@
             </div>
             <!--body-->
             <div class="p-6 flex-auto">
-                <OwnerProfileForm/>
+                <OwnerProfileForm ref="form" @close="closeModal"/>
             </div>
             <!--footer-->
             <div
@@ -38,7 +38,7 @@
                 class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style="transition: all .15s ease"
-                @click="this.$emit('close')"
+                @click="closeModal"
               >
                 Cerrar
               </button>
@@ -46,9 +46,9 @@
                 class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style="transition: all .15s ease"
-                @click="toggleModal()"
+                @click="this.$refs.form.submitForm()"
               >
-                Save Changes
+                Guardar cambios
               </button>
             </div>
           </div>
@@ -69,6 +69,11 @@ export default {
   data () {
     return {
       showModal: false
+    }
+  },
+  methods: {
+    closeModal () {
+      this.$emit('close')
     }
   }
 }

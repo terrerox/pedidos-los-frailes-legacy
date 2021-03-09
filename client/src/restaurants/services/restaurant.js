@@ -17,4 +17,9 @@ restaurantService.getCurrent = () => {
     .then(res => res)
 }
 
+restaurantService.update = (restaurant) => {
+  return httpClient.put('/restaurants/', restaurant)
+    .then(res => res)
+}
+
 export default restaurantService

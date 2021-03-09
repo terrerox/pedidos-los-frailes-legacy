@@ -34,8 +34,9 @@
         v-model="product.prepTimeUnit"
       />
     </div>
+    <label>Imagen</label>
     <div class="col-span-2 mt-2 combo">
-      <img class="w-20 trigger object-cover object-center" :src="imageUrl+'/11'" alt="Avatar Upload" />
+      <img class="w-20 trigger object-cover object-center" :src="product.image" alt="Foto del producto" />
       <input
         type="file"
         accept="image/*"
@@ -56,8 +57,7 @@ export default {
   components: { MaterialInput },
 
   props: {
-    isEditingId: { type: Number },
-    resownerId: { type: Number, required: true }
+    isEditingId: { type: Number }
   },
 
   data () {
@@ -69,9 +69,7 @@ export default {
         price: '',
         category: '',
         prepTimeValue: '',
-        prepTimeUnit: '',
-        imageUrl: '',
-        restaurantId: this.resownerId
+        prepTimeUnit: ''
       }
     }
   },
@@ -90,7 +88,7 @@ export default {
   methods: {
     submitProduct () {
       if (this.validate(this.product)) {
-        this.$swal('Debe de llenar todos los campos', '', 'warning')
+        this.$swal('Advertencia', 'Debe de llenar todos los campos', 'warning')
         return
       }
       if (this.isEditingId) {
@@ -106,8 +104,7 @@ export default {
         price: this.product.price,
         category: this.product.category,
         prepTimeValue: this.product.prepTimeValue,
-        prepTimeUnit: this.product.prepTimeUnit,
-        restaurantId: this.product.restaurantId
+        prepTimeUnit: this.product.prepTimeUnit
       })
       this.$swal('Agregado', 'Producto agregado con éxito', 'success')
       this.$refs.form.reset()
@@ -126,8 +123,7 @@ export default {
       this.product.category = this.productForEdit.category
       this.product.prepTimeValue = this.productForEdit.prepTimeValue
       this.product.prepTimeUnit = this.productForEdit.prepTimeUnit
-      this.product.restaurantId = this.productForEdit.restaurantId
-      this.product.imageUrl = this.productForEdit.imageUrl
+      this.product.image = this.productForEdit.image
     },
     validate (obj) {
       return !Object.values(obj).every(element => element !== '')

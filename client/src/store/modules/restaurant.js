@@ -36,6 +36,12 @@ const actions = {
       .then(res => {
         context.commit('setLoggedRestaurant', res)
       })
+  },
+  updateRestaurant (context, restaurant) {
+    return restaurantService.update(restaurant)
+      .then(res => {
+        context.commit('setLoggedRestaurant', res)
+      })
   }
 }
 
@@ -46,7 +52,7 @@ const getters = {
   currentRestaurant (state) {
     return state.currentRestaurant
   },
-  loggedRestaurant (state) {
+  loggedRestaurant (state, getters, rootState) {
     return state.loggedRestaurant
   }
 }

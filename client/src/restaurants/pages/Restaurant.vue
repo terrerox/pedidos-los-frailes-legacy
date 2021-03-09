@@ -2,7 +2,7 @@
   <div v-cloak id="dribbleShot">
     <OwnerHeader title="Tienda" backTo="Home" @openModal="showOwnerModal" />
     <section class="main">
-      <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId" :resownerId="resownerId" />
+      <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
       <HeroSectionOwner :heroData="loggedRestaurant" />
       <div class="flex flex-col-reverse lg:flex-row">
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="w-full lg:w-4/12 lg:mr-3">
-          <CardHolder :resownerId="resownerId" />
+          <CardHolder />
         </div>
       </div>
     </section>
@@ -83,7 +83,6 @@ export default {
 
   data () {
     return {
-      resownerId: 0,
       plus: plus,
       isModalVisible: false,
       isOwnerModalVisible: false,
@@ -92,11 +91,6 @@ export default {
   },
 
   created () {
-    const id = Number(this.$route.params.id)
-    this.resownerId = id
-  },
-
-  mounted () {
     this.getLoggedRestaurant()
     this.getLoggedProducts()
   },

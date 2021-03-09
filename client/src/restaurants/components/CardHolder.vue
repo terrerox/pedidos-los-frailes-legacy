@@ -21,12 +21,8 @@ export default {
 
   components: { CardOrder, EmptyOrders },
 
-  props: {
-    resownerId: { type: Number, required: true }
-  },
-
   created () {
-    this.$store.dispatch('order/getOrders', this.resownerId)
+    this.$store.dispatch('order/getOrders')
   },
 
   computed: {
