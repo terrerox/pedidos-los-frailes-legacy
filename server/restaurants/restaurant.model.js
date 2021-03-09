@@ -4,9 +4,11 @@ module.exports = (sequelize) => {
   const attributes = {
     title: { type: DataTypes.STRING, allowNull: false },
     category: { type: DataTypes.STRING, allowNull: false },
-    rating: { type: DataTypes.STRING, allowNull: false },
+    rating: { type: DataTypes.STRING, allowNull: true },
     imageUrl: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.BLOB, allowNull: false },
+    telephone: { type: DataTypes.STRING, allowNull: false },
+    address: { type: DataTypes.STRING, allowNull: false },
+    image: { type: DataTypes.TEXT, allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false },
     email: { type: DataTypes.STRING, allowNull: false },
     hash: { type: DataTypes.STRING, allowNull: false },

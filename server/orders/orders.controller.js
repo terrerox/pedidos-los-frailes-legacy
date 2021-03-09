@@ -7,8 +7,8 @@ const orderService = require('./order.service');
 
 // routes
 router.post('/create', createSchema, create);
-router.get('/', getAll);
-router.get('/orders', authorize(), getRestaurantOrder);
+router.get('/all', authorize(), getAll);
+router.get('/', authorize(), getRestaurantOrder);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);

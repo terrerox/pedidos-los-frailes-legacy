@@ -3,6 +3,7 @@ const db = require('_helpers/db');
 module.exports = {
     getAll,
     getById,
+    getRestaurantOrder,
     create,
     update,
     delete: _delete

@@ -11,8 +11,8 @@ router.get('/', getAll);
 router.get('/current', authorize(), getRestaurantProduct);
 router.get('/:id', getById);
 router.get('/img/:id', getImage);
-router.put('/:id', updateSchema, update);
-router.delete('/:id', _delete);
+router.put('/:id', authorize(), updateSchema, update);
+router.delete('/:id', authorize(), _delete);
 
 module.exports = router;
 
@@ -21,7 +21,7 @@ function createSchema(req, res, next) {
         title: Joi.string().required(),
         category: Joi.string().required(),
         rating: Joi.string(),
-        image: Joi.binary().required(),
+        image: Joi.string().required(),
         prepTimeValue: Joi.string().required(),
         prepTimeUnit: Joi.string().required(),
         price: Joi.number().required(),
@@ -69,7 +69,7 @@ function updateSchema(req, res, next) {
         title: Joi.string().required(),
         category: Joi.string().required(),
         rating: Joi.string(),
-        image: Joi.binary().required(),
+        image: Joi.string().required(),
         prepTimeValue: Joi.string().required(),
         prepTimeUnit: Joi.string().required(),
         price: Joi.number().required(),
@@ -78,6 +78,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
+    req.body.RestaurantId = req.restaurant.id
     productService.update(req.params.id, req.body)
         .then(product => res.json(product))
         .catch(next);

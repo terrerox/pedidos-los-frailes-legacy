@@ -11,9 +11,9 @@ function validateRequest(req, next, schema) {
     let body;
     if (req.body.image) {
         const { image } = req.body
-        const imageBuff = decodeBase64Image(image).data
+        // const imageBuff = decodeBase64Image(image).data
         
-        body = {...req.body, image: imageBuff}
+        body = {...req.body, image: image}
     } else {
         body = {...req.body }
     }

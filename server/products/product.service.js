@@ -11,11 +11,11 @@ module.exports = {
 };
 
 async function getAll() {
-    return await db.Product.findAll({ attributes: { exclude: ["image"] } });
+    return await db.Product.findAll();
 }
 
 async function getRestaurantProduct(restaurantId) {
-    return await db.Product.findAll({ where: { RestaurantId: restaurantId }, attributes: { exclude: ["image"] } });
+    return await db.Product.findAll({ where: { RestaurantId: restaurantId } });
 }
 
 async function getById(id) {
@@ -29,7 +29,7 @@ async function getImage(id) {
 
 async function create(params) {
     const newProduct = await db.Product.create(params);
-    return omitImage(newProduct.dataValues)
+    return newProduct.dataValues
 }
 
 async function update(id, params) {
@@ -38,7 +38,7 @@ async function update(id, params) {
     Object.assign(product, params);
     await product.save();
 
-    return omitImage(product.get());
+    return product.get();
 }
 
 async function _delete(id) {
@@ -49,9 +49,7 @@ async function _delete(id) {
 // helper functions
 
 async function getProduct(id) {
-    const product = await db.Product.findByPk(id, {
-        attributes: { exclude: ["image"] }
-    });
+    const product = await db.Product.findByPk(id);
     if (!product) throw 'Producto no encontrado';
     return product;
 }

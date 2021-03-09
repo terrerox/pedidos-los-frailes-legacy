@@ -25,11 +25,11 @@ async function authenticate({ email, password }) {
   const token = jwt.sign({ sub: restaurant.id }, config.secret, {
     expiresIn: "7d",
   });
-  return { ...omitHashAndImage(restaurant.get()), token };
+  return { ...omitHash(restaurant.get()), token };
 }
 
 async function getAll() {
-  return await db.Restaurant.findAll({ attributes: { exclude: ["image"] } });
+  return await db.Restaurant.findAll();
 }
 
 async function getById(id) {
@@ -77,7 +77,7 @@ async function update(id, params) {
   Object.assign(restaurant, params);
   await restaurant.save();
 
-  return omitHashAndImage(restaurant.get());
+  return omitHash(restaurant.get());
 }
 
 async function _delete(id) {
@@ -92,17 +92,16 @@ async function getRestaurant(id) {
     include: [
       {
         model: db.Product,
-        as: "Products",
-        attributes: { exclude: ["image"] }
+        as: "Products"
       },
     ],
-    attributes: { exclude: ["image"] },
-  });
+  }
+  );
   if (!restaurant) throw "Restaurante no encontrado";
   return restaurant;
 }
 
-function omitHashAndImage(restaurant) {
-  const { hash, image, ...RestaurantWithoutHashAndImage } = restaurant;
-  return RestaurantWithoutHashAndImage;
+function omitHash(restaurant) {
+  const { hash, ...RestaurantWithoutHash } = restaurant;
+  return RestaurantWithoutHash;
 }

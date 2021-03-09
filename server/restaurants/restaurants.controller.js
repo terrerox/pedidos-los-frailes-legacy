@@ -12,7 +12,7 @@ router.get('/', getAll);
 router.get('/current', authorize(), getCurrent);
 router.get('/:id', getById);
 router.get('/img/:id', getImage);
-router.put('/:id', authorize(), updateSchema, update);
+router.put('/', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
 module.exports = router;
@@ -35,9 +35,10 @@ function registerSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
         category: Joi.string().required(),
-        rating: Joi.string().required(),
+        telephone: Joi.string().required(),
+        address: Joi.string().required(),
         description: Joi.string().required(),
-        image: Joi.binary().required(),
+        image: Joi.string().required(),
         email: Joi.string().required(),
         password: Joi.string().min(6).required()
     });
@@ -58,8 +59,7 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-    const { image, ...restaurantWithoutImage } = req.restaurant
-    res.json(restaurantWithoutImage);
+    res.json(req.restaurant);
 }
 
 function getById(req, res, next) {
@@ -78,11 +78,12 @@ function getImage(req, res, next) {
 function updateSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().empty(''),
-        cat1: Joi.string().empty(''),
-        cat2: Joi.string().empty(''),
+        category: Joi.string().empty(''),
+        address: Joi.string().empty(''),
+        telephone: Joi.string().empty(''),
         rating: Joi.string().empty(''),
         description: Joi.string().empty(''),
-        image: Joi.binary().empty(''),
+        image: Joi.string().empty(''),
         email: Joi.string().empty(''),
         password: Joi.string().min(6).empty('')
     });
@@ -90,7 +91,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    restaurantService.update(req.params.id, req.body)
+    restaurantService.update(req.restaurant.id, req.body)
         .then(restaurant => res.json(restaurant))
         .catch(next);
 }
