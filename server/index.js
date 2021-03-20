@@ -15,17 +15,7 @@ app.use(cors());
 app.use('/restaurants', require('./restaurants/restaurants.controller'));
 app.use('/products', require('./products/products.controller'));
 app.use('/orders', require('./orders/orders.controller'));
-
-app.use(express.static('./server/public'))
-
-app.post('/upload', (req, res) => {
-  const { image } = req.body;
-  let buff = new Buffer.from(image, 'base64');
-  console.log(buff)
-    res.status(200).json({
-      buff
-    })  
-});
+app.use('/deliveries', require('./deliveries/deliveries.controller'));
 
 // global error handler
 app.use(errorHandler);

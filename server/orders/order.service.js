@@ -42,7 +42,7 @@ async function _delete(id) {
 // helper functions
 
 async function getOrder(id) {
-    const order = await db.Order.findByPk(id);
+    const order = await db.Order.findByPk(id, { include: [db.Delivery] } )
     if (!order) throw 'Orden no encontrada';
     return order;
 }

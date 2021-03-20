@@ -18,10 +18,11 @@ module.exports = router;
 function createSchema(req, res, next) {
     const schema = Joi.object({
         name: Joi.string().required(),
-        tel: Joi.string().required(),
+        phoneNumber: Joi.string().required(),
         street: Joi.string().required(),
-        number: Joi.string().required(),
+        numberOfHouse: Joi.string().required(),
         reference: Joi.string().required(),
+        status: Joi.string().required(),
         apartment: Joi.string().required(),
         additionalNotes: Joi.string().required(),
         paymentMethod: Joi.string().required(),
@@ -59,14 +60,16 @@ function getById(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
-        name: Joi.string().required(),
-        tel: Joi.string().required(),
-        street: Joi.string().required(),
-        number: Joi.string().required(),
-        reference: Joi.binary().required(),
-        apartment: Joi.string().required(),
-        additionalNotes: Joi.string().required(),
-        cartItems: Joi.string().required()
+        name: Joi.string().empty(''),
+        phoneNumber: Joi.string().empty(''),
+        status: Joi.string().empty(''),
+        street: Joi.string().empty(''),
+        numberOfHouse: Joi.string().empty(''),
+        reference: Joi.binary().empty(''),
+        apartment: Joi.string().empty(''),
+        DeliveryId: Joi.number().empty(''),
+        additionalNotes: Joi.string().empty(''),
+        cartItems: Joi.string().empty('')
     });
     validateRequest(req, next, schema);
 }
