@@ -10,7 +10,7 @@
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
-        v-model="orderInfo.tel"
+        v-model="orderInfo.phoneNumber"
         required
         v-mask="'(###) ###-####'"
         label="Telefono"
@@ -27,8 +27,8 @@
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
-        v-model="orderInfo.number"
-        label="Numero"
+        v-model="orderInfo.numberOfHouse"
+        label="Número de casa"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -44,7 +44,7 @@
         required
         type="text"
         v-model="orderInfo.apartment"
-        label="Edificio/Apto/Extensión"
+        label="Edificio/Apto/Extensión *"
       />
     </div>
     <div class="col-span-2 mt-2">
@@ -52,7 +52,7 @@
         required
         type="text"
         v-model="orderInfo.additionalNotes"
-        label="Notas adicionales"
+        label="Notas adicionales *"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">
@@ -100,12 +100,13 @@ export default {
     return {
       orderInfo: {
         name: '',
-        tel: '',
+        phoneNumber: '',
         street: '',
-        number: '',
+        numberOfHouse: '',
         reference: '',
         apartment: '',
         additionalNotes: '',
+        status: 'active',
         paymentMethod: 'Pago en entrega',
         RestaurantId: this.restaurantId,
         cartItems: []

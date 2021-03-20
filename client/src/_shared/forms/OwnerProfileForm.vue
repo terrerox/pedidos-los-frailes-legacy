@@ -35,7 +35,7 @@
       <material-input
         required
         type="text"
-        label="Contraseña"
+        label="Email"
         v-model="restaurant.email"
       />
     </div>

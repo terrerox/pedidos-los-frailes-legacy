@@ -6,6 +6,7 @@ import Shop from '@/shop/pages/Shop'
 import Home from '@/home/pages/Home'
 import Checkout from '@/orders/pages/Checkout'
 import Restaurant from '@/restaurants/pages/Restaurant'
+import Order from '@/restaurants/pages/Order'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/restaurant/:id',
     name: 'Restaurant',
     component: Restaurant
+  },
+  {
+    path: '/restaurant/:id/order/:orderId',
+    name: 'Order',
+    component: Order
   },
   {
     path: '/:pathMatch(.*)',

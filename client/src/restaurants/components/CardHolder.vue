@@ -27,7 +27,7 @@ export default {
 
   computed: {
     getOrders () {
-      return this.$store.getters['order/order']
+      return this.$store.getters['order/orders']
     }
   }
 }

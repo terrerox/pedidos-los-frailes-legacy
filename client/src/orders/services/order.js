@@ -17,6 +17,11 @@ orderService.getById = (id) => {
     .then(res => res)
 }
 
+orderService.update = (order) => {
+  return httpClient.put(`/orders/${order.id}`, order)
+    .then(res => res)
+}
+
 orderService.deleteOrder = id => {
   return httpClient.delete(`/orders/${id}`)
 }

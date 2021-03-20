@@ -3,6 +3,7 @@
     class="sticky top-0 w-full p-4 shadow-md z-10 color-primary"
   >
     <div class="flex items-center">
+      <img class="cursor-pointer ml-4" :src="arrowBack" @click="goBack" />
       <a class="mx-4 cursor-pointer" @click="logout">
         <svg
           class="w-6 h-6"
@@ -44,8 +45,8 @@ import arrowBack from '@/_shared/assets/arrow-back.png'
 export default {
   name: 'OwnerHeader',
   props: {
-    title: { type: String, required: true },
-    backTo: { type: String, required: true }
+    title: { type: String },
+    backTo: { type: String }
   },
 
   data () {

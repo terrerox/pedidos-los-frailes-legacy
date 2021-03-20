@@ -1,6 +1,6 @@
 <template>
   <div v-cloak id="dribbleShot">
-    <OwnerHeader title="Tienda" backTo="Home" @openModal="showOwnerModal" />
+    <OwnerHeader @openModal="showOwnerModal" />
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
@@ -67,8 +67,6 @@ import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
 import OwnerProfileModal from '@/_shared/modals/OwnerProfileModal'
 
-import { currency } from '@/_helpers'
-
 export default {
   name: 'Shop',
 
@@ -116,15 +114,7 @@ export default {
 
   computed: {
     ...mapGetters('restaurant', ['loggedRestaurant']),
-    ...mapGetters('product', ['loggedProducts']),
-    cartTotal () {
-      return currency(
-        this.cartItems.reduce(
-          (total, current) => total + current.product.price * current.quantity,
-          0
-        )
-      )
-    }
+    ...mapGetters('product', ['loggedProducts'])
   }
 }
 </script>

@@ -8,7 +8,7 @@
     >
       <div class="title font-bold text-lg">{{ order.name }}</div>
       <div class="title font-bold text-lg">Calle: {{ order.street }}</div>
-      <div class="title font-bold text-lg">{{ order.tel }}</div>
+      <div class="title font-bold text-lg">{{ order.phoneNumber }}</div>
       <span class="text-white" v-show="!active">
         <img
           :src="plus"
@@ -39,7 +39,7 @@
           Número:
         </div>
         <div class="title  text-lg">
-          {{ order.number }}
+          {{ order.numberOfHouse }}
         </div>
       </div>
       <hr />
@@ -78,7 +78,7 @@
       <div class="px-2 flex flex-row justify-between">
         <button
           class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
-          @click="sendOrder(order.id)"
+          @click="goToOrderDetails(order.id)"
         >
           Enviar pedido
         </button>
@@ -115,6 +115,9 @@ export default {
   },
 
   methods: {
+    goToOrderDetails (id) {
+      this.$router.push({ name: 'Order', params: { orderId: id } })
+    },
     sendOrder (id) {
       this.$swal({
         title: '¿Estás seguro de enviar este producto?',
