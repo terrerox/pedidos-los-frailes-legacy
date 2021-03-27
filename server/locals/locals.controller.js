@@ -3,11 +3,10 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
-const restaurantService = require('./restaurant.service');
+const localService = require('./local.service');
 
 // routes
-router.post('/authenticate', authenticateSchema, authenticate);
-router.post('/register', registerSchema, register);
+router.post('/create', authorize(), createSchema, create);
 router.get('/', getAll);
 router.get('/current', authorize(), getCurrent);
 router.get('/:id', getById);
@@ -17,21 +16,7 @@ router.delete('/:id', authorize(), _delete);
 
 module.exports = router;
 
-function authenticateSchema(req, res, next) {
-    const schema = Joi.object({
-        email: Joi.string().required(),
-        password: Joi.string().required()
-    });
-    validateRequest(req, next, schema);
-}
-
-function authenticate(req, res, next) {
-    restaurantService.authenticate(req.body)
-        .then(restaurant => res.json(restaurant))
-        .catch(next);
-}
-
-function registerSchema(req, res, next) {
+function createSchema(req, res, next) {
     const schema = Joi.object({
         title: Joi.string().required(),
         category: Joi.string().required(),
@@ -39,38 +24,37 @@ function registerSchema(req, res, next) {
         address: Joi.string().required(),
         description: Joi.string().required(),
         image: Joi.string().required(),
-        email: Joi.string().required(),
-        password: Joi.string().min(6).required()
+        AccountId: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
 
-function register(req, res, next) {
-    req.body.imageUrl = `${req.protocol}://${req.headers.host}/restaurants/img/`
-    restaurantService.create(req.body)
+function create(req, res, next) {
+    req.body.imageUrl = `${req.protocol}://${req.headers.host}/locals/img/`
+    localService.create(req.body)
         .then(() => res.json({ message: 'Registrado con éxito' }))
         .catch(next);
 }
 
 function getAll(req, res, next) {
-    restaurantService.getAll()
-        .then(restaurants => res.json(restaurants))
+    localService.getAll()
+        .then(locals => res.json(locals))
         .catch(next);
 }
 
 function getCurrent(req, res, next) {
-    res.json(req.restaurant);
+    res.json(req.local);
 }
 
 function getById(req, res, next) {
-    restaurantService.getById(req.params.id)
-        .then(restaurant => res.json(restaurant))
+    localService.getById(req.params.id)
+        .then(local => res.json(local))
         .catch(next);
 }
 
 function getImage(req, res, next) {
     const id = req.params.id;
-    restaurantService.getImage(id)
+    localService.getImage(id)
         .then(image => res.end(image))
         .catch(next);
 }
@@ -91,13 +75,13 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    restaurantService.update(req.restaurant.id, req.body)
-        .then(restaurant => res.json(restaurant))
+    localService.update(req.local.id, req.body)
+        .then(local => res.json(local))
         .catch(next);
 }
 
 function _delete(req, res, next) {
-    restaurantService.delete(req.params.id)
-        .then(() => res.json({ message: 'Restaurante eliminado con éxito' }))
+    localService.delete(req.params.id)
+        .then(() => res.json({ message: 'Locale eliminado con éxito' }))
         .catch(next);
 }

@@ -8,7 +8,7 @@ const productService = require('./product.service');
 // routes
 router.post('/create', authorize(), createSchema, create);
 router.get('/', getAll);
-router.get('/current', authorize(), getRestaurantProduct);
+router.get('/current', authorize(), getLocalProduct);
 router.get('/:id', getById);
 router.get('/img/:id', getImage);
 router.put('/:id', authorize(), updateSchema, update);
@@ -30,8 +30,8 @@ function createSchema(req, res, next) {
 }
 
 function create(req, res, next) {
-    // set restaurantid to body
-    req.body.RestaurantId = req.restaurant.id
+    // set localid to body
+    req.body.LocalId = req.local.id
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
         .then(product => res.json(product))
@@ -44,9 +44,9 @@ function getAll(req, res, next) {
         .catch(next);
 }
 
-function getRestaurantProduct(req, res, next) {
-    const currentRestaurantId = req.restaurant.id
-    productService.getRestaurantProduct(currentRestaurantId)
+function getLocalProduct(req, res, next) {
+    const currentLocalId = req.local.id
+    productService.getLocalProduct(currentLocalId)
         .then(products => res.json(products))
         .catch(next);
 }
@@ -78,7 +78,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    req.body.RestaurantId = req.restaurant.id
+    req.body.LocalId = req.local.id
     productService.update(req.params.id, req.body)
         .then(product => res.json(product))
         .catch(next);

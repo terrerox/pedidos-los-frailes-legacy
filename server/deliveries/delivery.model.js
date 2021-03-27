@@ -8,22 +8,9 @@ module.exports = (sequelize) => {
     phoneNumber: { type: DataTypes.STRING, allowNull: false },
     imageUrl: { type: DataTypes.STRING, allowNull: false },
     image: { type: DataTypes.TEXT, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false },
-    hash: { type: DataTypes.STRING, allowNull: false },
-  };
+  }; 
 
-  const options = {
-    defaultScope: {
-      // exclude hash by default
-      attributes: { exclude: ["hash"] },
-    },
-    scopes: {
-      // include hash with this scope
-      withHash: { attributes: {} },
-    },
-  };
-
-  const Delivery = sequelize.define("Delivery", attributes, options);
+  const Delivery = sequelize.define("Delivery", attributes);
   
   return Delivery;
 };

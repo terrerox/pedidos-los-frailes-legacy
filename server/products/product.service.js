@@ -2,7 +2,7 @@ const db = require('_helpers/db');
 
 module.exports = {
     getAll,
-    getRestaurantProduct,
+    getLocalProduct,
     getById,
     getImage,
     create,
@@ -14,8 +14,8 @@ async function getAll() {
     return await db.Product.findAll();
 }
 
-async function getRestaurantProduct(restaurantId) {
-    return await db.Product.findAll({ where: { RestaurantId: restaurantId } });
+async function getLocalProduct(localId) {
+    return await db.Product.findAll({ where: { LocalId: localId } });
 }
 
 async function getById(id) {

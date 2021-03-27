@@ -21,16 +21,23 @@ async function initialize() {
     dialect: "mysql",
   });
 
-  db.Restaurant = require("../restaurants/restaurant.model")(sequelize);
+  db.Local = require("../locals/local.model")(sequelize);
   db.Product = require("../products/product.model")(sequelize);
   db.Order = require("../orders/order.model")(sequelize);
   db.Delivery = require("../deliveries/delivery.model")(sequelize);
+  db.Account = require("../accounts/account.model")(sequelize);
 
-  db.Restaurant.hasMany(db.Product);
-  db.Product.belongsTo(db.Restaurant);
+  db.Account.hasOne(db.Delivery);
+  db.Delivery.belongsTo(db.Account);
 
-  db.Restaurant.hasMany(db.Order);
-  db.Order.belongsTo(db.Restaurant);
+  db.Account.hasOne(db.Local);
+  db.Local.belongsTo(db.Account);
+
+  db.Local.hasMany(db.Product);
+  db.Product.belongsTo(db.Local);
+
+  db.Local.hasMany(db.Order);
+  db.Order.belongsTo(db.Local);
 
   db.Delivery.hasOne(db.Order);
   db.Order.belongsTo(db.Delivery);

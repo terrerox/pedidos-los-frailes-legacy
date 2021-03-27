@@ -8,7 +8,7 @@ const orderService = require('./order.service');
 // routes
 router.post('/create', createSchema, create);
 router.get('/all', authorize(), getAll);
-router.get('/', authorize(), getRestaurantOrder);
+router.get('/', authorize(), getLocalOrder);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
@@ -27,13 +27,13 @@ function createSchema(req, res, next) {
         additionalNotes: Joi.string().required(),
         paymentMethod: Joi.string().required(),
         cartItems: Joi.string().required(),
-        RestaurantId: Joi.number().required()
+        LocalId: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
 
 function create(req, res, next) {
-    // set restaurantid to body
+    // set localid to body
     orderService.create(req.body)
         .then(() => res.json({ message: 'Orden creada con éxito' }))
         .catch(next);
@@ -45,9 +45,9 @@ function getAll(req, res, next) {
         .catch(next);
 }
 
-function getRestaurantOrder(req, res, next) {
-    const currentRestaurantId = req.restaurant.id
-    orderService.getRestaurantOrder(currentRestaurantId)
+function getLocalOrder(req, res, next) {
+    const currentLocalId = req.local.id
+    orderService.getLocalOrder(currentLocalId)
         .then(orders => res.json(orders))
         .catch(next);
 }

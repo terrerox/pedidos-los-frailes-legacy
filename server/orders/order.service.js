@@ -3,7 +3,7 @@ const db = require('_helpers/db');
 module.exports = {
     getAll,
     getById,
-    getRestaurantOrder,
+    getLocalOrder,
     create,
     update,
     delete: _delete
@@ -13,8 +13,8 @@ async function getAll() {
     return await db.Order.findAll();
 }
 
-async function getRestaurantOrder(restaurantId) {
-    return await db.Order.findAll({ where: { RestaurantId: restaurantId } });
+async function getLocalOrder(localId) {
+    return await db.Order.findAll({ where: { LocalId: localId } });
 }
 
 async function getById(id) {

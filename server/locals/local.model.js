@@ -9,23 +9,10 @@ module.exports = (sequelize) => {
     phoneNumber: { type: DataTypes.STRING, allowNull: false },
     address: { type: DataTypes.STRING, allowNull: false },
     image: { type: DataTypes.TEXT, allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false },
-    hash: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false }
   };
 
-  const options = {
-    defaultScope: {
-      // exclude hash by default
-      attributes: { exclude: ["hash"] },
-    },
-    scopes: {
-      // include hash with this scope
-      withHash: { attributes: {} },
-    },
-  };
+  const Local = sequelize.define("Local", attributes);
 
-  const Restaurant = sequelize.define("Restaurant", attributes, options);
-
-  return Restaurant;
+  return Local;
 };
