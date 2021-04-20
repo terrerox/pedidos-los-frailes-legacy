@@ -5,8 +5,9 @@ import Register from '@/account/pages/Register'
 import Shop from '@/shop/pages/Shop'
 import Home from '@/home/pages/Home'
 import Checkout from '@/orders/pages/Checkout'
-import Restaurant from '@/restaurants/pages/Restaurant'
-import Order from '@/restaurants/pages/Order'
+import Local from '@/locals/pages/Local'
+import Order from '@/locals/pages/Order'
+import Delivery from '@/delivery/pages/Delivery'
 
 const routes = [
   {
@@ -35,14 +36,19 @@ const routes = [
     component: Checkout
   },
   {
-    path: '/restaurant/:id',
-    name: 'Restaurant',
-    component: Restaurant
+    path: '/local/:id',
+    name: 'Local',
+    component: Local
   },
   {
-    path: '/restaurant/:id/order/:orderId',
+    path: '/local/:id/order/:orderId',
     name: 'Order',
     component: Order
+  },
+  {
+    path: '/delivery/:id',
+    name: 'Delivery',
+    component: Delivery
   },
   {
     path: '/:pathMatch(.*)',
@@ -59,12 +65,13 @@ router.beforeEach((to, from, next) => {
   const publicPages = [
     'Login',
     'Register',
+    'Delivery',
     'Home',
     'Shop',
     'Checkout'
   ]
   const authRequired = !publicPages.includes(to.name)
-  const loggedIn = localStorage.getItem('restaurant')
+  const loggedIn = localStorage.getItem('local')
 
   if (authRequired && !loggedIn) {
     return next('/login')

@@ -13,7 +13,7 @@ deliveryService.getById = (id) => {
 }
 
 deliveryService.update = (delivery) => {
-  return httpClient.put(`/deliveries/${delivery.id}`, delivery)
+  return httpClient.put(`/deliveries/${delivery.accountId}`, delivery)
     .then(res => res)
 }
 

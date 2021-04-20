@@ -13,7 +13,7 @@
               class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t"
             >
               <h3 class="text-3xl font-semibold">
-                Editar restaurante
+                Editar locale
               </h3>
               <button
                 class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"

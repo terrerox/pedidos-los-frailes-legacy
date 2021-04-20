@@ -4,14 +4,14 @@
       <material-input
         required
         label="Nombre"
-        v-model="restaurant.title"
+        v-model="local.title"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
         label="Telefono"
-        v-model="restaurant.telephone"
+        v-model="local.telephone"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -19,11 +19,11 @@
         type="text"
         required
         label="Dirección"
-        v-model="restaurant.address"
+        v-model="local.address"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1 combo">
-      <img class="w-20 trigger object-cover object-center" :src="restaurant.image" alt="restaurant image" />
+      <img class="w-20 trigger object-cover object-center" :src="local.image" alt="local image" />
       <input
         type="file"
         accept="image/*"
@@ -36,7 +36,7 @@
         required
         type="text"
         label="Email"
-        v-model="restaurant.email"
+        v-model="local.email"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -44,7 +44,7 @@
         required
         type="text"
         label="Contraseña"
-        v-model="restaurant.password"
+        v-model="local.password"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -58,7 +58,7 @@
     <div class="col-span-2 mt-2">
       <material-input
         label="Editar descripción"
-        v-model="restaurant.description"
+        v-model="local.description"
       />
     </div>
   </form>
@@ -74,7 +74,7 @@ export default {
 
   data () {
     return {
-      restaurant: {
+      local: {
         id: 0,
         title: '',
         description: '',
@@ -88,38 +88,34 @@ export default {
     }
   },
   created () {
-    this.setRestaurantForEdit()
+    this.setLocalForEdit()
   },
   computed: {
-    ...mapState('restaurant', ['loggedRestaurant'])
+    ...mapState('local', ['loggedLocal'])
   },
 
   methods: {
-    ...mapActions('restaurant', ['updateRestaurant']),
+    ...mapActions('local', ['updateLocal']),
 
     submitForm () {
-      if (this.restaurant.password.length < 6) {
-        this.$swal('Advertencia', 'La contraseña debe de tener + 5 caracteres', 'warning')
-        return
-      }
-      if (this.confirmPass !== this.restaurant.password) {
+      if (this.confirmPass !== this.local.password) {
         this.$swal('Advertencia', 'Las contraseñas no coinciden', 'warning')
         return
       }
-      this.updateRestaurant(this.restaurant)
+      this.updateLocal(this.local)
       this.$swal('Actualizado', 'Local actualizado con éxito', 'success')
       this.$emit('close')
     },
 
-    setRestaurantForEdit () {
-      this.restaurant.id = this.loggedRestaurant.id
-      this.restaurant.description = this.loggedRestaurant.description
-      this.restaurant.telephone = this.loggedRestaurant.telephone
-      this.restaurant.address = this.loggedRestaurant.address
-      this.restaurant.category = this.loggedRestaurant.category
-      this.restaurant.email = this.loggedRestaurant.email
-      this.restaurant.password = this.loggedRestaurant.password
-      this.restaurant.image = this.loggedRestaurant.image
+    setLocalForEdit () {
+      this.local.id = this.loggedLocal.id
+      this.local.description = this.loggedLocal.description
+      this.local.telephone = this.loggedLocal.telephone
+      this.local.address = this.loggedLocal.address
+      this.local.category = this.loggedLocal.category
+      this.local.email = this.loggedLocal.email
+      this.local.password = this.loggedLocal.password
+      this.local.image = this.loggedLocal.image
     },
     handleImage (e) {
       const selectedImage = e.target.files[0] // get first file
@@ -129,7 +125,7 @@ export default {
       const reader = new FileReader()
 
       reader.onload = (e) => {
-        this.restaurant.image = e.target.result
+        this.local.image = e.target.result
       }
       reader.readAsDataURL(fileObject)
     }

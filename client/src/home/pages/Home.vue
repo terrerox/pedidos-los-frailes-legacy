@@ -32,7 +32,7 @@
       </div>
       <!-- end hero -->
       <div class="flex mt-12 items-end">
-        <h3 class="text-xl font-bold">Restaurantes</h3>
+        <h3 class="text-xl font-bold">Locales</h3>
         <img
           src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/hamburger_1f354.png"
           class="mx-4 h-8 w-8"
@@ -44,10 +44,10 @@
       >
         <div
           class="flex flex-col"
-          v-for="restaurant in restaurantsItems"
-          :key="restaurant.id"
+          v-for="local in localsItems"
+          :key="local.id"
         >
-          <Restaurant :restaurant="restaurant" />
+          <Local :local="local" />
         </div>
       </div>
     </div>
@@ -56,23 +56,23 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import Restaurant from '@/home/components/Restaurant'
+import Local from '@/home/components/Local'
 
 export default {
-  name: 'Restaurants',
+  name: 'Locals',
 
-  components: { Restaurant },
+  components: { Local },
 
   created () {
-    this.getRestaurants()
+    this.getLocals()
   },
   computed: {
-    ...mapGetters('restaurant', {
-      restaurantsItems: 'restaurants'
+    ...mapGetters('local', {
+      localsItems: 'locals'
     })
   },
   methods: {
-    ...mapActions('restaurant', ['getRestaurants'])
+    ...mapActions('local', ['getLocals'])
   }
 }
 </script>

@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import { cart } from './modules/cart'
 import { order } from './modules/order'
-import { restaurant } from './modules/restaurant'
+import { local } from './modules/local'
 import { product } from './modules/product'
 import { account } from './modules/account'
 import { delivery } from './modules/delivery'
@@ -11,7 +11,7 @@ const store = createStore({
   modules: {
     cart,
     order,
-    restaurant,
+    local,
     product,
     account,
     delivery,

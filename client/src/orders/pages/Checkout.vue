@@ -4,11 +4,11 @@
     <section class="main">
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
-          <CheckoutForm :restaurantId="currentRestaurantId" />
+          <CheckoutForm :localId="currentLocalId" />
         </div>
         <Cart
           :onCheckout="true"
-          :restaurantId="currentRestaurantId"
+          :localId="currentLocalId"
         />
       </div>
     </section>
@@ -27,7 +27,7 @@ export default {
 
   data () {
     return {
-      currentRestaurantId: Number(this.$route.params.id)
+      currentLocalId: Number(this.$route.params.id)
     }
   }
 }

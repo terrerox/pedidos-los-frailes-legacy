@@ -93,7 +93,7 @@ export default {
   components: { MaterialInput },
 
   props: {
-    restaurantId: { type: Number, required: true }
+    localId: { type: Number, required: true }
   },
 
   data () {
@@ -108,7 +108,7 @@ export default {
         additionalNotes: '',
         status: 'active',
         paymentMethod: 'Pago en entrega',
-        RestaurantId: this.restaurantId,
+        LocalAccountId: this.localId,
         cartItems: []
       }
     }
@@ -154,7 +154,7 @@ export default {
       return currency(this.$store.getters['cart/cartTotal'])
     },
     cartItems () {
-      return this.$store.getters['cart/productsOnCart'].filter(item => item.product.RestaurantId === this.restaurantId)
+      return this.$store.getters['cart/productsOnCart'].filter(item => item.product.LocalAccountId === this.localId)
     }
   }
 }

@@ -7,7 +7,7 @@
       <h3 class="font-bold text-xl textcenter mb-8">{{ title }} 🛒</h3>
       <div class="mt-12 p-6 color-primary custom-rounded font-hairline text-xs">
         <div class="flex justify-between items-center mb-4" v-if="onCheckout">
-          <p class="text-white">{{ currentRestaurant.title }}</p>
+          <p class="text-white">{{ currentLocal.title }}</p>
           <router-link
             :to="{ name: 'Shop' }"
             class="text-yellow-400 cursor-pointer"
@@ -70,7 +70,7 @@ export default {
     onCheckout: {
       type: Boolean
     },
-    restaurantId: {
+    localId: {
       type: Number
     }
   },
@@ -79,12 +79,12 @@ export default {
     title () {
       return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
     },
-    ...mapGetters('restaurant', {
-      currentRestaurant: 'currentRestaurant'
+    ...mapGetters('local', {
+      currentLocal: 'currentLocal'
     }),
     cartItems () {
       return this.$store.getters['cart/productsOnCart'].filter(
-        item => item.product.RestaurantId === this.restaurantId
+        item => item.product.LocalAccountId === this.localId
       )
     },
     cartTotal () {

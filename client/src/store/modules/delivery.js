@@ -21,7 +21,7 @@ const actions = {
   },
   updateDelivery ({ commit }, delivery) {
     return deliveryService.update(delivery).then(res => {
-      commit('removeDelivery', res.id)
+      commit('removeDelivery', res.accountId)
     })
   }
 }

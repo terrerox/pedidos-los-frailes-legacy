@@ -69,7 +69,7 @@ import { currency } from '@/_helpers'
 import OrderCartItem from '@/_shared/cart/OrderCartItem'
 
 export default {
-  name: 'orderDetails',
+  name: 'OrderDetails',
 
   components: { OrderCartItem },
 

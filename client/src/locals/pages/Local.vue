@@ -4,7 +4,7 @@
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
-      <HeroSectionOwner :heroData="loggedRestaurant" />
+      <HeroSectionOwner :heroData="loggedLocal.Local" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12 flex items-center">
@@ -59,8 +59,8 @@ import { mapActions, mapGetters } from 'vuex'
 
 import plus from '@/_shared/assets/plus.png'
 
-import ProductOwner from '@/restaurants/components/ProductOwner'
-import CardHolder from '@/restaurants/components/CardHolder'
+import ProductOwner from '@/locals/components/ProductOwner'
+import CardHolder from '@/locals/components/CardHolder'
 
 import HeroSectionOwner from '@/_shared/layout/HeroSectionOwner'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
@@ -89,12 +89,12 @@ export default {
   },
 
   created () {
-    this.getLoggedRestaurant()
+    this.getLoggedLocal()
     this.getLoggedProducts()
   },
 
   methods: {
-    ...mapActions('restaurant', ['getLoggedRestaurant']),
+    ...mapActions('local', ['getLoggedLocal']),
     ...mapActions('product', ['getLoggedProducts']),
 
     showOwnerModal () {
@@ -113,7 +113,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('restaurant', ['loggedRestaurant']),
+    ...mapGetters('local', ['loggedLocal']),
     ...mapGetters('product', ['loggedProducts'])
   }
 }

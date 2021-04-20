@@ -2,21 +2,21 @@ import { httpClient } from '@/_helpers'
 const accountService = {}
 
 accountService.login = (email, password) => {
-  return httpClient.post('/restaurants/authenticate', { email, password })
-    .then(restaurant => {
-      const { token } = restaurant
+  return httpClient.post('/accounts/authenticate', { email, password })
+    .then(local => {
+      const { token } = local
 
       if (token) {
-        // store restaurant details and jwt token in local storage to keep restaurant logged in between page refreshes
-        localStorage.setItem('restaurant', JSON.stringify(token))
+        // store local details and jwt token in local storage to keep local logged in between page refreshes
+        localStorage.setItem('local', JSON.stringify(token))
       }
 
-      return restaurant
+      return local
     })
 }
 accountService.logout = () => {
   // remove user from local storage to log user out
-  localStorage.removeItem('restaurant')
+  localStorage.removeItem('local')
 }
 
 export default accountService

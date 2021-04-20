@@ -3,11 +3,11 @@
     <div>
       <h2 class="font-bold text-xl textcenter mb-8">Deliveries 📝</h2>
       <transition-group name="order">
-        <template v-for="delivery in activeDeliveries" :key="delivery.id">
+        <template v-for="delivery in activeDeliveries" :key="delivery.accountId">
           <DeliveryItem
             @select="setSelectedDelivery"
             :delivery="delivery"
-            :class="{ 'is-active': delivery.id === setOrderToDelivery.DeliveryId}"
+            :class="{ 'is-active': delivery.accountId === setOrderToDelivery.DeliveryAccountId}"
           />
         </template>
       </transition-group>
@@ -25,7 +25,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import DeliveryItem from '@/restaurants/components/DeliveryItem'
+import DeliveryItem from '@/locals/components/DeliveryItem'
 
 export default {
   name: 'DeliveryList',
@@ -36,7 +36,7 @@ export default {
     return {
       setOrderToDelivery: {
         OrderId: '',
-        DeliveryId: '',
+        DeliveryAccountId: '',
         status: 'taken'
       }
     }
@@ -49,11 +49,12 @@ export default {
 
   methods: {
     setSelectedDelivery (id) {
-      this.setOrderToDelivery.DeliveryId = id
+      this.setOrderToDelivery.DeliveryAccountId = id
     },
     submitOrderConfirmation () {
-      const { DeliveryId, status, OrderId } = this.setOrderToDelivery
-      if (DeliveryId === '') {
+      console.log(this.setOrderToDelivery)
+      const { DeliveryAccountId, status, OrderId } = this.setOrderToDelivery
+      if (DeliveryAccountId === '') {
         this.$swal('Debe seleccionar un delivery', '', 'warning')
         return
       }
@@ -66,8 +67,8 @@ export default {
         showCloseButton: true
       }).then((result) => {
         if (result.value) {
-          this.updateDelivery({ status, id: DeliveryId })
-          this.updateOrder({ status, DeliveryId, id: OrderId })
+          this.updateDelivery({ status, accountId: DeliveryAccountId })
+          this.updateOrder({ status, DeliveryAccountId, id: OrderId })
           location.reload()
         }
       })

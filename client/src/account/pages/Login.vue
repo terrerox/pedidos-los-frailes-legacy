@@ -52,7 +52,7 @@
           <div
             class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display font-semibold text-gray-700 text-center"
           >
-            ¿No has registrado tu restaurante?
+            ¿No has registrado tu locale?
             <router-link to="/register" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
               >¡Registra aqui!</router-link>
           </div>

@@ -1,7 +1,7 @@
 <template>
    <div
     class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded cursor-pointer"
-    @click="this.$emit('select', delivery.id)"
+    @click="this.$emit('select', delivery.accountId)"
   >
     <div
       class="absolute top-0 left-0 w-4 h-4 text-center transition color-primary rounded-full border border-white cursor-pointer shadow ripple btn-hover focus:outline-none"

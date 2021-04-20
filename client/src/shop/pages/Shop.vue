@@ -2,7 +2,7 @@
   <div v-cloak id="dribbleShot">
     <Header title="Tienda" backTo="Home"/>
     <section class="main">
-      <HeroSection :heroData="currentRestaurant" />
+      <HeroSection :heroData="currentLocal" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12 flex items-center">
@@ -20,7 +20,7 @@
           >
             <div
               class="flex flex-col"
-              v-for="product in currentRestaurant.Products"
+              v-for="product in currentLocal.Products"
               :key="product.id"
             >
               <Product :product="product" />
@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="w-full lg:w-4/12 lg:mr-3">
-          <Cart :restaurantId="restaurantId" />
+          <Cart :localId="localId" />
         </div>
       </div>
     </section>
@@ -72,31 +72,31 @@ export default {
 
   data () {
     return {
-      restaurantId: 0
+      localId: 0
     }
   },
 
   created () {
     const id = Number(this.$route.params.id)
-    this.restaurantId = id
-    this.getRestaurant(id)
+    this.localId = id
+    this.getLocal(id)
   },
 
   methods: {
     goToCheckout () {
       this.$router.push({ name: 'Checkout' })
     },
-    ...mapActions('restaurant', ['getRestaurant'])
+    ...mapActions('local', ['getLocal'])
   },
 
   computed: {
-    ...mapGetters('restaurant', {
-      currentRestaurant: 'currentRestaurant'
+    ...mapGetters('local', {
+      currentLocal: 'currentLocal'
     }),
 
     cartItems () {
       return this.$store.getters['cart/productsOnCart'].filter(
-        item => item.product.RestaurantId === this.restaurantId
+        item => item.product.LocalAccountId === this.localId
       )
     },
     cartTotal () {
