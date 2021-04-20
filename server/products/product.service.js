@@ -15,7 +15,7 @@ async function getAll() {
 }
 
 async function getLocalProduct(localId) {
-    return await db.Product.findAll({ where: { LocalId: localId } });
+    return await db.Product.findAll({ where: { LocalAccountId: localId } });
 }
 
 async function getById(id) {

@@ -31,7 +31,7 @@ function createSchema(req, res, next) {
 
 function create(req, res, next) {
     // set localid to body
-    req.body.LocalId = req.local.id
+    req.body.LocalAccountId = req.local.id
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
         .then(product => res.json(product))

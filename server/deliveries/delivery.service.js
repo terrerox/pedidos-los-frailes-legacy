@@ -1,12 +1,16 @@
-const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
 
 module.exports = {
     getAll,
     getById,
     update,
+    create,
     delete: _delete
 };
+
+async function create(params) {
+    await db.Delivery.create(params);
+}
 
 async function getAll() {
     return await db.Delivery.findAll();
@@ -18,22 +22,7 @@ async function getById(id) {
 
 async function update(id, params) {
     const delivery = await getDelivery(id);
-  
-    // validate
-    const EmailChanged = params.email && delivery.email !== params.email;
-    if (
-      EmailChanged &&
-      (await db.Delivery.findOne({ where: { email: params.email } }))
-    ) {
-      throw 'Correo "' + params.email + '" ya existe';
-    }
-  
-    // hash password if it was entered
-    if (params.password) {
-      params.hash = await bcrypt.hash(params.password, 10);
-    }
-  
-    // copy params to delivery and save
+
     Object.assign(delivery, params);
     await delivery.save();
   

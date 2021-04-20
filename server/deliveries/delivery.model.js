@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const attributes = {
+    accountId: { type: DataTypes.INTEGER, primaryKey: true },
     name: { type: DataTypes.STRING, allowNull: false },
     lastName: { type: DataTypes.STRING, allowNull: false },
     status: { type: DataTypes.STRING, allowNull: false },

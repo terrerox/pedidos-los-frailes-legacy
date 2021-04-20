@@ -24,8 +24,13 @@ function authorize(roles = []) {
                 return res.status(401).json({ message: 'Unauthorized' });
             }
 
-            // authorization successful
-            req.user = account.get();
+            if (account.role === 'Local') {
+                const account = await db.Account.findByPk(req.user.sub, { include: [db.Local] });
+                req.local = account.get();
+            } else {
+                const account = await db.Account.findByPk(req.user.sub, { include: [db.Delivery] });
+                req.delivery = account.get();
+            }
             next();
         }
     ];

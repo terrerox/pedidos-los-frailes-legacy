@@ -3,28 +3,28 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
+const Role = require('_helpers/role');
 const localService = require('./local.service');
 
 // routes
-router.post('/create', authorize(), createSchema, create);
+router.post('/create', authorize(Role.Local), createSchema, create);
 router.get('/', getAll);
-router.get('/current', authorize(), getCurrent);
+router.get('/current', authorize(Role.Local), getCurrent);
 router.get('/:id', getById);
-router.get('/img/:id', getImage);
-router.put('/', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.put('/', authorize(Role.Local), updateSchema, update);
+router.delete('/:id', authorize(Role.Local), _delete);
 
 module.exports = router;
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
+        accountId: Joi.number().required(),
         title: Joi.string().required(),
         category: Joi.string().required(),
         phoneNumber: Joi.string().required(),
         address: Joi.string().required(),
         description: Joi.string().required(),
-        image: Joi.string().required(),
-        AccountId: Joi.number().required()
+        image: Joi.string().required()
     });
     validateRequest(req, next, schema);
 }
@@ -49,13 +49,6 @@ function getCurrent(req, res, next) {
 function getById(req, res, next) {
     localService.getById(req.params.id)
         .then(local => res.json(local))
-        .catch(next);
-}
-
-function getImage(req, res, next) {
-    const id = req.params.id;
-    localService.getImage(id)
-        .then(image => res.end(image))
         .catch(next);
 }
 

@@ -27,11 +27,11 @@ async function initialize() {
   db.Delivery = require("../deliveries/delivery.model")(sequelize);
   db.Account = require("../accounts/account.model")(sequelize);
 
-  db.Account.hasOne(db.Delivery);
-  db.Delivery.belongsTo(db.Account);
+  db.Account.hasOne(db.Delivery, { foreignKey: 'accountId' });
+  db.Delivery.belongsTo(db.Account, { foreignKey: 'accountId' });
 
-  db.Account.hasOne(db.Local);
-  db.Local.belongsTo(db.Account);
+  db.Account.hasOne(db.Local, { foreignKey: 'accountId' });
+  db.Local.belongsTo(db.Account, { foreignKey: 'accountId' });
 
   db.Local.hasMany(db.Product);
   db.Product.belongsTo(db.Local);

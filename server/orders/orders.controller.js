@@ -27,7 +27,7 @@ function createSchema(req, res, next) {
         additionalNotes: Joi.string().required(),
         paymentMethod: Joi.string().required(),
         cartItems: Joi.string().required(),
-        LocalId: Joi.number().required()
+        LocalAccountId: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -67,7 +67,7 @@ function updateSchema(req, res, next) {
         numberOfHouse: Joi.string().empty(''),
         reference: Joi.binary().empty(''),
         apartment: Joi.string().empty(''),
-        DeliveryId: Joi.number().empty(''),
+        DeliveryAccountId: Joi.number().empty(''),
         additionalNotes: Joi.string().empty(''),
         cartItems: Joi.string().empty('')
     });

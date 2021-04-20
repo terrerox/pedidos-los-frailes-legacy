@@ -16,20 +16,20 @@ module.exports = router;
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
+        accountId: Joi.number().required(),
         name: Joi.string().required(),
         lastName: Joi.string().required(),
         status: Joi.string().required(),
         phoneNumber: Joi.string().required(),
         imageUrl: Joi.string().required(),
-        image: Joi.string().required(),
-        AccountId: Joi.number().required()
+        image: Joi.string().required()
     });
     validateRequest(req, next, schema);
 }
 
 function create(req, res, next) {
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/locals/img/`
-    localService.create(req.body)
+    deliveryService.create(req.body)
         .then(() => res.json({ message: 'Registrado con éxito' }))
         .catch(next);
 }

@@ -1,14 +1,16 @@
-const config = require("config.json");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
 
 module.exports = {
   getAll,
   getById,
   update,
+  create,
   delete: _delete,
 };
+
+async function create(params) {
+    await db.Local.create(params);
+}
 
 async function getAll() {
   return await db.Local.findAll();
@@ -21,21 +23,6 @@ async function getById(id) {
 async function update(id, params) {
   const local = await getLocal(id);
 
-  // validate
-  const EmailChanged = params.email && local.email !== params.email;
-  if (
-    EmailChanged &&
-    (await db.Local.findOne({ where: { email: params.email } }))
-  ) {
-    throw 'Correo "' + params.email + '" ya existe';
-  }
-
-  // hash password if it was entered
-  if (params.password) {
-    params.hash = await bcrypt.hash(params.password, 10);
-  }
-
-  // copy params to Local and save
   Object.assign(local, params);
   await local.save();
 
