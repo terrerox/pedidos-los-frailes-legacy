@@ -3,14 +3,16 @@ const router = express.Router();
 const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
+const Role = require('_helpers/role');
 const deliveryService = require('./delivery.service');
 
 // routes
-router.post('/create', authorize(), createSchema, create);
+router.post('/create', authorize(Role.Delivery), createSchema, create);
 router.get('/all', getAll);
+router.get('/logged',  authorize(Role.Delivery), getLogged);
 router.get('/:id', getById);
-router.put('/:id', authorize(), updateSchema, update);
-router.delete('/:id', authorize(), _delete);
+router.put('/:id', updateSchema, update);
+router.delete('/:id', authorize(Role.Delivery), _delete);
 
 module.exports = router;
 
@@ -18,6 +20,7 @@ function createSchema(req, res, next) {
     const schema = Joi.object({
         accountId: Joi.number().required(),
         name: Joi.string().required(),
+        nationalId: Joi.string().required(),
         lastName: Joi.string().required(),
         status: Joi.string().required(),
         phoneNumber: Joi.string().required(),
@@ -46,9 +49,14 @@ function getById(req, res, next) {
         .catch(next);
 }
 
+function getLogged(req, res, next) {
+    res.json(req.delivery);
+}
+
 function updateSchema(req, res, next) {
     const schema = Joi.object({
         name: Joi.string().empty(''),
+        nationalId: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
         phoneNumber: Joi.string().empty(''),
         status: Joi.string().empty(''),

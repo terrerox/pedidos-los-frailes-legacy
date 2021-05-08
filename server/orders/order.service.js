@@ -4,6 +4,7 @@ module.exports = {
     getAll,
     getById,
     getLocalOrder,
+    getDeliveryOrder,
     create,
     update,
     delete: _delete
@@ -15,6 +16,13 @@ async function getAll() {
 
 async function getLocalOrder(localId) {
     return await db.Order.findAll({ where: { LocalAccountId: localId } });
+}
+
+async function getDeliveryOrder(deliveryId) {
+    return await db.Order.findAll({ 
+        where: { DeliveryAccountId: deliveryId },
+        include: [db.Local] 
+    });
 }
 
 async function getById(id) {

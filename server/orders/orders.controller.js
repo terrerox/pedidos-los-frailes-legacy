@@ -9,6 +9,7 @@ const orderService = require('./order.service');
 router.post('/create', createSchema, create);
 router.get('/all', authorize(), getAll);
 router.get('/', authorize(), getLocalOrder);
+router.get('/delivery', authorize(), getDeliveryOrder);
 router.get('/:id', authorize(), getById);
 router.put('/:id', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
@@ -27,7 +28,8 @@ function createSchema(req, res, next) {
         additionalNotes: Joi.string().required(),
         paymentMethod: Joi.string().required(),
         cartItems: Joi.string().required(),
-        LocalAccountId: Joi.number().required()
+        LocalAccountId: Joi.number().required(),
+        DeliveryAccountId: Joi.number().required()
     });
     validateRequest(req, next, schema);
 }
@@ -48,6 +50,14 @@ function getAll(req, res, next) {
 function getLocalOrder(req, res, next) {
     const currentLocalId = req.local.id
     orderService.getLocalOrder(currentLocalId)
+        .then(orders => res.json(orders))
+        .catch(next);
+}
+
+function getDeliveryOrder(req, res, next) {
+    console.log(req)
+    const currentDeliveryId = req.delivery.id
+    orderService.getDeliveryOrder(currentDeliveryId)
         .then(orders => res.json(orders))
         .catch(next);
 }

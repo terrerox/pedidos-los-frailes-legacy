@@ -18,7 +18,6 @@ module.exports = router;
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
-        accountId: Joi.number().required(),
         title: Joi.string().required(),
         category: Joi.string().required(),
         phoneNumber: Joi.string().required(),
@@ -31,8 +30,9 @@ function createSchema(req, res, next) {
 
 function create(req, res, next) {
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/locals/img/`
+    req.body.accountId = req.local.id
     localService.create(req.body)
-        .then(() => res.json({ message: 'Registrado con éxito' }))
+        .then(() => res.json({ id: req.body.accountId }))
         .catch(next);
 }
 
@@ -43,7 +43,7 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-    res.json(req.local);
+    req.local.Local ? res.json(req.local) : res.json({ notFound: true })
 }
 
 function getById(req, res, next) {
