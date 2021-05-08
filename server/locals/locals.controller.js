@@ -9,7 +9,7 @@ const localService = require('./local.service');
 // routes
 router.post('/create', authorize(Role.Local), createSchema, create);
 router.get('/', getAll);
-router.get('/current', authorize(Role.Local), getCurrent);
+router.get('/logged', authorize(Role.Local), getCurrent);
 router.get('/:id', getById);
 router.put('/', authorize(Role.Local), updateSchema, update);
 router.delete('/:id', authorize(Role.Local), _delete);
@@ -43,7 +43,9 @@ function getAll(req, res, next) {
 }
 
 function getCurrent(req, res, next) {
-    req.local.Local ? res.json(req.local) : res.json({ notFound: true })
+    req.local.Local
+        ? res.json(req.local)
+        : res.json({ notFound: true })
 }
 
 function getById(req, res, next) {

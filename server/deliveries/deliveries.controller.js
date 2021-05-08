@@ -18,13 +18,11 @@ module.exports = router;
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
-        accountId: Joi.number().required(),
         name: Joi.string().required(),
         nationalId: Joi.string().required(),
         lastName: Joi.string().required(),
         status: Joi.string().required(),
         phoneNumber: Joi.string().required(),
-        imageUrl: Joi.string().required(),
         image: Joi.string().required()
     });
     validateRequest(req, next, schema);
@@ -32,8 +30,9 @@ function createSchema(req, res, next) {
 
 function create(req, res, next) {
     req.body.imageUrl = `${req.protocol}://${req.headers.host}/locals/img/`
+    req.body.accountId = req.delivery.id
     deliveryService.create(req.body)
-        .then(() => res.json({ message: 'Registrado con éxito' }))
+        .then(() => res.json({ id: req.body.accountId }))
         .catch(next);
 }
 
@@ -50,7 +49,9 @@ function getById(req, res, next) {
 }
 
 function getLogged(req, res, next) {
-    res.json(req.delivery);
+    req.delivery.Delivery 
+        ? res.json(req.delivery)
+        : res.json({ notFound: true })
 }
 
 function updateSchema(req, res, next) {
