@@ -4,7 +4,7 @@
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
       <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
-      <HeroSectionOwner :heroData="loggedLocal.Local" />
+      <HeroSection :heroData="loggedLocal.Local" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12 flex items-center">
@@ -62,10 +62,10 @@ import plus from '@/_shared/assets/plus.png'
 import ProductOwner from '@/locals/components/ProductOwner'
 import CardHolder from '@/locals/components/CardHolder'
 
-import HeroSectionOwner from '@/_shared/layout/HeroSectionOwner'
+import HeroSection from '@/locals/components/HeroSection'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
-import OwnerProfileModal from '@/_shared/modals/OwnerProfileModal'
+import OwnerProfileModal from '@/locals/components/EditProfileModal'
 
 export default {
   name: 'Shop',
@@ -73,7 +73,7 @@ export default {
   components: {
     ProductOwner,
     CardHolder,
-    HeroSectionOwner,
+    HeroSection,
     OwnerHeader,
     ProductModal,
     OwnerProfileModal

@@ -1,5 +1,5 @@
 <template>
-  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="addOrder">
+  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="submitForm">
     <p class="col-span-2 text-gray-800 font-bold m-2">Tu información</p>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
@@ -47,12 +47,19 @@
         label="Edificio/Apto/Extensión *"
       />
     </div>
-    <div class="col-span-2 mt-2">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
         type="text"
         v-model="orderInfo.additionalNotes"
         label="Notas adicionales *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <Dropdown
+        :content="activeDeliveries"
+        title="Delivery"
+        v-model="orderInfo.DeliveryAccountId"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">
@@ -80,17 +87,19 @@
   </form>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import { currency } from '@/_helpers'
 import { mask } from 'vue-the-mask'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import Dropdown from '@/_shared/Dropdown'
 
 export default {
   name: 'CheckoutForm',
 
   directives: { mask },
 
-  components: { MaterialInput },
+  components: { MaterialInput, Dropdown },
 
   props: {
     localId: { type: Number, required: true }
@@ -107,8 +116,9 @@ export default {
         apartment: '',
         additionalNotes: '',
         status: 'active',
-        paymentMethod: 'Pago en entrega',
+        paymentMethod: 'Efectivo',
         LocalAccountId: this.localId,
+        DeliveryAccountId: 0,
         cartItems: []
       }
     }
@@ -116,10 +126,12 @@ export default {
 
   created () {
     this.orderInfo.cartItems = this.cartItems
+    this.getDeliveries()
   },
 
   methods: {
-    addOrder () {
+    ...mapActions('delivery', ['getDeliveries']),
+    submitForm () {
       if (this.isEmpty(this.orderInfo)) {
         this.$swal('Debe de llenar todos los campos', '', 'warning')
         return
@@ -135,7 +147,8 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
-          this.$store.dispatch('order/addOrder', this.orderInfo)
+          this.addOrder(this.orderInfo)
+          this.updateDelivery({ accountId: this.orderInfo.DeliveryAccountId, status: 'taken' })
           this.$refs.form.reset()
           this.cartItems.map(cartItem => {
             this.$store.dispatch('cart/removeProductFromCart', cartItem)
@@ -146,10 +159,13 @@ export default {
     },
     isEmpty (obj) {
       return !Object.values(obj).every(element => element !== '')
-    }
+    },
+    ...mapActions('order', ['addOrder']),
+    ...mapActions('delivery', ['updateDelivery'])
   },
 
   computed: {
+    ...mapGetters('delivery', ['activeDeliveries']),
     cartTotal () {
       return currency(this.$store.getters['cart/cartTotal'])
     },

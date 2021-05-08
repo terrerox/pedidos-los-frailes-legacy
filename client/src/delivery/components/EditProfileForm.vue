@@ -3,27 +3,27 @@
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
-        label="Nombre"
-        v-model="local.title"
+        label="Cédula"
+        v-model="delivery.nationalId"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
-        label="Telefono"
-        v-model="local.telephone"
+        label="Nombre"
+        v-model="delivery.name"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         type="text"
         required
-        label="Dirección"
-        v-model="local.address"
+        label="Apellido"
+        v-model="delivery.lastName"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1 combo">
-      <img class="w-20 trigger object-cover object-center" :src="local.image" alt="local image" />
+      <img class="w-20 trigger object-cover object-center" :src="delivery.image" alt="delivery image" />
       <input
         type="file"
         accept="image/*"
@@ -36,7 +36,7 @@
         required
         type="text"
         label="Email"
-        v-model="local.email"
+        v-model="delivery.email"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -44,7 +44,7 @@
         required
         type="text"
         label="Contraseña"
-        v-model="local.password"
+        v-model="delivery.password"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -57,8 +57,8 @@
     </div>
     <div class="col-span-2 mt-2">
       <material-input
-        label="Editar descripción"
-        v-model="local.description"
+        label="Número de teléfono"
+        v-model="delivery.phoneNumber"
       />
     </div>
   </form>
@@ -74,12 +74,12 @@ export default {
 
   data () {
     return {
-      local: {
-        id: 0,
-        title: '',
-        description: '',
-        telephone: '',
-        category: '',
+      delivery: {
+        accountId: 0,
+        nationalId: '',
+        name: '',
+        lastName: '',
+        phoneNumber: '',
         email: '',
         password: '',
         image: ''
@@ -88,34 +88,41 @@ export default {
     }
   },
   created () {
-    this.setLocalForEdit()
+    this.getLoggedDelivery()
+    setTimeout(() => {
+      this.setDelivery(this.loggedDelivery)
+    }, 2000)
   },
   computed: {
-    ...mapState('local', ['loggedLocal'])
+    ...mapState('delivery', ['loggedDelivery'])
   },
 
   methods: {
-    ...mapActions('local', ['updateLocal']),
+    ...mapActions('delivery', ['getLoggedDelivery']),
+    ...mapActions('delivery', ['updateDelivery']),
+    ...mapActions('account', ['updateAccount']),
 
     submitForm () {
-      if (this.confirmPass !== this.local.password) {
+      const { email, password, ...deliveryWithoutEmailAndPass } = this.delivery
+      if (this.confirmPass !== password) {
         this.$swal('Advertencia', 'Las contraseñas no coinciden', 'warning')
         return
       }
-      this.updateLocal(this.local)
-      this.$swal('Actualizado', 'Local actualizado con éxito', 'success')
+      this.updateDelivery(deliveryWithoutEmailAndPass)
+      this.updateAccount({ id: this.loggedDelivery.id, email, password })
+      this.$swal('Actualizado', 'Delivery actualizado con éxito', 'success')
       this.$emit('close')
     },
 
-    setLocalForEdit () {
-      this.local.id = this.loggedLocal.id
-      this.local.description = this.loggedLocal.description
-      this.local.telephone = this.loggedLocal.telephone
-      this.local.address = this.loggedLocal.address
-      this.local.category = this.loggedLocal.category
-      this.local.email = this.loggedLocal.email
-      this.local.password = this.loggedLocal.password
-      this.local.image = this.loggedLocal.image
+    setDelivery (loggedDelivery) {
+      const { nationalId, lastName, phoneNumber, image, name } = loggedDelivery.Delivery
+      this.delivery.accountId = loggedDelivery.id
+      this.delivery.nationalId = nationalId
+      this.delivery.name = name
+      this.delivery.lastName = lastName
+      this.delivery.phoneNumber = phoneNumber
+      this.delivery.email = loggedDelivery.email
+      this.delivery.image = image
     },
     handleImage (e) {
       const selectedImage = e.target.files[0] // get first file
@@ -125,7 +132,7 @@ export default {
       const reader = new FileReader()
 
       reader.onload = (e) => {
-        this.local.image = e.target.result
+        this.delivery.image = e.target.result
       }
       reader.readAsDataURL(fileObject)
     }

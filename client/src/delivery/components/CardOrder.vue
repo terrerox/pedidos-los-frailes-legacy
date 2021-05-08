@@ -6,9 +6,8 @@
       class="mb-1 p-4 no-underline text-white flex justify-between rounded "
       @click.prevent="active = !active"
     >
-      <div class="title font-bold text-lg">{{ order.name }}</div>
-      <div class="title font-bold text-lg">Calle: {{ order.street }}</div>
-      <div class="title font-bold text-lg">{{ order.phoneNumber }}</div>
+      <div class="title font-bold text-lg">{{ order.Local.title }}</div>
+      <div class="title font-bold text-lg">Cliente: {{ order.name }}</div>
       <span class="text-white" v-show="!active">
         <img
           :src="plus"
@@ -25,6 +24,24 @@
       /></span>
     </div>
     <div class="p-2" v-show="active">
+      <div class="flex flex-row justify-between">
+        <div class="title font-bold text-lg">
+          Calle:
+        </div>
+        <div class="title  text-lg">
+          {{ order.street }}
+        </div>
+      </div>
+      <hr />
+      <div class="flex flex-row justify-between">
+        <div class="title font-bold text-lg">
+          Número de telefono:
+        </div>
+        <div class="title  text-lg">
+          {{ order.phoneNumber }}
+        </div>
+      </div>
+      <hr />
       <div class="flex flex-row justify-between">
         <div class="title font-bold text-lg">
           Edificio/Apto/Extensión:
@@ -78,9 +95,9 @@
       <div class="px-2 flex flex-row justify-between">
         <button
           class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
-          @click="goToOrderDetails(order.id)"
+          @click="submitOrder(order.id)"
         >
-          Enviar pedido
+          {{ buttonTitle }}
         </button>
         <div class="title font-bold text-lg">Total DOP: {{ cartTotal }}</div>
       </div>
@@ -102,44 +119,67 @@ export default {
   components: { OrderCartItem },
 
   props: {
-    order: { type: Object, required: true },
-    index: { type: Number, required: true }
+    order: { type: Object, required: true }
   },
 
   data () {
     return {
       active: false,
       plus: plus,
-      minus: minus
+      minus: minus,
+      isConfirmed: false
     }
   },
 
   methods: {
-    goToOrderDetails (id) {
-      this.$router.push({ name: 'Order', params: { orderId: id } })
-    },
-    sendOrder (id) {
-      this.$swal({
-        title: '¿Estás seguro de enviar este producto?',
-        text: 'No podrás revertir esta acción',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        cancelButtonText: 'Cancelar',
-        showCloseButton: true,
-        icon: 'warning'
-      }).then((result) => {
-        if (result.value) {
-          this.$swal('Enviado', 'Producto se ha enviado con éxito', 'success')
-          this.$store.dispatch('order/deleteOrder', {
-            id,
-            index: this.index
-          })
-        }
-      })
+    submitOrder (id) {
+      if (!this.isConfirmed) {
+        this.$swal({
+          title: '¿Estás seguro de confirmar esta orden?',
+          text: 'No podrás revertir esta acción',
+          showCancelButton: true,
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar',
+          showCloseButton: true,
+          icon: 'warning'
+        }).then((result) => {
+          if (result.value) {
+            this.$swal('Orden confirmada', 'success')
+            this.$store.dispatch('order/updateOrder', {
+              id,
+              status: 'confirmed'
+            })
+            this.isConfirmed = true
+          }
+        })
+      } else {
+        this.$swal({
+          title: '¿Has entregado la orden?',
+          text: 'No podrás revertir esta acción',
+          showCancelButton: true,
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar',
+          showCloseButton: true,
+          icon: 'warning'
+        }).then((result) => {
+          if (result.value) {
+            this.$swal('Entregada', 'Orden entragada con éxito', 'success')
+            this.$store.dispatch('order/deleteOrder', { id })
+            const deliveryId = Number(this.$route.params.id)
+            this.$store.dispatch('delivery/updateDelivery', {
+              accountId: deliveryId,
+              status: 'active'
+            })
+          }
+        })
+      }
     }
   },
 
   computed: {
+    buttonTitle () {
+      return !this.isConfirmed ? 'Confirmar orden' : 'Orden entregada'
+    },
     cartTotal () {
       return currency(
         this.order.cartItems.reduce(

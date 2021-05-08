@@ -4,7 +4,7 @@
   >
     <div class="flex items-center">
       <img class="cursor-pointer ml-4" :src="arrowBack" @click="goBack" />
-      <a class="mx-4 cursor-pointer" @click="logout">
+      <a class="mx-4 cursor-pointer" @click="logoutButton">
         <svg
           class="w-6 h-6"
           fill="none"
@@ -57,6 +57,10 @@ export default {
 
   methods: {
     ...mapActions('account', ['logout']),
+    logoutButton () {
+      this.logout()
+      this.$router.push({ name: 'Login' })
+    },
     goBack () {
       return this.$router.push({ name: this.backTo })
     }

@@ -21,4 +21,9 @@ deliveryService.deleteDelivery = id => {
   return httpClient.delete(`/deliveries/${id}`)
 }
 
+deliveryService.getCurrent = () => {
+  return httpClient.get('/deliveries/logged')
+    .then(res => res)
+}
+
 export default deliveryService

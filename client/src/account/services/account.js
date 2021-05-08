@@ -3,20 +3,29 @@ const accountService = {}
 
 accountService.login = (email, password) => {
   return httpClient.post('/accounts/authenticate', { email, password })
-    .then(local => {
-      const { token } = local
+    .then(account => {
+      const { token } = account
 
       if (token) {
-        // store local details and jwt token in local storage to keep local logged in between page refreshes
-        localStorage.setItem('local', JSON.stringify(token))
+        localStorage.setItem('account', JSON.stringify(token))
       }
-
-      return local
+      return account
     })
 }
+
+accountService.register = ({ email, password, role }) => {
+  return httpClient.post('/accounts/register', { email, password, role })
+    .then(account => account)
+}
+
 accountService.logout = () => {
   // remove user from local storage to log user out
-  localStorage.removeItem('local')
+  localStorage.removeItem('account')
+}
+
+accountService.update = (account) => {
+  return httpClient.put(`/accounts/${account.id}`, account)
+    .then(res => res)
 }
 
 export default accountService

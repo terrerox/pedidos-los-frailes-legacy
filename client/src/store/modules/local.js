@@ -1,4 +1,5 @@
 import localService from '@/locals/services/local'
+import router from '@/router'
 
 const state = {
   locals: [],
@@ -19,6 +20,10 @@ const mutations = {
 }
 
 const actions = {
+  createLocal ({ commit }, local) {
+    return localService.create(local)
+      .then(res => router.push(`/local/${res.id}`))
+  },
   getLocals ({ commit }) {
     return localService.getAll()
       .then(res => {

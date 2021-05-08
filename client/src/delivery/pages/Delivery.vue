@@ -2,13 +2,12 @@
   <div v-cloak id="dribbleShot">
     <OwnerHeader @openModal="showOwnerModal" />
     <section class="main">
-      <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
-      <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
-      <HeroSectionOwner :heroData="loggedLocal" />
+      <EditProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
+      <HeroSection :heroData="loggedDelivery.Delivery" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12">
-            <DeliveryInfo :deliveryInfo="order" />
+            <DeliveryInfo />
           </div>
         </div>
         <div class="w-full lg:w-4/12 lg:mr-3">
@@ -27,10 +26,9 @@ import plus from '@/_shared/assets/plus.png'
 import CardHolder from '@/delivery/components/CardHolder'
 import DeliveryInfo from '@/delivery/components/DeliveryInfo'
 
-import HeroSectionOwner from '@/_shared/layout/HeroSectionOwner'
+import HeroSection from '@/delivery/components/HeroSection'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
-import ProductModal from '@/_shared/modals/ProductModal'
-import OwnerProfileModal from '@/_shared/modals/OwnerProfileModal'
+import EditProfileModal from '@/delivery/components/EditProfileModal'
 
 export default {
   name: 'Shop',
@@ -38,10 +36,9 @@ export default {
   components: {
     DeliveryInfo,
     CardHolder,
-    HeroSectionOwner,
+    HeroSection,
     OwnerHeader,
-    ProductModal,
-    OwnerProfileModal
+    EditProfileModal
   },
 
   data () {
@@ -54,15 +51,15 @@ export default {
   },
 
   created () {
-    this.getLoggedLocal()
-    this.getLoggedProducts()
-    const orderId = Number(this.$route.params.id)
-    this.getOrder(orderId)
+    this.getLoggedDelivery()
+    // this.getLoggedProducts()
+    // const orderId = Number(this.$route.params.id)
+    // this.getOrder(orderId)
   },
 
   methods: {
     ...mapActions('order', ['getOrder']),
-    ...mapActions('local', ['getLoggedLocal']),
+    ...mapActions('delivery', ['getLoggedDelivery']),
     ...mapActions('product', ['getLoggedProducts']),
 
     showOwnerModal () {
@@ -81,7 +78,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters('local', ['loggedLocal']),
+    ...mapGetters('delivery', ['loggedDelivery']),
     ...mapGetters('product', ['loggedProducts']),
     ...mapGetters('order', ['order'])
   }

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import OwnerProfileForm from '@/_shared/forms/OwnerProfileForm'
+import OwnerProfileForm from '@/locals/components/EditProfileForm'
 
 export default {
   name: 'ProductModal',

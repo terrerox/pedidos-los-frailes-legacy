@@ -7,6 +7,11 @@ orderService.loggedOrders = () => {
     .then(res => res)
 }
 
+orderService.deliveryOrders = () => {
+  return httpClient.get('/orders/delivery')
+    .then(res => res)
+}
+
 orderService.getAll = () => {
   return httpClient.get('/orders/all')
     .then(res => res)

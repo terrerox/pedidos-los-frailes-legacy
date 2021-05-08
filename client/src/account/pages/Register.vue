@@ -48,9 +48,9 @@
         </h2>
         <Alert />
         <div class="mt-12">
-          <RegisterForm />
+          <Test />
           <div
-            class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display font-semibold text-gray-700 text-center"
+            class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display font-semibold text-gray-700 text-center"
           >
             ¿Ya has registrado tu negocio?
             <router-link to="/login" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
@@ -73,16 +73,16 @@
 </template>
 
 <script>
-import RegisterForm from '../components/RegisterForm'
+import Test from '../components/Test'
 
 import Alert from '@/_shared/Alert'
 
 export default {
-  components: { RegisterForm, Alert }
+  components: { Test, Alert }
 }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 .st0 {
   fill: none;
   stroke: currentColor;

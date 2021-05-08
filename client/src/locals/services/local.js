@@ -2,6 +2,11 @@ import { httpClient } from '@/_helpers'
 
 const localService = {}
 
+localService.create = (local) => {
+  return httpClient.post('/locals/create', local)
+    .then(res => res)
+}
+
 localService.getAll = () => {
   return httpClient.get('/locals')
     .then(res => res)

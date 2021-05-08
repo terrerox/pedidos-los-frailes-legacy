@@ -18,6 +18,12 @@
     <div class="col-span-2 lg:col-span-1">
       <material-input type="text" label="Contraseña" v-model="email" />
     </div>
+    <div class="col-span-2 lg:col-span-1">
+      <material-input type="text" label="Dirección" v-model="email" />
+    </div>
+    <div class="col-span-2 lg:col-span-1">
+      <material-input type="text" label="Teléfono" v-model="email" />
+    </div>
     <div class="mt-10 col-span-2">
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide

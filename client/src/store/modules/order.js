@@ -2,6 +2,7 @@ import orderService from '@/orders/services/order'
 
 const state = {
   orders: [],
+  deliveryOrders: [],
   order: {}
 }
 
@@ -9,14 +10,17 @@ const mutations = {
   setOrders (state, orders) {
     state.orders = orders
   },
+  setDeliveryOrders (state, orders) {
+    state.deliveryOrders = orders
+  },
   setOrder (state, order) {
     state.order = order
   },
   addOrders (state, order) {
     state.orders.push({ order })
   },
-  removeOrder (state, index) {
-    state.orders.splice(index, 1)
+  removeOrder (state, id) {
+    state.orders = state.orders.filter(order => order.id !== id)
   }
 }
 
@@ -32,6 +36,20 @@ const actions = {
           ordersArray = [...ordersArray, orders]
         })
         commit('setOrders', ordersArray)
+      })
+  },
+
+  getDeliveryOrders ({ commit }, id) {
+    let ordersArray = []
+    return orderService.deliveryOrders()
+      .then(res => {
+        res.map(order => {
+          const { cartItems, ...orders } = order
+          const cartItemsJson = JSON.parse(cartItems)
+          orders.cartItems = cartItemsJson
+          ordersArray = [...ordersArray, orders]
+        })
+        commit('setDeliveryOrders', ordersArray)
       })
   },
 
@@ -60,7 +78,7 @@ const actions = {
 
   deleteOrder ({ commit }, { id, index }) {
     return orderService.deleteOrder(id).then(() => {
-      commit('removeOrder', index)
+      commit('removeOrder', id)
     })
   }
 }
@@ -68,6 +86,9 @@ const actions = {
 const getters = {
   orders (state) {
     return state.orders
+  },
+  deliveryOrders (state) {
+    return state.deliveryOrders
   },
   order (state) {
     return state.order

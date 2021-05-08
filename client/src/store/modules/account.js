@@ -1,32 +1,33 @@
 import accountService from '@/account/services/account'
+import localService from '@/locals/services/local'
 import router from '@/router'
 
-const local = JSON.parse(localStorage.getItem('local'))
-const state = local
-  ? { status: { loggedIn: true }, local }
-  : { status: {}, local: null }
+const user = JSON.parse(localStorage.getItem('account'))
+const state = user
+  ? { status: { loggedIn: true }, user }
+  : { status: {}, user: null }
 
 const mutations = {
-  loginRequest (state, local) {
+  loginRequest (state, user) {
     state.status = { loggingIn: true }
-    state.local = local
+    state.user = user
   },
-  loginSuccess (state, local) {
+  loginSuccess (state, user) {
     state.status = { loggedIn: true }
-    state.local = local
+    state.user = user
   },
   loginFailure (state) {
     state.status = {}
-    state.local = null
+    state.user = null
   },
   logout (state) {
     state.status = {}
-    state.local = null
+    state.user = null
   },
-  registerRequest (state, local) {
+  registerRequest (state, user) {
     state.status = { registering: true }
   },
-  registerSuccess (state, local) {
+  registerSuccess (state, user) {
     state.status = {}
   },
   registerFailure (state, error) {
@@ -40,9 +41,17 @@ const actions = {
 
     accountService.login(email, password)
       .then(
-        local => {
-          commit('loginSuccess', local)
-          router.push(`/local/${local.id}`)
+        user => {
+          commit('loginSuccess', user)
+          if (user.role === 'Local') {
+            localService.getCurrent().then(res => {
+              res.notFound
+                ? router.push('/local-info')
+                : router.push(`/local/${user.id}`)
+            })
+          } else {
+            router.push(`/delivery/${user.id}`)
+          }
         },
         error => {
           commit('loginFailure', error)
@@ -52,27 +61,27 @@ const actions = {
   },
   logout ({ commit }) {
     accountService.logout()
-    router.push('/login')
     commit('logout')
   },
-  register ({ dispatch, commit }, local) {
-    commit('registerRequest', local)
+  register ({ dispatch, commit }, user) {
+    commit('registerRequest', user)
 
-    accountService.register(local)
+    accountService.register(user)
       .then(
-        local => {
-          commit('registerSuccess', local)
-          router.push('/login')
-          setTimeout(() => {
-            // display success message after route change completes
-            dispatch('alert/success', 'Registration successful', { root: true })
-          })
+        user => {
+          commit('registerSuccess', user)
         },
         error => {
           commit('registerFailure', error)
           dispatch('alert/error', error, { root: true })
         }
       )
+  },
+  updateAccount (context, account) {
+    return accountService.update(account)
+      .then(res => {
+        console.log(res)
+      })
   }
 }
 

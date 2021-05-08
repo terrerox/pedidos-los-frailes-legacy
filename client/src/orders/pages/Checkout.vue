@@ -18,7 +18,7 @@
 import Header from '@/_shared/layout/Header'
 
 import Cart from '@/_shared/cart/Cart'
-import CheckoutForm from '@/_shared/forms/CheckoutForm'
+import CheckoutForm from '@/orders/components/CheckoutForm'
 
 export default {
   name: 'Checkout',

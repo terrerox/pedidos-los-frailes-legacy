@@ -66,7 +66,6 @@ const actions = {
   },
 
   removeProductFromCart (context, index) {
-    console.log(index)
     context.commit('removeProductFromCart', index.product.id)
     context.commit('setStorage')
   }

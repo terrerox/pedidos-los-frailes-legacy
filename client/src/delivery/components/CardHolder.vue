@@ -3,8 +3,8 @@
     <div v-if="getOrders.length">
       <h2 class="font-bold text-xl textcenter mb-8">Pedidos 📝</h2>
       <transition-group name="order">
-        <template v-for="(order, $index) in getOrders" :key="order.id">
-          <CardOrder :order="order" :index="$index" />
+        <template v-for="order in getOrders" :key="order.id">
+          <CardOrder :order="order"/>
         </template>
       </transition-group>
     </div>
@@ -22,15 +22,12 @@ export default {
   components: { CardOrder, EmptyOrders },
 
   created () {
-    this.$store.dispatch('order/getOrders')
+    this.$store.dispatch('order/getDeliveryOrders')
   },
 
   computed: {
     getOrders () {
-      return this.$store.getters['order/orders'].filter(order => {
-        const deliveryId = Number(this.$route.params.id)
-        return order.DeliveryId === deliveryId
-      })
+      return this.$store.getters['order/deliveryOrders']
     }
   }
 }

@@ -6,6 +6,7 @@ import Shop from '@/shop/pages/Shop'
 import Home from '@/home/pages/Home'
 import Checkout from '@/orders/pages/Checkout'
 import Local from '@/locals/pages/Local'
+import LocalInfo from '@/locals/pages/LocalInfo'
 import Order from '@/locals/pages/Order'
 import Delivery from '@/delivery/pages/Delivery'
 
@@ -41,6 +42,11 @@ const routes = [
     component: Local
   },
   {
+    path: '/local-info',
+    name: 'LocalInfo',
+    component: LocalInfo
+  },
+  {
     path: '/local/:id/order/:orderId',
     name: 'Order',
     component: Order
@@ -64,14 +70,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = [
     'Login',
-    'Register',
     'Delivery',
+    'Register',
     'Home',
     'Shop',
     'Checkout'
   ]
   const authRequired = !publicPages.includes(to.name)
-  const loggedIn = localStorage.getItem('local')
+  const loggedIn = localStorage.getItem('account')
 
   if (authRequired && !loggedIn) {
     return next('/login')
