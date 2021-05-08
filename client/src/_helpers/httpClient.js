@@ -5,7 +5,7 @@ import router from '@/router'
 import { authHeader } from '@/_helpers'
 
 export const httpClient = axios.create({
-  baseURL: 'http://localhost:4000/'
+  baseURL: 'http://10.0.0.38:4000/'
 })
 
 httpClient.interceptors.request.use((config) => {

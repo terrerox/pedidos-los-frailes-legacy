@@ -17,8 +17,8 @@ localService.getById = (id) => {
     .then(res => res)
 }
 
-localService.getCurrent = () => {
-  return httpClient.get('/locals/current')
+localService.getLogged = () => {
+  return httpClient.get('/locals/logged')
     .then(res => res)
 }
 

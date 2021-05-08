@@ -7,9 +7,9 @@
       alt="Empty cart"
       class="m-auto w-2/4"
     />
-    <p class="mt-6 text-gray-500 font-bold text-2xl">No hay nada para comer!</p>
+    <p class="mt-6 text-gray-500 font-bold text-2xl">¡No hay nada en el carrito!</p>
     <p class="mt-2 text-gray-500 text-lg">
-      Selecciona tus
+      ¡Selecciona tus
       <br />favoritos!
     </p>
   </div>

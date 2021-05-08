@@ -37,7 +37,7 @@ const actions = {
       })
   },
   getLoggedLocal (context, id) {
-    return localService.getCurrent()
+    return localService.getLogged()
       .then(res => {
         context.commit('setLoggedLocal', res)
       })

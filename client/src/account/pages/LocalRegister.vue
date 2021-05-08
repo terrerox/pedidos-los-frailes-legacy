@@ -44,21 +44,18 @@
           class="text-center text-2xl text-indigo-900 font-display font-semibold lg:text-left xl:text-3xl
                     xl:text-bold"
         >
-          Inicia sesión
+          Registrar Local
         </h2>
         <Alert />
         <div class="mt-12">
-          <LoginForm />
+          <LocalRegisterForm />
           <div
-            class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display font-semibold text-gray-700 text-center"
+            class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display font-semibold text-gray-700 text-center"
           >
-            ¿No has registrado tu local?
-            <router-link to="/local-register" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
-              >¡Registra aqui!</router-link>
-            <br>
-            ¿No te has registrado como delivery?
-            <router-link to="/delivery-register" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
-              >¡Registra aqui!</router-link>
+            ¿Ya has registrado tu negocio?
+            <router-link to="/login" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
+              >¡Inicia sesión aqui!</router-link
+            >
           </div>
         </div>
       </div>
@@ -76,16 +73,16 @@
 </template>
 
 <script>
-import LoginForm from '../components/LoginForm'
+import LocalRegisterForm from '../components/LocalRegisterForm'
 
 import Alert from '@/_shared/Alert'
 
 export default {
-  components: { LoginForm, Alert }
+  components: { LocalRegisterForm, Alert }
 }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 .st0 {
   fill: none;
   stroke: currentColor;

@@ -5,7 +5,7 @@
     text-${alertColor}-700`"
     class="pl-4 pr-8 py-3 rounded relative"
   >
-    <strong class="font-bold">Error! </strong>
+    <strong class="font-bold">¡{{ alert.type }}!</strong>
     <span class="block sm:inline">{{ alert.message }}</span>
   </div>
 </template>

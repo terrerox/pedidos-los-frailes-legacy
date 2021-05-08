@@ -2,6 +2,10 @@ import { httpClient } from '@/_helpers'
 
 const deliveryService = {}
 
+deliveryService.create = (delivery) => {
+  return httpClient.post('/deliveries/create', delivery)
+}
+
 deliveryService.getAll = () => {
   return httpClient.get('/deliveries/all')
     .then(res => res)
@@ -21,7 +25,7 @@ deliveryService.deleteDelivery = id => {
   return httpClient.delete(`/deliveries/${id}`)
 }
 
-deliveryService.getCurrent = () => {
+deliveryService.getLogged = () => {
   return httpClient.get('/deliveries/logged')
     .then(res => res)
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5">
-    <p class="col-span-2 text-gray-800 font-bold m-2">Detalles de orden <strong v-show="orderDetails.status === 'taken'">(Confirmada)</strong></p>
+    <p class="col-span-2 text-gray-800 font-bold m-2">Detalles de orden <strong v-show="orderDetails.status === 'confirmed'">(Confirmada)</strong></p>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <h2 class="font-bold">Nombre</h2>
       {{ orderDetails.name }}
@@ -37,12 +37,12 @@
           :key="cartItem.product.id"
         />
     </div>
-    <div v-show="orderDetails.status === 'taken'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
+    <div v-show="orderDetails.status === 'confirmed'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <h2 class="font-bold">Delivery encargado</h2>
       {{ delivery.name }}
       {{ delivery.lastName }}
     </div>
-    <div v-show="orderDetails.status === 'taken'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
+    <div v-show="orderDetails.status === 'confirmed'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <h2 class="font-bold">Número de teléfono del Delivery</h2>
       {{ delivery.phoneNumber }}
     </div>

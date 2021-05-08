@@ -1,7 +1,8 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 import Login from '@/account/pages/Login'
-import Register from '@/account/pages/Register'
+import DeliveryRegister from '@/account/pages/DeliveryRegister'
+import LocalRegister from '@/account/pages/LocalRegister'
 import Shop from '@/shop/pages/Shop'
 import Home from '@/home/pages/Home'
 import Checkout from '@/orders/pages/Checkout'
@@ -9,6 +10,7 @@ import Local from '@/locals/pages/Local'
 import LocalInfo from '@/locals/pages/LocalInfo'
 import Order from '@/locals/pages/Order'
 import Delivery from '@/delivery/pages/Delivery'
+import DeliveryInfo from '@/delivery/pages/DeliveryInfo'
 
 const routes = [
   {
@@ -17,9 +19,14 @@ const routes = [
     component: Login
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register
+    path: '/delivery-register',
+    name: 'DeliveryRegister',
+    component: DeliveryRegister
+  },
+  {
+    path: '/local-register',
+    name: 'LocalRegister',
+    component: LocalRegister
   },
   {
     path: '/',
@@ -57,6 +64,11 @@ const routes = [
     component: Delivery
   },
   {
+    path: '/delivery-info',
+    name: 'DeliveryInfo',
+    component: DeliveryInfo
+  },
+  {
     path: '/:pathMatch(.*)',
     redirect: '/'
   }
@@ -71,7 +83,8 @@ router.beforeEach((to, from, next) => {
   const publicPages = [
     'Login',
     'Delivery',
-    'Register',
+    'DeliveryRegister',
+    'LocalRegister',
     'Home',
     'Shop',
     'Checkout'

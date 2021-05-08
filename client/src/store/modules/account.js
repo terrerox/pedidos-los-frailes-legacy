@@ -1,5 +1,6 @@
 import accountService from '@/account/services/account'
 import localService from '@/locals/services/local'
+import deliveryService from '@/delivery/services/delivery'
 import router from '@/router'
 
 const user = JSON.parse(localStorage.getItem('account'))
@@ -44,13 +45,17 @@ const actions = {
         user => {
           commit('loginSuccess', user)
           if (user.role === 'Local') {
-            localService.getCurrent().then(res => {
+            localService.getLogged().then(res => {
               res.notFound
                 ? router.push('/local-info')
                 : router.push(`/local/${user.id}`)
             })
           } else {
-            router.push(`/delivery/${user.id}`)
+            deliveryService.getLogged().then(res => {
+              res.notFound
+                ? router.push('/delivery-info')
+                : router.push(`/delivery/${user.id}`)
+            })
           }
         },
         error => {
@@ -70,6 +75,10 @@ const actions = {
       .then(
         user => {
           commit('registerSuccess', user)
+          dispatch('alert/success',
+            '¡Registrado con éxito, inicia sesión!',
+            { root: true }
+          )
         },
         error => {
           commit('registerFailure', error)

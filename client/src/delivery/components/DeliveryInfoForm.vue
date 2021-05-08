@@ -4,46 +4,40 @@
    <div class="col-span-2 lg:col-span-1">
       <material-input
         type="text"
-        label="Nombre del local"
-        v-model="local.title"
+        label="Ingresa su cédula"
+        v-model="delivery.nationalId"
+        v-mask="'###-#######-#'"
+       />
+   </div>
+   <div class="col-span-2 lg:col-span-1">
+      <material-input
+        type="text"
+        label="Nombre"
+        v-model="delivery.name"
       />
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
         type="text"
-        label="Categoria"
-        v-model="local.category"
-      />
-   </div>
-   <div class="col-span-2 lg:col-span-1">
-      <label>Imagen de presentación</label>
-      <input
-        type="file"
-        accept="image/*"
-        class="mb-10"
-        @change="handleImage"
-      />
-   </div>
-   <div class="col-span-2 lg:col-span-1">
-      <material-input
-        type="text"
-        label="Descripción"
-        v-model="local.description"
-      />
-   </div>
-   <div class="col-span-2 lg:col-span-1">
-      <material-input
-        type="text"
-        label="Dirección"
-        v-model="local.address"
+        label="Apellido"
+        v-model="delivery.lastName"
       />
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
         type="text"
         label="Teléfono"
-        v-model="local.phoneNumber"
+        v-model="delivery.phoneNumber"
         v-mask="'(###) ###-####'"
+      />
+   </div>
+   <div class="col-span-2 lg:col-span-1">
+      <label>Foto de perfil</label>
+      <input
+        type="file"
+        accept="image/*"
+        class="mb-10"
+        @change="handleImage"
       />
    </div>
    <div class="col-span-2">
@@ -61,11 +55,11 @@
 <script>
 import { mapActions } from 'vuex'
 
-import { mask } from 'vue-the-mask'
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import { mask } from 'vue-the-mask'
 
 export default {
-  name: 'LocalInfoForm',
+  name: 'DeliveryInfoForm',
 
   directives: { mask },
 
@@ -73,25 +67,25 @@ export default {
 
   data () {
     return {
-      local: {
-        title: '',
-        category: '',
-        image: '',
-        description: '',
-        address: '',
-        phoneNumber: ''
+      delivery: {
+        nationalId: '',
+        name: '',
+        lastName: '',
+        status: 'active',
+        phoneNumber: '',
+        image: ''
       }
     }
   },
 
   methods: {
-    ...mapActions('local', ['createLocal']),
+    ...mapActions('delivery', ['createDelivery']),
 
     handleSubmit () {
-      if (this.isEmpty(this.local)) {
-        return alert('mamañemazo')
+      if (this.isEmpty(this.delivery)) {
+        return alert('llene todos los campos')
       }
-      this.createLocal(this.local)
+      this.createDelivery(this.delivery)
     },
 
     isEmpty (obj) {
@@ -107,7 +101,7 @@ export default {
       const reader = new FileReader()
 
       reader.onload = (e) => {
-        this.local.image = e.target.result
+        this.delivery.image = e.target.result
       }
       reader.readAsDataURL(fileObject)
     }

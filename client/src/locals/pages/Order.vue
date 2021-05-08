@@ -6,7 +6,6 @@
         <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
           <OrderDetails :orderDetails="order" />
         </div>
-        <DeliveryList/>
       </div>
     </section>
   </div>
@@ -15,14 +14,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import OrderDetails from '@/locals/components/OrderDetails'
-import DeliveryList from '@/locals/components/DeliveryList'
 
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
 
 export default {
   name: 'Order',
 
-  components: { OrderDetails, DeliveryList, OwnerHeader },
+  components: { OrderDetails, OwnerHeader },
 
   created () {
     const orderId = Number(this.$route.params.orderId)

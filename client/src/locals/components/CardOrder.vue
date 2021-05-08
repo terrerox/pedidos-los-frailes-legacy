@@ -80,7 +80,7 @@
           class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
           @click="goToOrderDetails(order.id)"
         >
-          Enviar pedido
+          Más información
         </button>
         <div class="title font-bold text-lg">Total DOP: {{ cartTotal }}</div>
       </div>

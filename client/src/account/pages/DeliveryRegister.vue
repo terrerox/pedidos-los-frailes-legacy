@@ -44,11 +44,11 @@
           class="text-center text-2xl text-indigo-900 font-display font-semibold lg:text-left xl:text-3xl
                     xl:text-bold"
         >
-          Registrar
+          Registrar Delivery
         </h2>
         <Alert />
         <div class="mt-12">
-          <Test />
+          <DeliveryRegisterForm />
           <div
             class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display font-semibold text-gray-700 text-center"
           >
@@ -73,12 +73,12 @@
 </template>
 
 <script>
-import Test from '../components/Test'
+import DeliveryRegisterForm from '../components/DeliveryRegisterForm'
 
 import Alert from '@/_shared/Alert'
 
 export default {
-  components: { Test, Alert }
+  components: { DeliveryRegisterForm, Alert }
 }
 </script>
 

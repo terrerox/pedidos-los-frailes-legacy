@@ -1,4 +1,5 @@
 import deliveryService from '@/delivery/services/delivery'
+import router from '@/router'
 
 const state = {
   deliveries: [],
@@ -17,6 +18,10 @@ const mutations = {
   }
 }
 const actions = {
+  createDelivery ({ commit }, delivery) {
+    return deliveryService.create(delivery)
+      .then(res => router.push(`/delivery/${res.id}`))
+  },
   getDeliveries (context) {
     return deliveryService.getAll()
       .then(deliveries => {
@@ -29,7 +34,7 @@ const actions = {
     })
   },
   getLoggedDelivery (context, id) {
-    return deliveryService.getCurrent()
+    return deliveryService.getLogged()
       .then(res => {
         context.commit('setLoggedDelivery', res)
       })

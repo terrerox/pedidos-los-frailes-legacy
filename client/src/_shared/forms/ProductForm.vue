@@ -8,7 +8,12 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input required label="Precio" v-model="product.price" />
+      <material-input
+        required
+        type="number"
+        label="Precio"
+        v-model="product.price"
+      />
     </div>
     <div class="col-span-2 lg:col-span-2 mt-2 pr-1">
       <material-input
