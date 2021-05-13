@@ -5,9 +5,9 @@
         class="md-input"
         :id="idName"
         :type="type"
+        :required="required"
         min="0"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        v-model="data"
         :pattern="pattern"
         :placeholder="placeholder || label"
       />
@@ -46,6 +46,10 @@ export default {
       type: String,
       default: randomId
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     labelBg: {
       type: String
     }
@@ -53,6 +57,16 @@ export default {
   methods: {
     updateSelf (name) {
       this.$emit('input', name)
+    }
+  },
+  computed: {
+    data: {
+      get () {
+        return this.modelValue
+      },
+      set (value) {
+        this.$emit('update:modelValue', value)
+      }
     }
   }
 }

@@ -86,11 +86,19 @@ const actions = {
         }
       )
   },
-  updateAccount (context, account) {
+  updateAccount ({ dispatch }, account) {
     return accountService.update(account)
-      .then(res => {
-        console.log(res)
-      })
+      .then(
+        () => {
+          dispatch('alert/success',
+            '¡Actualizado con éxito!',
+            { root: true }
+          )
+        },
+        error => {
+          dispatch('alert/error', error, { root: true })
+        }
+      )
   }
 }
 

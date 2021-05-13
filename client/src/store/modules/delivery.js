@@ -15,6 +15,23 @@ const mutations = {
   },
   setLoggedDelivery (state, delivery) {
     state.loggedDelivery = delivery
+  },
+
+  setEditedDelivery (state, editedDelivery) {
+    const {
+      name,
+      lastName,
+      phoneNumber,
+      image,
+      nationalId
+    } = editedDelivery
+
+    const { Delivery } = state.loggedDelivery
+    Delivery.name = name
+    Delivery.lastName = lastName
+    Delivery.phoneNumber = phoneNumber
+    Delivery.image = image
+    Delivery.nationalId = nationalId
   }
 }
 const actions = {
@@ -28,10 +45,23 @@ const actions = {
         context.commit('setDeliveries', deliveries)
       })
   },
-  updateDelivery ({ commit }, delivery) {
-    return deliveryService.update(delivery).then(res => {
-      commit('removeDelivery', res.accountId)
-    })
+  updateDelivery ({ commit, dispatch }, delivery) {
+    return deliveryService.update(delivery)
+      .then(
+        res => {
+          commit('setEditedDelivery', res)
+          dispatch('alert/success',
+            '¡Actualizado con éxito!',
+            { root: true }
+          )
+        },
+        error => {
+          dispatch('alert/error', error, { root: true })
+        }
+      )
+  },
+  updateDeliveryStatus ({ commit }, delivery) {
+    return deliveryService.update(delivery)
   },
   getLoggedDelivery (context, id) {
     return deliveryService.getLogged()

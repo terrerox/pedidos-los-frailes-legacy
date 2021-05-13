@@ -25,12 +25,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'DeliveryInfo',
+  name: 'TableInfo',
+
+  created () {
+    this.getLoggedDelivery()
+  },
+
+  methods: {
+    ...mapActions('delivery', ['getLoggedDelivery'])
+  },
 
   computed: {
-    ...mapGetters('delivery', {
+    ...mapState('delivery', {
       deliveryInfo: 'loggedDelivery'
     })
   }

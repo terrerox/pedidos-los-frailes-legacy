@@ -3,18 +3,6 @@ const state = {
   message: null
 }
 
-const actions = {
-  success ({ commit }, message) {
-    commit('success', message)
-  },
-  error ({ commit }, message) {
-    commit('error', message)
-  },
-  clear ({ commit }) {
-    commit('clear')
-  }
-}
-
 const mutations = {
   success (state, message) {
     state.type = 'Exito'
@@ -27,6 +15,24 @@ const mutations = {
   clear (state) {
     state.type = null
     state.message = null
+  }
+}
+
+const actions = {
+  success ({ commit }, message) {
+    commit('success', message)
+    setTimeout(() => {
+      commit('clear')
+    }, 5000)
+  },
+  error ({ commit }, message) {
+    commit('error', message)
+    setTimeout(() => {
+      commit('clear')
+    }, 5000)
+  },
+  clear ({ commit }) {
+    commit('clear')
   }
 }
 

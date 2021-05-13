@@ -16,6 +16,24 @@ const mutations = {
   },
   setLoggedLocal (state, local) {
     state.loggedLocal = local
+  },
+  setEditedLocal (state, editedLocal) {
+    const {
+      title,
+      image,
+      category,
+      description,
+      address,
+      phoneNumber
+    } = editedLocal
+
+    const { Local } = state.loggedLocal
+    Local.title = title
+    Local.category = category
+    Local.description = description
+    Local.address = address
+    Local.phoneNumber = phoneNumber
+    Local.image = image
   }
 }
 
@@ -42,11 +60,20 @@ const actions = {
         context.commit('setLoggedLocal', res)
       })
   },
-  updateLocal (context, local) {
+  updateLocal ({ commit, dispatch }, local) {
     return localService.update(local)
-      .then(res => {
-        context.commit('setLoggedLocal', res)
-      })
+      .then(
+        res => {
+          commit('setEditedLocal', res)
+          dispatch('alert/success',
+            '¡Actualizado con éxito!',
+            { root: true }
+          )
+        },
+        error => {
+          dispatch('alert/error', error, { root: true })
+        }
+      )
   }
 }
 

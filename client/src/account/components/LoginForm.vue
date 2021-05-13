@@ -21,20 +21,19 @@
         </div>
       </div>
       <material-input
-        type="text"
+        type="password"
         v-model="password"
         label="Contraseña"
       />
     </div>
     <div class="mt-10">
+      <Loader v-show="status.loggingIn"/>
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
         font-semibold font-display focus:outline-none focus:shadow-outline btn-hover shadow-lg"
       >
         Inicia sesión
       </button>
-       <img v-show="status.loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-
     </div>
   </form>
 </template>
@@ -43,11 +42,12 @@
 import { mapState, mapActions } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'LoginForm',
 
-  components: { MaterialInput },
+  components: { MaterialInput, Loader },
 
   data () {
     return {
@@ -65,7 +65,13 @@ export default {
   },
   methods: {
     ...mapActions('account', ['login', 'logout']),
+    ...mapActions('alert', ['success', 'error']),
+
     handleSubmit (e) {
+      if (this.password === '' && this.email === '') {
+        this.error('¡Llena todos los campos!')
+        return
+      }
       this.submitted = true
       const { email, password } = this
       if (email && password) {

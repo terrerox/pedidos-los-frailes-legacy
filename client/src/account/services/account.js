@@ -24,7 +24,7 @@ accountService.logout = () => {
 }
 
 accountService.update = (account) => {
-  return httpClient.put(`/accounts/${account.id}`, account)
+  return httpClient.put('/accounts/', account)
     .then(res => res)
 }
 

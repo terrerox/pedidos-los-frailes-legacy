@@ -1,5 +1,6 @@
 <template>
  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5 m-8" @submit.prevent="handleSubmit">
+   <Alert />
    <p class="col-span-2 text-gray-800 font-bold m-2 mb-4">¡Completa tu registro!</p>
    <div class="col-span-2 lg:col-span-1">
       <material-input
@@ -9,8 +10,8 @@
       />
    </div>
    <div class="col-span-2 lg:col-span-1">
-      <material-input
-        type="text"
+      <material-select
+        :content="selectItems"
         label="Categoria"
         v-model="local.category"
       />
@@ -43,7 +44,7 @@
         type="text"
         label="Teléfono"
         v-model="local.phoneNumber"
-        v-mask="'(###) ###-####'"
+        v-mask="'+1 ###-###-####'"
       />
    </div>
    <div class="col-span-2">
@@ -63,13 +64,15 @@ import { mapActions } from 'vuex'
 
 import { mask } from 'vue-the-mask'
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import MaterialSelect from '@/_shared/MaterialSelect'
+import Alert from '@/_shared/Alert'
 
 export default {
   name: 'LocalInfoForm',
 
   directives: { mask },
 
-  components: { MaterialInput },
+  components: { MaterialInput, MaterialSelect, Alert },
 
   data () {
     return {
@@ -80,16 +83,18 @@ export default {
         description: '',
         address: '',
         phoneNumber: ''
-      }
+      },
+      selectItems: ['Fármacos', 'Comida', 'Bebidas']
     }
   },
 
   methods: {
     ...mapActions('local', ['createLocal']),
+    ...mapActions('alert', ['error']),
 
     handleSubmit () {
       if (this.isEmpty(this.local)) {
-        return alert('mamañemazo')
+        return this.error('¡Llene todos los campos!')
       }
       this.createLocal(this.local)
     },

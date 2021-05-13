@@ -4,12 +4,10 @@
       <select
         class="md-input"
         :id="idName"
-        min="0"
-        @input="$emit('update:modelValue', Number($event.target.value))"
+        v-model="data"
       >
-        <option selected="selected" hidden="hidden"></option>
-        <template v-for="item in content" :key="item.accountId">
-            <option :value="item.accountId">{{ item.name }} {{ item.lastName }}</option>
+        <template v-for="item in content" :key="item">
+            <option :value="item">{{ item }}</option>
         </template>
       </select>
       <label :for="idName" class="md-label">{{ label }}</label>
@@ -22,8 +20,7 @@
 import { randomId } from '@/_helpers'
 
 export default {
-  name: 'Dropdown',
-
+  name: 'MaterialSelect',
   props: {
     modelValue: {
       type: [String, Number],
@@ -45,6 +42,17 @@ export default {
   methods: {
     updateSelf (name) {
       this.$emit('input', name)
+    }
+  },
+
+  computed: {
+    data: {
+      get () {
+        return this.modelValue
+      },
+      set (value) {
+        this.$emit('update:modelValue', value)
+      }
     }
   }
 }

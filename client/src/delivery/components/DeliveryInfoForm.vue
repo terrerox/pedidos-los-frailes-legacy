@@ -1,5 +1,6 @@
 <template>
  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5 m-8" @submit.prevent="handleSubmit">
+    <Alert />
    <p class="col-span-2 text-gray-800 font-bold m-2 mb-4">¡Completa tu registro!</p>
    <div class="col-span-2 lg:col-span-1">
       <material-input
@@ -28,7 +29,7 @@
         type="text"
         label="Teléfono"
         v-model="delivery.phoneNumber"
-        v-mask="'(###) ###-####'"
+        v-mask="'+1 ### ###-####'"
       />
    </div>
    <div class="col-span-2 lg:col-span-1">
@@ -56,6 +57,7 @@
 import { mapActions } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import Alert from '@/_shared/Alert'
 import { mask } from 'vue-the-mask'
 
 export default {
@@ -63,7 +65,7 @@ export default {
 
   directives: { mask },
 
-  components: { MaterialInput },
+  components: { MaterialInput, Alert },
 
   data () {
     return {
@@ -80,10 +82,11 @@ export default {
 
   methods: {
     ...mapActions('delivery', ['createDelivery']),
+    ...mapActions('alert', ['error']),
 
     handleSubmit () {
       if (this.isEmpty(this.delivery)) {
-        return alert('llene todos los campos')
+        return this.error('¡Llene todos los campos!')
       }
       this.createDelivery(this.delivery)
     },

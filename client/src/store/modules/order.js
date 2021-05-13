@@ -21,6 +21,9 @@ const mutations = {
   },
   removeOrder (state, id) {
     state.orders = state.orders.filter(order => order.id !== id)
+  },
+  removeDeliveryOrder (state, id) {
+    state.deliveryOrders = state.deliveryOrders.filter(order => order.id !== id)
   }
 }
 
@@ -71,14 +74,18 @@ const actions = {
   },
 
   updateOrder ({ commit }, order) {
-    return orderService.update(order).then(res => {
-      console.log(res)
+    return orderService.update(order)
+  },
+
+  deleteOrder ({ commit }, { id }) {
+    return orderService.deleteOrder(id).then(() => {
+      commit('removeOrder', id)
     })
   },
 
-  deleteOrder ({ commit }, { id, index }) {
+  deleteDeliveryOrder ({ commit }, { id }) {
     return orderService.deleteOrder(id).then(() => {
-      commit('removeOrder', id)
+      commit('removeDeliveryOrder', id)
     })
   }
 }

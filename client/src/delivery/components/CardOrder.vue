@@ -6,7 +6,7 @@
       class="mb-1 p-4 no-underline text-white flex justify-between rounded "
       @click.prevent="active = !active"
     >
-      <div class="title font-bold text-lg">{{ order.Local.title }}</div>
+      <div class="title font-bold text-lg">Local: {{ order.Local.title }}</div>
       <div class="title font-bold text-lg">Cliente: {{ order.name }}</div>
       <span class="text-white" v-show="!active">
         <img
@@ -44,15 +44,6 @@
       <hr />
       <div class="flex flex-row justify-between">
         <div class="title font-bold text-lg">
-          Edificio/Apto/Extensión:
-        </div>
-        <div class="title  text-lg">
-          {{ order.apartment }}
-        </div>
-      </div>
-      <hr />
-      <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
           Número:
         </div>
         <div class="title  text-lg">
@@ -84,6 +75,15 @@
         </div>
         <div class="title text-lg">
           {{ order.additionalNotes }}
+        </div>
+      </div>
+      <hr />
+      <div class="flex flex-row justify-between">
+        <div class="title font-bold text-lg">
+          Edificio/Apto/Extensión:
+        </div>
+        <div class="title  text-lg">
+          {{ order.apartment }}
         </div>
       </div>
       <hr />
@@ -144,7 +144,7 @@ export default {
           icon: 'warning'
         }).then((result) => {
           if (result.value) {
-            this.$swal('Orden confirmada', 'success')
+            this.$swal('Confirmada', 'Orden confirmada con éxito', 'success')
             this.$store.dispatch('order/updateOrder', {
               id,
               status: 'confirmed'
@@ -164,7 +164,7 @@ export default {
         }).then((result) => {
           if (result.value) {
             this.$swal('Entregada', 'Orden entragada con éxito', 'success')
-            this.$store.dispatch('order/deleteOrder', { id })
+            this.$store.dispatch('order/deleteDeliveryOrder', { id })
             const deliveryId = Number(this.$route.params.id)
             this.$store.dispatch('delivery/updateDelivery', {
               accountId: deliveryId,

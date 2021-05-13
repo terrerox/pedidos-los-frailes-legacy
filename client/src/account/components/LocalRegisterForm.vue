@@ -4,10 +4,10 @@
       <material-input type="email" label="Email" v-model="account.email" />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input type="text" label="Contraseña" v-model="account.password" />
+      <material-input type="password" label="Contraseña" v-model="account.password" />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input type="text" label="Confirmar Contraseña" v-model="confirmPass" />
+      <material-input type="password" label="Confirmar Contraseña" v-model="confirmPassword" />
     </div>
     <div class="col-span-2">
       <button
@@ -37,7 +37,7 @@ export default {
         email: '',
         password: ''
       },
-      confirmPass: '',
+      confirmPassword: '',
       submitted: false
     }
   },
@@ -53,14 +53,17 @@ export default {
 
   methods: {
     ...mapActions('account', ['register', 'logout']),
-    ...mapActions('alert', ['success']),
+    ...mapActions('alert', ['success', 'error']),
 
     handleSubmit () {
+      const { email, password } = this.account
       if (this.isEmpty(this.account)) {
-        return alert('llena todo')
+        return this.error('¡Llena todos los campos!')
+      }
+      if (password !== this.confirmPassword) {
+        return this.error('¡Las contraseñas no coinciden!')
       }
       this.submitted = true
-      const { email, password } = this.account
       this.register({ email, password, role: 'Local' })
     },
 

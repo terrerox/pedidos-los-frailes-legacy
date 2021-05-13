@@ -3,7 +3,7 @@
     <OwnerHeader @openModal="showOwnerModal" />
     <section class="main">
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
-      <OwnerProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
+      <EditProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
       <HeroSection :heroData="loggedLocal.Local" />
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
@@ -65,7 +65,7 @@ import CardHolder from '@/locals/components/CardHolder'
 import HeroSection from '@/locals/components/HeroSection'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
-import OwnerProfileModal from '@/locals/components/EditProfileModal'
+import EditProfileModal from '@/locals/components/EditProfileModal'
 
 export default {
   name: 'Shop',
@@ -76,7 +76,7 @@ export default {
     HeroSection,
     OwnerHeader,
     ProductModal,
-    OwnerProfileModal
+    EditProfileModal
   },
 
   data () {

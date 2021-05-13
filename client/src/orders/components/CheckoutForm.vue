@@ -1,6 +1,6 @@
 <template>
   <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="submitForm">
-    <p class="col-span-2 text-gray-800 font-bold m-2">Tu información</p>
+    <p class="col-span-2 text-gray-800 font-bold m-2">Tu información <span class="text-red-400">* opcional</span></p>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         v-model="orderInfo.name"
@@ -12,7 +12,7 @@
       <material-input
         v-model="orderInfo.phoneNumber"
         required
-        v-mask="'(###) ###-####'"
+        v-mask="'+1 ###-###-####'"
         label="Telefono"
       />
     </div>
@@ -40,8 +40,14 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <Dropdown
+        :content="activeDeliveries"
+        label="Delivery"
+        v-model="orderInfo.DeliveryAccountId"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
-        required
         type="text"
         v-model="orderInfo.apartment"
         label="Edificio/Apto/Extensión *"
@@ -49,17 +55,9 @@
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
-        required
         type="text"
         v-model="orderInfo.additionalNotes"
         label="Notas adicionales *"
-      />
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <Dropdown
-        :content="activeDeliveries"
-        title="Delivery"
-        v-model="orderInfo.DeliveryAccountId"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">
@@ -132,10 +130,10 @@ export default {
   methods: {
     ...mapActions('delivery', ['getDeliveries']),
     submitForm () {
-      if (this.isEmpty(this.orderInfo)) {
-        this.$swal('Debe de llenar todos los campos', '', 'warning')
-        return
-      }
+      // if (this.isEmpty(this.orderInfo)) {
+      //   this.$swal('Debe de llenar todos los campos', '', 'warning')
+      //   return
+      // }
 
       this.$swal({
         title: '¿Estás seguro de enviar el pedido?',
@@ -148,7 +146,7 @@ export default {
         if (result.value) {
           this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
           this.addOrder(this.orderInfo)
-          this.updateDelivery({ accountId: this.orderInfo.DeliveryAccountId, status: 'taken' })
+          this.updateDeliveryStatus({ accountId: this.orderInfo.DeliveryAccountId, status: 'taken' })
           this.$refs.form.reset()
           this.cartItems.map(cartItem => {
             this.$store.dispatch('cart/removeProductFromCart', cartItem)
@@ -161,7 +159,7 @@ export default {
       return !Object.values(obj).every(element => element !== '')
     },
     ...mapActions('order', ['addOrder']),
-    ...mapActions('delivery', ['updateDelivery'])
+    ...mapActions('delivery', ['updateDeliveryStatus'])
   },
 
   computed: {
