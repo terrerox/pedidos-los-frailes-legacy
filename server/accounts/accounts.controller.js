@@ -10,9 +10,9 @@ const accountService = require('./account.service');
 router.post('/authenticate', authenticateSchema, authenticate);
 router.post('/register', registerSchema, register);
 router.get('/all', getAll);
-router.get('/current', authorize(), getCurrent);
+router.get('/logged', authorize(), getLogged);
 router.get('/:id', getById);
-router.put('/:id', authorize(), updateSchema, update);
+router.put('/', authorize(), updateSchema, update);
 router.delete('/:id', authorize(), _delete);
 
 module.exports = router;
@@ -46,7 +46,7 @@ function register(req, res, next) {
         .catch(next);
 }
 
-function getCurrent(req, res, next) {
+function getLogged(req, res, next) {
     res.json(req.user);
 }
 
@@ -71,7 +71,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    accountService.update(req.params.id, req.body)
+    accountService.update(req.user.sub, req.body)
         .then(account => res.json(account))
         .catch(next);
 }

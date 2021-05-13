@@ -24,8 +24,8 @@ function createSchema(req, res, next) {
         numberOfHouse: Joi.string().required(),
         reference: Joi.string().required(),
         status: Joi.string().required(),
-        apartment: Joi.string().required(),
-        additionalNotes: Joi.string().required(),
+        apartment: Joi.string().empty(''),
+        additionalNotes: Joi.string().empty(''),
         paymentMethod: Joi.string().required(),
         cartItems: Joi.string().required(),
         LocalAccountId: Joi.number().required(),
@@ -35,7 +35,6 @@ function createSchema(req, res, next) {
 }
 
 function create(req, res, next) {
-    // set localid to body
     orderService.create(req.body)
         .then(() => res.json({ message: 'Orden creada con éxito' }))
         .catch(next);
