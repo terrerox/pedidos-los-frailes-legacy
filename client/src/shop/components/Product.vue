@@ -12,7 +12,9 @@
       class="absolute bottom-0 left-0 w-1/3 bg-gray-200 rounded-tr-lg p-2 text-center text-xs"
     >
       <span class="font-bold">{{ product.prepTimeValue }}</span>
-      {{ product.prepTimeUnit }}
+      {{ product.prepTimeUnit }} -
+      <span class="font-bold">{{ product.price }}</span>
+      DOP
     </div>
     <div style="bottom: -20px;" class="absolute right-0 w-10 mr-2">
       <button class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none">
@@ -36,9 +38,6 @@
     <span class="text-xs"><i class="fa fa-star"></i> {{ product.rating }}</span>
     <span class="text-gray-600 font-hairline text-xs mx-4">{{
       product.category
-    }}</span>
-    <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.price
     }}</span>
   </div>
 </template>

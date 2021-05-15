@@ -1,16 +1,35 @@
 <template>
-    <form class="grid grid-cols-2 gap-2" ref="deliveryForm">
+    <form class="grid grid-cols-2 gap-2" @submit.prevent="handleSubmit" ref="deliveryForm">
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Cédula" v-model="delivery.nationalId" />
+          <material-input
+            type="text"
+            label="Cédula"
+            v-model="delivery.nationalId"
+            pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}"
+            v-mask="'###-#######-#'"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Nombre" v-model="delivery.name" />
+          <material-input
+            type="text"
+            label="Nombre"
+            v-model="delivery.name"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Apellido" v-model="delivery.lastName" />
+          <material-input
+            type="text"
+            label="Apellido"
+            v-model="delivery.lastName"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Teléfono" v-model="delivery.phoneNumber" />
+          <material-input
+            type="tel"
+            pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
+            label="Teléfono"
+            v-mask="'+1 ###-###-####'"
+            v-model="delivery.phoneNumber" />
         </div>
         <div class="col-span-2">
           <label>Imagen</label>
@@ -28,9 +47,12 @@
 import { mapActions, mapState } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'UpdateDeliveryForm',
+
+  directives: { mask },
 
   emits: ['close'],
 
@@ -63,7 +85,7 @@ export default {
     ...mapActions('delivery', ['updateDelivery']),
     ...mapActions('alert', ['error']),
 
-    submit () {
+    handleSubmit () {
       const { delivery } = this
       if (this.isEmpty(delivery)) {
         this.error('Debe de llenar todos los campos')

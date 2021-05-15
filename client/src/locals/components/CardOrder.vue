@@ -27,15 +27,6 @@
     <div class="p-2" v-show="active">
       <div class="flex flex-row justify-between">
         <div class="title font-bold text-lg">
-          Edificio/Apto/Extensión:
-        </div>
-        <div class="title  text-lg">
-          {{ order.apartment }}
-        </div>
-      </div>
-      <hr />
-      <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
           Número:
         </div>
         <div class="title  text-lg">
@@ -63,6 +54,15 @@
       <hr />
       <div class="flex flex-row justify-between">
         <div class="title font-bold text-lg">
+          Edificio/Apto/Extensión:
+        </div>
+        <div class="title  text-lg">
+          {{ order.apartment }}
+        </div>
+      </div>
+      <hr />
+      <div class="flex flex-row justify-between">
+        <div class="title font-bold text-lg">
           Notas adicionales:
         </div>
         <div class="title text-lg">
@@ -77,7 +77,7 @@
       />
       <div class="px-2 flex flex-row justify-between">
         <button
-          class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
+          class="px-4 py-1 text-white font-bold bg-green-500 custom-rounded"
           @click="goToOrderDetails(order.id)"
         >
           Más información

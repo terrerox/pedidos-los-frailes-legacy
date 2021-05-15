@@ -1,19 +1,26 @@
 <template>
   <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="submitForm">
-    <p class="col-span-2 text-gray-800 font-bold m-2">Tu información <span class="text-red-400">* opcional</span></p>
+    <div class="col-span-2">
+      <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+        Tu información <span class="text-red-400 text-sm">* requerido</span>
+        <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+      </div>
+    </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         v-model="orderInfo.name"
         required
-        label="Nombre"
+        label="Nombre *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         v-model="orderInfo.phoneNumber"
         required
+        type="tel"
+        pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
         v-mask="'+1 ###-###-####'"
-        label="Telefono"
+        label="Teléfono *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -21,14 +28,14 @@
         type="text"
         required
         v-model="orderInfo.street"
-        label="Calle"
+        label="Calle *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
         v-model="orderInfo.numberOfHouse"
-        label="Número de casa"
+        label="Número de casa *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -36,13 +43,13 @@
         required
         type="text"
         v-model="orderInfo.reference"
-        label="Referencia"
+        label="Referencia *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <Dropdown
         :content="activeDeliveries"
-        label="Delivery"
+        label="Delivery *"
         v-model="orderInfo.DeliveryAccountId"
       />
     </div>
@@ -50,14 +57,14 @@
       <material-input
         type="text"
         v-model="orderInfo.apartment"
-        label="Edificio/Apto/Extensión *"
+        label="Edificio/Apto/Extensión"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         type="text"
         v-model="orderInfo.additionalNotes"
-        label="Notas adicionales *"
+        label="Notas adicionales"
       />
     </div>
     <div class="col-span-2 flex flex-col flex-wrap">

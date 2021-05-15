@@ -1,7 +1,11 @@
 <template>
     <form class="grid grid-cols-2 gap-2" ref="localForm">
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Nombre del local" v-model="local.title" />
+          <material-input
+            type="text"
+            label="Nombre del local"
+            v-model="local.title"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
           <material-select
@@ -20,13 +24,26 @@
           />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Descripción" v-model="local.description" />
+          <material-input
+            type="text"
+            label="Descripción"
+            v-model="local.description"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Dirección" v-model="local.address" />
+          <material-input
+            type="text"
+            label="Dirección"
+            v-model="local.address"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
-          <material-input type="text" label="Teléfono" v-model="local.phoneNumber" />
+          <material-input
+            type="tel"
+            pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
+            label="Teléfono"
+            v-model="local.phoneNumber"
+          />
         </div>
     </form>
 </template>

@@ -39,7 +39,6 @@
     </div>
     <label>Imagen</label>
     <div class="col-span-2 mt-2 combo">
-      <img class="w-20 trigger object-cover object-center" :src="product.image" alt="Foto del producto" />
       <input
         type="file"
         accept="image/*"

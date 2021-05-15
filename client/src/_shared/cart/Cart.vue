@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-gray-50 shadow-md rounded-lg mb-4 mt-10 p-10 max-w-sm m-auto"
+    class="border border-solid border-gray-500 shadow-md rounded-lg mb-4 mt-10 p-10 max-w-sm m-auto"
     :class="cartItems.length ? 'block' : 'hidden lg:block'"
   >
     <template v-if="cartItems.length">
@@ -18,7 +18,7 @@
           <div class="rounded-lg px-2 py-1 timer">
             <i class="fa fa-clock text-yellow-400"></i>
           </div>
-          <p class="text-white mx-3">Lo antes posible</p>
+          <p class="text-white text-base mx-3">Lo antes posible</p>
         </div>
       </div>
       <transition-group name="cart">

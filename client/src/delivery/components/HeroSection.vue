@@ -12,6 +12,9 @@
     <h1 class="text-black mt-10 md:text-6xl text-5xl font-bold">
       {{ data.name }}
     </h1>
+    <div class="text-gray-500 whitespace-pre-wrap mx-auto max-w-lg">
+      Delivery
+    </div>
   </div>
 </template>
 
@@ -24,7 +27,7 @@ export default {
 
   computed: {
     data () {
-      return this.heroData === undefined ? {} : this.heroData
+      return this.heroData ? this.heroData : ''
     }
   }
 }

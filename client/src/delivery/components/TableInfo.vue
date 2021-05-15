@@ -1,6 +1,11 @@
 <template>
   <div class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5">
-    <p class="col-span-2 text-gray-800 font-bold m-2">Información personal </p>
+    <div class="col-span-2">
+      <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+        Información personal
+        <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+      </div>
+    </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <h2 class="font-bold">Cédula</h2>
       {{ deliveryInfo.Delivery.nationalId }}
@@ -14,7 +19,7 @@
       {{ deliveryInfo.Delivery.name }}
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Numero</h2>
+      <h2 class="font-bold">Teléfono</h2>
       {{ deliveryInfo.Delivery.phoneNumber }}
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">

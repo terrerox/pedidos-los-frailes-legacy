@@ -5,7 +5,10 @@
       <div
         class="py-12 color-secondary lg:bg-white flex justify-center lg:justify-start lg:px-12"
       >
-        <div class="cursor-pointer flex items-center">
+        <router-link
+          :to="{ name: 'Home' }"
+          class="cursor-pointer flex items-center"
+        >
           <div>
             <svg
               class="w-10 text-indigo-500"
@@ -35,7 +38,7 @@
           >
             Pedidos Los Frailes
           </div>
-        </div>
+        </router-link>
       </div>
       <div
         class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-5 xl:px-24 xl:max-w-2xl"
@@ -44,7 +47,7 @@
           class="text-center text-2xl text-indigo-900 font-display font-semibold lg:text-left xl:text-3xl
                     xl:text-bold"
         >
-          Inicia sesión
+          Iniciar sesión
         </h2>
         <Alert />
         <div class="mt-12">
@@ -52,13 +55,13 @@
           <div
             class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display font-semibold text-gray-700 text-center"
           >
-            ¿No has registrado tu local?
+            ¿Aún no has registrado tu local?
             <router-link to="/local-register" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
-              >¡Registra aqui!</router-link>
+              >¡Regístrate aquí!</router-link>
             <br>
-            ¿No te has registrado como delivery?
+            ¿Aún no te has registrado como delivery?
             <router-link to="/delivery-register" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
-              >¡Registra aqui!</router-link>
+              >¡Regístrate aquí!</router-link>
           </div>
         </div>
       </div>

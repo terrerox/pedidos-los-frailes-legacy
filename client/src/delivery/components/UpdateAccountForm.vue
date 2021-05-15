@@ -1,5 +1,5 @@
 <template>
-    <form class="grid grid-cols-2 gap-2" ref="accountForm">
+    <form class="grid grid-cols-2 gap-2" @submit.prevent="handleSubmit" ref="accountForm">
         <div class="col-span-2">
           <material-input type="text" label="Email" v-model="account.email" />
         </div>
@@ -44,7 +44,7 @@ export default {
     ...mapActions('account', ['updateAccount']),
     ...mapActions('alert', ['error']),
 
-    submit () {
+    handleSubmit () {
       const { account } = this
       if (this.isEmpty(account)) {
         this.error('Debe de llenar todos los campos')

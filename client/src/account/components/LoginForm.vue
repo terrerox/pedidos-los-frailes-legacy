@@ -2,6 +2,7 @@
   <form @submit.prevent="handleSubmit">
     <div>
       <material-input
+        required
         type="text"
         label="Correo electrónico"
         v-model="email"
@@ -16,11 +17,12 @@
             class="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
             cursor-pointer"
           >
-            ¿Olvidaste la contraseña?
+            ¿Olvidaste tu contraseña?
           </a>
         </div>
       </div>
       <material-input
+        required
         type="password"
         v-model="password"
         label="Contraseña"
@@ -68,10 +70,6 @@ export default {
     ...mapActions('alert', ['success', 'error']),
 
     handleSubmit (e) {
-      if (this.password === '' && this.email === '') {
-        this.error('¡Llena todos los campos!')
-        return
-      }
       this.submitted = true
       const { email, password } = this
       if (email && password) {

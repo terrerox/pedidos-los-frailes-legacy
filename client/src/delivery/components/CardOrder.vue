@@ -88,13 +88,14 @@
       </div>
       <hr />
       <OrderCartItem
+        class="px-4 py-1 border border-solid border-gray-500 font-bold custom-rounded"
         v-for="cartItem in order.cartItems"
         :cartItem="cartItem"
         :key="cartItem.product.id"
       />
       <div class="px-2 flex flex-row justify-between">
         <button
-          class="px-4 py-1 text-white font-bold btn-hover custom-rounded"
+          class="px-4 py-1 text-blue-800 font-bold color-secondary custom-rounded"
           @click="submitOrder(order.id)"
         >
           {{ buttonTitle }}

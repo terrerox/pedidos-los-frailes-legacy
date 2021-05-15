@@ -4,10 +4,17 @@ import router from '@/router'
 const state = {
   locals: [],
   currentLocal: {},
+  status: { isLoading: false },
   loggedLocal: {}
 }
 
 const mutations = {
+  localRequest (state, ctx) {
+    state.status = { isLoading: true }
+  },
+  localFinishedRequest (state, ctx) {
+    state.status = { isLoading: false }
+  },
   setLocals (state, locals) {
     state.locals = locals
   },
@@ -48,16 +55,18 @@ const actions = {
         commit('setLocals', res)
       })
   },
-  getLocal (context, id) {
+  getLocal ({ commit }, id) {
+    commit('localRequest')
     return localService.getById(id)
       .then(res => {
-        context.commit('setCurrentLocal', res)
+        commit('setCurrentLocal', res)
+        commit('localFinishedRequest')
       })
   },
-  getLoggedLocal (context, id) {
+  getLoggedLocal ({ commit }, id) {
     return localService.getLogged()
       .then(res => {
-        context.commit('setLoggedLocal', res)
+        commit('setLoggedLocal', res)
       })
   },
   updateLocal ({ commit, dispatch }, local) {

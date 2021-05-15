@@ -9,10 +9,15 @@
         class="h-48 w-48 m-auto rounded-full"
       />
     </div>
-    <h1 class="text-black mt-10 md:text-6xl text-5xl font-bold">
-      {{ heroData.title }}
-    </h1>
-    <p class="text-gray-500 mt-2 whitespace-pre-wrap mx-auto max-w-lg">
+    <div>
+      <div class="text-black mt-10 md:text-6xl text-5xl font-bold">
+        {{ heroData.title }}
+      </div>
+      <span class="text-black">
+        {{ heroData.category }}
+      </span>
+    </div>
+    <p class="text-gray-500 mt-7 whitespace-pre-wrap mx-auto max-w-lg">
       {{ heroData.description }}
     </p>
   </div>

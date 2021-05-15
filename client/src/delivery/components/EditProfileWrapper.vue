@@ -24,7 +24,7 @@
   <UpdateDeliveryForm ref="deliveryForm" v-if="currentStep === 1" />
   <div class="grid grid-cols-2 gap-2">
     <button
-      class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+      class="bg-red-500 text-white hover:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
       type="button"
       style="transition: all .15s ease"
       @click="closeModal"
@@ -32,7 +32,7 @@
       Cerrar
     </button>
     <button
-      class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+      class="bg-green-500 text-white hover:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
       type="button"
       style="transition: all .15s ease"
       @click="submitForm"
@@ -73,8 +73,8 @@ export default {
 
     submitForm () {
       this.currentStep === 0
-        ? this.$refs.accountForm.submit()
-        : this.$refs.deliveryForm.submit()
+        ? this.$refs.accountForm.handleSubmit()
+        : this.$refs.deliveryForm.handleSubmit()
     },
 
     nextStep () {

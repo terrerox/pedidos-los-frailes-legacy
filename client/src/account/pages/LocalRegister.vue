@@ -5,7 +5,10 @@
       <div
         class="py-12 color-secondary lg:bg-white flex justify-center lg:justify-start lg:px-12"
       >
-        <div class="cursor-pointer flex items-center">
+        <router-link
+          :to="{ name: 'Home' }"
+          class="cursor-pointer flex items-center"
+        >
           <div>
             <svg
               class="w-10 text-indigo-500"
@@ -35,7 +38,7 @@
           >
             Pedidos Los Frailes
           </div>
-        </div>
+        </router-link>
       </div>
       <div
         class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-5 xl:px-24 xl:max-w-2xl"

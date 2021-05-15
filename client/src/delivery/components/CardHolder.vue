@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded shadow transition-all duration-300 px-4 py-4">
+  <div class="rounded shadow transition-all duration-300 px-4 py-4 border border-solid border-gray-500">
     <div v-if="getOrders.length">
       <h2 class="font-bold text-xl textcenter mb-8">Pedidos 📝</h2>
       <transition-group name="order">

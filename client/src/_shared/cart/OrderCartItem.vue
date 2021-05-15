@@ -8,19 +8,19 @@
       alt="Product image"
     />
     <div class="flex flex-col w-full mx-2 truncate">
-      <span class="text-white truncate">{{ cartItem.product.title }} </span>
+      <span class=" truncate">{{ cartItem.product.title }} </span>
       <div>
-        <span class="text-white">DOP {{ cartItem.product.price }}</span>
+        <span class="">DOP {{ cartItem.product.price }}</span>
       </div>
     </div>
-    <span class="text-white">Cantidad:</span>
-    <div class="flex items-center text-lg font-bold text-white-500 bg-button">
+    <span class="">Cantidad:</span>
+    <div class="flex items-center text-lg font-bold bg-button">
       <input
         type="number"
         name="quantity"
         min="1"
         :value="cartItem.quantity"
-        class="w-8 py-3 font-bold text-center text-white bg-transparent"
+        class="w-8 py-3 font-bold text-center  bg-transparent"
       />
     </div>
   </div>
