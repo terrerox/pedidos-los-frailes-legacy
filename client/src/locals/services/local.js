@@ -1,4 +1,5 @@
 import { httpClient } from '@/_helpers'
+import clodinary from '@/_helpers/cloudinaryConfig'
 
 const localService = {}
 
@@ -8,6 +9,7 @@ localService.create = (local) => {
 }
 
 localService.getAll = () => {
+  console.log(clodinary)
   return httpClient.get('/locals')
     .then(res => res)
 }
