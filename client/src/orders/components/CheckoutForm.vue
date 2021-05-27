@@ -1,0 +1,182 @@
+<template>
+  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5" ref="form" @submit.prevent="submitForm">
+    <div class="col-span-2">
+      <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+        Tu información <span class="text-red-400 text-sm">* requerido</span>
+        <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+      </div>
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        v-model="orderInfo.name"
+        required
+        label="Nombre *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        v-model="orderInfo.phoneNumber"
+        required
+        type="tel"
+        pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
+        v-mask="'+1 ###-###-####'"
+        label="Teléfono *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        type="text"
+        required
+        v-model="orderInfo.street"
+        label="Calle *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        required
+        v-model="orderInfo.numberOfHouse"
+        label="Número de casa *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        required
+        type="text"
+        v-model="orderInfo.reference"
+        label="Referencia *"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <Dropdown
+        :content="activeDeliveries"
+        label="Delivery *"
+        v-model="orderInfo.DeliveryAccountId"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        type="text"
+        v-model="orderInfo.apartment"
+        label="Edificio/Apto/Extensión"
+      />
+    </div>
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+      <material-input
+        type="text"
+        v-model="orderInfo.additionalNotes"
+        label="Notas adicionales"
+      />
+    </div>
+    <div class="col-span-2 flex flex-col flex-wrap">
+      <p class="mt-4 text-gray-800 font-medium">Métodos de pago</p>
+      <button
+        class="flex items-center justify-between bg-white rounded-md border-2 border-blue-500 p-4 focus:outline-none"
+      >
+        <label class="flex items-center">
+          <input
+            type="radio"
+            class="form-radio h-5 w-5 text-blue-600"
+            checked
+          /><span class="ml-2 text-sm text-gray-700">🛵 Pago en entrega</span>
+        </label>
+      </button>
+    </div>
+    <div class="mt-4 col-span-2 flex justify-center align-center">
+      <button
+        class="px-4 py-1 text-white font-bold color-primary custom-rounded hover:opacity-75"
+        type="submit"
+      >
+        Enviar pedido
+      </button>
+    </div>
+  </form>
+</template>
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import { currency } from '@/_helpers'
+import { mask } from 'vue-the-mask'
+
+import MaterialInput from '@/_shared/inputs/MaterialInput'
+import Dropdown from '@/_shared/Dropdown'
+
+export default {
+  name: 'CheckoutForm',
+
+  directives: { mask },
+
+  components: { MaterialInput, Dropdown },
+
+  props: {
+    localId: { type: Number, required: true }
+  },
+
+  data () {
+    return {
+      orderInfo: {
+        name: '',
+        phoneNumber: '',
+        street: '',
+        numberOfHouse: '',
+        reference: '',
+        apartment: '',
+        additionalNotes: '',
+        status: 'active',
+        paymentMethod: 'Efectivo',
+        LocalAccountId: this.localId,
+        DeliveryAccountId: 0,
+        cartItems: []
+      }
+    }
+  },
+
+  created () {
+    this.orderInfo.cartItems = this.cartItems
+    this.getDeliveries()
+  },
+
+  methods: {
+    ...mapActions('delivery', ['getDeliveries']),
+    submitForm () {
+      // if (this.isEmpty(this.orderInfo)) {
+      //   this.$swal('Debe de llenar todos los campos', '', 'warning')
+      //   return
+      // }
+
+      this.$swal({
+        title: '¿Estás seguro de enviar el pedido?',
+        text: 'No podrás revertir esta acción',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true
+      }).then((result) => {
+        if (result.value) {
+          this.$swal('Enviado', 'El pedido se ha enviado con exito', 'success')
+          this.addOrder(this.orderInfo)
+          this.updateDeliveryStatus({ accountId: this.orderInfo.DeliveryAccountId, status: 'taken' })
+          this.$refs.form.reset()
+          this.cartItems.map(cartItem => {
+            this.$store.dispatch('cart/removeProductFromCart', cartItem)
+          })
+          this.$router.push({ name: 'Shop' })
+        }
+      })
+    },
+    isEmpty (obj) {
+      return !Object.values(obj).every(element => element !== '')
+    },
+    ...mapActions('order', ['addOrder']),
+    ...mapActions('delivery', ['updateDeliveryStatus'])
+  },
+
+  computed: {
+    ...mapGetters('delivery', ['activeDeliveries']),
+    cartTotal () {
+      return currency(this.$store.getters['cart/cartTotal'])
+    },
+    cartItems () {
+      return this.$store.getters['cart/productsOnCart'].filter(item => item.product.LocalAccountId === this.localId)
+    }
+  }
+}
+</script>
