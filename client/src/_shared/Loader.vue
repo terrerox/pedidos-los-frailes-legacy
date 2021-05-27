@@ -23,7 +23,7 @@ export default {
 
 <style scoped>
 .sk-circle {
-  margin: 100px auto;
+  margin: 30px auto;
   width: 40px;
   height: 40px;
   position: relative;

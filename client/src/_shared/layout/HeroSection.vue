@@ -3,8 +3,8 @@
     <div class="w-full h-44 color-primary"></div>
     <div class="flex justify-center -mt-24">
       <img
-        v-if="heroData.image"
-        :src="heroData.image"
+        v-if="heroData.imageUrl"
+        :src="heroData.imageUrl"
         alt="Logo image"
         class="h-48 w-48 m-auto rounded-full"
       />

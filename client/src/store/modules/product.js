@@ -2,10 +2,17 @@ import productService from '@/shop/services/product'
 
 const state = {
   products: [],
-  product: {}
+  product: {},
+  status: { isLoading: false }
 }
 
 const mutations = {
+  productRequest (state, ctx) {
+    state.status = { isLoading: true }
+  },
+  productFinishedRequest (state, ctx) {
+    state.status = { isLoading: false }
+  },
   setProducts (state, products) {
     state.products = products
   },
@@ -22,7 +29,7 @@ const mutations = {
     const {
       id,
       title,
-      image,
+      imageUrl,
       category,
       prepTimeUnit,
       prepTimeValue,
@@ -35,7 +42,7 @@ const mutations = {
     product.prepTimeUnit = prepTimeUnit
     product.prepTimeValue = prepTimeValue
     product.price = price
-    product.image = image
+    product.imageUrl = imageUrl
   }
 }
 
@@ -46,14 +53,26 @@ const actions = {
         context.commit('setProducts', products)
       })
   },
-  addProduct ({ commit }, product) {
+  addProduct ({ commit, dispatch }, product) {
+    commit('productRequest')
     return productService.addProduct(product).then(res => {
       commit('addProduct', res)
+      commit('productFinishedRequest')
+      dispatch('alert/success',
+        '¡Agregado con éxito!',
+        { root: true }
+      )
     })
   },
-  updateProduct ({ commit }, product) {
+  updateProduct ({ commit, dispatch }, product) {
+    commit('productRequest')
     return productService.updateProduct(product).then(res => {
       commit('setEditedProduct', res)
+      commit('productFinishedRequest')
+      dispatch('alert/success',
+        '¡Actualizado con éxito!',
+        { root: true }
+      )
     })
   },
   deleteProduct ({ commit }, { id, index }) {

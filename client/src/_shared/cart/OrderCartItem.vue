@@ -3,7 +3,7 @@
     class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded"
   >
     <img
-      :src="cartItem.product.image"
+      :src="cartItem.product.imageUrl"
       class="w-12 h-12 my-auto custom-rounded"
       alt="Product image"
     />

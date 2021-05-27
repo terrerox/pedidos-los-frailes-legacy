@@ -3,10 +3,17 @@ import router from '@/router'
 
 const state = {
   deliveries: [],
-  loggedDelivery: {}
+  loggedDelivery: {},
+  status: { isLoading: false }
 }
 
 const mutations = {
+  deliveryRequest (state, ctx) {
+    state.status = { isLoading: true }
+  },
+  deliveryFinishedRequest (state, ctx) {
+    state.status = { isLoading: false }
+  },
   setDeliveries (state, deliveries) {
     state.deliveries = deliveries
   },
@@ -22,7 +29,7 @@ const mutations = {
       name,
       lastName,
       phoneNumber,
-      image,
+      imageUrl,
       nationalId
     } = editedDelivery
 
@@ -30,26 +37,33 @@ const mutations = {
     Delivery.name = name
     Delivery.lastName = lastName
     Delivery.phoneNumber = phoneNumber
-    Delivery.image = image
+    Delivery.imageUrl = imageUrl
     Delivery.nationalId = nationalId
   }
 }
 const actions = {
   createDelivery ({ commit }, delivery) {
+    commit('deliveryRequest')
     return deliveryService.create(delivery)
-      .then(res => router.push(`/delivery/${res.id}`))
+      .then(res => {
+        commit('deliveryFinishedRequest')
+        router.push(`/delivery/${res.id}`)
+      })
   },
-  getDeliveries (context) {
+  getDeliveries ({ commit }) {
     return deliveryService.getAll()
       .then(deliveries => {
-        context.commit('setDeliveries', deliveries)
+        commit('setDeliveries', deliveries)
+        commit('deliveryFinishedRequest')
       })
   },
   updateDelivery ({ commit, dispatch }, delivery) {
+    commit('deliveryRequest')
     return deliveryService.update(delivery)
       .then(
         res => {
           commit('setEditedDelivery', res)
+          commit('deliveryFinishedRequest')
           dispatch('alert/success',
             '¡Actualizado con éxito!',
             { root: true }

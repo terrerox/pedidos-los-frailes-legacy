@@ -1,4 +1,5 @@
 <template>
+  <Alert class="mb-5"/>
   <form class="grid grid-cols-2 gap-2" ref="form">
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
@@ -47,18 +48,21 @@
       />
     </div>
   </form>
+  <Loader v-if="status.isLoading"/>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 import MaterialSelect from '@/_shared/MaterialSelect'
+import Loader from '@/_shared/Loader'
+import Alert from '@/_shared/Alert'
 
 export default {
   name: 'ProductForm',
 
-  components: { MaterialInput, MaterialSelect },
+  components: { MaterialInput, MaterialSelect, Loader, Alert },
 
   props: {
     isEditingId: { type: Number }
@@ -87,6 +91,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('product', ['status']),
     ...mapGetters('product', {
       productForEdit: 'product'
     })
@@ -99,9 +104,6 @@ export default {
       }
       if (this.isEditingId) {
         this.updateProduct(this.product)
-        this.$refs.form.reset()
-        this.$swal('Actualizado', 'Producto actualizado con éxito', 'success')
-        this.$emit('close')
         return
       }
       this.addProduct({
@@ -112,9 +114,7 @@ export default {
         prepTimeValue: this.product.prepTimeValue,
         prepTimeUnit: this.product.prepTimeUnit
       })
-      this.$swal('Agregado', 'Producto agregado con éxito', 'success')
-      this.$refs.form.reset()
-      this.$emit('close')
+      // this.$refs.form.reset()
     },
 
     ...mapActions('product', ['updateProduct', 'addProduct']),

@@ -95,7 +95,7 @@
       />
       <div class="px-2 flex flex-row justify-between">
         <button
-          class="px-4 py-1 text-blue-800 font-bold color-secondary custom-rounded"
+          class="px-4 py-1 text-white font-bold bg-green-500 custom-rounded"
           @click="submitOrder(order.id)"
         >
           {{ buttonTitle }}

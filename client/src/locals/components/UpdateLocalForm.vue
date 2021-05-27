@@ -42,6 +42,7 @@
             type="tel"
             pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
             label="Teléfono"
+            v-mask="'+1 ###-###-####'"
             v-model="local.phoneNumber"
           />
         </div>
@@ -53,11 +54,14 @@ import { mapActions, mapState } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 import MaterialSelect from '@/_shared/MaterialSelect'
+import { mask } from 'vue-the-mask'
 
 export default {
   name: 'UpdateLocalForm',
 
   emits: ['close'],
+
+  directives: { mask },
 
   components: { MaterialInput, MaterialSelect },
 

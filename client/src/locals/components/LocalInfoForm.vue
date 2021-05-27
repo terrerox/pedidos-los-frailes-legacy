@@ -4,6 +4,7 @@
    <p class="col-span-2 text-gray-800 font-bold m-2 mb-4">¡Completa tu registro!</p>
    <div class="col-span-2 lg:col-span-1">
       <material-input
+        required
         type="text"
         label="Nombre del local"
         v-model="local.title"
@@ -11,6 +12,7 @@
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-select
+        required
         :content="selectItems"
         label="Categoria"
         v-model="local.category"
@@ -19,6 +21,7 @@
    <div class="col-span-2 lg:col-span-1">
       <label>Imagen de presentación</label>
       <input
+        required
         type="file"
         accept="image/*"
         class="mb-10"
@@ -27,6 +30,7 @@
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
+        required
         type="text"
         label="Descripción"
         v-model="local.description"
@@ -34,6 +38,7 @@
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
+        required
         type="text"
         label="Dirección"
         v-model="local.address"
@@ -41,12 +46,15 @@
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
-        type="text"
+        required
+        type="tel"
+        pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
         label="Teléfono"
-        v-model="local.phoneNumber"
         v-mask="'+1 ###-###-####'"
+        v-model="local.phoneNumber"
       />
    </div>
+   <Loader v-if="status.isLoading"/>
    <div class="col-span-2">
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
@@ -60,19 +68,20 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 import { mask } from 'vue-the-mask'
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 import MaterialSelect from '@/_shared/MaterialSelect'
 import Alert from '@/_shared/Alert'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'LocalInfoForm',
 
   directives: { mask },
 
-  components: { MaterialInput, MaterialSelect, Alert },
+  components: { MaterialInput, MaterialSelect, Alert, Loader },
 
   data () {
     return {
@@ -84,8 +93,12 @@ export default {
         address: '',
         phoneNumber: ''
       },
-      selectItems: ['Fármacos', 'Comida', 'Bebidas']
+      selectItems: ['Fármacos', 'Comida rápida', 'Bebidas']
     }
+  },
+
+  computed: {
+    ...mapState('local', ['status'])
   },
 
   methods: {

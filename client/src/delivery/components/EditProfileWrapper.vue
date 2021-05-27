@@ -22,6 +22,7 @@
   <Alert class="mb-8" />
   <UpdateAccountForm ref="accountForm" v-if="currentStep === 0" />
   <UpdateDeliveryForm ref="deliveryForm" v-if="currentStep === 1" />
+  <Loader v-if="status.isLoading"/>
   <div class="grid grid-cols-2 gap-2">
     <button
       class="bg-red-500 text-white hover:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
@@ -43,17 +44,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import UpdateAccountForm from '@/delivery/components/UpdateAccountForm'
 import UpdateDeliveryForm from '@/delivery/components/UpdateDeliveryForm'
 import Alert from '@/_shared/Alert'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'OwnerProfileForm',
 
   emits: ['close'],
 
-  components: { UpdateAccountForm, UpdateDeliveryForm, Alert },
+  components: { UpdateAccountForm, UpdateDeliveryForm, Alert, Loader },
 
   data () {
     return {
@@ -62,6 +64,10 @@ export default {
   },
   created () {
     this.getLoggedDelivery()
+  },
+
+  computed: {
+    ...mapState('delivery', ['status'])
   },
 
   methods: {

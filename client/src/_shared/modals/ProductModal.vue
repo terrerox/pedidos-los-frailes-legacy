@@ -28,7 +28,7 @@
             </div>
             <!--body-->
             <div class="relative p-6 flex-auto">
-                <ProductForm :isEditingId="isEditingId" @close="closeModal"
+                <ProductForm :isEditingId="isEditingId"
                 ref="form"
                 />
             </div>
@@ -37,7 +37,7 @@
               class="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b"
             >
               <button
-                class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+                class="bg-red-500 text-white hover:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
                 type="button"
                 style="transition: all .15s ease"
                 @click="closeModal"
@@ -45,7 +45,7 @@
                 Cerrar
               </button>
               <button
-                class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+                class="bg-green-500 text-white hover:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
                 @click="this.$refs.form.submitProduct()"
                 style="transition: all .15s ease"
               >

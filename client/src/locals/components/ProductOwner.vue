@@ -4,14 +4,16 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + product.image + '\')'
+      backgroundImage: 'url(\'' + product.imageUrl + '\')'
     }"
   >
     <div
       class="absolute bottom-0 left-0 w-1/3 bg-gray-200 rounded-tr-lg p-2 text-center text-xs"
     >
       <span class="font-bold">{{ product.prepTimeValue }}</span>
-      {{ product.prepTimeUnit }}
+      {{ product.prepTimeUnit }} -
+      <span class="font-bold">{{ product.price }}</span>
+      DOP
     </div>
     <div style="top: -20px;" class="absolute right-0 w-7">
       <button

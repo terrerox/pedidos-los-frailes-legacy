@@ -30,7 +30,7 @@
    </div>
    <div class="col-span-2 lg:col-span-1">
       <material-input
-        requiredd
+        required
         type="tel"
         pattern="[+]{1}[0-9]{1} [0-9]{3}-[0-9]{3}-[0-9]{4}"
         label="Teléfono"
@@ -48,6 +48,7 @@
         @change="handleImage"
       />
    </div>
+   <Loader v-if="status.isLoading"/>
    <div class="col-span-2">
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
@@ -61,18 +62,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 import Alert from '@/_shared/Alert'
 import { mask } from 'vue-the-mask'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'DeliveryInfoForm',
 
   directives: { mask },
 
-  components: { MaterialInput, Alert },
+  components: { MaterialInput, Alert, Loader },
 
   data () {
     return {
@@ -85,6 +87,10 @@ export default {
         image: ''
       }
     }
+  },
+
+  computed: {
+    ...mapState('delivery', ['status'])
   },
 
   methods: {

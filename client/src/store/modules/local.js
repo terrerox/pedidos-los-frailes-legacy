@@ -27,7 +27,7 @@ const mutations = {
   setEditedLocal (state, editedLocal) {
     const {
       title,
-      image,
+      imageUrl,
       category,
       description,
       address,
@@ -40,14 +40,18 @@ const mutations = {
     Local.description = description
     Local.address = address
     Local.phoneNumber = phoneNumber
-    Local.image = image
+    Local.imageUrl = imageUrl
   }
 }
 
 const actions = {
   createLocal ({ commit }, local) {
+    commit('localRequest')
     return localService.create(local)
-      .then(res => router.push(`/local/${res.id}`))
+      .then(res => {
+        router.push(`/local/${res.id}`)
+        commit('localFinishedRequest')
+      })
   },
   getLocals ({ commit }) {
     return localService.getAll()
@@ -64,16 +68,20 @@ const actions = {
       })
   },
   getLoggedLocal ({ commit }, id) {
+    commit('localRequest')
     return localService.getLogged()
       .then(res => {
         commit('setLoggedLocal', res)
+        commit('localFinishedRequest')
       })
   },
   updateLocal ({ commit, dispatch }, local) {
+    commit('localRequest')
     return localService.update(local)
       .then(
         res => {
           commit('setEditedLocal', res)
+          commit('localFinishedRequest')
           dispatch('alert/success',
             '¡Actualizado con éxito!',
             { root: true }

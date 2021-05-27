@@ -5,7 +5,7 @@
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + product.image + '\')'
+      backgroundImage: 'url(\'' + product.imageUrl + '\')'
     }"
   >
     <div

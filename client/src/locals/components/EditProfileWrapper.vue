@@ -22,6 +22,7 @@
   <Alert class="mb-8" />
   <UpdateAccountForm ref="accountForm" v-if="currentStep === 0" />
   <UpdateLocalForm ref="localForm" v-if="currentStep === 1" />
+  <Loader v-if="status.isLoading"/>
   <div class="grid grid-cols-2 gap-2">
     <button
       class="bg-red-500 text-white hover:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
@@ -43,25 +44,31 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import UpdateAccountForm from '@/locals/components/UpdateAccountForm'
 import UpdateLocalForm from '@/locals/components/UpdateLocalForm'
 import Alert from '@/_shared/Alert'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'OwnerProfileForm',
 
   emits: ['close'],
 
-  components: { UpdateAccountForm, UpdateLocalForm, Alert },
+  components: { UpdateAccountForm, UpdateLocalForm, Alert, Loader },
 
   data () {
     return {
       currentStep: 0
     }
   },
+
   created () {
     this.getLoggedLocal()
+  },
+
+  computed: {
+    ...mapState('local', ['status'])
   },
 
   methods: {
