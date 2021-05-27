@@ -1,7 +1,7 @@
-const config = require("config.json");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
+require('dotenv').config()
 
 module.exports = {
   authenticate,
@@ -29,7 +29,7 @@ async function authenticate({ email, password }) {
     throw "Correo o contraseña incorrectas";
 
   // authentication successful
-  const token = jwt.sign({ sub: account.id }, config.secret, {
+  const token = jwt.sign({ sub: account.id }, process.env.SECRET_TOKEN, {
     expiresIn: "7d",
   });
   return { ...omitHash(account.get()), token };

@@ -1,4 +1,5 @@
 const db = require("_helpers/db");
+const cloudinary = require('_helpers/cloudinary');
 
 module.exports = {
     getAll,
@@ -8,8 +9,17 @@ module.exports = {
     delete: _delete
 };
 
-async function create(params) {
-    await db.Delivery.create(params);
+async function create(deliveryParams) {
+    const cloudinaryResponse = await cloudinary.uploader.upload(deliveryParams.image, {
+        folder: 'deliveries'
+    });
+    const cloudinaryContent = {
+        imageUrl: cloudinaryResponse.secure_url,
+        cloudinaryId: cloudinaryResponse.public_id
+    }
+    const { image, ...deliveryWithoutImage } = deliveryParams
+    const delivery = { ...deliveryWithoutImage, ...cloudinaryContent }
+    await db.Delivery.create(delivery);
 }
 
 async function getAll() {
@@ -22,8 +32,22 @@ async function getById(id) {
 
 async function update(id, params) {
     const delivery = await getDelivery(id);
+    const { image, ...deliveryWithoutImage } = params
 
-    Object.assign(delivery, params);
+    if (params.image) {
+        const cloudinaryResponse = await cloudinary.uploader.upload(params.image, {
+            public_id: delivery.cloudinaryId
+        });
+        const cloudinaryContent = {
+            imageUrl: cloudinaryResponse.secure_url
+        }
+        const updatedDelivery = { ...deliveryWithoutImage, ...cloudinaryContent }
+        Object.assign(delivery, updatedDelivery);
+
+    } else {
+        Object.assign(delivery, deliveryWithoutImage);
+    }
+
     await delivery.save();
   
     return omitHash(delivery.get());
@@ -32,6 +56,7 @@ async function update(id, params) {
 async function _delete(id) {
     const delivery = await getDelivery(id);
     await delivery.destroy();
+    await cloudinary.uploader.destroy(delivery.cloudinaryId);
 }
 
 // helper functions

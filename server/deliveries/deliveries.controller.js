@@ -74,6 +74,6 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     deliveryService.delete(req.params.id)
-        .then(() => res.json({ message: 'Orden eliminada con éxito' }))
+        .then(() => res.json({ message: 'Delivery eliminado con éxito' }))
         .catch(next);
 }

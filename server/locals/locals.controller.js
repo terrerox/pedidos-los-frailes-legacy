@@ -29,7 +29,6 @@ function createSchema(req, res, next) {
 }
 
 function create(req, res, next) {
-    req.body.imageUrl = `${req.protocol}://${req.headers.host}/locals/img/`
     req.body.accountId = req.local.id
     localService.create(req.body)
         .then(() => res.json({ id: req.body.accountId }))
@@ -63,8 +62,6 @@ function updateSchema(req, res, next) {
         rating: Joi.string().empty(''),
         description: Joi.string().empty(''),
         image: Joi.string().empty(''),
-        email: Joi.string().empty(''),
-        password: Joi.string().min(6).empty('')
     });
     validateRequest(req, next, schema);
 }

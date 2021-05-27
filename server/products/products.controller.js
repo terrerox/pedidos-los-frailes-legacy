@@ -32,7 +32,6 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     // set localid to body
     req.body.LocalAccountId = req.local.id
-    req.body.imageUrl = `${req.protocol}://${req.headers.host}/products/img/`
     productService.create(req.body)
         .then(product => res.json(product))
         .catch(next);
@@ -66,13 +65,13 @@ function getImage(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
-        title: Joi.string().required(),
-        category: Joi.string().required(),
+        title: Joi.string().empty(''),
+        category: Joi.string().empty(''),
         rating: Joi.string(),
-        image: Joi.string().required(),
-        prepTimeValue: Joi.string().required(),
-        prepTimeUnit: Joi.string().required(),
-        price: Joi.number().required(),
+        image: Joi.string().empty(''),
+        prepTimeValue: Joi.string().empty(''),
+        prepTimeUnit: Joi.string().empty(''),
+        price: Joi.number().empty(''),
     });
     validateRequest(req, next, schema);
 }

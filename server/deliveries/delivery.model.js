@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
     status: { type: DataTypes.STRING, allowNull: false },
     phoneNumber: { type: DataTypes.STRING, allowNull: false },
     imageUrl: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.TEXT, allowNull: false },
+    cloudinaryId: { type: DataTypes.STRING, allowNull: false },
   }; 
 
   const Delivery = sequelize.define("Delivery", attributes);

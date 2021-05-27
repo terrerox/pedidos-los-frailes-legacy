@@ -1,4 +1,5 @@
 const db = require('_helpers/db');
+const cloudinary = require('_helpers/cloudinary');
 
 module.exports = {
     getAll,
@@ -27,15 +28,38 @@ async function getImage(id) {
     return img.dataValues.image
 }
 
-async function create(params) {
-    const newProduct = await db.Product.create(params);
+async function create(productParams) {
+   const cloudinaryResponse = await cloudinary.uploader.upload(productParams.image, {
+        folder: 'products'
+    });
+    const cloudinaryContent = {
+        imageUrl: cloudinaryResponse.secure_url,
+        cloudinaryId: cloudinaryResponse.public_id
+    }
+    const { image, ...productWithoutImage } = productParams
+    const product = { ...productWithoutImage, ...cloudinaryContent }
+    const newProduct = await db.Product.create(product);
     return newProduct.dataValues
 }
 
 async function update(id, params) {
     const product = await getProduct(id);
+    const { image, ...productWithoutImage } = params
+
+    if (params.image) {
+        const cloudinaryResponse = await cloudinary.uploader.upload(params.image, {
+            public_id: product.cloudinaryId
+        });
+        const cloudinaryContent = {
+            imageUrl: cloudinaryResponse.secure_url
+        }
+        const updatedProduct = { ...productWithoutImage, ...cloudinaryContent }
+        Object.assign(product, updatedProduct);
+
+    } else {
+        Object.assign(product, productWithoutImage);
+    }
     // copy params to Product and save
-    Object.assign(product, params);
     await product.save();
 
     return product.get();
@@ -44,6 +68,7 @@ async function update(id, params) {
 async function _delete(id) {
     const product = await getProduct(id);
     await product.destroy();
+    await cloudinary.uploader.destroy(product.cloudinaryId);
 }
 
 // helper functions

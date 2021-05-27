@@ -7,9 +7,9 @@ module.exports = (sequelize) => {
     category: { type: DataTypes.STRING, allowNull: false },
     rating: { type: DataTypes.STRING, allowNull: true },
     imageUrl: { type: DataTypes.STRING, allowNull: false },
+    cloudinaryId: { type: DataTypes.STRING, allowNull: false },
     phoneNumber: { type: DataTypes.STRING, allowNull: false },
     address: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.TEXT, allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false }
   };
 

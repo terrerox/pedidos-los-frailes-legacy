@@ -5,12 +5,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_middleware/error-handler');
 const expressOasGenerator = require('express-oas-generator');
-const fileupload = require('express-fileupload')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
-// app.use(fileupload());
 
 // api routes
 app.use('/accounts', require('./accounts/accounts.controller'));
@@ -24,5 +22,6 @@ expressOasGenerator.init(app, {});
 app.use(errorHandler);
 
 // start server
+const host = process.env.HOST || '0.0.0.0';
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;
-app.listen(port, () => console.log('Server listening on port ' + port));
+app.listen(port, host, () => console.log('Server listening on port ' + port));
