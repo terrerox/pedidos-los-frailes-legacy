@@ -42,12 +42,16 @@ const mutations = {
   }
 }
 const actions = {
-  createDelivery ({ commit }, delivery) {
+  createDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
     return deliveryService.create(delivery)
       .then(res => {
         commit('deliveryFinishedRequest')
         router.push(`/delivery/${res.id}`)
+      },
+      error => {
+        commit('deliveryFinishedRequest')
+        dispatch('alert/error', error, { root: true })
       })
   },
   getDeliveries ({ commit }) {

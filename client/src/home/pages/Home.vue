@@ -28,23 +28,44 @@
         </div>
       </div>
       <!-- end hero -->
-      <div class="flex mt-12 items-end">
-        <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
-          Locales displonibles 🤩
-          <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+      <template v-if="verifiedLocals.length">
+        <div class="flex mt-12 items-end">
+          <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+            Locales displonibles 🤩
+            <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+          </div>
         </div>
-      </div>
-      <div
-        class="mt-12 mb-7 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"
-      >
         <div
-          class="flex flex-col"
-          v-for="local in localsItems"
-          :key="local.id"
+          class="mt-12 mb-7 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"
         >
-          <Local :local="local" />
+          <div
+            class="flex flex-col"
+            v-for="local in verifiedLocals"
+            :key="local.id"
+          >
+            <Local :local="local" />
+          </div>
         </div>
-      </div>
+      </template>
+      <template v-if="unverifiedLocals.length">
+        <div class="flex mt-12 items-end">
+          <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+            Próximamente 🤫
+            <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
+          </div>
+        </div>
+        <div
+          class="mt-12 mb-7 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"
+        >
+          <div
+            class="flex flex-col"
+            v-for="local in unverifiedLocals"
+            :key="local.id"
+          >
+            <Local unverified :local="local" />
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -62,9 +83,7 @@ export default {
     this.getLocals()
   },
   computed: {
-    ...mapGetters('local', {
-      localsItems: 'locals'
-    })
+    ...mapGetters('local', ['verifiedLocals', 'unverifiedLocals'])
   },
   methods: {
     ...mapActions('local', ['getLocals'])

@@ -1,11 +1,12 @@
 <template>
   <div
-  @click="goToShop(local.accountId)"
-    class="shadow-lg relative h-40 custom-rounded cursor-pointer hover:opacity-75"
+    @click="unverified ? '' : goToShop(local.accountId)"
+    class="shadow-lg relative h-40 custom-rounded"
+    :class="unverified ? 'blured cursor-not-allowed disabled' : 'cursor-pointer hover:opacity-75'"
     :style="{
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      backgroundImage: 'url(\'' + local.imageUrl + '\')'
+      backgroundImage: 'url(\'' + local.imageUrl + '\')',
     }"
   >
   </div>
@@ -25,7 +26,8 @@ export default {
   name: 'Local',
 
   props: {
-    local: { type: Object, required: true }
+    local: { type: Object, required: true },
+    unverified: { type: Boolean, default: false }
   },
 
   methods: {
@@ -35,3 +37,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.blured {
+  -webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+  filter: blur(5px);
+}
+</style>

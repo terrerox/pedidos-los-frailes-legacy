@@ -5,6 +5,7 @@
         class="md-input"
         :id="idName"
         min="0"
+        :required="required"
         @input="$emit('update:modelValue', Number($event.target.value))"
       >
         <option selected="selected" hidden="hidden"></option>
@@ -40,6 +41,10 @@ export default {
     content: {
       type: Array,
       required: true
+    },
+    required: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

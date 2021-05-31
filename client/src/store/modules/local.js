@@ -31,7 +31,8 @@ const mutations = {
       category,
       description,
       address,
-      phoneNumber
+      phoneNumber,
+      status
     } = editedLocal
 
     const { Local } = state.loggedLocal
@@ -41,16 +42,21 @@ const mutations = {
     Local.address = address
     Local.phoneNumber = phoneNumber
     Local.imageUrl = imageUrl
+    Local.status = status
   }
 }
 
 const actions = {
-  createLocal ({ commit }, local) {
+  createLocal ({ commit, dispatch }, local) {
     commit('localRequest')
     return localService.create(local)
       .then(res => {
         router.push(`/local/${res.id}`)
         commit('localFinishedRequest')
+      },
+      error => {
+        commit('localFinishedRequest')
+        dispatch('alert/error', error, { root: true })
       })
   },
   getLocals ({ commit }) {
@@ -95,8 +101,11 @@ const actions = {
 }
 
 const getters = {
-  locals (state) {
-    return state.locals
+  verifiedLocals (state) {
+    return state.locals.filter(local => local.status === 'active')
+  },
+  unverifiedLocals (state) {
+    return state.locals.filter(local => local.status === 'inactive')
   },
   currentLocal (state) {
     return state.currentLocal

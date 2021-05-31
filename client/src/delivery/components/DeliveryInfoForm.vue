@@ -1,6 +1,6 @@
 <template>
  <form class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5 m-8" @submit.prevent="handleSubmit">
-    <Alert />
+    <Alert class="col-span-2" />
    <p class="col-span-2 text-gray-800 font-bold m-2 mb-4">¡Completa tu registro!</p>
    <div class="col-span-2 lg:col-span-1">
       <material-input
@@ -48,7 +48,8 @@
         @change="handleImage"
       />
    </div>
-   <Loader v-if="status.isLoading"/>
+   <Loader class="col-span-2" v-if="status.isLoading"/>
+    <p class="col-span-2 text-red-800 font-bold mb-4">Se le contactará via whatsapp para validar identidad</p>
    <div class="col-span-2">
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
@@ -82,7 +83,7 @@ export default {
         nationalId: '',
         name: '',
         lastName: '',
-        status: 'active',
+        status: 'inactive',
         phoneNumber: '',
         image: ''
       }
