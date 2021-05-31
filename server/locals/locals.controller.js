@@ -23,6 +23,7 @@ function createSchema(req, res, next) {
         phoneNumber: Joi.string().required(),
         address: Joi.string().required(),
         description: Joi.string().required(),
+        status: Joi.string().required(),
         image: Joi.string().required()
     });
     validateRequest(req, next, schema);
@@ -61,6 +62,7 @@ function updateSchema(req, res, next) {
         phoneNumber: Joi.string().empty(''),
         rating: Joi.string().empty(''),
         description: Joi.string().empty(''),
+        status: Joi.string().empty(''),
         image: Joi.string().empty(''),
     });
     validateRequest(req, next, schema);
