@@ -18,6 +18,11 @@ accountService.register = ({ email, password, role }) => {
     .then(account => account)
 }
 
+accountService.getLogged = () => {
+  return httpClient.get('/accounts/logged')
+    .then(account => account)
+}
+
 accountService.logout = () => {
   // remove user from local storage to log user out
   localStorage.removeItem('account')

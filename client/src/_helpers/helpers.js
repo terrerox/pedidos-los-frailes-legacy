@@ -20,3 +20,6 @@ export function currency (value, currency, decimals) {
     sign + head + _int.slice(i).replace(digitsRE, '$1,') + _float
   )
 }
+
+const WHATSAPP_MESSAGE = '¡Hola! Somos Pedidos Los Frailes, una plataforma de delivery y pedidos en línea. Nos llegó la notificación de que deseas unirte a nuestra plataforma, para verificar tu solicitud envía una foto de tu cédula.'
+export const API_SEND_WHATSAPP_MESSAGE = `https://api.whatsapp.com/send/?app_absent=0&text=${WHATSAPP_MESSAGE}&phone=`

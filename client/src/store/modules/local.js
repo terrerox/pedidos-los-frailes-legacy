@@ -43,6 +43,10 @@ const mutations = {
     Local.phoneNumber = phoneNumber
     Local.imageUrl = imageUrl
     Local.status = status
+  },
+  setVerifiedLocal (state, verifiedLocal) {
+    const local = state.locals.find(local => local.accountId === verifiedLocal.accountId)
+    local.status = verifiedLocal.status
   }
 }
 
@@ -95,6 +99,25 @@ const actions = {
         },
         error => {
           dispatch('alert/error', error, { root: true })
+          console.log(error)
+        }
+      )
+  },
+  verifyLocal ({ commit, dispatch }, local) {
+    commit('localRequest')
+    return localService.update(local)
+      .then(
+        res => {
+          commit('setVerifiedLocal', res)
+          commit('localFinishedRequest')
+          dispatch('alert/success',
+            '¡Verificado con éxito!',
+            { root: true }
+          )
+        },
+        error => {
+          dispatch('alert/error', error, { root: true })
+          console.log(error)
         }
       )
   }

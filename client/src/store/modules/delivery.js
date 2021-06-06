@@ -39,6 +39,10 @@ const mutations = {
     Delivery.phoneNumber = phoneNumber
     Delivery.imageUrl = imageUrl
     Delivery.nationalId = nationalId
+  },
+  setVerifiedDelivery (state, verifiedDelivery) {
+    const delivery = state.deliveries.find(delivery => delivery.accountId === verifiedDelivery.accountId)
+    delivery.status = verifiedDelivery.status
   }
 }
 const actions = {
@@ -80,6 +84,7 @@ const actions = {
   },
   updateDeliveryStatus ({ commit }, delivery) {
     return deliveryService.update(delivery)
+      .then(res => commit('setVerifiedDelivery', res))
   },
   getLoggedDelivery (context, id) {
     return deliveryService.getLogged()
@@ -91,6 +96,9 @@ const actions = {
 const getters = {
   activeDeliveries (state) {
     return state.deliveries.filter(delivery => delivery.status === 'active')
+  },
+  unverifiedDeliveries (state) {
+    return state.deliveries.filter(delivery => delivery.status === 'inactive')
   },
   loggedDelivery (state, getters, rootState) {
     return state.loggedDelivery

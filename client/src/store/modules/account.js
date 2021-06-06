@@ -5,10 +5,13 @@ import router from '@/router'
 
 const user = JSON.parse(localStorage.getItem('account'))
 const state = user
-  ? { status: { loggedIn: true }, user }
+  ? { status: { loggedIn: true }, user, loggedUser: {} }
   : { status: {}, user: null }
 
 const mutations = {
+  setLogged (state, loggedUser) {
+    state.loggedUser = loggedUser
+  },
   loginRequest (state, user) {
     state.status = { loggingIn: true }
     state.user = user
@@ -50,12 +53,14 @@ const actions = {
                 ? router.push('/local-info')
                 : router.push(`/local/${user.id}`)
             })
-          } else {
+          } else if (user.role === 'Delivery') {
             deliveryService.getLogged().then(res => {
               res.notFound
                 ? router.push('/delivery-info')
                 : router.push(`/delivery/${user.id}`)
             })
+          } else {
+            router.push(`/admin/${user.id}`)
           }
         },
         error => {
@@ -99,6 +104,16 @@ const actions = {
           dispatch('alert/error', error, { root: true })
         }
       )
+  },
+  getLogged ({ commit }) {
+    accountService.getLogged()
+      .then(res => commit('setLogged', res))
+  }
+}
+
+const getters = {
+  loggedUser (state, getters, rootState) {
+    return state.loggedUser
   }
 }
 
@@ -106,5 +121,6 @@ export const account = {
   namespaced: true,
   state,
   mutations,
-  actions
+  actions,
+  getters
 }
