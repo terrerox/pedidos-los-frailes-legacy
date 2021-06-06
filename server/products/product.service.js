@@ -78,8 +78,3 @@ async function getProduct(id) {
     if (!product) throw 'Producto no encontrado';
     return product;
 }
-
-function omitImage(product) {
-    const { image, ...productWithoutImage } = product;
-    return productWithoutImage;
-  }

@@ -23,7 +23,7 @@ async function create(deliveryParams) {
 }
 
 async function getAll() {
-    return await db.Delivery.findAll();
+    return await db.Delivery.findAll({ include: db.Account });
 }
 
 async function getById(id) {

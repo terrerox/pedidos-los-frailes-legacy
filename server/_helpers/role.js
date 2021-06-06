@@ -1,4 +1,5 @@
 module.exports = {
     Local: 'Local',
-    Delivery: 'Delivery'
+    Delivery: 'Delivery',
+    Admin: 'Admin'
 }

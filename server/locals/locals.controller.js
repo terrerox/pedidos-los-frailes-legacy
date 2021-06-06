@@ -11,7 +11,7 @@ router.post('/create', authorize(Role.Local), createSchema, create);
 router.get('/', getAll);
 router.get('/logged', authorize(Role.Local), getLogged);
 router.get('/:id', getById);
-router.put('/', authorize(Role.Local), updateSchema, update);
+router.put('/', authorize([Role.Local, Role.Admin]), updateSchema, update);
 router.delete('/:id', authorize(Role.Local), _delete);
 
 module.exports = router;
@@ -56,6 +56,7 @@ function getById(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
+        id: Joi.number().empty(''),
         title: Joi.string().empty(''),
         category: Joi.string().empty(''),
         address: Joi.string().empty(''),
@@ -69,7 +70,8 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    localService.update(req.local.id, req.body)
+    const id = req.body.id ? req.body.id : req.local.id
+    localService.update(id, req.body)
         .then(local => res.json(local))
         .catch(next);
 }
