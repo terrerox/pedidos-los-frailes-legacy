@@ -51,6 +51,7 @@
       </div>
     </section>
   </div>
+  <Footer />
 </template>
 
 <script>
@@ -65,6 +66,7 @@ import HeroSection from '@/locals/components/HeroSection'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
 import EditProfileModal from '@/locals/components/EditProfileModal'
+import Footer from '@/_shared/layout/Footer'
 
 export default {
   name: 'Shop',
@@ -75,7 +77,8 @@ export default {
     HeroSection,
     OwnerHeader,
     ProductModal,
-    EditProfileModal
+    EditProfileModal,
+    Footer
   },
 
   data () {

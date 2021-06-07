@@ -28,7 +28,7 @@
                 </div>
               </div>
               <div v-else>
-                <h1 class="text-2xl text-center font-bold">¡No hay productos! 😬</h1>
+                <h1 class="text-xl text-center">¡No hay productos! 😬</h1>
               </div>
             </div>
             <div

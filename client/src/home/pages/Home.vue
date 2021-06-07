@@ -16,7 +16,7 @@
               <p
                 class="text-gray-800 text-base leading-relaxed mt-8 font-semibold"
               >
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima quis eius nisi amet porro, ipsum et, perferendis
+                ¡Una plataforma de pedidos en linea y delivery exclusivamente para Los Frailes!
               </p>
             </div>
 
@@ -68,16 +68,18 @@
       </template>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import Local from '@/home/components/Local'
+import Footer from '@/_shared/layout/Footer'
 
 export default {
   name: 'Home',
 
-  components: { Local },
+  components: { Local, Footer },
 
   created () {
     this.getLocals()
