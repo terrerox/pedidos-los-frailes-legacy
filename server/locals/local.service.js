@@ -24,7 +24,7 @@ async function create(newLocal) {
 }
 
 async function getAll() {
-  return await db.Local.findAll();
+  return await db.Local.findAll({ include: db.Account });
 }
 
 async function getById(id) {

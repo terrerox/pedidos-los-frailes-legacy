@@ -11,6 +11,7 @@ import LocalInfo from '@/locals/pages/LocalInfo'
 import Order from '@/locals/pages/Order'
 import Delivery from '@/delivery/pages/Delivery'
 import DeliveryInfo from '@/delivery/pages/DeliveryInfo'
+import Admin from '@/admin/pages/Admin'
 
 const routes = [
   {
@@ -69,6 +70,11 @@ const routes = [
     component: DeliveryInfo
   },
   {
+    path: '/admin/:id',
+    name: 'Admin',
+    component: Admin
+  },
+  {
     path: '/:pathMatch(.*)',
     redirect: '/'
   }
@@ -82,7 +88,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPages = [
     'Login',
-    'Delivery',
     'DeliveryRegister',
     'LocalRegister',
     'Home',

@@ -27,9 +27,11 @@ function authorize(roles = []) {
             if (account.role === 'Local') {
                 const account = await db.Account.findByPk(req.user.sub, { include: [db.Local] });
                 req.local = account.get();
-            } else {
+            } else if (account.role === 'Delivery') {
                 const account = await db.Account.findByPk(req.user.sub, { include: [db.Delivery] });
                 req.delivery = account.get();
+            } else {
+                req.user = account
             }
             next();
         }

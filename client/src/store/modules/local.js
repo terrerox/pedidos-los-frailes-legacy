@@ -31,7 +31,8 @@ const mutations = {
       category,
       description,
       address,
-      phoneNumber
+      phoneNumber,
+      status
     } = editedLocal
 
     const { Local } = state.loggedLocal
@@ -41,16 +42,25 @@ const mutations = {
     Local.address = address
     Local.phoneNumber = phoneNumber
     Local.imageUrl = imageUrl
+    Local.status = status
+  },
+  setVerifiedLocal (state, verifiedLocal) {
+    const local = state.locals.find(local => local.accountId === verifiedLocal.accountId)
+    local.status = verifiedLocal.status
   }
 }
 
 const actions = {
-  createLocal ({ commit }, local) {
+  createLocal ({ commit, dispatch }, local) {
     commit('localRequest')
     return localService.create(local)
       .then(res => {
         router.push(`/local/${res.id}`)
         commit('localFinishedRequest')
+      },
+      error => {
+        commit('localFinishedRequest')
+        dispatch('alert/error', error, { root: true })
       })
   },
   getLocals ({ commit }) {
@@ -89,14 +99,36 @@ const actions = {
         },
         error => {
           dispatch('alert/error', error, { root: true })
+          console.log(error)
+        }
+      )
+  },
+  verifyLocal ({ commit, dispatch }, local) {
+    commit('localRequest')
+    return localService.update(local)
+      .then(
+        res => {
+          commit('setVerifiedLocal', res)
+          commit('localFinishedRequest')
+          dispatch('alert/success',
+            '¡Verificado con éxito!',
+            { root: true }
+          )
+        },
+        error => {
+          dispatch('alert/error', error, { root: true })
+          console.log(error)
         }
       )
   }
 }
 
 const getters = {
-  locals (state) {
-    return state.locals
+  verifiedLocals (state) {
+    return state.locals.filter(local => local.status === 'active')
+  },
+  unverifiedLocals (state) {
+    return state.locals.filter(local => local.status === 'inactive')
   },
   currentLocal (state) {
     return state.currentLocal

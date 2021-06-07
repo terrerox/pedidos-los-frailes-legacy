@@ -26,16 +26,12 @@
               </svg>
             </button>
             <h3 class="text-xl font-bold">
-              Productos
+              Productos 🤯
             </h3>
-            <img
-              src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/hamburger_1f354.png"
-              class="mx-4 h-8 w-8"
-              alt=""
-            />
           </div>
           <div
             class="mt-12 mb-7 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"
+            v-if="loggedProducts.length"
           >
             <div
               class="flex flex-col"
@@ -45,6 +41,9 @@
               <ProductOwner :index="$index" :product="product" @openModal="showModal" />
             </div>
           </div>
+          <div v-else>
+            <h1 class="text-xl mt-10 text-center">¡No hay productos! 😬</h1>
+          </div>
         </div>
         <div class="w-full lg:w-4/12 lg:mr-3">
           <CardHolder />
@@ -52,6 +51,7 @@
       </div>
     </section>
   </div>
+  <Footer />
 </template>
 
 <script>
@@ -66,6 +66,7 @@ import HeroSection from '@/locals/components/HeroSection'
 import OwnerHeader from '@/_shared/layout/OwnerHeader'
 import ProductModal from '@/_shared/modals/ProductModal'
 import EditProfileModal from '@/locals/components/EditProfileModal'
+import Footer from '@/_shared/layout/Footer'
 
 export default {
   name: 'Shop',
@@ -76,7 +77,8 @@ export default {
     HeroSection,
     OwnerHeader,
     ProductModal,
-    EditProfileModal
+    EditProfileModal,
+    Footer
   },
 
   data () {

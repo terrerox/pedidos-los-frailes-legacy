@@ -48,6 +48,7 @@
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <Dropdown
+        required
         :content="activeDeliveries"
         label="Delivery *"
         v-model="orderInfo.DeliveryAccountId"

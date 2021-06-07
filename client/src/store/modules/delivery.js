@@ -39,15 +39,23 @@ const mutations = {
     Delivery.phoneNumber = phoneNumber
     Delivery.imageUrl = imageUrl
     Delivery.nationalId = nationalId
+  },
+  setVerifiedDelivery (state, verifiedDelivery) {
+    const delivery = state.deliveries.find(delivery => delivery.accountId === verifiedDelivery.accountId)
+    delivery.status = verifiedDelivery.status
   }
 }
 const actions = {
-  createDelivery ({ commit }, delivery) {
+  createDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
     return deliveryService.create(delivery)
       .then(res => {
         commit('deliveryFinishedRequest')
         router.push(`/delivery/${res.id}`)
+      },
+      error => {
+        commit('deliveryFinishedRequest')
+        dispatch('alert/error', error, { root: true })
       })
   },
   getDeliveries ({ commit }) {
@@ -76,6 +84,7 @@ const actions = {
   },
   updateDeliveryStatus ({ commit }, delivery) {
     return deliveryService.update(delivery)
+      .then(res => commit('setVerifiedDelivery', res))
   },
   getLoggedDelivery (context, id) {
     return deliveryService.getLogged()
@@ -87,6 +96,9 @@ const actions = {
 const getters = {
   activeDeliveries (state) {
     return state.deliveries.filter(delivery => delivery.status === 'active')
+  },
+  unverifiedDeliveries (state) {
+    return state.deliveries.filter(delivery => delivery.status === 'inactive')
   },
   loggedDelivery (state, getters, rootState) {
     return state.loggedDelivery
