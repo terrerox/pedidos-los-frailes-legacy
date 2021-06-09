@@ -1,8 +1,10 @@
 <template>
   <div
     v-if="alert.message"
-    :class="`bg-${alertColor}-200 border border-${alertColor}-400
-    text-${alertColor}-700`"
+    :class="alert.type === 'Error'
+      ? 'bg-red-200 border border-red-400 text-red-700'
+      : 'bg-green-200 border border-green-400 text-green-700'
+    "
     class="pl-4 pr-8 py-3 rounded relative"
   >
     <strong class="font-bold">¡{{ alert.type }}!</strong>
@@ -18,10 +20,7 @@ export default {
   computed: {
     ...mapState({
       alert: state => state.alert
-    }),
-    alertColor () {
-      return this.alert.type === 'Error' ? 'red' : 'green'
-    }
+    })
   },
   methods: {
     ...mapActions({
