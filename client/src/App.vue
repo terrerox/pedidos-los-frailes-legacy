@@ -10,7 +10,8 @@ export default {
 
 <style>
 body * {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Hammersmith One', sans-serif;
+  /* background-color: #eff2fb; */
 }
 [v-cloak] {
   display: none;

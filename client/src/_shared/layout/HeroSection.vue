@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <div class="w-full h-44 color-primary"></div>
+    <div class="w-full h-44 color-secondary"></div>
     <div class="flex justify-center -mt-24">
       <img
         v-if="heroData.imageUrl"
@@ -10,16 +10,20 @@
       />
     </div>
     <div>
-      <div class="text-black mt-10 md:text-6xl text-5xl font-bold">
+      <div class="text-3xl md:text-4xl text-gray-600 leading-tight mt-10">
         {{ heroData.title }}
       </div>
-      <span class="text-black">
-        {{ heroData.category }}
-      </span>
+      <div class="flex justify-center ">
+        <div
+          class="rounded-full w-auto py-1 px-2 shadow-xl text-white color-primary"
+        >
+          <span class="text-xs">✨ {{ heroData.category }}</span>
+        </div>
+      </div>
     </div>
-    <p class="text-gray-500 mt-7 whitespace-pre-wrap mx-auto max-w-lg">
-      {{ heroData.description }}
-    </p>
+    <div class="whitespace-pre-wrap mx-auto max-w-lg text-gray-500 mt-7">
+        {{ heroData.description }}
+    </div>
   </div>
 </template>
 

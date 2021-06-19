@@ -41,7 +41,7 @@ export default {
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: #1E40AF;
+  background-color: #b34f4f;
   border-radius: 100%;
   -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
           animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;

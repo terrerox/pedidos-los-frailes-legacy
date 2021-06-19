@@ -2,26 +2,12 @@
   <!-- component -->
   <div class="lg:flex">
     <div class="lg:w-1/2 xl:max-w-screen-sm">
-      <div
-        class="py-12 color-secondary lg:bg-white flex justify-center lg:justify-start lg:px-12"
-      >
-        <router-link
-          :to="{ name: 'Home' }"
-          class="cursor-pointer flex items-center"
-        >
-          <div
-            class="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold"
-          >
-            Pedidos Los Frailes
-          </div>
-        </router-link>
-      </div>
+      <Header />
       <div
         class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-5 xl:px-24 xl:max-w-2xl"
       >
         <h2
-          class="text-center text-2xl text-indigo-900 font-display font-semibold lg:text-left xl:text-3xl
-                    xl:text-bold"
+          class="text-center text-2xl text-gray-600 leading-tight font-display lg:text-left xl:text-3xl"
         >
           Registrar Delivery
         </h2>
@@ -32,7 +18,7 @@
             class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display font-semibold text-gray-700 text-center"
           >
             ¿Ya te has registrado como delivery?
-            <router-link to="/login" class="cursor-pointer text-indigo-600 hover:text-indigo-800"
+            <router-link to="/login" class="cursor-pointer text-color-primary"
               >¡Inicia sesión aqui!</router-link
             >
           </div>
@@ -53,11 +39,12 @@
 
 <script>
 import DeliveryRegisterForm from '../components/DeliveryRegisterForm'
+import Header from '../components/Header'
 
 import Alert from '@/_shared/Alert'
 
 export default {
-  components: { DeliveryRegisterForm, Alert }
+  components: { DeliveryRegisterForm, Alert, Header }
 }
 </script>
 

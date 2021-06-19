@@ -4,7 +4,7 @@
     :class="cartItems.length ? 'block' : 'hidden lg:block'"
   >
     <template v-if="cartItems.length">
-      <h3 class="font-bold text-xl textcenter mb-8">{{ title }} 🛒</h3>
+      <h3 class="text-gray-600 leading-tight text-xl textcenter mb-8">{{ title }} 🛒</h3>
       <div class="mt-12 p-6 color-primary custom-rounded font-hairline text-xs">
         <div class="flex justify-between items-center mb-4" v-if="onCheckout">
           <p class="text-white">{{ currentLocal.title }}</p>
@@ -31,15 +31,15 @@
       </transition-group>
       <hr class="my-4" />
       <div class="grid grid-cols-2 gap-1">
-        <span class="text-black text-sm">Delivery</span>
+        <span class="text-gray-600 leading-tight text-sm">Delivery</span>
         <div class="text-right">
-          <span class="text-black text-sm">¡Gratis!</span>
+          <span class="text-gray-600 leading-tight text-sm">¡Gratis!</span>
         </div>
       </div>
       <div class="grid grid-cols-2 gap-1 mt-2">
-        <span class="text-black text-2xl font-bold">Total</span>
+        <span class="text-black text-2xl">Total</span>
         <div class="text-right">
-          <span class="text-black text-xl font-bold">DOP {{ cartTotal }}</span>
+          <span class="text-black text-xl">DOP {{ cartTotal }}</span>
         </div>
       </div>
       <div class="max-w-sm my-4 m-auto hidden lg:block" v-if="!onCheckout">
