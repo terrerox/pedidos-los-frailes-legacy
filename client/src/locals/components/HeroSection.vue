@@ -13,7 +13,7 @@
       <div class="text-3xl md:text-4xl text-gray-600 leading-tight mt-10">
         {{ data.title }}
       </div>
-      <div class="flex justify-center ">
+      <div class="flex justify-center mt-3">
         <div
           class="rounded-full w-auto py-1 px-2 shadow-xl text-white color-primary"
         >

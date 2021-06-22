@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="custom-rounded text-xs md:text-base lg:text-base absolute inset-0 z-10 bg-gray-900 text-gray-400 leading-tight text-center flex flex-col items-center justify-center opacity-100 bg-opacity-90">
+    <div class="custom-rounded text-xs md:text-base lg:text-base xl:text-base absolute inset-0 z-10 bg-gray-900 text-gray-400 leading-tight text-center flex flex-col items-center justify-center opacity-100 bg-opacity-90">
       <h1>Próximamente</h1>
     </div>
     <div
