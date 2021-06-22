@@ -2,12 +2,13 @@
    <div
     class="relative flex flex-row items-center px-2 my-2 transition-all duration-300 color-primary custom-rounded"
   >
-    <div
-      class="absolute top-0 left-0 w-4 h-4 text-center transition color-primary rounded-full border border-white cursor-pointer shadow ripple btn-hover focus:outline-none"
-      @click="remove(cartItem)"
-      v-if="!onCheckout"
-    >
-      <img :src="cancel"/>
+    <div v-if="!onCheckout" class="absolute top-0 left-0 w-4 h-4 text-center transition color-primary rounded-full border border-white cursor-pointer shadow ripple btn-hover focus:outline-none">
+      <div
+        v-tooltip="'Remover del carrito'"
+        @click="remove(cartItem)"
+      >
+        <img :src="cancel"/>
+      </div>
     </div>
     <img
       :src="cartItem.product.imageUrl"
@@ -21,7 +22,12 @@
       </div>
     </div>
     <div class="flex items-center text-lg font-bold text-white-500 bg-button">
-      <div class="w-6 cursor-pointer select-none" @click="decrement(cartItem)" v-if="!onCheckout" >
+      <div
+        class="w-6 cursor-pointer select-none"
+        @click="decrement(cartItem)"
+        v-if="!onCheckout"
+        v-tooltip="'Disminuir cantidad'"
+      >
         <img
           :src="minus"
           alt="-"
@@ -36,7 +42,12 @@
         :value="cartItem.quantity"
         class="w-8 py-3 font-bold text-center text-white bg-transparent"
       />
-      <div class="w-6 cursor-pointer select-none" @click="increment(cartItem)" v-if="!onCheckout">
+      <div
+        v-tooltip="'Incrementar cantidad'"
+        class="w-6 cursor-pointer select-none"
+        @click="increment(cartItem)"
+        v-if="!onCheckout"
+      >
         <img
           :src="plus"
           alt="+"

@@ -5,22 +5,19 @@
     <template v-else>
       <section class="main">
         <HeroSection :heroData="currentLocal" />
-        <div class="flex flex-col-reverse lg:flex-row">
-          <div class="flex-grow px-7 md:px-16 lg:px-16">
-            <div class="mt-12 flex items-center">
-              <h3 class="text-2xl font-bold">
-                Productos 🤯
-              </h3>
+        <img class="w-full" src="@/_shared/assets/wave.svg" alt="" />
+        <div class="flex flex-col-reverse lg:flex-row color-secondary">
+          <div class="lg:mt-0 mt-5 flex-grow px-7 md:px-16 lg:px-16">
+            <div class="text-center text-2xl text-gray-600 leading-tight">
+              {{ sectionTitle }}
             </div>
-            <div
-              class="mt-12 mb-7"
-            >
+            <div class="flex mx-auto lg:max-w-3xl xl:max-w-5xl">
               <div
-                class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10"
+                class="flex flex-wrap justify-center w-full h-full mx-auto"
                 v-if="currentLocal.Products.length"
               >
                 <div
-                  class="flex flex-col"
+                  class="w-full py-10 px-5 md:w-1/2 xl:w-1/2"
                   v-for="product in currentLocal.Products"
                   :key="product.id"
                 >
@@ -28,7 +25,7 @@
                 </div>
               </div>
               <div v-else>
-                <h1 class="text-xl text-center">¡No hay productos! 😬</h1>
+                <img class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12" src="@/_shared/assets/empty.svg" alt="" />
               </div>
             </div>
             <div
@@ -55,6 +52,7 @@
             <Cart :localId="localId" />
           </div>
         </div>
+        <img class="w-full" src="@/_shared/assets/invertedWave.svg" alt="" />
       </section>
     </template>
   </div>
@@ -64,12 +62,13 @@
 import { mapActions, mapGetters, mapState } from 'vuex'
 
 import Product from '@/shop/components/Product'
+import Header from '@/shop/components/Header'
+
 import Cart from '@/_shared/cart/Cart'
 
 import Loader from '@/_shared/Loader'
 
 import HeroSection from '@/_shared/layout/HeroSection'
-import Header from '@/_shared/layout/Header'
 
 import { currency } from '@/_helpers'
 
@@ -104,6 +103,10 @@ export default {
       currentLocal: 'currentLocal'
     }),
     ...mapState('local', ['status']),
+
+    sectionTitle () {
+      return this.currentLocal.Products.length ? 'Productos 🍔' : '¡No hay productos! 😬'
+    },
 
     cartItems () {
       return this.$store.getters['cart/productsOnCart'].filter(

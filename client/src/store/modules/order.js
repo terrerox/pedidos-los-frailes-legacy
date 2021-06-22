@@ -77,7 +77,7 @@ const actions = {
     return orderService.update(order)
   },
 
-  deleteOrder ({ commit }, { id }) {
+  deleteOrder ({ commit }, id) {
     return orderService.deleteOrder(id).then(() => {
       commit('removeOrder', id)
     })

@@ -1,6 +1,6 @@
 <template>
   <div v-cloak id="dribbleShot">
-    <OwnerHeader title="Revisión" backTo="Local"/>
+    <Header title="Detalles de orden" backTo="Local"/>
     <section class="main">
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
@@ -15,12 +15,12 @@
 import { mapActions, mapGetters } from 'vuex'
 import OrderDetails from '@/locals/components/OrderDetails'
 
-import OwnerHeader from '@/_shared/layout/OwnerHeader'
+import Header from '@/_shared/layout/Header'
 
 export default {
   name: 'Order',
 
-  components: { OrderDetails, OwnerHeader },
+  components: { OrderDetails, Header },
 
   created () {
     const orderId = Number(this.$route.params.orderId)

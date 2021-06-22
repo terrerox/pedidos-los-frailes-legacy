@@ -6,17 +6,15 @@
       class="mb-1 p-4 no-underline text-white flex justify-between rounded "
       @click.prevent="active = !active"
     >
-      <div class="title font-bold text-lg">{{ order.name }}</div>
-      <div class="title font-bold text-lg">Calle: {{ order.street }}</div>
-      <div class="title font-bold text-lg">{{ order.phoneNumber }}</div>
-      <span class="text-white" v-show="!active">
+      <div class="title text-lg">{{ order.name }}</div>
+      <span class="text-white" v-tooltip="'Ampliar'" v-show="!active">
         <img
           :src="plus"
           alt="+"
           class="w-7"
           draggable="false"
       /></span>
-      <span class="text-white" v-show="active">
+      <span class="text-white" v-tooltip="'Disminuir'" v-show="active">
         <img
           :src="minus"
           alt="-"
@@ -26,7 +24,25 @@
     </div>
     <div class="p-2" v-show="active">
       <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
+        <div class="title text-lg">
+          Calle:
+        </div>
+        <div class="title  text-lg">
+          {{ order.street }}
+        </div>
+      </div>
+      <hr />
+      <div class="flex flex-row justify-between">
+        <div class="title text-lg">
+          Teléfono:
+        </div>
+        <div class="title  text-lg">
+          {{ order.phoneNumber }}
+        </div>
+      </div>
+      <hr />
+      <div class="flex flex-row justify-between">
+        <div class="title text-lg">
           Número:
         </div>
         <div class="title  text-lg">
@@ -35,7 +51,7 @@
       </div>
       <hr />
       <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
+        <div class="title text-lg">
           Referencia:
         </div>
         <div class="title text-lg">
@@ -44,7 +60,7 @@
       </div>
       <hr />
       <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
+        <div class="title text-lg">
           Método de pago:
         </div>
         <div class="title text-lg">
@@ -53,7 +69,7 @@
       </div>
       <hr />
       <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
+        <div class="title text-lg">
           Edificio/Apto/Extensión:
         </div>
         <div class="title  text-lg">
@@ -62,7 +78,7 @@
       </div>
       <hr />
       <div class="flex flex-row justify-between">
-        <div class="title font-bold text-lg">
+        <div class="title text-lg">
           Notas adicionales:
         </div>
         <div class="title text-lg">
@@ -76,13 +92,13 @@
         :key="cartItem.product.id"
       />
       <div class="px-2 flex flex-row justify-between">
-        <button
-          class="px-4 py-1 text-white font-bold bg-green-500 custom-rounded"
+        <div class="title text-lg">Total DOP: {{ cartTotal }}</div>
+        <div
+          v-tooltip="'Más información'"
           @click="goToOrderDetails(order.id)"
         >
-          Más información
-        </button>
-        <div class="title font-bold text-lg">Total DOP: {{ cartTotal }}</div>
+          <img class="w-6 h-6" src="@/_shared/assets/arrowRight.svg" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -102,8 +118,7 @@ export default {
   components: { OrderCartItem },
 
   props: {
-    order: { type: Object, required: true },
-    index: { type: Number, required: true }
+    order: { type: Object, required: true }
   },
 
   data () {
@@ -130,10 +145,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Enviado', 'Producto se ha enviado con éxito', 'success')
-          this.$store.dispatch('order/deleteOrder', {
-            id,
-            index: this.index
-          })
+          this.$store.dispatch('order/deleteOrder', id)
         }
       })
     }

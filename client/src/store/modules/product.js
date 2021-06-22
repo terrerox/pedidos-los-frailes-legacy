@@ -16,8 +16,8 @@ const mutations = {
   setProducts (state, products) {
     state.products = products
   },
-  removeProduct (state, index) {
-    state.products.splice(index, 1)
+  removeProduct (state, id) {
+    state.products = state.products.filter(product => product.id !== id)
   },
   addProduct (state, product) {
     state.products.push(product)
@@ -75,9 +75,9 @@ const actions = {
       )
     })
   },
-  deleteProduct ({ commit }, { id, index }) {
+  deleteProduct ({ commit }, id) {
     return productService.deleteProduct(id).then(() => {
-      commit('removeProduct', index)
+      commit('removeProduct', id)
     })
   }
 }

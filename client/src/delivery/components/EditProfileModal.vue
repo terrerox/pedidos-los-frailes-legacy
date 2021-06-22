@@ -10,7 +10,7 @@
             <div
               class="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t"
             >
-              <h3 class="text-3xl font-semibold">
+              <h3 class="text-3xl">
                 Editar
               </h3>
               <button

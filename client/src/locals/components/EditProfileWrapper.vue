@@ -2,8 +2,8 @@
   <div class="grid grid-cols-2 gap-2 mb-7">
     <button
       class="text-gray-100 p-4 w-full rounded-full tracking-wide
-      font-semibold font-display focus:outline-none focus:shadow-outline btn-hover shadow-lg"
-      :class="currentStep === 0 ? 'color-primary' : 'color-secondary'"
+      font-display focus:outline-none focus:shadow-outline shadow-lg"
+      :class="currentStep === 0 ? 'color-primary' : 'color-secondary text-gray-600'"
       type="button"
       @click="prevStep"
     >
@@ -11,8 +11,8 @@
     </button>
     <button
       class="text-gray-100 p-4 w-full rounded-full tracking-wide
-      font-semibold font-display focus:outline-none focus:shadow-outline btn-hover shadow-lg"
-      :class="currentStep === 1 ? 'color-primary' : 'color-secondary'"
+      font-display focus:outline-none focus:shadow-outline shadow-lg"
+      :class="currentStep === 1 ? 'color-primary' : 'color-secondary text-gray-600'"
       type="button"
       @click="nextStep"
     >

@@ -4,13 +4,16 @@
 
 @layer base {
   .color-primary {
-    @apply bg-blue-800;
+    background-color: #ec1f28;
+  }
+  .text-color-primary {
+    color:#ec1f28; 
   }
   .color-secondary {
-    @apply bg-blue-100;
+    background-color: #eff2fb;
   }
   .btn-hover {
-    @apply hover:bg-blue-900;
-    @apply hover:shadow-lg;
+    background-color: #ec1f28;
+    @apply hover:shadow-xl;
   }
 }

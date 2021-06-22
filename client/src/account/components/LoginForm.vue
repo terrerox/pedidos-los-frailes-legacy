@@ -14,8 +14,7 @@
         </div>
         <div>
           <a
-            class="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
-            cursor-pointer"
+            class="text-xs font-display font-semibold text-color-primary cursor-pointer"
           >
             ¿Olvidaste tu contraseña?
           </a>
