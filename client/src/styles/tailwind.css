@@ -4,16 +4,16 @@
 
 @layer base {
   .color-primary {
-    background-color: #b34f4f;
+    background-color: #ec1f28;
   }
   .text-color-primary {
-    color:#b34f4f; 
+    color:#ec1f28; 
   }
   .color-secondary {
     background-color: #eff2fb;
   }
   .btn-hover {
-    background-color: #b34f4f;
+    background-color: #ec1f28;
     @apply hover:shadow-xl;
   }
 }

@@ -1,10 +1,13 @@
 <template>
-  <div class="bg-white rounded shadow transition-all duration-300 px-4 py-4">
+  <div
+    class="border border-solid border-gray-500 shadow-md rounded-lg mb-4 mt-16 p-10 max-w-sm m-auto"
+    :class="getOrders.length ? 'block' : 'hidden lg:block'"
+  >
     <div v-if="getOrders.length">
-      <h2 class="font-bold text-xl textcenter mb-8">Pedidos 📝</h2>
+      <h2 class="text-xl text-gray-600 leading-tight text-center mb-8">Pedidos 📝</h2>
       <transition-group name="order">
-        <template v-for="(order, $index) in getOrders" :key="order.id">
-          <CardOrder :order="order" :index="$index" />
+        <template v-for="order in getOrders" :key="order.id">
+          <CardOrder :order="order" />
         </template>
       </transition-group>
     </div>

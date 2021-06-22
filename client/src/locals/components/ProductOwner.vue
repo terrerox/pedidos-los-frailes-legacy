@@ -7,18 +7,22 @@
       backgroundImage: 'url(\'' + product.imageUrl + '\')'
     }"
   >
-    <div
-      class="absolute bottom-0 left-0 w-1/3 bg-gray-200 rounded-tr-lg p-2 text-center text-xs"
-    >
-      <span class="font-bold">{{ product.prepTimeValue }}</span>
-      {{ product.prepTimeUnit }} -
-      <span class="font-bold">{{ product.price }}</span>
-      DOP
+    <div class="flex flex-row space-x-2 ml-3 absolute bottom-2">
+      <div
+        class="rounded-full w-auto py-1 px-2 shadow-xl text-white color-primary"
+      >
+        <span class="text-xs">💵{{ product.price }} DOP</span>
+      </div>
+      <div
+        class="rounded-full w-auto py-1 px-2 shadow-xl text-white color-primary"
+      >
+        <span class="text-xs">⌛{{  product.prepTimeValue }} {{  product.prepTimeUnit }}</span>
+      </div>
     </div>
     <div style="top: -20px;" class="absolute right-0 w-7">
       <button
         @click="this.$emit('openModal', product.id)"
-        class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none"
+        class="inline-block p-3 text-center text-white transition bg-green-700 rounded-full shadow ripple btn-hover focus:outline-none"
       >
         <svg
           class="w-6 h-6"
@@ -52,23 +56,13 @@
       </button>
     </div>
   </div>
-  <p class="mt-4 font-medium">{{ product.title }}</p>
-  <div class="mt-2 flex items-center">
-    <span class="text-xs"><i class="fa fa-star"></i> {{ product.rating }}</span>
-    <span class="text-gray-600 font-hairline text-xs mx-4">{{
-      product.category
-    }}</span>
-  </div>
+  <p class="mt-4 text-lg text-gray-600 leading-tight">{{ product.title }}</p>
 </template>
 
 <script>
 export default {
   name: 'ProductOwner',
   props: {
-    index: {
-      type: Number,
-      required: true
-    },
     product: {
       type: Object,
       required: true
@@ -94,10 +88,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$swal('Eliminado', 'Producto eliminado con éxito', 'success')
-          this.$store.dispatch('product/deleteProduct', {
-            id,
-            index: this.index
-          })
+          this.$store.dispatch('product/deleteProduct', id)
         }
       })
     }

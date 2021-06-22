@@ -15,7 +15,7 @@
         <div class="mt-12">
           <LoginForm />
           <div
-            class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display font-semibold text-gray-700 text-center"
+            class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display text-gray-700 text-center"
           >
             ¿Aún no has registrado tu local?
             <router-link to="/local-register" class="cursor-pointer text-color-primary"

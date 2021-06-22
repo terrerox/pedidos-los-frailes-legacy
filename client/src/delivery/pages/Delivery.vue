@@ -4,7 +4,8 @@
     <section class="main">
       <EditProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
       <HeroSection :heroData="loggedDelivery.Delivery" />
-      <div class="flex flex-col-reverse lg:flex-row">
+      <img class="w-full" src="@/_shared/assets/wave.svg" alt="" />
+      <div class="flex flex-col-reverse lg:flex-row color-secondary">
         <div class="flex-grow px-7 md:px-16 lg:px-16">
           <div class="mt-12">
             <Loader v-if="isLoading"/>
@@ -15,6 +16,7 @@
           <CardHolder />
         </div>
       </div>
+      <img class="w-full" src="@/_shared/assets/invertedWave.svg" alt="" />
     </section>
   </div>
   <Footer />

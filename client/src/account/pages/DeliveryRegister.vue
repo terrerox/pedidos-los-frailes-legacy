@@ -15,7 +15,7 @@
         <div class="mt-12">
           <DeliveryRegisterForm />
           <div
-            class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display font-semibold text-gray-700 text-center"
+            class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display text-gray-700 text-center"
           >
             ¿Ya te has registrado como delivery?
             <router-link to="/login" class="cursor-pointer text-color-primary"

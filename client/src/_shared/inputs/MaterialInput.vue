@@ -104,12 +104,12 @@ export default {
     transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
 }
 .md-label-focus {
-  color: #b34f4f;
+  color: #ec1f28;
   transform: translate(0, -65px) scale(0.75);
   transform-origin: top left;
 }
 .md-input-underline {
-  border-bottom: 1px solid #b34f4f;
+  border-bottom: 1px solid #ec1f28;
 }
 .md-input-underline:after {
   position: absolute;
@@ -120,7 +120,7 @@ export default {
   content: "";
   transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
   transform: scaleX(0);
-  border-bottom: 2px solid #b34f4f;
+  border-bottom: 2px solid #ec1f28;
 }
 .md-input:focus ~ .md-input-underline:after {
   transform: scaleX(1);
@@ -128,7 +128,7 @@ export default {
 .md-input:focus + .md-label,
 .md-input:not(:placeholder-shown) + .md-label {
   @apply md-label-focus;
-  color: #b34f4f;
+  color: #ec1f28;
   transform: translate(0, -65px) scale(0.75);
   transform-origin: top left;
 }

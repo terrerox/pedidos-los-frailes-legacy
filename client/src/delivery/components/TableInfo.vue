@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5">
     <div class="col-span-2">
-      <div class="font-bold text-2xl max-w-xl text-gray-900 leading-tight">
+      <div class="text-2xl max-w-xl text-gray-600 leading-tight">
         Información personal
         <hr class="w-12 h-1 color-primary rounded-full mb-7 mt-1" />
       </div>

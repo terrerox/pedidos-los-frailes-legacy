@@ -30,7 +30,7 @@
       {{ orderDetails.additionalNotes }}
     </div>
     <div class="col-span-2 mt-2">
-      <h2 class="font-bold">Productos pedidos | Total: </h2>
+      <h2 class="font-bold">Productos pedidos</h2>
         <OrderCartItem
           class="text-white"
           v-for="cartItem in orderDetails.cartItems"
