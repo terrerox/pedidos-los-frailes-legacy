@@ -11,11 +11,11 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
 
 // api routes
-app.use('/accounts', require('./accounts/accounts.controller'));
-app.use('/locals', require('./locals/locals.controller'));
-app.use('/products', require('./products/products.controller'));
-app.use('/orders', require('./orders/orders.controller'));
-app.use('/deliveries', require('./deliveries/deliveries.controller'));
+app.use('/api/accounts', require('./accounts/accounts.controller'));
+app.use('/api/locals', require('./locals/locals.controller'));
+app.use('/api/products', require('./products/products.controller'));
+app.use('/api/orders', require('./orders/orders.controller'));
+app.use('/api/deliveries', require('./deliveries/deliveries.controller'));
 
 expressOasGenerator.init(app, {});
 // global error handler
