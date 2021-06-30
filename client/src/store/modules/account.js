@@ -75,15 +75,17 @@ const actions = {
   },
   register ({ dispatch, commit }, user) {
     commit('registerRequest', user)
+    const { email, password } = user
 
     accountService.register(user)
       .then(
         user => {
-          commit('registerSuccess', user)
           dispatch('alert/success',
-            '¡Registrado con éxito, inicia sesión!',
+            '¡Registrado con éxito! Espere un momento...',
             { root: true }
           )
+          dispatch('login', { email, password })
+          commit('registerSuccess', user)
         },
         error => {
           commit('registerFailure', error)
