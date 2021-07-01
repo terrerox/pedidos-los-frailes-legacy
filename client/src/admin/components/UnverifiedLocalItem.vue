@@ -1,7 +1,7 @@
 <template>
   <div class="flex mt-2 lg:flex-row flex-col mb-4 items-center">
     <p class="w-full text-center font-bold">{{ local.title }}</p>
-    <p class="w-full lg:mb-0 mb-2 text-center font-bold">{{ local.Account.email }}</p>
+    <p class="w-full lg:mb-0 mb-2 text-center font-bold">{{ local.Account.userName }}</p>
     <a target="_blank" v-tooltip="'Escribir por Whatsapp'" :href="API_SEND_WHATSAPP_MESSAGE + local.phoneNumber"  class="flex-no-shrink block w-full p-2 ml-4 mr-2 border-2 rounded bg-green-500 hover:bg-green-600">
       <img class="m-auto" :src="whatsappIcon"/>
     </a>

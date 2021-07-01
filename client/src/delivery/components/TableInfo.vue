@@ -23,8 +23,8 @@
       {{ deliveryInfo.Delivery.phoneNumber }}
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Email</h2>
-      {{ deliveryInfo.email }}
+      <h2 class="font-bold">Usuario</h2>
+      {{ deliveryInfo.userName }}
     </div>
   </div>
 </template>

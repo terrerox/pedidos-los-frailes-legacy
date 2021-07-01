@@ -40,10 +40,10 @@ const mutations = {
 }
 
 const actions = {
-  login ({ dispatch, commit }, { email, password }) {
-    commit('loginRequest', { email })
+  login ({ dispatch, commit }, { userName, password }) {
+    commit('loginRequest', { userName })
 
-    accountService.login(email, password)
+    accountService.login(userName, password)
       .then(
         user => {
           commit('loginSuccess', user)
@@ -73,18 +73,18 @@ const actions = {
     accountService.logout()
     commit('logout')
   },
-  register ({ dispatch, commit }, user) {
-    commit('registerRequest', user)
-    const { email, password } = user
+  register ({ dispatch, commit }, userData) {
+    commit('registerRequest', userData)
+    const { userName, password } = userData
 
-    accountService.register(user)
+    accountService.register(userData)
       .then(
         user => {
           dispatch('alert/success',
             '¡Registrado con éxito! Espere un momento...',
             { root: true }
           )
-          dispatch('login', { email, password })
+          dispatch('login', { userName, password })
           commit('registerSuccess', user)
         },
         error => {

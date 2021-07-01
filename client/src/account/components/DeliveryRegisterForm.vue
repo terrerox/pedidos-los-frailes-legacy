@@ -3,9 +3,9 @@
     <div class="col-span-2">
       <material-input
         required
-        type="email"
-        label="Email"
-        v-model="account.email"
+        type="text"
+        label="Usuario"
+        v-model="account.userName"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
@@ -51,7 +51,7 @@ export default {
   data () {
     return {
       account: {
-        email: '',
+        userName: '',
         password: ''
       },
       confirmPassword: '',
@@ -73,12 +73,12 @@ export default {
     ...mapActions('alert', ['success', 'error']),
 
     handleSubmit () {
-      const { email, password } = this.account
+      const { userName, password } = this.account
       if (password !== this.confirmPassword) {
         return this.error('¡Las contraseñas no coinciden!')
       }
       this.submitted = true
-      this.register({ email, password, role: 'Delivery' })
+      this.register({ userName, password, role: 'Delivery' })
     }
   }
 }

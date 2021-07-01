@@ -49,7 +49,7 @@
       />
    </div>
    <Loader class="col-span-2" v-if="status.isLoading"/>
-    <p class="col-span-2 text-red-800 font-bold mb-4">Se le contactará via telefónica o whatsapp para validar identidad</p>
+    <p class="col-span-2 text-color-primary font-bold mb-4">Se le contactará via telefónica o whatsapp para validar identidad</p>
    <div class="col-span-2">
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
