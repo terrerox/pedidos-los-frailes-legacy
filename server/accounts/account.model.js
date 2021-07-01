@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const attributes = {
-    email: { type: DataTypes.STRING, allowNull: false },
+    userName: { type: DataTypes.STRING, allowNull: false },
     hash: { type: DataTypes.STRING, allowNull: false },
     role: { type: DataTypes.STRING, allowNull: false },
   };

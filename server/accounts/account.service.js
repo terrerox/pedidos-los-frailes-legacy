@@ -20,13 +20,13 @@ async function getById(id) {
   return await getAccount(id);
 }
 
-async function authenticate({ email, password }) {
+async function authenticate({ userName, password }) {
   const account = await db.Account.scope("withHash").findOne({
-    where: { email },
+    where: { userName },
   });
 
   if (!account || !(await bcrypt.compare(password, account.hash)))
-    throw "Correo o contraseña incorrectas";
+    throw "Usuario o contraseña incorrectas";
 
   // authentication successful
   const token = jwt.sign({ sub: account.id }, process.env.SECRET_TOKEN, {
@@ -37,8 +37,8 @@ async function authenticate({ email, password }) {
 
 async function create(params) {
     // validate
-    if (await db.Account.findOne({ where: { email: params.email } })) {
-        throw 'Correo "' + params.email + '" ya existe';
+    if (await db.Account.findOne({ where: { userName: params.userName } })) {
+        throw 'Usuario "' + params.userName + '" ya existe';
     }
 
     // hash password
@@ -54,12 +54,12 @@ async function update(id, params) {
     const account = await getAccount(id);
   
     // validate
-    const EmailChanged = params.email && account.email !== params.email;
+    const userNameChanged = params.userName && account.userName !== params.userName;
     if (
-      EmailChanged &&
-      (await db.Account.findOne({ where: { email: params.email } }))
+      userNameChanged &&
+      (await db.Account.findOne({ where: { userName: params.userName } }))
     ) {
-      throw 'Correo "' + params.email + '" ya existe';
+      throw 'Usuario "' + params.userName + '" ya existe';
     }
   
     // hash password if it was entered
