@@ -15,5 +15,6 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
 import 'normalize.css'
+import './registerServiceWorker'
 
 createApp(App).directive('tooltip', tooltip).use(router).use(store).use(VueSweetalert2).mount('#app')
