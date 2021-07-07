@@ -1,8 +1,8 @@
 import { httpClient } from '@/_helpers'
 const accountService = {}
 
-accountService.login = (email, password) => {
-  return httpClient.post('/accounts/authenticate', { email, password })
+accountService.login = (userName, password) => {
+  return httpClient.post('/accounts/authenticate', { userName, password })
     .then(account => {
       const { token } = account
 
@@ -13,8 +13,8 @@ accountService.login = (email, password) => {
     })
 }
 
-accountService.register = ({ email, password, role }) => {
-  return httpClient.post('/accounts/register', { email, password, role })
+accountService.register = ({ userName, password, role }) => {
+  return httpClient.post('/accounts/register', { userName, password, role })
     .then(account => account)
 }
 

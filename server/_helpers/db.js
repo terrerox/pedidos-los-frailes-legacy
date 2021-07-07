@@ -8,16 +8,23 @@ module.exports = db = {};
 initialize();
 
 async function initialize() {
+  const connectionData = {
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 3306,
+    user: process.env.DB_USER || 'terrerox',
+    password: process.env.DB_PASS || 'wendy0611',
+    database: process.env.DB_NAME || 'pedidoslosfrailes',
+  }
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
+    host: connectionData.host,
+    port: connectionData.port,
+    user: connectionData.user,
+    password: connectionData.password,
+    database: connectionData.database,
   });
-  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\`;`);
+  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${connectionData.database}\`;`);
 
-  const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  const sequelize = new Sequelize(connectionData.database, connectionData.user, connectionData.password, {
     dialect: "mysql",
   });
 

@@ -95,7 +95,7 @@ const actions = {
 }
 const getters = {
   activeDeliveries (state) {
-    return state.deliveries.filter(delivery => delivery.status === 'active')
+    return state.deliveries
   },
   unverifiedDeliveries (state) {
     return state.deliveries.filter(delivery => delivery.status === 'inactive')

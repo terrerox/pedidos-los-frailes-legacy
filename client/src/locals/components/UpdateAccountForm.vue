@@ -1,7 +1,7 @@
 <template>
     <form class="grid grid-cols-2 gap-2" ref="accountForm">
         <div class="col-span-2">
-          <material-input type="text" label="Email" v-model="account.email" />
+          <material-input type="text" label="Usuario" v-model="account.userName" />
         </div>
         <div class="col-span-2 lg:col-span-1">
           <material-input type="password" label="Contraseña" v-model="account.password" />
@@ -25,7 +25,7 @@ export default {
   data () {
     return {
       account: {
-        email: '',
+        userName: '',
         password: ''
       },
       confirmPassword: ''
@@ -63,7 +63,7 @@ export default {
 
     setAccountInfo () {
       const { account, loggedLocal } = this
-      account.email = loggedLocal.email
+      account.userName = loggedLocal.userName
     }
   }
 }

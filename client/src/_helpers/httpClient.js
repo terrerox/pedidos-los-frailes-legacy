@@ -5,7 +5,7 @@ import router from '@/router'
 import { authHeader } from '@/_helpers'
 
 export const httpClient = axios.create({
-  baseURL: process.env.VUE_APP_API_URL || 'http://10.0.0.38:4000/'
+  baseURL: process.env.VUE_APP_API_URL || 'https://pedidoslosfrailes.com/api/'
 })
 
 httpClient.interceptors.request.use((config) => {

@@ -9,15 +9,15 @@
             >
               <div class="hero-text col-span-6">
                 <h1
-                  class="text-3xl md:text-4xl max-w-xl text-gray-600 leading-tight"
+                  class="text-4xl xl:text-5xl max-w-xl text-gray-600 leading-tight"
                 >
                   Bienvenidos a Pedidos <br /><span class="text-color-primary"
                     >Los Frailes</span>
                 </h1>
                 <hr class="w-12 h-1 color-primary rounded-full mt-8" />
-                <p class="text-gray-800 text-base leading-relaxed mt-8">
-                  ¡Una plataforma de pedidos en linea y delivery exclusivamente
-                  para Los Frailes!
+                <p class="text-gray-800 text-base xl:text-xl leading-relaxed mt-8">
+                  Una plataforma de pedidos en linea y delivery exclusivamente
+                  para Los Frailes
                 </p>
               </div>
 
@@ -35,14 +35,14 @@
         <div class="px-4 sm:px-8 lg:px-14 xl:px-18 mx-auto">
           <template v-if="verifiedLocals.length">
             <div class="text-center">
-              <div class="text-2xl md:text-3xl text-gray-600 leading-tight">
+              <div class="xl:text-4xl text-2xl md:text-3xl text-gray-600 leading-tight">
                 Tiendas locales
               </div>
-              <div class="text-gray-500 mt-5">
+              <div class="xl:text-xl text-gray-500 mt-5">
                 Compra lo que deseas en los locales disponibles
               </div>
             </div>
-            <div class="flex mx-auto lg:max-w-3xl xl:max-w-5xl">
+            <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
               <div class="flex flex-wrap justify-center w-full h-full mx-auto">
                 <div
                   v-for="local in verifiedLocals"
@@ -60,7 +60,7 @@
       <div class="px-7 md:px-16 lg:px-16">
         <div class="px-4 sm:px-8 lg:px-14 xl:px-18 mx-auto">
           <template v-if="unverifiedLocals.length">
-            <div class="flex mx-auto lg:max-w-3xl xl:max-w-5xl">
+            <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
               <div class="flex flex-wrap justify-center w-full h-full mx-auto">
                 <div
                   class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"

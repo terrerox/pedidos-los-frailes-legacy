@@ -1,10 +1,45 @@
 <template>
+  <InternetError v-if="!onLine" />
   <router-view />
 </template>
 
 <script>
+import InternetError from '@/_shared/InternetError'
 export default {
-  name: 'App'
+  name: 'App',
+
+  components: { InternetError },
+
+  data () {
+    return {
+      onLine: navigator.onLine
+    }
+  },
+
+  methods: {
+    updateOnlineStatus (e) {
+      const {
+        type
+      } = e
+      this.onLine = type === 'online'
+    }
+  },
+
+  mounted () {
+    window.addEventListener('fetch', e => {
+      console.log('Fetch.. ', e)
+
+      e.respondWith(
+        caches.match(e.request)
+          .then(respuestaCache => {
+            return respuestaCache || fetch(e.request)
+          })
+          .catch(() => console.log('no hay conexion'))
+      )
+    })
+    window.addEventListener('online', this.updateOnlineStatus)
+    window.addEventListener('offline', this.updateOnlineStatus)
+  }
 }
 </script>
 

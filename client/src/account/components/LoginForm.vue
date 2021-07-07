@@ -4,8 +4,8 @@
       <material-input
         required
         type="text"
-        label="Correo electrónico"
-        v-model="email"
+        label="Usuario"
+        v-model="userName"
       />
     </div>
     <div class="mt-5">
@@ -52,7 +52,7 @@ export default {
 
   data () {
     return {
-      email: '',
+      userName: '',
       password: '',
       submitted: false
     }
@@ -70,9 +70,9 @@ export default {
 
     handleSubmit (e) {
       this.submitted = true
-      const { email, password } = this
-      if (email && password) {
-        this.login({ email, password })
+      const { userName, password } = this
+      if (userName && password) {
+        this.login({ userName, password })
       }
     }
   }

@@ -3,9 +3,9 @@
     <div class="col-span-2">
       <material-input
         required
-        type="email"
-        label="Email"
-        v-model="account.email"
+        type="text"
+        label="Usuario"
+        v-model="account.userName"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
@@ -25,6 +25,7 @@
       />
     </div>
     <div class="col-span-2">
+      <Loader v-show="status.registering"/>
       <button
         class="color-primary text-gray-100 p-4 w-full rounded-full tracking-wide
         font-semibold font-display focus:outline-none focus:shadow-outline btn-hover shadow-lg"
@@ -40,16 +41,17 @@
 import { mapState, mapActions } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
+import Loader from '@/_shared/Loader'
 
 export default {
   name: 'App',
 
-  components: { MaterialInput },
+  components: { MaterialInput, Loader },
 
   data () {
     return {
       account: {
-        email: '',
+        userName: '',
         password: ''
       },
       confirmPassword: '',
@@ -71,12 +73,12 @@ export default {
     ...mapActions('alert', ['success', 'error']),
 
     handleSubmit () {
-      const { email, password } = this.account
+      const { userName, password } = this.account
       if (password !== this.confirmPassword) {
         return this.error('¡Las contraseñas no coinciden!')
       }
       this.submitted = true
-      this.register({ email, password, role: 'Local' })
+      this.register({ userName, password, role: 'Local' })
     }
   }
 }
