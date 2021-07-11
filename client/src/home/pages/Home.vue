@@ -9,7 +9,7 @@
             >
               <div class="hero-text col-span-6">
                 <h1
-                  class="text-3xl xl:text-5xl max-w-xl text-gray-600 leading-tight"
+                  class="text-lg md:text-2xl xl:text-4xl max-w-xl text-gray-600 leading-tight"
                 >
                   Bienvenidos a Pedidos <br /><span class="text-color-primary"
                     >Los Frailes</span>
@@ -35,7 +35,7 @@
         <div class="px-4 sm:px-8 lg:px-14 xl:px-18 mx-auto">
           <template v-if="verifiedLocals.length">
             <div class="text-center">
-              <div class="xl:text-4xl text-2xl md:text-3xl text-gray-600 leading-tight">
+              <div class="xl:text-4xl text-lg md:text-2xl text-gray-600 leading-tight">
                 Tiendas locales
               </div>
               <div class="xl:text-xl text-gray-500 mt-5">
