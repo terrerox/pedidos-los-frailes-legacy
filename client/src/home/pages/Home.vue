@@ -41,16 +41,22 @@
               <div class="xl:text-xl text-gray-500 mt-5">
                 Compra lo que deseas en los locales disponibles
               </div>
+              <SearchInput v-model="search" class="mt-4" />
             </div>
             <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
-              <div class="flex flex-wrap justify-center w-full h-full mx-auto">
+              <div class="flex flex-wrap justify-center w-full h-full mx-auto"
+                v-if="filteredLocals.length"
+              >
                 <div
-                  v-for="local in verifiedLocals"
+                  v-for="local in filteredLocals"
                   class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"
                   :key="local.id"
                 >
                   <Local :local="local" />
                 </div>
+              </div>
+              <div v-else>
+                <img class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12" src="@/_shared/assets/empty.svg" alt="" />
               </div>
             </div>
           </template>
@@ -84,17 +90,30 @@ import { mapActions, mapGetters } from 'vuex'
 import Local from '@/home/components/Local'
 import ComingSoonLocal from '@/home/components/ComingSoonLocal'
 import Footer from '@/_shared/layout/Footer'
+import SearchInput from '@/_shared/inputs/SearchInput'
 
 export default {
   name: 'Home',
 
-  components: { Local, Footer, ComingSoonLocal },
+  components: { Local, Footer, ComingSoonLocal, SearchInput },
+
+  data () {
+    return {
+      search: ''
+    }
+  },
 
   created () {
     this.getLocals()
   },
   computed: {
-    ...mapGetters('local', ['verifiedLocals', 'unverifiedLocals'])
+    ...mapGetters('local', ['verifiedLocals', 'unverifiedLocals']),
+
+    filteredLocals () {
+      return this.verifiedLocals.filter(local => {
+        return local.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   methods: {
     ...mapActions('local', ['getLocals'])

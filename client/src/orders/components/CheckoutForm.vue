@@ -38,20 +38,12 @@
         label="Número de casa *"
       />
     </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+    <div class="col-span-2 mt-2 pr-1">
       <material-input
         required
         type="text"
         v-model="orderInfo.reference"
         label="Referencia *"
-      />
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <Dropdown
-        required
-        :content="activeDeliveries"
-        label="Delivery *"
-        v-model="orderInfo.DeliveryAccountId"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
@@ -98,14 +90,13 @@ import { currency } from '@/_helpers'
 import { mask } from 'vue-the-mask'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
-import Dropdown from '@/_shared/Dropdown'
 
 export default {
   name: 'CheckoutForm',
 
   directives: { mask },
 
-  components: { MaterialInput, Dropdown },
+  components: { MaterialInput },
 
   props: {
     localId: { type: Number, required: true }
@@ -132,17 +123,17 @@ export default {
 
   created () {
     this.orderInfo.cartItems = this.cartItems
+    this.orderInfo.DeliveryAccountId = this.deliverySelectedId
     this.getDeliveries()
   },
 
   methods: {
     ...mapActions('delivery', ['getDeliveries']),
     submitForm () {
-      // if (this.isEmpty(this.orderInfo)) {
-      //   this.$swal('Debe de llenar todos los campos', '', 'warning')
-      //   return
-      // }
-
+      if (!this.deliverySelectedId) {
+        this.$swal('No hay deliveries', 'No hay delivery activo para recoger tu orden. Inténtelo más tarde', 'warning')
+        return
+      }
       this.$swal({
         title: '¿Estás seguro de enviar el pedido?',
         text: 'No podrás revertir esta acción',
@@ -171,7 +162,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters('delivery', ['activeDeliveries']),
+    ...mapGetters('delivery', ['activeDelivery']),
+    deliverySelectedId () {
+      return this.activeDelivery ? this.activeDelivery.accountId : 0
+    },
     cartTotal () {
       return currency(this.$store.getters['cart/cartTotal'])
     },

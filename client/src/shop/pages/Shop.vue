@@ -105,7 +105,7 @@ export default {
     ...mapState('local', ['status']),
 
     sectionTitle () {
-      return this.currentLocal.Products.length ? 'Productos 🍔' : '¡No hay productos! 😬'
+      return this.currentLocal.Products.length ? 'Productos 🍔' : 'No hay productos 😬'
     },
 
     cartItems () {
