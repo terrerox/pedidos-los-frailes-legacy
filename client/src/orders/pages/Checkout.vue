@@ -4,17 +4,18 @@
     <section class="main">
       <div class="flex flex-col-reverse lg:flex-row">
         <div class="leading-loose m-5 flex-grow px-2 md:px-16 lg:px-16">
-          <CheckoutForm :localId="currentLocalId" />
+          <CheckoutForm />
         </div>
         <Cart
           :onCheckout="true"
-          :localId="currentLocalId"
         />
       </div>
     </section>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
+
 import Header from '@/_shared/layout/Header'
 
 import Cart from '@/_shared/cart/Cart'
@@ -25,10 +26,13 @@ export default {
 
   components: { Cart, CheckoutForm, Header },
 
-  data () {
-    return {
-      currentLocalId: Number(this.$route.params.id)
-    }
+  created () {
+    const id = Number(this.$route.params.id)
+    this.getLocal(id)
+  },
+
+  methods: {
+    ...mapActions('local', ['getLocal'])
   }
 }
 </script>

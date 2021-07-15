@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="w-full lg:w-4/12 lg:mr-3">
-            <Cart :localId="localId" />
+            <Cart />
           </div>
         </div>
         <img class="w-full" src="@/_shared/assets/invertedWave.svg" alt="" />

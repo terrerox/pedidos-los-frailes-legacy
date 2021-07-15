@@ -9,7 +9,7 @@
             >
               <div class="hero-text col-span-6">
                 <h1
-                  class="text-lg md:text-2xl xl:text-4xl max-w-xl text-gray-600 leading-tight"
+                  class="text-lg md:text-3xl xl:text-4xl max-w-xl text-gray-600 leading-tight"
                 >
                   Bienvenidos a Pedidos <br /><span class="text-color-primary"
                     >Los Frailes</span>
@@ -111,7 +111,7 @@ export default {
 
     filteredLocals () {
       return this.verifiedLocals.filter(local => {
-        return local.title.toLowerCase().includes(this.search.toLowerCase())
+        return local.title.toLowerCase().trim().includes(this.search.toLowerCase().trim())
       })
     }
   },

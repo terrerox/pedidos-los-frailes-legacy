@@ -38,7 +38,7 @@
         label="Número de casa *"
       />
     </div>
-    <div class="col-span-2 mt-2 pr-1">
+    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
       <material-input
         required
         type="text"
@@ -53,7 +53,7 @@
         label="Edificio/Apto/Extensión"
       />
     </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
+    <div class="col-span-2 mt-2 pr-1">
       <material-input
         type="text"
         v-model="orderInfo.additionalNotes"
@@ -98,10 +98,6 @@ export default {
 
   components: { MaterialInput },
 
-  props: {
-    localId: { type: Number, required: true }
-  },
-
   data () {
     return {
       orderInfo: {
@@ -114,7 +110,7 @@ export default {
         additionalNotes: '',
         status: 'active',
         paymentMethod: 'Efectivo',
-        LocalAccountId: this.localId,
+        LocalAccountId: Number(this.$route.params.id),
         DeliveryAccountId: 0,
         cartItems: []
       }
@@ -123,13 +119,13 @@ export default {
 
   created () {
     this.orderInfo.cartItems = this.cartItems
-    this.orderInfo.DeliveryAccountId = this.deliverySelectedId
     this.getDeliveries()
   },
 
   methods: {
     ...mapActions('delivery', ['getDeliveries']),
     submitForm () {
+      this.orderInfo.DeliveryAccountId = this.deliverySelectedId
       if (!this.deliverySelectedId) {
         this.$swal('No hay deliveries', 'No hay delivery activo para recoger tu orden. Inténtelo más tarde', 'warning')
         return

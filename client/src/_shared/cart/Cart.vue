@@ -69,9 +69,6 @@ export default {
     // If it is true will be disabled some functions of cart for review in checkout view
     onCheckout: {
       type: Boolean
-    },
-    localId: {
-      type: Number
     }
   },
 
@@ -84,7 +81,10 @@ export default {
     }),
     cartItems () {
       return this.$store.getters['cart/productsOnCart'].filter(
-        item => item.product.LocalAccountId === this.localId
+        item => {
+          const localId = Number(this.$route.params.id)
+          return item.product.LocalAccountId === localId
+        }
       )
     },
     cartTotal () {
