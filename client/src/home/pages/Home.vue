@@ -1,21 +1,23 @@
 <template>
+<div class="background-canvas">
   <div class="flex" v-cloak id="dribbleShot">
     <div class="main">
       <div class="px-7 md:px-16 lg:px-16">
-        <div class="hero bg-white py-7 lg:py-24">
+        <div class="py-7 lg:py-24"
+        >
           <div class="container px-4 sm:px-8 lg:px-16 xl:px-20 mx-auto">
             <div
               class="hero-wrapper grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
             >
               <div class="hero-text col-span-6">
                 <h1
-                  class="text-lg md:text-3xl xl:text-4xl max-w-xl text-gray-600 leading-tight"
+                  class="text-2xl md:text-3xl xl:text-4xl max-w-xl text-gray-600 leading-tight"
                 >
                   Bienvenidos a Pedidos <br /><span class="text-color-primary"
                     >Los Frailes</span>
                 </h1>
                 <hr class="w-12 h-1 color-primary rounded-full mt-8" />
-                <p class="text-gray-800 text-base xl:text-xl leading-relaxed mt-8">
+                <p class="text-gray-500 text-base xl:text-xl leading-relaxed mt-8">
                   Una plataforma de pedidos en linea y delivery exclusivamente
                   para Los Frailes
                 </p>
@@ -83,6 +85,7 @@
     </div>
   </div>
   <Footer />
+  </div>
 </template>
 
 <script>
@@ -120,3 +123,13 @@ export default {
   }
 }
 </script>
+<style scoped>
+.background-canvas {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url('../../_shared/assets/foodCanvas.svg');
+  background-position: center;
+  position: relative;
+
+}
+</style>
