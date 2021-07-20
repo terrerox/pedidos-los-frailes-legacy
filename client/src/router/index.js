@@ -1,115 +1,13 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
-import Login from '@/account/pages/Login'
-import DeliveryRegister from '@/account/pages/DeliveryRegister'
-import LocalRegister from '@/account/pages/LocalRegister'
-import Shop from '@/shop/pages/Shop'
-import Home from '@/home/pages/Home'
-import Checkout from '@/orders/pages/Checkout'
-import Local from '@/locals/pages/Local'
-import LocalInfo from '@/locals/pages/LocalInfo'
-import Order from '@/locals/pages/Order'
-import Delivery from '@/delivery/pages/Delivery'
-import DeliveryInfo from '@/delivery/pages/DeliveryInfo'
-import Admin from '@/admin/pages/Admin'
+import { customerViewRoutes } from './customerViewRoutes'
+import { cmsRoutes } from './cmsRoutes'
+import { authRoutes } from './authRoutes'
 
 const routes = [
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-    meta: {
-      title: 'Login'
-    }
-  },
-  {
-    path: '/delivery-register',
-    name: 'DeliveryRegister',
-    component: DeliveryRegister,
-    meta: {
-      title: 'Registrar delivery'
-    }
-  },
-  {
-    path: '/local-register',
-    name: 'LocalRegister',
-    component: LocalRegister,
-    meta: {
-      title: 'Registrar local'
-    }
-  },
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: {
-      title: 'Pedidos Los Frailes'
-    }
-  },
-  {
-    path: '/shop/:id',
-    name: 'Shop',
-    component: Shop,
-    meta: {
-      title: 'Tienda'
-    }
-  },
-  {
-    path: '/shop/:id/checkout',
-    name: 'Checkout',
-    component: Checkout,
-    meta: {
-      title: 'Checkout'
-    }
-  },
-  {
-    path: '/local/:id',
-    name: 'Local',
-    component: Local,
-    meta: {
-      title: 'Local Dashboard'
-    }
-  },
-  {
-    path: '/local-info',
-    name: 'LocalInfo',
-    component: LocalInfo,
-    meta: {
-      title: 'Información del local'
-    }
-  },
-  {
-    path: '/local/:id/order/:orderId',
-    name: 'Order',
-    component: Order,
-    meta: {
-      title: 'Información de orden'
-    }
-  },
-  {
-    path: '/delivery/:id',
-    name: 'Delivery',
-    component: Delivery,
-    meta: {
-      title: 'Delivery Dashboard'
-    }
-  },
-  {
-    path: '/delivery-info',
-    name: 'DeliveryInfo',
-    component: DeliveryInfo,
-    meta: {
-      title: 'Información del delivery'
-    }
-  },
-  {
-    path: '/admin/:id',
-    name: 'Admin',
-    component: Admin,
-    meta: {
-      title: 'Admin Dashboard'
-    }
-  },
+  ...customerViewRoutes,
+  ...cmsRoutes,
+  ...authRoutes,
   {
     path: '/:pathMatch(.*)',
     redirect: '/'

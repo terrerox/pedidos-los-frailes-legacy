@@ -12,8 +12,11 @@
   .color-secondary {
     background-color: #eff2fb;
   }
-  .btn-hover {
+  .btn-hover:hover {
     background-color: #ec1f28;
     @apply hover:shadow-xl;
+  }
+  .sidebar-btn:hover {
+    background-color: #eff2fb;
   }
 }

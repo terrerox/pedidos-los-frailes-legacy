@@ -1,129 +1,107 @@
 <template>
-  <div v-cloak id="dribbleShot">
-    <OwnerHeader @openModal="showOwnerModal" />
-    <section class="main">
-      <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
-      <EditProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
-      <HeroSection :heroData="loggedLocal.Local" />
-      <img class="w-full" src="@/_shared/assets/wave.svg" alt="" />
-      <div class="flex flex-col-reverse lg:flex-row color-secondary">
-        <div class="lg:mt-0 mt-5 flex-grow px-7 md:px-16 lg:px-16">
-            <div class="mt-12 flex items-center">
-              <button
-                @click="showModal"
-                class="inline-block p-3 text-center text-white transition color-primary rounded-full shadow ripple btn-hover focus:outline-none mr-4"
-              >
-                <svg
-                  viewBox="0 0 20 20"
-                  enable-background="new 0 0 20 20"
-                  class="w-6 h-6"
-                >
-                  <path
-                    fill="#ffff"
-                    d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
-            C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
-            C15.952,9,16,9.447,16,10z"
-                  />
-                </svg>
-              </button>
-              <div class="text-center text-2xl text-gray-600 leading-tight">
-                {{ sectionTitle }}
-              </div>
-            </div>
-            <div class="flex mx-auto lg:max-w-3xl xl:max-w-5xl">
-              <div
-                class="flex flex-wrap justify-center w-full h-full mx-auto"
-                v-if="loggedProducts.length"
-              >
-                <div
-                  class="w-full py-10 px-5 md:w-1/2 xl:w-1/2"
-                  v-for="product in loggedProducts"
-                  :key="product.id"
-                >
-                  <ProductOwner :product="product" @openModal="showModal" />
+<div>
+    <div>
+        <div class="flex h-screen bg-gray-100 dark:bg-gray-800 font-roboto">
+            <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
+                class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+
+            <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
+                class="fixed z-30 inset-y-0 left-0 w-60 transition duration-300 transform bg-white dark:bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
+                <div class="flex items-center justify-center mt-8">
+                    <div class="flex items-center">
+                        <span class="text-gray-800 text-2xl">Pedidos<span class="text-color-primary"
+                    > Los Frailes</span></span>
+                    </div>
                 </div>
-              </div>
-              <div v-else>
-                <img class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12" src="@/_shared/assets/empty.svg" alt="" />
-              </div>
+
+                <nav
+                    class="flex flex-col mt-10 px-4 text-center"
+                >
+                    <router-link
+                        v-for="item in items" :key="item"
+                        :to="{ name: item.name }"
+                        class="mt-3 py-2 text-sm text-gray-600 hover:text-gray-700  sidebar-btn rounded"
+                    >
+                        {{ item.title }}
+                    </router-link>
+                </nav>
             </div>
-      </div>
-        <div class="w-full lg:w-4/12 lg:mr-3">
-          <CardHolder />
+
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <header class="flex justify-between items-center p-6">
+                    <div class="flex items-center space-x-4 lg:space-x-0">
+                        <button @click="sidebarOpen = true"
+                            class="text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <div>
+                            <h1 class="text-2xl font-medium text-gray-800 dark:text-white">Overview</h1>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button class="flex text-gray-600 dark:text-gray-300 focus:outline-none">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <div class="relative">
+                            <button @click="dropdownOpen = ! dropdownOpen"
+                                class="flex items-center space-x-2 relative focus:outline-none">
+                                <h2 class="text-gray-700 dark:text-gray-300 text-sm hidden sm:block">Jones Ferdinand</h2>
+                                <img class="h-9 w-9 rounded-full border-2 border-purple-500 object-cover"
+                                    src="https://images.unsplash.com/photo-1553267751-1c148a7280a1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                                    alt="Your avatar">
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10"
+                                v-show="dropdownOpen"
+                              >
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white">Perfil</a>
+                                <a href="/login"
+                                    class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="flex-1 overflow-x-hidden overflow-y-auto">
+                    <div class="container mx-auto px-6 py-8">
+                        <router-view />
+                    </div>
+                </main>
+            </div>
         </div>
-      </div>
-      <img class="w-full" src="@/_shared/assets/invertedWave.svg" alt="" />
-    </section>
-  </div>
-  <Footer />
+    </div>
+</div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
-import plus from '@/_shared/assets/plus.png'
-
-import ProductOwner from '@/locals/components/ProductOwner'
-import CardHolder from '@/locals/components/CardHolder'
-
-import HeroSection from '@/locals/components/HeroSection'
-import OwnerHeader from '@/_shared/layout/OwnerHeader'
-import ProductModal from '@/_shared/modals/ProductModal'
-import EditProfileModal from '@/locals/components/EditProfileModal'
-import Footer from '@/_shared/layout/Footer'
-
 export default {
-  name: 'Shop',
-
-  components: {
-    ProductOwner,
-    CardHolder,
-    HeroSection,
-    OwnerHeader,
-    ProductModal,
-    EditProfileModal,
-    Footer
-  },
+  name: 'Local',
 
   data () {
     return {
-      plus: plus,
-      isModalVisible: false,
-      isOwnerModalVisible: false,
-      isEditingId: 0
-    }
-  },
-
-  created () {
-    this.getLoggedLocal()
-    this.getLoggedProducts()
-  },
-
-  methods: {
-    ...mapActions('local', ['getLoggedLocal']),
-    ...mapActions('product', ['getLoggedProducts']),
-
-    showOwnerModal () {
-      this.isOwnerModalVisible = true
-    },
-    closeOwnerModal () {
-      this.isOwnerModalVisible = false
-    },
-    showModal (isEditingId) {
-      this.isModalVisible = true
-      this.isEditingId = Number(isEditingId)
-    },
-    closeModal () {
-      this.isModalVisible = false
-    }
-  },
-
-  computed: {
-    ...mapGetters('local', ['loggedLocal']),
-    ...mapGetters('product', ['loggedProducts']),
-    sectionTitle () {
-      return this.loggedProducts.length ? 'Productos 🍔' : '¡No hay productos! 😬'
+      sidebarOpen: false,
+      dropdownOpen: false,
+      items: [
+        { title: 'Productos', name: 'LocalProduct' },
+        { title: 'Ordenes', name: 'LocalOrder' }
+      ]
     }
   }
 }
 </script>
+
+<style scoped>
+.router-link-active {
+    background-color: #eff2fb;
+}
+</style>
