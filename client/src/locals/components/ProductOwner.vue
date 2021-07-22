@@ -22,7 +22,7 @@
     <div style="top: -20px;" class="absolute right-0 w-7">
       <button
         @click="this.$emit('openModal', product.id)"
-        class="inline-block p-3 text-center text-white transition bg-green-700 rounded-full shadow ripple btn-hover focus:outline-none"
+        class="inline-block p-3 text-center text-white transition bg-green-700 rounded-full shadow ripple hover:bg-green-800 focus:outline-none"
       >
         <svg
           class="w-6 h-6"

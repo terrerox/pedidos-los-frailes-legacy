@@ -57,8 +57,8 @@
                   <Local :local="local" />
                 </div>
               </div>
-              <div v-else>
-                <img class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12" src="@/_shared/assets/empty.svg" alt="" />
+              <div class="w-full lg:w-1/3 m-auto" v-else>
+                <img class="mt-6 lg:mt-12" src="@/_shared/assets/empty.svg" alt="" />
               </div>
             </div>
           </template>

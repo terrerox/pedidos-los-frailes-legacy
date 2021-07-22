@@ -39,7 +39,7 @@
                         </button>
 
                         <div>
-                            <h1 class="text-2xl font-medium text-gray-800 dark:text-white">Overview</h1>
+                            <h1 class="text-2xl font-medium text-gray-800 dark:text-white">{{ title }}</h1>
                         </div>
                     </div>
 
@@ -63,10 +63,13 @@
                             <div class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10"
                                 v-show="dropdownOpen"
                               >
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white">Perfil</a>
-                                <a href="/login"
-                                    class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white">Cerrar sesión</a>
+                                <router-link
+                                    v-for="item in dropdownItems" :key="item"
+                                    :to="{ name: item.name }"
+                                    class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white"
+                                >
+                                    {{ item.title }}
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -94,7 +97,17 @@ export default {
       items: [
         { title: 'Productos', name: 'LocalProduct' },
         { title: 'Ordenes', name: 'LocalOrder' }
+      ],
+      dropdownItems: [
+        { title: 'Editar Perfil', name: 'LocalProfile' },
+        { title: 'Cerrar sesión', name: 'LocalProfile' }
       ]
+    }
+  },
+
+  computed: {
+    title () {
+      return this.$route.meta.title
     }
   }
 }

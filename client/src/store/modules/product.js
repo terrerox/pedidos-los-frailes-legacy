@@ -47,10 +47,12 @@ const mutations = {
 }
 
 const actions = {
-  getLoggedProducts (context, id) {
+  getLoggedProducts ({ commit }, id) {
+    commit('productRequest')
     return productService.getLoggedProducts()
       .then(products => {
-        context.commit('setProducts', products)
+        commit('setProducts', products)
+        commit('productFinishedRequest')
       })
   },
   addProduct ({ commit, dispatch }, product) {

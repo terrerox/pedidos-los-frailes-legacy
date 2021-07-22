@@ -51,7 +51,7 @@ const actions = {
             localService.getLogged().then(res => {
               res.notFound
                 ? router.push('/local-info')
-                : router.push(`/local/${user.id}`)
+                : router.push(`/local/${user.id}/productos`)
             })
           } else if (user.role === 'Delivery') {
             deliveryService.getLogged().then(res => {

@@ -10,12 +10,26 @@ export const cmsRoutes = [
       {
         path: 'productos',
         name: 'LocalProduct',
-        component: () => import('@/locals/components/LocalProduct')
+        component: () => import('@/locals/components/LocalProduct'),
+        meta: {
+          title: 'Productos'
+        }
       },
       {
         path: 'ordenes',
         name: 'LocalOrder',
-        component: () => import('@/locals/components/LocalProduct')
+        component: () => import('@/locals/components/LocalOrder'),
+        meta: {
+          title: 'Ordenes'
+        }
+      },
+      {
+        path: 'perfil',
+        name: 'LocalProfile',
+        component: () => import('@/locals/components/LocalEditProfile'),
+        meta: {
+          title: 'Editar Perfil'
+        }
       }
     ]
   },

@@ -5,7 +5,7 @@
       <ProductModal v-if="isModalVisible" @close="closeModal" :isEditingId="isEditingId"/>
       <EditProfileModal v-show="isOwnerModalVisible" @close="closeOwnerModal"/>
       <HeroSection :heroData="loggedLocal.Local" />
-      <img class="w-full" src="@/_shared/assets/wave.svg" alt="" />
+      <img class="w-full" src="@/_shared/assets/wave.svg" alt="" />s
       <div class="flex flex-col-reverse lg:flex-row color-secondary">
         <div class="lg:mt-0 mt-5 flex-grow px-7 md:px-16 lg:px-16">
             <div class="mt-12 flex items-center">

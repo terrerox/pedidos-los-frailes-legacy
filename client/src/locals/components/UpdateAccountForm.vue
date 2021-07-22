@@ -1,7 +1,7 @@
 <template>
     <form class="grid grid-cols-2 gap-2" ref="accountForm">
         <div class="col-span-2">
-          <material-input type="text" label="Usuario" v-model="account.userName" />
+          <material-input type="text" label="Usuario" v-model="userName" />
         </div>
         <div class="col-span-2 lg:col-span-1">
           <material-input type="password" label="Contraseña" v-model="account.password" />
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 import MaterialInput from '@/_shared/inputs/MaterialInput'
 
@@ -21,6 +21,10 @@ export default {
   name: 'UpdateAccountForm',
 
   components: { MaterialInput },
+
+  props: {
+    loggedLocal: { type: Object, required: true }
+  },
 
   data () {
     return {
@@ -33,11 +37,14 @@ export default {
   },
 
   computed: {
-    ...mapState('local', ['loggedLocal'])
-  },
-
-  created () {
-    this.setAccountInfo()
+    userName: {
+      get () {
+        return this.loggedLocal.userName
+      },
+      set (value) {
+        this.account.userName = value
+      }
+    }
   },
 
   methods: {
@@ -59,11 +66,6 @@ export default {
 
     isEmpty (obj) {
       return !Object.values(obj).every(element => element !== '')
-    },
-
-    setAccountInfo () {
-      const { account, loggedLocal } = this
-      account.userName = loggedLocal.userName
     }
   }
 }
