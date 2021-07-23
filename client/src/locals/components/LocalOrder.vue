@@ -1,142 +1,108 @@
 <template>
-<ul>
-  <li>
-    <a href="#">
-      <h2>Title #1</h2>
-      <p>Text Content #1</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #2</h2>
-      <p>Text Content #2</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #3</h2>
-      <p>Text Content #3</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #4</h2>
-      <p>Text Content #4</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #5</h2>
-      <p>Text Content #5</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #6</h2>
-      <p>Text Content #6</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #7</h2>
-      <p>Text Content #7</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #8</h2>
-      <p>Text Content #8</p>
-    </a>
-  </li>
-  <li>
-    <a href="#">
-      <h2>Title #8</h2>
-      <p>Text Content #8</p>
-    </a>
-  </li>
-    <li>
-    <a href="#">
-      <h2>Title #8</h2>
-      <p>Text Content #8</p>
-    </a>
-  </li>
-</ul>
+  <div class="container">
+    <div class="notes">
+      <div
+        v-for="order in orders"
+        :key="order"
+        class="note cursor-pointer"
+        :style="'margin:'+margin()+ '; transform:'+ rotate() +'; background:'+color()+''"
+      >
+        <div class="details">
+          <div class="title text-lg">
+            {{ order.name }}
+          </div>
+          <div class="title  text-lg">
+            {{ order.phoneNumber }}
+          </div>
+          <div class="title  text-lg">
+            {{ order.street }}
+          </div>
+          <div class="title  text-lg">
+            {{ order.additionalNotes }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+let i = 0
 export default {
-  name: 'LocalOrder'
+  name: 'LocalOrder',
+
+  created () {
+    this.getOrders()
+  },
+
+  computed: {
+    ...mapGetters('order', ['orders'])
+  },
+
+  methods: {
+    ...mapActions('order', ['getOrders']),
+
+    margin () {
+      const randomMargin = ['-5px', '1px', '5px', '10px', '15px', '20px']
+      return randomMargin[Math.floor(Math.random() * randomMargin.length)]
+    },
+
+    rotate () {
+      const randomDegree = ['rotate(3deg)', 'rotate(1deg)', 'rotate(-1deg)', 'rotate(-3deg)', 'rotate(-5deg)', 'rotate(-10deg)']
+      return randomDegree[Math.floor(Math.random() * randomDegree.length)]
+    },
+
+    color () {
+      const randomColors = ['#c2ff3d', '#ff3de8', '#3dc2ff', '#04e022', '#bc83e6', '#ebb328']
+      if (i > randomColors.length - 1) {
+        i = 0
+      }
+      return randomColors[i++]
+    }
+  }
 }
 </script>
 
 <style scoped>
-body {
-  margin: 20px auto;
-  font-family: 'Lato';
-  background:#666;
-  color:#fff;
-}
-
-*{
-  margin:0;
-  padding:0;
-}
-
-h2 {
-  font-weight: bold;
-  font-size: 2rem;
-}
-p {
-  font-family: 'Reenie Beanie';
-  font-size: 2rem;
-}
-ul,li{
-  list-style:none;
-}
-ul{
+.notes{
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-}
-ul li a{
-  text-decoration:none;
-  color:#000;
-  background:#ffc;
-  display:block;
-  height:10em;
-  width:10em;
-  padding:1em;
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  transform: rotate(-6deg);
-  transition: transform .15s linear;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
-ul li:nth-child(even) a{
-  transform:rotate(4deg);
-  position:relative;
-  top:5px;
-  background:#cfc;
-}
-ul li:nth-child(3n) a{
-  transform:rotate(-3deg);
-  position:relative;
-  top:-5px;
-  background:#ccf;
-}
-ul li:nth-child(5n) a{
-  transform:rotate(5deg);
-  position:relative;
-  top:-10px;
+.note{
+  width:300px;
+  height:305px;
+  transition: 2s;
+  box-shadow: 0px 10px 24px 0px rgba(0, 0, 0, 0.507);
 }
 
-ul li a:hover,ul li a:focus{
-  box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  transform: scale(1.25);
-  position:relative;
-  z-index:5;
+.note:hover {
+  transform: scale(1.1);
 }
 
-ul li{
-  margin:1em;
+.note h1{
+  font-size: 1.5rem;
 }
+
+.details {
+  margin-top: 25px;
+  padding: 0 15px;
+  font-size: 1.5rem;
+}
+
+.details i{
+  color: whitesmoke;
+  cursor: pointer;
+  text-shadow: 1px 1px #BBB;
+}
+
+@media(max-width:1280px){
+  .container{
+    width: 95%;
+  }
+}
+
 </style>
