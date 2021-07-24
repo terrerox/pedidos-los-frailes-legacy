@@ -34,14 +34,6 @@ export const cmsRoutes = [
     ]
   },
   {
-    path: '/local/:id/order/:orderId',
-    name: 'Order',
-    component: () => import('@/locals/pages/Order'),
-    meta: {
-      title: 'Información de orden'
-    }
-  },
-  {
     path: '/delivery/:id',
     name: 'Delivery',
     component: () => import('@/delivery/pages/Delivery'),

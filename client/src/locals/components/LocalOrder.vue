@@ -1,12 +1,10 @@
 <template>
-  <OrderDetails :details="orderDetails" @close="closeDetails" v-if="isDetailsVisible" />
   <div class="container">
     <div class="notes">
       <div
         v-for="order in orders"
         :key="order"
         @click="showDetails(order)"
-        ref="klk"
         class="note cursor-pointer"
         :class="'transform ' + rotate()"
         :style="'margin:'+margin()+ '; background:'+color()+''"
@@ -24,12 +22,13 @@
             <div class="title text-lg">
               {{ order.additionalNotes }}
             </div>
-            <div v-if="order.status === 'confirmed'">
-              <h2 class="font-bold">Delivery encargado</h2>
+            <div class="title text-lg" v-if="order.status === 'confirmed'">
+              <strong>Orden confirmada</strong><br>
+              Delivery -> {{ order.Delivery.name}} {{ order.Delivery.lastName}}
 
             </div>
-            <div v-if="order.status === 'confirmed'">
-              <h2 class="font-bold">Número de teléfono del Delivery</h2>
+            <div class="title text-base" v-if="order.status === 'confirmed'">
+              # del Delivery -> {{ order.Delivery.phoneNumber}}
             </div>
             <div class="title text-lg">
                 <OrderCartItem
@@ -38,7 +37,9 @@
                   :key="cartItem.product.id"
                 />
             </div>
-            <div class="float-right text-base">5000</div>
+            <div class="float-right text-base">
+              <strong>{{ cartTotal(order) }}</strong>
+            </div>
         </div>
       </div>
     </div>
@@ -47,7 +48,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import OrderDetails from '@/locals/components/OrderDetails'
 import OrderCartItem from '@/locals/components/OrderCartItem'
 
 import { currency } from '@/_helpers'
@@ -56,46 +56,26 @@ let i = 0
 export default {
   name: 'LocalOrder',
 
-  components: { OrderDetails, OrderCartItem },
-
-  data () {
-    return {
-      isDetailsVisible: false,
-      orderDetails: {}
-    }
-  },
+  components: { OrderCartItem },
 
   created () {
     this.getOrders()
   },
 
   computed: {
-    ...mapGetters('order', ['orders']),
-
-    delivery () {
-      return this.orderDetails.Delivery ? this.orderDetails.Delivery : ''
-    },
-
-    cartTotal () {
-      return currency(
-        this.order.cartItems.reduce(
-          (total, current) => total + current.product.price * current.quantity,
-          0
-        )
-      )
-    }
+    ...mapGetters('order', ['orders'])
   },
 
   methods: {
     ...mapActions('order', ['getOrders']),
 
-    showDetails (order) {
-      this.orderDetails = order
-      this.isDetailsVisible = true
-    },
-
-    closeDetails () {
-      this.isDetailsVisible = false
+    cartTotal (order) {
+      return currency(
+        order.cartItems.reduce(
+          (total, current) => total + current.product.price * current.quantity,
+          0
+        )
+      )
     },
 
     margin () {
