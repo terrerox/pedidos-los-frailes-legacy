@@ -15,7 +15,10 @@ async function getAll() {
 }
 
 async function getLocalOrder(localId) {
-    return await db.Order.findAll({ where: { LocalAccountId: localId } });
+    return await db.Order.findAll({ 
+        where: { LocalAccountId: localId },
+        include: [db.Delivery] 
+    });
 }
 
 async function getDeliveryOrder(deliveryId) {
