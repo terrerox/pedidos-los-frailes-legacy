@@ -1,25 +1,44 @@
 <template>
+  <OrderDetails :details="orderDetails" @close="closeDetails" v-if="isDetailsVisible" />
   <div class="container">
     <div class="notes">
       <div
         v-for="order in orders"
         :key="order"
+        @click="showDetails(order)"
+        ref="klk"
         class="note cursor-pointer"
-        :style="'margin:'+margin()+ '; transform:'+ rotate() +'; background:'+color()+''"
+        :class="'transform ' + rotate()"
+        :style="'margin:'+margin()+ '; background:'+color()+''"
       >
         <div class="details">
           <div class="title text-lg">
-            {{ order.name }}
-          </div>
-          <div class="title  text-lg">
-            {{ order.phoneNumber }}
-          </div>
-          <div class="title  text-lg">
-            {{ order.street }}
-          </div>
-          <div class="title  text-lg">
-            {{ order.additionalNotes }}
-          </div>
+              {{ order.name }}
+            </div>
+            <div class="title text-lg">
+              {{ order.phoneNumber }}
+            </div>
+            <div class="title text-lg">
+              {{ order.paymentMethod }}
+            </div>
+            <div class="title text-lg">
+              {{ order.additionalNotes }}
+            </div>
+            <div v-if="order.status === 'confirmed'">
+              <h2 class="font-bold">Delivery encargado</h2>
+
+            </div>
+            <div v-if="order.status === 'confirmed'">
+              <h2 class="font-bold">Número de teléfono del Delivery</h2>
+            </div>
+            <div class="title text-lg">
+                <OrderCartItem
+                  v-for="cartItem in order.cartItems"
+                  :cartItem="cartItem"
+                  :key="cartItem.product.id"
+                />
+            </div>
+            <div class="float-right text-base">5000</div>
         </div>
       </div>
     </div>
@@ -28,20 +47,56 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import OrderDetails from '@/locals/components/OrderDetails'
+import OrderCartItem from '@/locals/components/OrderCartItem'
+
+import { currency } from '@/_helpers'
+
 let i = 0
 export default {
   name: 'LocalOrder',
+
+  components: { OrderDetails, OrderCartItem },
+
+  data () {
+    return {
+      isDetailsVisible: false,
+      orderDetails: {}
+    }
+  },
 
   created () {
     this.getOrders()
   },
 
   computed: {
-    ...mapGetters('order', ['orders'])
+    ...mapGetters('order', ['orders']),
+
+    delivery () {
+      return this.orderDetails.Delivery ? this.orderDetails.Delivery : ''
+    },
+
+    cartTotal () {
+      return currency(
+        this.order.cartItems.reduce(
+          (total, current) => total + current.product.price * current.quantity,
+          0
+        )
+      )
+    }
   },
 
   methods: {
     ...mapActions('order', ['getOrders']),
+
+    showDetails (order) {
+      this.orderDetails = order
+      this.isDetailsVisible = true
+    },
+
+    closeDetails () {
+      this.isDetailsVisible = false
+    },
 
     margin () {
       const randomMargin = ['-5px', '1px', '5px', '10px', '15px', '20px']
@@ -49,12 +104,12 @@ export default {
     },
 
     rotate () {
-      const randomDegree = ['rotate(3deg)', 'rotate(1deg)', 'rotate(-1deg)', 'rotate(-3deg)', 'rotate(-5deg)', 'rotate(-10deg)']
+      const randomDegree = ['rotate-3', 'rotate-1', '-rotate-1', '-rotate-3', '-rotate-6', '-rotate-12']
       return randomDegree[Math.floor(Math.random() * randomDegree.length)]
     },
 
     color () {
-      const randomColors = ['#c2ff3d', '#ff3de8', '#3dc2ff', '#04e022', '#bc83e6', '#ebb328']
+      const randomColors = ['#c2ff3d', '#3dc2ff', '#04e022', '#bc83e6', '#ebb328']
       if (i > randomColors.length - 1) {
         i = 0
       }
@@ -65,6 +120,7 @@ export default {
 </script>
 
 <style scoped>
+
 .notes{
   display: flex;
   justify-content: center;
@@ -75,16 +131,16 @@ export default {
 .note{
   width:300px;
   height:305px;
-  transition: 2s;
+  transition: all .2s ease-in-out;
   box-shadow: 0px 10px 24px 0px rgba(0, 0, 0, 0.507);
-}
-
-.note:hover {
-  transform: scale(1.1);
 }
 
 .note h1{
   font-size: 1.5rem;
+}
+
+.note:hover {
+  transform: scale(1);
 }
 
 .details {

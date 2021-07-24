@@ -80,7 +80,6 @@ export default {
   },
   created () {
     this.getLoggedProducts()
-    console.log(this.$route)
   },
 
   methods: {

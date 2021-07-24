@@ -1,92 +1,95 @@
 <template>
-  <div class="grid grid-cols-2 gap-2 bg-white rounded shadow-xl p-5">
-    <p class="col-span-2 text-gray-800 font-bold m-2">Detalles de orden <strong v-show="orderDetails.status === 'confirmed'">(Confirmada)</strong></p>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Nombre</h2>
-      {{ orderDetails.name }}
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Número de teléfono</h2>
-      {{ orderDetails.phoneNumber }}
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Calle</h2>
-      {{ orderDetails.street }}
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Número de casa</h2>
-      {{ orderDetails.numberOfHouse }}
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Referencia</h2>
-      {{ orderDetails.reference }}
-    </div>
-    <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Apartamento</h2>
-      {{ orderDetails.apartment }}
-    </div>
-    <div class="col-span-2 mt-2">
-      <h2 class="font-bold">Notas adicionales</h2>
-      {{ orderDetails.additionalNotes }}
-    </div>
-    <div class="col-span-2 mt-2">
-      <h2 class="font-bold">Productos pedidos</h2>
-        <OrderCartItem
-          class="text-white"
-          v-for="cartItem in orderDetails.cartItems"
-          :cartItem="cartItem"
-          :key="cartItem.product.id"
-        />
-    </div>
-    <div v-show="orderDetails.status === 'confirmed'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Delivery encargado</h2>
-      {{ delivery.name }}
-      {{ delivery.lastName }}
-    </div>
-    <div v-show="orderDetails.status === 'confirmed'" class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <h2 class="font-bold">Número de teléfono del Delivery</h2>
-      {{ delivery.phoneNumber }}
-    </div>
-    <div class="col-span-2 flex flex-col flex-wrap">
-      <p class="mt-4 text-gray-800 font-medium">Métodos de pago</p>
-      <button
-        class="flex items-center justify-between bg-white rounded-md border-2 border-blue-500 p-4 focus:outline-none"
+      <div
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex"
       >
-        <label class="flex items-center">
-          <input
-            type="radio"
-            class="form-radio h-5 w-5 text-blue-600"
-            checked
-          /><span class="ml-2 text-sm text-gray-700">🛵 Pago en entrega</span>
-        </label>
-      </button>
-    </div>
-  </div>
+        <div class="relative w-auto my-6 mx-auto max-w-3xl">
+          <!--content-->
+          <div
+            class="shadow-lg relative flex flex-col w-full notes outline-none focus:outline-none"
+            style="background: #ff3de8"
+          >
+            <!--header-->
+            <div
+              class="flex items-start justify-between rounded-t"
+            >
+              <button
+                class="p-1 ml-auto border-0 text-gray-800 float-right text-3xl font-semibold outline-none focus:outline-none"
+                @click="$emit('close')"
+              >
+                <span
+                  class="h-6 w-6 text-2xl block outline-none focus:outline-none"
+                >
+                  x
+                </span>
+              </button>
+            </div>
+            <!--body-->
+              <div
+                class="note"
+              >
+                <div class="details">
+                  <div class="title text-lg">
+                    {{ details.name }}
+                  </div>
+                  <div class="title text-lg">
+                    {{ details.phoneNumber }}
+                  </div>
+                  <div class="title text-lg">
+                    {{ details.paymentMethod }}
+                  </div>
+                  <div class="title text-lg">
+                    {{ details.additionalNotes }}
+                  </div>
+                  <div v-if="details.status === 'confirmed'">
+                    <h2 class="font-bold">Delivery encargado</h2>
+                    {{ details.delivery.name }}
+                    {{ details.delivery.lastName }}
+                  </div>
+                  <div v-if="details.status === 'confirmed'">
+                    <h2 class="font-bold">Número de teléfono del Delivery</h2>
+                    {{ details.delivery.phoneNumber }}
+                  </div>
+                  <div class="title text-lg">
+                      <OrderCartItem
+                        v-for="cartItem in details.cartItems"
+                        :cartItem="cartItem"
+                        :key="cartItem.product.id"
+                      />
+                  </div>
+                  <div class="float-right text-base">{{ cartTotal }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="opacity-25 fixed inset-0 z-40 bg-black"></div>
 </template>
 
 <script>
+import OrderCartItem from '@/locals/components/OrderCartItem'
 import { currency } from '@/_helpers'
-
-import OrderCartItem from '@/_shared/cart/OrderCartItem'
 
 export default {
   name: 'OrderDetails',
 
+  emits: ['close'],
+
   components: { OrderCartItem },
 
   props: {
-    orderDetails: {
-      type: Object
+    details: { type: Object, required: true }
+  },
+
+  methods: {
+    closeModal () {
+      this.$emit('close')
     }
   },
 
   computed: {
-    delivery () {
-      return this.orderDetails.Delivery ? this.orderDetails.Delivery : ''
-    },
     cartTotal () {
       return currency(
-        this.orderDetails.cartItems.reduce(
+        this.details.cartItems.reduce(
           (total, current) => total + current.product.price * current.quantity,
           0
         )
@@ -95,7 +98,33 @@ export default {
   }
 }
 </script>
+<style scoped>
+.notes{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
 
-<style>
+.note{
+  width:300px;
+  height:305px;
+  transition: all .2s ease-in-out;
+}
 
+.note h1{
+  font-size: 1.5rem;
+}
+
+.details {
+  margin-top: 25px;
+  padding: 0 15px;
+  font-size: 1.5rem;
+}
+
+.details i{
+  color: whitesmoke;
+  cursor: pointer;
+  text-shadow: 1px 1px #BBB;
+}
 </style>
