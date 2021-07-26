@@ -77,7 +77,7 @@ const actions = {
         commit('localFinishedRequest')
       })
   },
-  getLoggedLocal ({ commit }, id) {
+  getLoggedLocal ({ commit }) {
     commit('localRequest')
     return localService.getLogged()
       .then(res => {

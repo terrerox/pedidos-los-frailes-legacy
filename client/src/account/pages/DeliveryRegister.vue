@@ -26,7 +26,7 @@
       </div>
     </div>
     <div
-      class="hidden lg:flex items-center justify-center color-secondary flex-1 h-screen"
+      class="hidden lg:flex items-center justify-center color-secondary flex-1 h-auto"
     >
       <div
         class="max-w-xs transform duration-200 hover:scale-110 cursor-pointer"

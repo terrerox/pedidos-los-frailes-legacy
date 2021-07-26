@@ -166,7 +166,10 @@ export default {
       return currency(this.$store.getters['cart/cartTotal'])
     },
     cartItems () {
-      return this.$store.getters['cart/productsOnCart'].filter(item => item.product.LocalAccountId === this.localId)
+      return this.$store.getters['cart/productsOnCart'].filter(item => {
+        const localId = Number(this.$route.params.id)
+        return item.product.LocalAccountId === localId
+      })
     }
   }
 }

@@ -8,7 +8,7 @@
         v-model="userName"
       />
     </div>
-    <div class="mt-5">
+    <div class="mt-2">
       <div class="flex justify-between items-center">
         <div class="text-sm font-bold text-gray-700 tracking-wide">
         </div>
