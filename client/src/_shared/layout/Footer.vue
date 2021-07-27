@@ -1,7 +1,10 @@
 <template>
     <footer class="color-secondary mt-10 text-gray-600 leading-tight w-full py-6 px-4">
         <div class="flex items-center justify-between my-4">
-            <p class="">ㅤ</p>
+            <div class="text-xs">
+                &copy; {{ new Date().getFullYear() }} Alerta <span class="text-color-primary"
+            > Los Frailes</span>
+            </div>
             <p class="text-center mr-4">Para reportar problema contactar en <span class="text-color-primary">pedidoslosfrailes@gmail.com</span></p>
             <div class="flex items-center">
                 <a href="#">

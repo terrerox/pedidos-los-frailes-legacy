@@ -21,6 +21,16 @@
                   Una plataforma de pedidos en linea y delivery exclusivamente
                   para Los Frailes
                 </p>
+                <button @click="installPWA" class="bg-white shadow-md px-3 py-2 m-auto mt-6 rounded-lg flex items-center space-x-4">
+                      <div class="image">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <div class="text">
+                          <p class="text-xs font-semibold text-gray-900">Instalar app</p>
+                      </div>
+                  </button>
               </div>
 
               <!-- hero image -->
@@ -95,6 +105,17 @@ import ComingSoonLocal from '@/home/components/ComingSoonLocal'
 import Footer from '@/_shared/layout/Footer'
 import SearchInput from '@/_shared/inputs/SearchInput'
 
+let deferredPrompt
+
+window.addEventListener('beforeinstallprompt', function (e) {
+  e.preventDefault()
+
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e
+
+  return false
+})
+
 export default {
   name: 'Home',
 
@@ -119,7 +140,17 @@ export default {
     }
   },
   methods: {
-    ...mapActions('local', ['getLocals'])
+    ...mapActions('local', ['getLocals']),
+
+    async installPWA () {
+      if (deferredPrompt !== null) {
+        deferredPrompt.prompt()
+        const { outcome } = await deferredPrompt.userChoice
+        if (outcome === 'accepted') {
+          deferredPrompt = null
+        }
+      }
+    }
   }
 }
 </script>
