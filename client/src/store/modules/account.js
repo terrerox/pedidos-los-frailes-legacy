@@ -51,13 +51,13 @@ const actions = {
             localService.getLogged().then(res => {
               res.notFound
                 ? router.push('/local-info')
-                : router.push(`/local/${user.id}/productos`)
+                : router.push(`/local/${user.id}/products`)
             })
           } else if (user.role === 'Delivery') {
             deliveryService.getLogged().then(res => {
               res.notFound
                 ? router.push('/delivery-info')
-                : router.push(`/delivery/${user.id}`)
+                : router.push(`/delivery/${user.id}/orders`)
             })
           } else {
             router.push(`/admin/${user.id}`)

@@ -1,5 +1,5 @@
 <template>
-    <form class="grid grid-cols-2 gap-2" @submit.prevent="handleSubmit" ref="deliveryForm">
+    <form class="grid grid-cols-2 gap-2" @submit.prevent="submit" ref="deliveryForm">
         <div class="col-span-2 lg:col-span-1">
           <material-input
             type="text"
@@ -85,7 +85,7 @@ export default {
     ...mapActions('delivery', ['updateDelivery']),
     ...mapActions('alert', ['error']),
 
-    handleSubmit () {
+    submit () {
       const { delivery } = this
       if (this.isEmpty(delivery)) {
         this.error('Debe de llenar todos los campos')

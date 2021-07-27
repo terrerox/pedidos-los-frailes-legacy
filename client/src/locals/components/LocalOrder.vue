@@ -4,7 +4,6 @@
       <div
         v-for="order in orders"
         :key="order"
-        @click="showDetails(order)"
         class="note cursor-pointer"
         :class="'transform ' + rotate()"
         :style="'margin:'+margin()+ '; background:'+color()+''"
@@ -109,8 +108,6 @@ export default {
 }
 
 .note{
-  width:300px;
-  height:305px;
   transition: all .2s ease-in-out;
   box-shadow: 0px 10px 24px 0px rgba(0, 0, 0, 0.507);
 }
