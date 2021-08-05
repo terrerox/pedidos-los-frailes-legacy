@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="notes">
+    <div class="notes" v-if="orders.length">
       <div
         v-for="order in orders"
         :key="order"
@@ -41,6 +41,16 @@
             </div>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <div class="text-center text-2xl text-gray-600 leading-tight">
+        No hay ordenes
+      </div>
+      <img
+        class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
+        src="@/_shared/assets/empty.svg"
+        alt=""
+      />
     </div>
   </div>
 </template>

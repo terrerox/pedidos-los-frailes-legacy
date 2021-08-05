@@ -4,10 +4,10 @@ const accountService = {}
 accountService.login = (userName, password) => {
   return httpClient.post('/accounts/authenticate', { userName, password })
     .then(account => {
-      const { token } = account
+      const { token, role, id } = account
 
       if (token) {
-        localStorage.setItem('account', JSON.stringify(token))
+        localStorage.setItem('account', JSON.stringify({ id, token: token, role }))
       }
       return account
     })
