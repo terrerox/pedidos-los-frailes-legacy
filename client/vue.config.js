@@ -5,7 +5,6 @@ module.exports = {
     shortName: 'Pedidos Los Frailes',
     themeColor: '#ec1f28',
     msTileColor: '#eff2fb',
-    startUrl: './login',
     display: 'standalone',
     orientation: 'portrait-primary',
     appleMobileWebAppCapable: 'yes',
@@ -19,6 +18,7 @@ module.exports = {
       // ...other Workbox options...
     },
     manifestOptions: {
+      start_url: './login',
       background_color: '#eff2fb',
       icons: [
         {
