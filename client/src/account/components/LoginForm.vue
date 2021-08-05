@@ -60,12 +60,9 @@ export default {
   computed: {
     ...mapState('account', ['status'])
   },
-  created () {
-    // reset login status
-    this.logout()
-  },
+
   methods: {
-    ...mapActions('account', ['login', 'logout']),
+    ...mapActions('account', ['login']),
     ...mapActions('alert', ['success', 'error']),
 
     handleSubmit (e) {

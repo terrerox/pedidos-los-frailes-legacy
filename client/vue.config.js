@@ -5,6 +5,7 @@ module.exports = {
     shortName: 'Pedidos Los Frailes',
     themeColor: '#ec1f28',
     msTileColor: '#eff2fb',
+    startUrl: './login',
     display: 'standalone',
     orientation: 'portrait-primary',
     appleMobileWebAppCapable: 'yes',

@@ -1,3 +1,7 @@
+import localService from '@/locals/services/local'
+import deliveryService from '@/delivery/services/delivery'
+import router from '@/router'
+
 export const authRoutes = [
   {
     path: '/login',
@@ -5,6 +9,27 @@ export const authRoutes = [
     component: () => import('@/account/pages/Login'),
     meta: {
       title: 'Login'
+    },
+    beforeEnter: (to, from, next) => {
+      const account = JSON.parse(localStorage.getItem('account'))
+
+      if (!account) return next()
+
+      if (account.role === 'Local') {
+        localService.getLogged().then(res => {
+          res.notFound
+            ? router.push('/local-info')
+            : router.push(`/local/${account.id}/products`)
+        })
+      } else if (account.role === 'Delivery') {
+        deliveryService.getLogged().then(res => {
+          res.notFound
+            ? router.push('/delivery-info')
+            : router.push(`/delivery/${account.id}/orders`)
+        })
+      } else {
+        router.push(`/admin/${account.id}`)
+      }
     }
   },
   {
