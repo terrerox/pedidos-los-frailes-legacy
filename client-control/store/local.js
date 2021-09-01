@@ -122,10 +122,10 @@ export const actions = {
 
 export const getters = {
   verifiedLocals (state) {
-    return state.locals.filter(local => local.status === 'active')
+    return state.locals
   },
   unverifiedLocals (state) {
-    return state.locals.filter(local => local.status === 'inactive')
+    return state.locals
   },
   currentLocal (state) {
     return state.currentLocal
