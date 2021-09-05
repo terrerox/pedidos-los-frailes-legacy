@@ -1,30 +1,36 @@
 import { httpClient } from './httpClient'
 
-const localService = {}
+const accountService = {}
 
-localService.create = (local) => {
-  return httpClient.post('/locals/create', local)
+accountService.login = (userName, password) => {
+  return httpClient.post('/accounts/authenticate', { userName, password })
+    .then((account) => {
+      const { token, role, id } = account
+
+      if (token) {
+        localStorage.setItem('account', JSON.stringify({ id, token, role }))
+      }
+      return account
+    })
+}
+
+accountService.register = ({ userName, password, role }) => {
+  return httpClient.post('/accounts/register', { userName, password, role })
+    .then(account => account)
+}
+
+accountService.getLogged = () => {
+  return httpClient.get('/accounts/logged')
+    .then(account => account)
+}
+
+accountService.logout = () => {
+  localStorage.removeItem('account')
+}
+
+accountService.update = (account) => {
+  return httpClient.put('/accounts/', account)
     .then(res => res)
 }
 
-localService.getAll = () => {
-  return httpClient.get('/locals')
-    .then(res => res)
-}
-
-localService.getById = (id) => {
-  return httpClient.get(`/locals/${id}`)
-    .then(res => res)
-}
-
-localService.getLogged = () => {
-  return httpClient.get('/locals/logged')
-    .then(res => res)
-}
-
-localService.update = (local) => {
-  return httpClient.put('/locals/', local)
-    .then(res => res)
-}
-
-export default localService
+export default accountService

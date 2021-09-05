@@ -1,6 +1,6 @@
 <template>
   <div
-    class="py-12 bg-white justify-start px-12 flex md:justify-center md:color-secondary"
+    class="py-12 xl:bg-white lg:bg-white 2xl:justify-start px-12 flex justify-center"
   >
     <div
       class="cursor-pointer flex items-center"

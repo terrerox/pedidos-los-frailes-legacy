@@ -8,28 +8,20 @@
         <h2
           class="text-center text-2xl text-gray-600 leading-tight font-display lg:text-left xl:text-3xl"
         >
-          Iniciar sesión
+          Registrar Delivery
         </h2>
         <Alert />
         <div class="mt-12">
-          <LoginForm />
+          <DeliveryRegisterForm />
           <div
-            class="my-5 sm:mt-10 md:mt-10 lg:mt-10 text-sm font-display text-gray-700 text-center"
+            class="my-5 sm:mt-10 md:mt-10 lg:mt-7 text-sm font-display text-gray-700 text-center"
           >
-            ¿Aún no has registrado tu local?
+            ¿Ya te has registrado como delivery?
             <nuxt-link
-              to="/local-register"
+              to="/login"
               class="cursor-pointer text-color-primary"
             >
-              ¡Regístrate aquí!
-            </nuxt-link>
-            <br>
-            ¿Aún no te has registrado como delivery?
-            <nuxt-link
-              to="/delivery-register"
-              class="cursor-pointer text-color-primary"
-            >
-              ¡Regístrate aquí!
+              ¡Inicia sesión aqui!
             </nuxt-link>
           </div>
         </div>
@@ -48,15 +40,15 @@
 </template>
 
 <script>
-import LoginForm from '../components/auth/LoginForm'
+import DeliveryRegisterForm from '../components/auth/DeliveryRegisterForm'
 import Header from '../components/Header'
 import Alert from '../components/shared/Alert'
 export default {
-  components: { LoginForm, Alert, Header }
+  components: { DeliveryRegisterForm, Alert, Header }
 }
 </script>
 
-<style type="text/css">
+<style type="text/css" scoped>
 .st0 {
   fill: none;
   stroke: currentColor;

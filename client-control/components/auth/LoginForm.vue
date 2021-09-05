@@ -40,8 +40,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import MaterialInput from './MaterialInput'
-import Loader from './Loader'
+import MaterialInput from '../shared/MaterialInput'
+import Loader from '../shared/Loader'
 
 export default {
   name: 'LoginForm',
@@ -57,7 +57,9 @@ export default {
     ...mapState('account', ['status'])
   },
   methods: {
-    ...mapActions('account', ['login']),
+    ...mapActions({
+      login: 'account/login'
+    }),
     ...mapActions('alert', ['success', 'error']),
     handleSubmit (e) {
       this.submitted = true
