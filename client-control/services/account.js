@@ -8,7 +8,7 @@ accountService.login = (userName, password) => {
       const { token, role, id } = account
 
       if (token) {
-        localStorage.setItem('account', JSON.stringify({ id, token, role }))
+        process.browser && localStorage.setItem('account', JSON.stringify({ id, token, role }))
       }
       return account
     })
@@ -25,7 +25,7 @@ accountService.getLogged = () => {
 }
 
 accountService.logout = () => {
-  localStorage.removeItem('account')
+  process.browser && localStorage.removeItem('account')
 }
 
 accountService.update = (account) => {

@@ -55,12 +55,12 @@
           v-show="dropdownOpen"
           class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10"
         >
-          <router-link
-            :to="{ name: 'DeliveryProfile' }"
+          <nuxt-link
+            to="profile"
             class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white"
           >
             Editar Perfil
-          </router-link>
+          </nuxt-link>
           <a
             class="block px-4 py-2 cursor-pointer text-sm text-gray-700 btn-hover hover:text-white"
             @click="logoutButton"

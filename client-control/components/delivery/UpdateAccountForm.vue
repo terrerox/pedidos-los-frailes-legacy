@@ -38,10 +38,10 @@ export default {
 
   computed: {
     userName: {
-      get () {
+      get: function() {
         return this.loggedDelivery.userName
       },
-      set (value) {
+      set: function(value) {
         this.account.userName = value
       }
     }
