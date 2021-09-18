@@ -110,7 +110,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.logout()
-          this.$router.push({ name: 'Login' })
+          this.$router.push('/login')
         }
       })
     }
@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-.router-link-active {
+.nuxt-link-active {
     background-color: #ec1f28;
     color: white;
 }

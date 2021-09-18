@@ -3,7 +3,7 @@
     <div v-if="deliveryOrders.length" class="notes">
       <div
         v-for="order in deliveryOrders"
-        :key="order"
+        :key="order.id"
         class="note cursor-pointer"
         :class="'transform ' + rotate()"
         :style="'margin:'+margin()+ '; background:'+color()+''"
@@ -84,6 +84,8 @@ export default {
 
   layout: 'delivery',
 
+  middleware: 'authenticated',
+
   data () {
     return {
       isConfirmed: false
@@ -104,7 +106,6 @@ export default {
 
   methods: {
     ...mapActions('order', ['getDeliveryOrders']),
-
     submitOrder (id) {
       if (!this.isConfirmed) {
         this.$swal({

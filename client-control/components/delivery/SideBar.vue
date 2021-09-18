@@ -25,7 +25,7 @@
           v-for="item in items"
           :key="item.path"
           :to="item.path"
-          class="mt-3 py-2 text-sm text-gray-600 hover:text-gray-700 nuxt-link-active rounded"
+          class="mt-3 py-2 text-sm text-gray-600 hover:text-gray-700 rounded"
         >
           {{ item.title }}
         </nuxt-link>

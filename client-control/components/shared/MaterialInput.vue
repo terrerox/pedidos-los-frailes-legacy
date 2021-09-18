@@ -3,14 +3,13 @@
     <div class="md-input-box">
       <input
         :id="idName"
-        :value="modelValue"
+        v-model="data"
         class="md-input"
         :type="type"
         :required="required"
         min="0"
         :pattern="pattern"
         :placeholder="placeholder || label"
-        @input="$emit('input', $event.target.value)"
       >
       <label :for="idName" class="md-label">{{ label }}</label>
       <div class="md-input-underline" />
@@ -22,9 +21,13 @@
 import { randomId } from '../../helpers'
 export default {
   name: 'TextInput',
+  model: {
+    prop: 'modelValue',
+    event: 'input'
+  },
   props: {
     modelValue: {
-      type: [String, Number],
+      type: String,
       default: ''
     },
     label: {
@@ -62,7 +65,7 @@ export default {
         return this.modelValue
       },
       set (value) {
-        this.$emit('update:modelValue', value)
+        this.$emit('input', value)
       }
     }
   },
@@ -86,11 +89,9 @@ export default {
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .md-input-box {
-  @apply relative;
   position: relative;
 }
 .md-input {
-  @apply w-full;
   width: 100%;
   outline: none;
   height: 50px;
@@ -128,7 +129,6 @@ export default {
 }
 .md-input:focus + .md-label,
 .md-input:not(:placeholder-shown) + .md-label {
-  @apply md-label-focus;
   color: #ec1f28;
   transform: translate(0, -65px) scale(0.75);
   transform-origin: top left;

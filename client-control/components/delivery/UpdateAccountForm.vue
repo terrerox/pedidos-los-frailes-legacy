@@ -1,7 +1,7 @@
 <template>
   <form ref="accountForm" class="grid grid-cols-2 gap-2">
     <div class="col-span-2">
-      <material-input v-model="userName" type="text" label="Usuario" />
+      <material-input v-model="account.userName" type="text" label="Usuario" />
     </div>
     <div class="col-span-2 lg:col-span-1">
       <material-input v-model="account.password" type="password" label="Contraseña" />
@@ -38,13 +38,17 @@ export default {
 
   computed: {
     userName: {
-      get: function() {
+      get () {
         return this.loggedDelivery.userName
       },
-      set: function(value) {
+      set (value) {
         this.account.userName = value
       }
     }
+  },
+
+  created () {
+    this.account.userName = this.loggedDelivery.userName
   },
 
   methods: {
@@ -70,7 +74,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

@@ -21,9 +21,9 @@
       </button>
     </div>
     <Alert class="mb-8" />
-    <UpdateAccountForm :loggedDelivery="loggedDelivery" ref="accountForm" v-if="currentStep === 0" />
-    <UpdateDeliveryForm ref="deliveryForm" v-if="currentStep === 1" />
-    <Loader v-if="status.isLoading"/>
+    <UpdateAccountForm v-if="currentStep === 0" ref="accountForm" :logged-delivery="loggedDelivery" />
+    <UpdateDeliveryForm v-if="currentStep === 1" ref="deliveryForm" />
+    <Loader v-if="status.isLoading" />
     <div class="mt-4 flex justify-center">
       <button
         class="bg-green-500 px-20 text-white hover:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
@@ -50,17 +50,19 @@ export default {
 
   layout: 'delivery',
 
+  middleware: 'authenticated',
+
   data () {
     return {
       currentStep: 0
     }
   },
-  created () {
-    this.getLoggedDelivery()
-  },
   computed: {
     ...mapState('delivery', ['status']),
     ...mapGetters('delivery', ['loggedDelivery'])
+  },
+  created () {
+    this.getLoggedDelivery()
   },
   methods: {
     ...mapActions('delivery', ['getLoggedDelivery']),

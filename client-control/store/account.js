@@ -11,7 +11,7 @@ if (process.browser) {
 export const state = () => (
   user
     ? { status: { loggedIn: true }, user, loggedUser: {} }
-    : { status: {}, user: null }
+    : { status: { loggedIn: false }, user: null }
 )
 
 export const mutations = {
@@ -27,11 +27,11 @@ export const mutations = {
     state.user = user
   },
   loginFailure (state) {
-    state.status = {}
+    state.status = { loggedIn: false }
     state.user = null
   },
   logout (state) {
-    state.status = {}
+    state.status = { loggedIn: false }
     state.user = null
   },
   registerRequest (state, user) {
