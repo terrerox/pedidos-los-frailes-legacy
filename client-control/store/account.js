@@ -11,7 +11,7 @@ if (process.browser) {
 export const state = () => (
   user
     ? { status: { loggedIn: true }, user, loggedUser: {} }
-    : { status: { loggedIn: false }, user: null }
+    : { status: { }, user: null }
 )
 
 export const mutations = {
@@ -56,13 +56,13 @@ export const actions = {
           if (user.role === 'Local') {
             localService.getLogged().then((res) => {
               res.notFound
-                ? this.$router.push('/local-info')
+                ? this.$router.push(`/local/${user.id}/info`)
                 : this.$router.push(`/local/${user.id}/products`)
             })
           } else if (user.role === 'Delivery') {
             deliveryService.getLogged().then((res) => {
               res.notFound
-                ? this.$router.push('/delivery-info')
+                ? this.$router.push(`/delivery/${user.id}/info`)
                 : this.$router.push(`/delivery/${user.id}/orders`)
             })
           } else {

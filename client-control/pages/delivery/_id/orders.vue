@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import OrderCartItem from '@/components/local/OrderCartItem'
 
 import { currency } from '@/helpers'
@@ -94,6 +94,7 @@ export default {
 
   computed: {
     ...mapGetters('order', ['deliveryOrders']),
+    ...mapState('account', ['status']),
 
     buttonTitle () {
       return !this.isConfirmed ? 'Confirmar orden' : 'Orden entregada'
