@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <Fragment>
     <div
       :class="sidebarOpen ? 'block' : 'hidden'"
       class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"
@@ -23,9 +23,9 @@
       >
         <nuxt-link
           v-for="item in items"
-          :key="item"
-          :to="{ name: item.name }"
-          class="mt-3 py-2 text-sm text-gray-600 hover:text-gray-700  sidebar-btn rounded"
+          :key="item.path"
+          :to="item.path"
+          class="mt-3 py-2 text-sm text-gray-600 hover:text-gray-700 rounded"
         >
           {{ item.title }}
         </nuxt-link>
@@ -38,12 +38,16 @@
         </div>
       </div>
     </div>
-  </div>
+  </Fragment>
 </template>
 
 <script>
+import { Fragment } from 'vue-fragment'
+
 export default {
   name: 'SideBar',
+
+  components: { Fragment },
 
   props: {
     sidebarOpen: { type: Boolean, required: true }
@@ -54,8 +58,8 @@ export default {
   data () {
     return {
       items: [
-        { title: 'Productos', name: 'LocalProduct' },
-        { title: 'Ordenes', name: 'LocalOrder' }
+        { title: 'Productos', path: 'products' },
+        { title: 'Ordenes', path: 'orders' }
       ]
     }
   }
@@ -63,7 +67,7 @@ export default {
 </script>
 
 <style scoped>
-.router-link-active {
+.nuxt-link-active {
     background-color: #eff2fb;
 }
 </style>

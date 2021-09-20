@@ -56,7 +56,7 @@
           class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10"
         >
           <router-link
-            :to="{ name: 'LocalProfile' }"
+            to="profile"
             class="block px-4 py-2 text-sm text-gray-700 btn-hover hover:text-white"
           >
             Editar Perfil
@@ -110,7 +110,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.logout()
-          this.$router.push({ name: 'Login' })
+          this.$router.push('/login')
         }
       })
     }
@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-.router-link-active {
+.nuxt-link-active {
     background-color: #ec1f28;
     color: white;
 }

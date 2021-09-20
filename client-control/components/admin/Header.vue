@@ -33,8 +33,18 @@ export default {
   methods: {
     ...mapActions('account', ['logout']),
     logoutButton () {
-      this.logout()
-      this.$router.push({ to: 'login' })
+      this.$swal({
+        title: '¿Deseas cerrar sesión?',
+        showCancelButton: true,
+        confirmButtonText: 'Aceptar',
+        cancelButtonText: 'Cancelar',
+        showCloseButton: true
+      }).then((result) => {
+        if (result.value) {
+          this.logout()
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }

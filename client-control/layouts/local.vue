@@ -4,7 +4,7 @@
       <div class="flex h-screen bg-gray-100 dark:bg-gray-800 font-roboto">
         <SideBar :sidebar-open="sidebarOpen" @sidebarOpen="sidebarOpen = false" />
         <div class="flex-1 flex flex-col overflow-hidden">
-          <Header :logged-delivery="loggedDelivery" @sidebarOpen="sidebarOpen = true" />
+          <Header :logged-local="loggedLocal" @sidebarOpen="sidebarOpen = true" />
 
           <main class="flex-1 overflow-x-hidden overflow-y-auto">
             <div class="container mx-auto px-6 py-8">
@@ -19,18 +19,16 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Header from '../components/delivery/Header'
-import SideBar from '../components/delivery/SideBar'
+import Header from '@/components/local/Header'
+import SideBar from '@/components/local/SideBar'
 export default {
-  name: 'Delivery',
-
+  name: 'Local',
   components: { Header, SideBar },
   data () {
     return {
       sidebarOpen: false
     }
   },
-
   head () {
     return {
       link: [
@@ -42,18 +40,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('delivery', ['loggedDelivery'])
+    ...mapGetters('local', ['loggedLocal'])
   },
   created () {
-    this.getLoggedDelivery()
+    this.getLoggedLocal()
   },
   methods: {
-    ...mapActions('delivery', ['getLoggedDelivery'])
+    ...mapActions('local', ['getLoggedLocal'])
   }
 }
 </script>
-<style scoped>
-  body * {
-    font-family: 'Hammersmith One', sans-serif;
-  }
-</style>

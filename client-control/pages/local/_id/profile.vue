@@ -17,12 +17,12 @@
         type="button"
         @click="nextStep"
       >
-        Delivery
+        Local
       </button>
     </div>
     <Alert class="mb-8" />
-    <UpdateAccountForm v-if="currentStep === 0" ref="accountForm" :logged-delivery="loggedDelivery" />
-    <UpdateDeliveryForm v-if="currentStep === 1" ref="deliveryForm" />
+    <UpdateAccountForm v-if="currentStep === 0" ref="accountForm" :logged-local="loggedLocal" />
+    <UpdateLocalForm v-if="currentStep === 1" ref="localForm" />
     <Loader v-if="status.isLoading" />
     <div class="mt-4 flex justify-center">
       <button
@@ -38,16 +38,20 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
-import Alert from '../shared/Alert'
-import Loader from '../shared/Loader'
-import UpdateAccountForm from './UpdateAccountForm'
-import UpdateDeliveryForm from './UpdateDeliveryForm'
+import { mapActions, mapState } from 'vuex'
+import Alert from '@/components/shared/Alert'
+import Loader from '@/components/shared/Loader'
+import UpdateAccountForm from '@/components/local/UpdateAccountForm'
+import UpdateLocalForm from '@/components/local/UpdateLocalForm'
 
 export default {
-  name: 'DeliveryEditProfile',
+  name: 'LocalEditProfile',
 
-  components: { UpdateAccountForm, UpdateDeliveryForm, Alert, Loader },
+  components: { UpdateAccountForm, UpdateLocalForm, Alert, Loader },
+
+  layout: 'local',
+
+  middleware: 'authenticated',
 
   data () {
     return {
@@ -56,21 +60,21 @@ export default {
   },
 
   computed: {
-    ...mapState('delivery', ['status']),
-    ...mapGetters('delivery', ['loggedDelivery'])
+    ...mapState('local', ['status']),
+    ...mapState('local', ['loggedLocal'])
   },
 
   created () {
-    this.getLoggedDelivery()
+    this.getLoggedLocal()
   },
 
   methods: {
-    ...mapActions('delivery', ['getLoggedDelivery']),
+    ...mapActions('local', ['getLoggedLocal']),
 
     submitForm () {
       this.currentStep === 0
         ? this.$refs.accountForm.submit()
-        : this.$refs.deliveryForm.submit()
+        : this.$refs.localForm.submit()
     },
 
     nextStep () {

@@ -6,6 +6,9 @@
 import DeliveryInfoForm from '@/components/delivery/DeliveryInfoForm'
 export default {
   name: 'DeliveryInfo',
-  components: { DeliveryInfoForm }
+
+  components: { DeliveryInfoForm },
+
+  middleware: 'authenticated'
 }
 </script>

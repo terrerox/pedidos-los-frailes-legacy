@@ -52,7 +52,7 @@
       <div v-else>
         <img
           class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
-          src="../../assets/img/empty.svg"
+          src="@/assets/img/empty.svg"
           alt=""
         >
       </div>
@@ -62,15 +62,19 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex'
-import plus from '../../assets/img/plus.png'
-import Loader from '../shared/Loader'
-import ProductModal from '../shared/ProductModal'
+import plus from '@/assets/img/plus.png'
+import Loader from '@/components/shared/Loader'
+import ProductModal from '@/components/shared/ProductModal'
 
-import ProductOwner from './ProductOwner'
+import ProductOwner from '@/components/local/ProductOwner'
 
 export default {
 
   components: { ProductModal, ProductOwner, Loader },
+
+  layout: 'local',
+
+  middleware: 'authenticated',
 
   data () {
     return {
@@ -109,6 +113,3 @@ export default {
   }
 }
 </script>
-
-<style>
-</style>

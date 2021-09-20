@@ -47,7 +47,7 @@
       </div>
       <img
         class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
-        src="../../assets/img/empty.svg"
+        src="@/assets/img/empty.svg"
         alt=""
       >
     </div>
@@ -56,14 +56,18 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import { currency } from '../../helpers'
-import OrderCartItem from './OrderCartItem'
+import { currency } from '@/helpers'
+import OrderCartItem from '@/components/local/OrderCartItem'
 
 let i = 0
 export default {
   name: 'LocalOrder',
 
   components: { OrderCartItem },
+
+  layout: 'local',
+
+  middleware: 'authenticated',
 
   computed: {
     ...mapGetters('order', ['orders'])

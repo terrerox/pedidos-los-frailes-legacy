@@ -54,7 +54,7 @@ export const actions = {
     commit('localRequest')
     return localService.create(local)
       .then((res) => {
-        this.$router.push(`/local/${res.id}`)
+        this.$router.push(`/local/${res.id}/products`)
         commit('localFinishedRequest')
       },
       (error) => {
@@ -122,10 +122,10 @@ export const actions = {
 
 export const getters = {
   verifiedLocals (state) {
-    return state.locals
+    return state.locals.filter(local => local.status === 'active')
   },
   unverifiedLocals (state) {
-    return state.locals
+    return state.locals.filter(local => local.status === 'inactive')
   },
   currentLocal (state) {
     return state.currentLocal
