@@ -69,6 +69,22 @@ export default {
 
   middleware: 'authenticated',
 
+  head () {
+    return {
+      title: 'Ordenes | Pedidos Los Frailes Control',
+      meta: [
+        {
+          hid: 'Ordenes',
+          name: 'Ordenes',
+          content: 'Revisa las ordenes de tu local'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
   computed: {
     ...mapGetters('order', ['orders'])
   },

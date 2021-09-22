@@ -92,6 +92,22 @@ export default {
     }
   },
 
+  head () {
+    return {
+      title: 'Ordenes | Pedidos Los Frailes Control',
+      meta: [
+        {
+          hid: 'Ordenes',
+          name: 'Ordenes',
+          content: 'Revisa las ordenes asignadas'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
   computed: {
     ...mapGetters('order', ['deliveryOrders']),
     ...mapState('account', ['status']),

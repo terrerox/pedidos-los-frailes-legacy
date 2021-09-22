@@ -44,7 +44,22 @@ import DeliveryRegisterForm from '../components/auth/DeliveryRegisterForm'
 import Header from '../components/Header'
 import Alert from '../components/shared/Alert'
 export default {
-  components: { DeliveryRegisterForm, Alert, Header }
+  components: { DeliveryRegisterForm, Alert, Header },
+  head () {
+    return {
+      title: 'Registrar Delivery | Pedidos Los Frailes',
+      meta: [
+        {
+          hid: 'Registrar Delivery',
+          name: 'Registrar Delivery',
+          content: 'Registrate como delivery en Pedidos Los Frailes'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  }
 }
 </script>
 

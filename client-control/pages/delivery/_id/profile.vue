@@ -57,6 +57,23 @@ export default {
       currentStep: 0
     }
   },
+
+  head () {
+    return {
+      title: 'Perfil | Pedidos Los Frailes Control',
+      meta: [
+        {
+          hid: 'Perfil',
+          name: 'Perfil',
+          content: 'Actualiza tu perfil'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
   computed: {
     ...mapState('delivery', ['status']),
     ...mapGetters('delivery', ['loggedDelivery'])

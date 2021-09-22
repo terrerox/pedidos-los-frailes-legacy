@@ -52,7 +52,22 @@ import LoginForm from '../components/auth/LoginForm'
 import Header from '../components/Header'
 import Alert from '../components/shared/Alert'
 export default {
-  components: { LoginForm, Alert, Header }
+  components: { LoginForm, Alert, Header },
+  head () {
+    return {
+      title: 'Iniciar Sesión | Pedidos Los Frailes',
+      meta: [
+        {
+          hid: 'Iniciar Sesión',
+          name: 'Iniciar Sesión',
+          content: 'Inicia sesión en Pedidos Los Frailes'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  }
 }
 </script>
 

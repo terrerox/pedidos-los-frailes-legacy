@@ -85,6 +85,22 @@ export default {
     }
   },
 
+  head () {
+    return {
+      title: 'Productos | Pedidos Los Frailes Control',
+      meta: [
+        {
+          hid: 'Productos',
+          name: 'Productos',
+          content: 'Revisa los productos de tu local'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
   computed: {
     ...mapGetters('product', ['loggedProducts']),
     ...mapState('product', ['status'])

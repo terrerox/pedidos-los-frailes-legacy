@@ -44,7 +44,22 @@ import LocalRegisterForm from '../components/auth/LocalRegisterForm'
 import Header from '../components/Header'
 import Alert from '../components/shared/Alert'
 export default {
-  components: { LocalRegisterForm, Alert, Header }
+  components: { LocalRegisterForm, Alert, Header },
+  head () {
+    return {
+      title: 'Registrar Local | Pedidos Los Frailes',
+      meta: [
+        {
+          hid: 'Registrar Local',
+          name: 'Registrar Local',
+          content: 'Registrate como local en Pedidos Los Frailes'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  }
 }
 </script>
 

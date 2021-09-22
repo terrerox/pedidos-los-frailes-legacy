@@ -21,6 +21,22 @@ import UnverifiedLocals from '@/components/admin/UnverifiedLocals'
 export default {
   name: 'Admin',
   components: { Header, UnverifiedDeliveries, UnverifiedLocals },
-  middleware: 'authenticated'
+  middleware: 'authenticated',
+
+  head () {
+    return {
+      title: 'Inicio | Pedidos Los Frailes Control',
+      meta: [
+        {
+          hid: 'Inicio',
+          name: 'Inicio',
+          content: 'Inicio'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  }
 }
 </script>
