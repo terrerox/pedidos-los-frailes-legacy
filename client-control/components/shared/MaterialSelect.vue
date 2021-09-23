@@ -24,6 +24,10 @@ import { randomId } from '../../helpers'
 
 export default {
   name: 'MaterialSelect',
+  model: {
+    prop: 'modelValue',
+    event: 'input'
+  },
   props: {
     modelValue: {
       type: [String, Number],

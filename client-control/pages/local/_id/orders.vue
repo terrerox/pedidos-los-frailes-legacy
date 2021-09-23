@@ -1,73 +1,81 @@
 <template>
   <div class="container">
-    <div v-if="orders.length" class="notes">
-      <div
-        v-for="order in orders"
-        :key="order"
-        class="note cursor-pointer"
-        :class="'transform ' + rotate()"
-        :style="'margin:'+margin()+ '; background:'+color()+''"
-      >
-        <div class="details">
-          <div class="title text-lg">
-            {{ order.name }}
-          </div>
-          <div class="title text-lg">
-            {{ order.phoneNumber }}
-          </div>
-          <div class="title text-lg">
-            {{ order.paymentMethod }}
-          </div>
-          <div class="title text-lg">
-            {{ order.additionalNotes }}
-          </div>
-          <div v-if="order.status === 'confirmed'" class="title text-lg">
-            <strong>Orden confirmada</strong><br>
-            Delivery -> {{ order.Delivery.name }} {{ order.Delivery.lastName }}
-          </div>
-          <div v-if="order.status === 'confirmed'" class="title text-base">
-            # del Delivery -> {{ order.Delivery.phoneNumber }}
-          </div>
-          <div class="title text-lg">
-            <OrderCartItem
-              v-for="cartItem in order.cartItems"
-              :key="cartItem.product.id"
-              :cart-item="cartItem"
-            />
-          </div>
-          <div class="float-right text-base">
-            <strong>{{ cartTotal(order) }}</strong>
+    <Loader v-if="status.isLoading" />
+    <div v-else>
+      <div v-if="orders.length" class="notes">
+        <div
+          v-for="order in orders"
+          :key="order"
+          class="note cursor-pointer"
+          :class="'transform ' + rotate()"
+          :style="'margin:'+margin()+ '; background:'+color()+''"
+        >
+          <div class="details">
+            <div class="title text-lg">
+              {{ order.name }}
+            </div>
+            <div class="title text-lg">
+              {{ order.phoneNumber }}
+            </div>
+            <div class="title text-lg">
+              {{ order.paymentMethod }}
+            </div>
+            <div class="title text-lg">
+              {{ order.additionalNotes }}
+            </div>
+            <div v-if="order.status === 'confirmed'" class="title text-lg">
+              <strong>Orden confirmada</strong><br>
+              Delivery -> {{ order.Delivery.name }} {{ order.Delivery.lastName }}
+            </div>
+            <div v-if="order.status === 'confirmed'" class="title text-base">
+              # del Delivery -> {{ order.Delivery.phoneNumber }}
+            </div>
+            <div class="title text-lg">
+              <OrderCartItem
+                v-for="cartItem in order.cartItems"
+                :key="cartItem.product.id"
+                :cart-item="cartItem"
+              />
+            </div>
+            <div class="float-right text-base">
+              <strong>{{ cartTotal(order) }}</strong>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <div class="text-center text-2xl text-gray-600 leading-tight">
-        No hay ordenes
+      <div v-else>
+        <div class="text-center text-2xl text-gray-600 leading-tight">
+          No hay ordenes
+        </div>
+        <img
+          class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
+          src="@/assets/img/empty.svg"
+          alt=""
+        >
       </div>
-      <img
-        class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
-        src="@/assets/img/empty.svg"
-        alt=""
-      >
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import { currency } from '@/helpers'
 import OrderCartItem from '@/components/local/OrderCartItem'
+import Loader from '@/components/shared/Loader'
 
 let i = 0
 export default {
-  name: 'LocalOrder',
+  name: 'Orders',
 
-  components: { OrderCartItem },
+  components: { OrderCartItem, Loader },
 
   layout: 'local',
 
   middleware: 'authenticated',
+
+  meta: {
+    title: 'Ordenes'
+  },
 
   head () {
     return {
@@ -86,7 +94,8 @@ export default {
   },
 
   computed: {
-    ...mapGetters('order', ['orders'])
+    ...mapGetters('order', ['orders']),
+    ...mapState('order', ['status'])
   },
 
   created () {

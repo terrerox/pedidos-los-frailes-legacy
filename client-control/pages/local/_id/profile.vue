@@ -59,6 +59,10 @@ export default {
     }
   },
 
+  meta: {
+    title: 'Perfil'
+  },
+
   head () {
     return {
       title: 'Perfil | Pedidos Los Frailes Control',

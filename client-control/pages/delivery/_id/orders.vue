@@ -1,71 +1,74 @@
 <template>
   <div class="container">
-    <div v-if="deliveryOrders.length" class="notes">
-      <div
-        v-for="order in deliveryOrders"
-        :key="order.id"
-        class="note cursor-pointer"
-        :class="'transform ' + rotate()"
-        :style="'margin:'+margin()+ '; background:'+color()+''"
-      >
-        <div class="details">
-          <div class="title text-lg">
-            Orden de {{ order.Local.title }}
-          </div>
-          <div class="title text-lg">
-            {{ order.name }}
-          </div>
-          <div class="title text-lg">
-            {{ order.street }}
-          </div>
-          <div class="title text-lg">
-            Casa #{{ order.numberOfHouse }}
-          </div>
-          <div class="title text-lg">
-            {{ order.reference }}
-          </div>
-          <div v-if="order.apartment" class="title text-lg">
-            {{ order.apartment }}
-          </div>
-          <div class="title text-lg">
-            {{ order.phoneNumber }}
-          </div>
-          <div class="title text-lg">
-            {{ order.paymentMethod }}
-          </div>
-          <div v-if="order.additionalNotes" class="title text-lg">
-            {{ order.additionalNotes }}
-          </div>
-          <div class="title text-lg">
-            <OrderCartItem
-              v-for="cartItem in order.cartItems"
-              :key="cartItem.product.id"
-              :cart-item="cartItem"
-            />
-          </div>
-          <div class="float-right text-base">
-            <strong>{{ cartTotal(order) }}</strong>
-          </div>
-          <div class="my-10 float-right">
-            <button
-              class="absolute bottom-0 text-sm lined thin"
-              @click="submitOrder(order.id)"
-            >
-              {{ buttonTitle }}
-            </button>
+    <Loader v-if="status.isLoading" />
+    <div v-else>
+      <div v-if="deliveryOrders.length" class="notes">
+        <div
+          v-for="order in deliveryOrders"
+          :key="order.id"
+          class="note cursor-pointer"
+          :class="'transform ' + rotate()"
+          :style="'margin:'+margin()+ '; background:'+color()+''"
+        >
+          <div class="details">
+            <div class="title text-lg">
+              Orden de {{ order.Local.title }}
+            </div>
+            <div class="title text-lg">
+              {{ order.name }}
+            </div>
+            <div class="title text-lg">
+              {{ order.street }}
+            </div>
+            <div class="title text-lg">
+              Casa #{{ order.numberOfHouse }}
+            </div>
+            <div class="title text-lg">
+              {{ order.reference }}
+            </div>
+            <div v-if="order.apartment" class="title text-lg">
+              {{ order.apartment }}
+            </div>
+            <div class="title text-lg">
+              {{ order.phoneNumber }}
+            </div>
+            <div class="title text-lg">
+              {{ order.paymentMethod }}
+            </div>
+            <div v-if="order.additionalNotes" class="title text-lg">
+              {{ order.additionalNotes }}
+            </div>
+            <div class="title text-lg">
+              <OrderCartItem
+                v-for="cartItem in order.cartItems"
+                :key="cartItem.product.id"
+                :cart-item="cartItem"
+              />
+            </div>
+            <div class="float-right text-base">
+              <strong>{{ cartTotal(order) }}</strong>
+            </div>
+            <div class="my-10 float-right">
+              <button
+                class="absolute bottom-0 text-sm lined thin"
+                @click="submitOrder(order.id)"
+              >
+                {{ buttonTitle }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <div class="text-center text-2xl text-gray-600 leading-tight">
-        No hay ordenes
+      <div v-else>
+        <div class="text-center text-2xl text-gray-600 leading-tight">
+          No hay ordenes
+        </div>
+        <img
+          class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
+          src="@/assets/img/empty.svg"
+          alt=""
+        >
       </div>
-      <img
-        class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
-        src="@/assets/img/empty.svg"
-        alt=""
-      >
     </div>
   </div>
 </template>
@@ -73,6 +76,7 @@
 <script>
 import { mapGetters, mapActions, mapState } from 'vuex'
 import OrderCartItem from '@/components/local/OrderCartItem'
+import Loader from '@/components/shared/Loader'
 
 import { currency } from '@/helpers'
 
@@ -80,7 +84,7 @@ let i = 0
 export default {
   name: 'Orders',
 
-  components: { OrderCartItem },
+  components: { OrderCartItem, Loader },
 
   layout: 'delivery',
 
@@ -91,7 +95,9 @@ export default {
       isConfirmed: false
     }
   },
-
+  meta: {
+    title: 'Ordenes'
+  },
   head () {
     return {
       title: 'Ordenes | Pedidos Los Frailes Control',
@@ -110,7 +116,7 @@ export default {
 
   computed: {
     ...mapGetters('order', ['deliveryOrders']),
-    ...mapState('account', ['status']),
+    ...mapState('order', ['status']),
 
     buttonTitle () {
       return !this.isConfirmed ? 'Confirmar orden' : 'Orden entregada'

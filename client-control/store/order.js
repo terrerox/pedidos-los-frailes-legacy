@@ -3,10 +3,17 @@ import orderService from '@/services/order'
 export const state = () => ({
   orders: [],
   deliveryOrders: [],
-  order: {}
+  order: {},
+  status: { isLoading: false }
 })
 
 export const mutations = {
+  orderRequest (state, ctx) {
+    state.status = { isLoading: true }
+  },
+  orderFinishedRequest (state, ctx) {
+    state.status = { isLoading: false }
+  },
   setOrders (state, orders) {
     state.orders = orders
   },
@@ -29,6 +36,7 @@ export const mutations = {
 
 export const actions = {
   getOrders ({ commit }, id) {
+    commit('orderRequest')
     let ordersArray = []
     return orderService.loggedOrders()
       .then((res) => {
@@ -38,11 +46,13 @@ export const actions = {
           orders.cartItems = cartItemsJson
           ordersArray = [...ordersArray, orders]
         })
+        commit('orderFinishedRequest')
         commit('setOrders', ordersArray)
       })
   },
 
   getDeliveryOrders ({ commit }, id) {
+    commit('orderRequest')
     let ordersArray = []
     return orderService.deliveryOrders()
       .then((res) => {
@@ -52,17 +62,20 @@ export const actions = {
           orders.cartItems = cartItemsJson
           ordersArray = [...ordersArray, orders]
         })
+        commit('orderFinishedRequest')
         commit('setDeliveryOrders', ordersArray)
       })
   },
 
   getOrder ({ commit }, id) {
+    commit('orderRequest')
     return orderService.getById(id)
       .then((order) => {
         const { cartItems, ...orders } = order
         const cartItemsJson = JSON.parse(cartItems)
         orders.cartItems = cartItemsJson
         commit('setOrder', orders)
+        commit('orderFinishedRequest')
       })
   },
 

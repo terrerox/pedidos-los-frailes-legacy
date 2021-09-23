@@ -85,6 +85,10 @@ export default {
     }
   },
 
+  meta: {
+    title: 'Productos'
+  },
+
   head () {
     return {
       title: 'Productos | Pedidos Los Frailes Control',
