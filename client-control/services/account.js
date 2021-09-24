@@ -1,5 +1,4 @@
 import { httpClient } from './httpClient'
-
 const accountService = {}
 
 accountService.login = (userName, password) => {

@@ -1,4 +1,3 @@
-
 import { httpClient } from './httpClient'
 
 const productService = {}
