@@ -1,29 +1,27 @@
-import { httpClient } from './httpClient'
-
 const localService = {}
 
-localService.create = (local) => {
-  return httpClient.post('/locals/create', local)
+localService.create = (local, api) => {
+  return api.post('/locals/create', local)
     .then(res => res)
 }
 
-localService.getAll = () => {
-  return httpClient.get('/locals')
+localService.getAll = (api) => {
+  return api.get('/locals')
     .then(res => res)
 }
 
-localService.getById = (id) => {
-  return httpClient.get(`/locals/${id}`)
+localService.getById = (id, api) => {
+  return api.get(`/locals/${id}`)
     .then(res => res)
 }
 
-localService.getLogged = () => {
-  return httpClient.get('/locals/logged')
+localService.getLogged = (api) => {
+  return api.get('/locals/logged')
     .then(res => res)
 }
 
-localService.update = (local) => {
-  return httpClient.put('/locals/', local)
+localService.update = (local, api) => {
+  return api.put('/locals/', local)
     .then(res => res)
 }
 

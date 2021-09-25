@@ -38,7 +38,7 @@ export default {
     ...mapGetters('delivery', ['unverifiedDeliveries'])
   },
 
-  created () {
+  mounted () {
     this.getDeliveries()
   },
 

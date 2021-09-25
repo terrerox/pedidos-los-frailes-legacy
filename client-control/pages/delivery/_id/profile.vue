@@ -82,7 +82,7 @@ export default {
     ...mapState('delivery', ['status']),
     ...mapGetters('delivery', ['loggedDelivery'])
   },
-  created () {
+  mounted () {
     this.getLoggedDelivery()
   },
   methods: {

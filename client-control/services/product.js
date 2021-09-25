@@ -1,34 +1,32 @@
-import { httpClient } from './httpClient'
-
 const productService = {}
 
-productService.getAll = () => {
-  return httpClient.get('/products')
+productService.getAll = (api) => {
+  return api.get('/products')
     .then(res => res)
 }
 
-productService.getLoggedProducts = () => {
-  return httpClient.get('/products/current')
+productService.getLoggedProducts = (api) => {
+  return api.get('/products/current')
     .then(res => res)
 }
 
-productService.getById = (id) => {
-  return httpClient.get(`/products/${id}`)
+productService.getById = (id, api) => {
+  return api.get(`/products/${id}`)
     .then(res => res)
 }
 
-productService.addProduct = (product) => {
-  return httpClient.post('/products/create', product)
+productService.addProduct = (product, api) => {
+  return api.post('/products/create', product)
     .then(res => res)
 }
 
-productService.updateProduct = (product) => {
-  return httpClient.put(`/products/${product.id}`, product)
+productService.updateProduct = (product, api) => {
+  return api.put(`/products/${product.id}`, product)
     .then(res => res)
 }
 
-productService.deleteProduct = (id) => {
-  return httpClient.delete(`/products/${id}`)
+productService.deleteProduct = (id, api) => {
+  return api.delete(`/products/${id}`)
 }
 
 export default productService

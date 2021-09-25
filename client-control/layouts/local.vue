@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapGetters('local', ['loggedLocal'])
   },
-  created () {
+  mounted () {
     this.getLoggedLocal()
   },
   methods: {

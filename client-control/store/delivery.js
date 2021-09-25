@@ -47,7 +47,7 @@ export const mutations = {
 export const actions = {
   createDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
-    return deliveryService.create(delivery)
+    return deliveryService.create(delivery, this.$api)
       .then((res) => {
         commit('deliveryFinishedRequest')
         this.$router.push(`/delivery/${res.id}/orders`)
@@ -58,7 +58,7 @@ export const actions = {
       })
   },
   getDeliveries ({ commit }) {
-    return deliveryService.getAll()
+    return deliveryService.getAll(this.$api)
       .then((deliveries) => {
         commit('setDeliveries', deliveries)
         commit('deliveryFinishedRequest')
@@ -66,7 +66,7 @@ export const actions = {
   },
   updateDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
-    return deliveryService.update(delivery)
+    return deliveryService.update(delivery, this.$api)
       .then(
         (res) => {
           commit('setEditedDelivery', res)
@@ -82,11 +82,11 @@ export const actions = {
       )
   },
   updateDeliveryStatus ({ commit }, delivery) {
-    return deliveryService.update(delivery)
+    return deliveryService.update(delivery, this.$api)
       .then(res => commit('setVerifiedDelivery', res))
   },
   getLoggedDelivery (context, id) {
-    return deliveryService.getLogged()
+    return deliveryService.getLogged(this.$api)
       .then((res) => {
         context.commit('setLoggedDelivery', res)
       })

@@ -1,32 +1,30 @@
-import { httpClient } from './httpClient'
-
 const deliveryService = {}
 
-deliveryService.create = (delivery) => {
-  return httpClient.post('/deliveries/create', delivery)
+deliveryService.create = (delivery, api) => {
+  return api.post('/deliveries/create', delivery)
 }
 
-deliveryService.getAll = () => {
-  return httpClient.get('/deliveries/all')
+deliveryService.getAll = (api) => {
+  return api.get('/deliveries/all')
     .then(res => res)
 }
 
-deliveryService.getById = (id) => {
-  return httpClient.get(`/deliveries/${id}`)
+deliveryService.getById = (id, api) => {
+  return api.get(`/deliveries/${id}`)
     .then(res => res)
 }
 
-deliveryService.update = (delivery) => {
-  return httpClient.put(`/deliveries/${delivery.accountId}`, delivery)
+deliveryService.update = (delivery, api) => {
+  return api.put(`/deliveries/${delivery.accountId}`, delivery)
     .then(res => res)
 }
 
-deliveryService.deleteDelivery = (id) => {
-  return httpClient.delete(`/deliveries/${id}`)
+deliveryService.deleteDelivery = (id, api) => {
+  return api.delete(`/deliveries/${id}`)
 }
 
-deliveryService.getLogged = () => {
-  return httpClient.get('/deliveries/logged')
+deliveryService.getLogged = (api) => {
+  return api.get('/deliveries/logged')
     .then(res => res)
 }
 

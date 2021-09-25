@@ -49,18 +49,18 @@ export const actions = {
   login ({ dispatch, commit }, { userName, password }) {
     commit('loginRequest', { userName })
 
-    accountService.login(userName, password)
+    accountService.login(userName, password, this.$api)
       .then(
         (user) => {
           commit('loginSuccess', user)
           if (user.role === 'Local') {
-            localService.getLogged().then((res) => {
+            localService.getLogged(this.$api).then((res) => {
               res.notFound
                 ? this.$router.push(`/local/${user.id}/info`)
                 : this.$router.push(`/local/${user.id}/products`)
             })
           } else if (user.role === 'Delivery') {
-            deliveryService.getLogged().then((res) => {
+            deliveryService.getLogged(this.$api).then((res) => {
               res.notFound
                 ? this.$router.push(`/delivery/${user.id}/info`)
                 : this.$router.push(`/delivery/${user.id}/orders`)
@@ -83,7 +83,7 @@ export const actions = {
     commit('registerRequest', userData)
     const { userName, password } = userData
 
-    accountService.register(userData)
+    accountService.register(userData, this.$api)
       .then(
         (user) => {
           dispatch('alert/success',
@@ -100,7 +100,7 @@ export const actions = {
       )
   },
   updateAccount ({ dispatch }, account) {
-    return accountService.update(account)
+    return accountService.update(account, this.$api)
       .then(
         () => {
           dispatch('alert/success',
@@ -114,7 +114,7 @@ export const actions = {
       )
   },
   getLogged ({ commit }) {
-    accountService.getLogged()
+    accountService.getLogged(this.$api)
       .then(res => commit('setLogged', res))
   }
 }

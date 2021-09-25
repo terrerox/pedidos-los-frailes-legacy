@@ -52,7 +52,7 @@ export const mutations = {
 export const actions = {
   createLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.create(local)
+    return localService.create(local, this.$api)
       .then((res) => {
         this.$router.push(`/local/${res.id}/products`)
         commit('localFinishedRequest')
@@ -63,14 +63,14 @@ export const actions = {
       })
   },
   getLocals ({ commit }) {
-    return localService.getAll()
+    return localService.getAll(this.$api)
       .then((res) => {
         commit('setLocals', res)
       })
   },
   getLocal ({ commit }, id) {
     commit('localRequest')
-    return localService.getById(id)
+    return localService.getById(id, this.$api)
       .then((res) => {
         commit('setCurrentLocal', res)
         commit('localFinishedRequest')
@@ -78,7 +78,7 @@ export const actions = {
   },
   getLoggedLocal ({ commit }) {
     commit('localRequest')
-    return localService.getLogged()
+    return localService.getLogged(this.$api)
       .then((res) => {
         commit('setLoggedLocal', res)
         commit('localFinishedRequest')
@@ -86,7 +86,7 @@ export const actions = {
   },
   updateLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.update(local)
+    return localService.update(local, this.$api)
       .then(
         (res) => {
           commit('setEditedLocal', res)
@@ -103,7 +103,7 @@ export const actions = {
   },
   verifyLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.update(local)
+    return localService.update(local, this.$api)
       .then(
         (res) => {
           commit('setVerifiedLocal', res)

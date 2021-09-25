@@ -1,8 +1,7 @@
-import { httpClient } from './httpClient'
 const accountService = {}
 
-accountService.login = (userName, password) => {
-  return httpClient.post('/accounts/authenticate', { userName, password })
+accountService.login = (userName, password, api) => {
+  return api.post('/accounts/authenticate', { userName, password })
     .then((account) => {
       const { token, role, id } = account
 
@@ -13,13 +12,13 @@ accountService.login = (userName, password) => {
     })
 }
 
-accountService.register = ({ userName, password, role }) => {
-  return httpClient.post('/accounts/register', { userName, password, role })
+accountService.register = ({ userName, password, role }, api) => {
+  return api.post('/accounts/register', { userName, password, role })
     .then(account => account)
 }
 
-accountService.getLogged = () => {
-  return httpClient.get('/accounts/logged')
+accountService.getLogged = (api) => {
+  return api.get('/accounts/logged')
     .then(account => account)
 }
 
@@ -27,8 +26,8 @@ accountService.logout = () => {
   process.browser && localStorage.removeItem('account')
 }
 
-accountService.update = (account) => {
-  return httpClient.put('/accounts/', account)
+accountService.update = (account, api) => {
+  return api.put('/accounts/', account)
     .then(res => res)
 }
 

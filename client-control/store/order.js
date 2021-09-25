@@ -38,7 +38,7 @@ export const actions = {
   getOrders ({ commit }, id) {
     commit('orderRequest')
     let ordersArray = []
-    return orderService.loggedOrders()
+    return orderService.loggedOrders(this.$api)
       .then((res) => {
         res.forEach((order) => {
           const { cartItems, ...orders } = order
@@ -54,7 +54,7 @@ export const actions = {
   getDeliveryOrders ({ commit }, id) {
     commit('orderRequest')
     let ordersArray = []
-    return orderService.deliveryOrders()
+    return orderService.deliveryOrders(this.$api)
       .then((res) => {
         res.forEach((order) => {
           const { cartItems, ...orders } = order
@@ -69,7 +69,7 @@ export const actions = {
 
   getOrder ({ commit }, id) {
     commit('orderRequest')
-    return orderService.getById(id)
+    return orderService.getById(id, this.$api)
       .then((order) => {
         const { cartItems, ...orders } = order
         const cartItemsJson = JSON.parse(cartItems)
@@ -83,21 +83,21 @@ export const actions = {
     const { cartItems, ...order } = orderWithCartItems
     const cartItemsString = JSON.stringify(cartItems)
     order.cartItems = cartItemsString
-    return orderService.addOrder(order)
+    return orderService.addOrder(order, this.$api)
   },
 
   updateOrder ({ commit }, order) {
-    return orderService.update(order)
+    return orderService.update(order, this.$api)
   },
 
   deleteOrder ({ commit }, id) {
-    return orderService.deleteOrder(id).then(() => {
+    return orderService.deleteOrder(id, this.$api).then(() => {
       commit('removeOrder', id)
     })
   },
 
   deleteDeliveryOrder ({ commit }, { id }) {
-    return orderService.deleteOrder(id).then(() => {
+    return orderService.deleteOrder(id, this.$api).then(() => {
       commit('removeDeliveryOrder', id)
     })
   }

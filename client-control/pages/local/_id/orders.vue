@@ -98,7 +98,7 @@ export default {
     ...mapState('order', ['status'])
   },
 
-  created () {
+  mounted () {
     this.getOrders()
   },
 

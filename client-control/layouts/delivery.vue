@@ -44,7 +44,7 @@ export default {
   computed: {
     ...mapGetters('delivery', ['loggedDelivery'])
   },
-  created () {
+  mounted () {
     this.getLoggedDelivery()
   },
   methods: {

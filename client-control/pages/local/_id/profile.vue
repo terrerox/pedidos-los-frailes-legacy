@@ -84,7 +84,7 @@ export default {
     ...mapState('local', ['loggedLocal'])
   },
 
-  created () {
+  mounted () {
     this.getLoggedLocal()
   },
 

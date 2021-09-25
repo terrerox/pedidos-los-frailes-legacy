@@ -38,7 +38,7 @@ export default {
     ...mapGetters('local', ['unverifiedLocals'])
   },
 
-  created () {
+  mounted () {
     this.getLocals()
   },
 

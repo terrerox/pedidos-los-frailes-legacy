@@ -110,7 +110,7 @@ export default {
     ...mapState('product', ['status'])
   },
 
-  created () {
+  mounted () {
     this.getLoggedProducts()
   },
 

@@ -49,7 +49,7 @@ export const mutations = {
 export const actions = {
   getLoggedProducts ({ commit }, id) {
     commit('productRequest')
-    return productService.getLoggedProducts()
+    return productService.getLoggedProducts(this.$api)
       .then((products) => {
         commit('setProducts', products)
         commit('productFinishedRequest')
@@ -57,7 +57,7 @@ export const actions = {
   },
   addProduct ({ commit, dispatch }, product) {
     commit('productRequest')
-    return productService.addProduct(product).then((res) => {
+    return productService.addProduct(product, this.$api).then((res) => {
       commit('addProduct', res)
       commit('productFinishedRequest')
       dispatch('alert/success',
@@ -68,7 +68,7 @@ export const actions = {
   },
   updateProduct ({ commit, dispatch }, product) {
     commit('productRequest')
-    return productService.updateProduct(product).then((res) => {
+    return productService.updateProduct(product, this.$api).then((res) => {
       commit('setEditedProduct', res)
       commit('productFinishedRequest')
       dispatch('alert/success',
@@ -78,7 +78,7 @@ export const actions = {
     })
   },
   deleteProduct ({ commit }, id) {
-    return productService.deleteProduct(id).then(() => {
+    return productService.deleteProduct(id, this.$api).then(() => {
       commit('removeProduct', id)
     })
   }
