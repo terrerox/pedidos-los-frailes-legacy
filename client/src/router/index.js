@@ -1,13 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router'
 
 import { customerViewRoutes } from './customerViewRoutes'
-import { cmsRoutes } from './cmsRoutes'
-import { authRoutes } from './authRoutes'
 
 const routes = [
   ...customerViewRoutes,
-  ...cmsRoutes,
-  ...authRoutes,
   {
     path: '/:pathMatch(.*)',
     redirect: '/'

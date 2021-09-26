@@ -1,13 +1,12 @@
 import deliveryService from '@/services/delivery'
-import router from '@/router'
 
-const state = {
+export const state = () => ({
   deliveries: [],
   loggedDelivery: {},
   status: { isLoading: false }
-}
+})
 
-const mutations = {
+export const mutations = {
   deliveryRequest (state, ctx) {
     state.status = { isLoading: true }
   },
@@ -45,31 +44,31 @@ const mutations = {
     delivery.status = verifiedDelivery.status
   }
 }
-const actions = {
+export const actions = {
   createDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
-    return deliveryService.create(delivery)
-      .then(res => {
+    return deliveryService.create(delivery, this.$api)
+      .then((res) => {
         commit('deliveryFinishedRequest')
-        router.push(`/delivery/${res.id}`)
+        this.$router.push(`/delivery/${res.id}/orders`)
       },
-      error => {
+      (error) => {
         commit('deliveryFinishedRequest')
         dispatch('alert/error', error, { root: true })
       })
   },
   getDeliveries ({ commit }) {
-    return deliveryService.getAll()
-      .then(deliveries => {
+    return deliveryService.getAll(this.$api)
+      .then((deliveries) => {
         commit('setDeliveries', deliveries)
         commit('deliveryFinishedRequest')
       })
   },
   updateDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
-    return deliveryService.update(delivery)
+    return deliveryService.update(delivery, this.$api)
       .then(
-        res => {
+        (res) => {
           commit('setEditedDelivery', res)
           commit('deliveryFinishedRequest')
           dispatch('alert/success',
@@ -77,23 +76,23 @@ const actions = {
             { root: true }
           )
         },
-        error => {
+        (error) => {
           dispatch('alert/error', error, { root: true })
         }
       )
   },
   updateDeliveryStatus ({ commit }, delivery) {
-    return deliveryService.update(delivery)
+    return deliveryService.update(delivery, this.$api)
       .then(res => commit('setVerifiedDelivery', res))
   },
   getLoggedDelivery (context, id) {
-    return deliveryService.getLogged()
-      .then(res => {
+    return deliveryService.getLogged(this.$api)
+      .then((res) => {
         context.commit('setLoggedDelivery', res)
       })
   }
 }
-const getters = {
+export const getters = {
   activeDeliveries (state) {
     return state.deliveries.filter(delivery => delivery.status === 'active')
   },
@@ -106,12 +105,4 @@ const getters = {
   loggedDelivery (state, getters, rootState) {
     return state.loggedDelivery
   }
-}
-
-export const delivery = {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters
 }

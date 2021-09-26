@@ -1,14 +1,13 @@
 import localService from '@/services/local'
-import router from '@/router'
 
-const state = {
+export const state = () => ({
   locals: [],
   currentLocal: {},
   status: { isLoading: false },
   loggedLocal: {}
-}
+})
 
-const mutations = {
+export const mutations = {
   localRequest (state, ctx) {
     state.status = { isLoading: true }
   },
@@ -50,46 +49,46 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   createLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.create(local)
-      .then(res => {
-        router.push(`/local/${res.id}`)
+    return localService.create(local, this.$api)
+      .then((res) => {
+        this.$router.push(`/local/${res.id}/products`)
         commit('localFinishedRequest')
       },
-      error => {
+      (error) => {
         commit('localFinishedRequest')
         dispatch('alert/error', error, { root: true })
       })
   },
   getLocals ({ commit }) {
-    return localService.getAll()
-      .then(res => {
+    return localService.getAll(this.$api)
+      .then((res) => {
         commit('setLocals', res)
       })
   },
   getLocal ({ commit }, id) {
     commit('localRequest')
-    return localService.getById(id)
-      .then(res => {
+    return localService.getById(id, this.$api)
+      .then((res) => {
         commit('setCurrentLocal', res)
         commit('localFinishedRequest')
       })
   },
   getLoggedLocal ({ commit }) {
     commit('localRequest')
-    return localService.getLogged()
-      .then(res => {
+    return localService.getLogged(this.$api)
+      .then((res) => {
         commit('setLoggedLocal', res)
         commit('localFinishedRequest')
       })
   },
   updateLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.update(local)
+    return localService.update(local, this.$api)
       .then(
-        res => {
+        (res) => {
           commit('setEditedLocal', res)
           commit('localFinishedRequest')
           dispatch('alert/success',
@@ -97,17 +96,16 @@ const actions = {
             { root: true }
           )
         },
-        error => {
+        (error) => {
           dispatch('alert/error', error, { root: true })
-          console.log(error)
         }
       )
   },
   verifyLocal ({ commit, dispatch }, local) {
     commit('localRequest')
-    return localService.update(local)
+    return localService.update(local, this.$api)
       .then(
-        res => {
+        (res) => {
           commit('setVerifiedLocal', res)
           commit('localFinishedRequest')
           dispatch('alert/success',
@@ -115,15 +113,14 @@ const actions = {
             { root: true }
           )
         },
-        error => {
+        (error) => {
           dispatch('alert/error', error, { root: true })
-          console.log(error)
         }
       )
   }
 }
 
-const getters = {
+export const getters = {
   verifiedLocals (state) {
     return state.locals.filter(local => local.status === 'active')
   },
@@ -136,12 +133,4 @@ const getters = {
   loggedLocal (state, getters, rootState) {
     return state.loggedLocal
   }
-}
-
-export const local = {
-  namespaced: true,
-  state,
-  mutations,
-  actions,
-  getters
 }

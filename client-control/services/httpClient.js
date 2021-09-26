@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { authHeader } from '@/_helpers'
+import { authHeader } from './authHeader'
 
 export const httpClient = axios.create({
   baseURL: process.env.VUE_APP_API_URL || 'https://pedidoslosfrailes.com/api/'
