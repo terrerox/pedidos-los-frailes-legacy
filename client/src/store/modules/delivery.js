@@ -1,4 +1,4 @@
-import deliveryService from '@/delivery/services/delivery'
+import deliveryService from '@/services/delivery'
 import router from '@/router'
 
 const state = {

@@ -1,4 +1,4 @@
-import localService from '@/locals/services/local'
+import localService from '@/services/local'
 import router from '@/router'
 
 const state = {
