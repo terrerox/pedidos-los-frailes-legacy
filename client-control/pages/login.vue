@@ -41,7 +41,7 @@
       <div
         class="max-w-xs transform duration-200 hover:scale-110 cursor-pointer"
       >
-        <img src="../assets/img/chef.svg" alt="Chef">
+        <img :src="chefImg" alt="Chef">
       </div>
     </div>
   </div>
@@ -51,8 +51,17 @@
 import LoginForm from '../components/auth/LoginForm'
 import Header from '../components/Header'
 import Alert from '../components/shared/Alert'
+
+import chefImg from '../assets/img/chef.svg'
+
 export default {
   components: { LoginForm, Alert, Header },
+
+  data () {
+    return {
+      chefImg
+    }
+  },
   head () {
     return {
       title: 'Iniciar Sesión | Pedidos Los Frailes',

@@ -6,7 +6,7 @@
       class="cursor-pointer flex items-center"
     >
       <div>
-        <img class="w-16" src="../assets/img/logo.png">
+        <img class="w-16" :src="icon">
       </div>
       <div class="text-2xl text-gray-600 tracking-wide ml-2">
         Pedidos <span class="text-color-primary">Los Frailes</span>
@@ -16,7 +16,15 @@
 </template>
 
 <script>
+import icon from '../assets/img/logo.png'
+
 export default {
-  name: 'Header'
+  name: 'Header',
+
+  data () {
+    return {
+      icon
+    }
+  }
 }
 </script>
