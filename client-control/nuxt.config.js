@@ -54,7 +54,15 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'en',
+      name: 'Pedidos Los Frailes',
+      shortName: 'Pedidos Los Frailes',
+      themeColor: '#ec1f28',
+      msTileColor: '#eff2fb',
+      display: 'standalone',
+      orientation: 'portrait-primary',
+      appleMobileWebAppCapable: 'yes',
+      appleMobileWebAppStatusBarStyle: 'black'
     }
   },
 
