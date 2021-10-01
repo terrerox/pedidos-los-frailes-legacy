@@ -18,7 +18,7 @@
           >
             ¿Ya te has registrado como delivery?
             <nuxt-link
-              to="/login"
+              to="/"
               class="cursor-pointer text-color-primary"
             >
               ¡Inicia sesión aqui!

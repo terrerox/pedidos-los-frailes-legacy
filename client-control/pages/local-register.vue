@@ -18,7 +18,7 @@
           >
             ¿Ya has registrado tu negocio?
             <nuxt-link
-              to="/login"
+              to="/"
               class="cursor-pointer text-color-primary"
             >
               ¡Inicia sesión aqui!

@@ -42,7 +42,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.logout()
-          this.$router.push('/login')
+          this.$router.push('/')
         }
       })
     }

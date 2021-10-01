@@ -2,16 +2,16 @@ import accountService from '@/services/account'
 import localService from '@/services/local'
 import deliveryService from '@/services/delivery'
 
-let user
+let userToken
 
 if (process.browser) {
-  user = JSON.parse(localStorage.getItem('account'))
+  userToken = JSON.parse(localStorage.getItem('account'))
 }
 
 export const state = () => (
-  user
-    ? { status: { loggedIn: true }, user, loggedUser: {} }
-    : { status: { }, user: null }
+  userToken
+    ? { status: { loggedIn: true }, loggedUser: {} }
+    : { status: { }, userToken: null }
 )
 
 export const mutations = {

@@ -1,24 +1,21 @@
-import { authHeader } from '@/services/authHeader'
+// import { authHeader } from '@/services/authHeader'
 
-export default function ({ $axios, redirect }, inject) {
-  // Create a custom axios instance
-  const api = $axios.create({
-    headers: authHeader()
-  })
+export default function ({ $axios, store }, inject) {
+  const api = $axios.create()
 
   api.onResponse((res) => {
     return res.data
   })
 
-  // api.onError((error) => {
-  //   if (error.response.status === 401) {
-  //     redirect('/login')
-  //   }
-  // })
+  api.onRequest((config) => {
+    if (store.state.account.user) {
+      config.headers.Authorization = 'Bearer ' + store.state.account.user.token
+    }
 
-  // Set baseURL to something different
-  api.setBaseURL('https://pedidoslosfrailes.com/api/')
+    return config
+  })
 
-  // Inject to context as $api
+  api.setBaseURL('https://api.pedidoslosfrailes.com/api/')
+
   inject('api', api)
 }
