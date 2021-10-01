@@ -56,13 +56,11 @@ export default {
     manifest: {
       lang: 'en',
       name: 'Pedidos Los Frailes',
-      shortName: 'Pedidos Los Frailes',
-      themeColor: '#ec1f28',
-      msTileColor: '#eff2fb',
+      short_name: 'Pedidos Los Frailes',
+      theme_color: '#ec1f28',
+      ms_tile_color: '#eff2fb',
       display: 'standalone',
-      orientation: 'portrait-primary',
-      appleMobileWebAppCapable: 'yes',
-      appleMobileWebAppStatusBarStyle: 'black'
+      orientation: 'portrait-primary'
     }
   },
 
