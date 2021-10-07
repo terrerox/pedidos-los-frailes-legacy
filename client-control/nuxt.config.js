@@ -53,14 +53,22 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      title: 'Pedidos Los Frailes Control',
+      author: 'Terrerox'
+    },
     manifest: {
       lang: 'en',
-      name: 'Pedidos Los Frailes',
-      short_name: 'Pedidos Los Frailes',
+      name: 'Pedidos Los Frailes Control',
+      short_name: 'Pedidos Los Frailes Control',
+      description: 'App de control para locales y deliveries',
       theme_color: '#ec1f28',
       ms_tile_color: '#eff2fb',
       display: 'standalone',
       orientation: 'portrait-primary'
+    },
+    icon: {
+      fileName: 'app-icon.png'
     }
   },
 
