@@ -70,6 +70,9 @@ export default {
     }
   },
 
+  server: {
+    port: 4500
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vue-tooltip']
