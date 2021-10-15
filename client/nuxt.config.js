@@ -70,6 +70,10 @@ export default {
     }
   },
 
+  generate: {
+    dir: 'public'
+  },
+
   server: {
     port: 4500
   },
