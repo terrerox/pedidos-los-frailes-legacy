@@ -4,12 +4,10 @@ export default function ({ $axios, store }, inject) {
   api.onResponse((res) => {
     return res.data
   })
-
   api.onRequest((config) => {
     if (store.state.account.user) {
       config.headers.Authorization = 'Bearer ' + store.state.account.user.token
     }
-
     return config
   })
 
