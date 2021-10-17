@@ -46,6 +46,14 @@ body * {
 .text-color-primary {
     color:#ec1f28;
 }
+.tooltip {
+  background-color: #ec1f28;
+  color: #fff;
+  text-align: center;
+  padding: 5px 5px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
 .color-secondary {
     background-color: #eff2fb;
 }

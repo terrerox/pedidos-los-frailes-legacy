@@ -25,12 +25,12 @@ export default {
 
   head () {
     return {
-      title: 'Inicio | Pedidos Los Frailes Control',
+      title: 'Administrador | Pedidos Los Frailes Control',
       meta: [
         {
-          hid: 'Inicio',
-          name: 'Inicio',
-          content: 'Inicio'
+          hid: 'Administrador',
+          name: 'Administrador',
+          content: 'Administrador'
         }
       ],
       htmlAttrs: {

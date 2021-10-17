@@ -11,10 +11,10 @@
         v-for="local in unverifiedLocals"
       >
         <UnverifiedLocalItem
-          :key="local"
+          :key="local.accountId"
           :local="local"
         />
-        <hr :key="local" class="col-span-2">
+        <hr :key="local.accountId" class="col-span-2">
       </template>
     </div>
     <div v-else class="col-span-2">
