@@ -21,7 +21,7 @@ import UnverifiedLocals from '@/components/admin/UnverifiedLocals'
 export default {
   name: 'Admin',
   components: { Header, UnverifiedDeliveries, UnverifiedLocals },
-  middleware: 'authenticated',
+  middleware: 'not-authenticated',
 
   head () {
     return {

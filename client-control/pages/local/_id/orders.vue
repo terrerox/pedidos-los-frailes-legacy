@@ -71,7 +71,7 @@ export default {
 
   layout: 'local',
 
-  middleware: 'authenticated',
+  middleware: 'not-authenticated',
 
   meta: {
     title: 'Ordenes'

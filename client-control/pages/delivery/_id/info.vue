@@ -9,7 +9,7 @@ export default {
 
   components: { DeliveryInfoForm },
 
-  middleware: 'authenticated',
+  middleware: 'not-authenticated',
 
   head () {
     return {
