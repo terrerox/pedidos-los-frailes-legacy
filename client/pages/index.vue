@@ -49,52 +49,56 @@
         <img src="@/assets/wave.svg" alt="">
         <div class="color-secondary px-7 md:px-16 lg:px-16">
           <div class="px-4 sm:px-8 lg:px-14 xl:px-18 mx-auto">
-            <template v-if="verifiedLocals.length">
-              <div class="text-center">
-                <div class="xl:text-4xl text-lg md:text-2xl text-gray-600 leading-tight">
-                  Tiendas locales
+            <client-only>
+              <template v-if="verifiedLocals.length">
+                <div class="text-center">
+                  <div class="xl:text-4xl text-lg md:text-2xl text-gray-600 leading-tight">
+                    Tiendas locales
+                  </div>
+                  <div class="xl:text-xl text-gray-500 mt-5">
+                    Compra lo que deseas en los locales disponibles
+                  </div>
+                  <SearchInput v-model="search" class="mt-4" />
                 </div>
-                <div class="xl:text-xl text-gray-500 mt-5">
-                  Compra lo que deseas en los locales disponibles
-                </div>
-                <SearchInput v-model="search" class="mt-4" />
-              </div>
-              <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
-                <div
-                  v-if="filteredLocals.length"
-                  class="flex flex-wrap justify-center w-full h-full mx-auto"
-                >
+                <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
                   <div
-                    v-for="local in filteredLocals"
-                    :key="local.id"
-                    class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"
+                    v-if="filteredLocals.length"
+                    class="flex flex-wrap justify-center w-full h-full mx-auto"
                   >
-                    <Local :local="local" />
+                    <div
+                      v-for="local in filteredLocals"
+                      :key="local.id"
+                      class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"
+                    >
+                      <Local :local="local" />
+                    </div>
+                  </div>
+                  <div v-else class="w-full lg:w-1/3 m-auto">
+                    <img class="mt-6 lg:mt-12" src="@/assets/empty.svg" alt="">
                   </div>
                 </div>
-                <div v-else class="w-full lg:w-1/3 m-auto">
-                  <img class="mt-6 lg:mt-12" src="@/assets/empty.svg" alt="">
-                </div>
-              </div>
-            </template>
+              </template>
+            </client-only>
           </div>
         </div>
         <img class="w-full" src="@/assets/invertedWave.svg" alt="">
         <div class="px-7 md:px-16 lg:px-16">
           <div class="px-4 sm:px-8 lg:px-14 xl:px-18 mx-auto">
-            <template v-if="unverifiedLocals.length">
-              <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
-                <div class="flex flex-wrap justify-center w-full h-full mx-auto">
-                  <div
-                    v-for="local in unverifiedLocals"
-                    :key="local.id"
-                    class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"
-                  >
-                    <ComingSoonLocal :local="local" />
+            <client-only>
+              <template v-if="unverifiedLocals.length">
+                <div class="flex mx-auto lg:max-w-3xl xl:max-w-full">
+                  <div class="flex flex-wrap justify-center w-full h-full mx-auto">
+                    <div
+                      v-for="local in unverifiedLocals"
+                      :key="local.id"
+                      class="w-full py-10 px-5 md:w-1/2 xl:w-1/3"
+                    >
+                      <ComingSoonLocal :local="local" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </template>
+              </template>
+            </client-only>
           </div>
         </div>
       </div>
