@@ -27,6 +27,7 @@ export const actions = {
       .then((res) => {
         commit('setLocals', res)
       })
+      .catch(err => console.log(err))
   },
   getLocal ({ commit }, id) {
     commit('localRequest')
@@ -35,6 +36,7 @@ export const actions = {
         commit('setCurrentLocal', res)
         commit('localFinishedRequest')
       })
+      .catch(err => console.log(err))
   }
 }
 
