@@ -153,9 +153,11 @@ export default {
           this.addOrder(this.orderInfo)
           this.updateDeliveryStatus({ accountId: this.orderInfo.DeliveryAccountId, status: 'taken' })
           this.$refs.form.reset()
-          this.cartItems.map(cartItem => (
+          // eslint-disable-next-line no-undef
+          for (cartItem of this.cartItems) {
+            // eslint-disable-next-line no-undef
             this.$store.dispatch('cart/removeProductFromCart', cartItem)
-          ))
+          }
           this.$router.push('/')
         }
       })
