@@ -53,8 +53,9 @@ export const actions = {
         this.$router.push(`/delivery/${res.id}/orders`)
       },
       (error) => {
+        const { message } = error.response.data
         commit('deliveryFinishedRequest')
-        dispatch('alert/error', error, { root: true })
+        dispatch('alert/error', message, { root: true })
       })
   },
   getDeliveries ({ commit }) {
@@ -77,7 +78,8 @@ export const actions = {
           )
         },
         (error) => {
-          dispatch('alert/error', error, { root: true })
+          const { message } = error.response.data
+          dispatch('alert/error', message, { root: true })
         }
       )
   },

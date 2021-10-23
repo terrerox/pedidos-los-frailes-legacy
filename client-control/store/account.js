@@ -68,12 +68,13 @@ export const actions = {
           } else {
             this.$router.push(`/admin/${user.id}`)
           }
-        },
-        (error) => {
-          commit('loginFailure', error)
-          dispatch('alert/error', error, { root: true })
         }
       )
+      .catch((error) => {
+        const { message } = error.response.data
+        commit('loginFailure', message)
+        dispatch('alert/error', message, { root: true })
+      })
   },
   logout ({ commit }) {
     accountService.logout()
@@ -94,8 +95,9 @@ export const actions = {
           commit('registerSuccess', user)
         },
         (error) => {
-          commit('registerFailure', error)
-          dispatch('alert/error', error, { root: true })
+          const { message } = error.response.data
+          commit('registerFailure', message)
+          dispatch('alert/error', message, { root: true })
         }
       )
   },
@@ -109,7 +111,8 @@ export const actions = {
           )
         },
         (error) => {
-          dispatch('alert/error', error, { root: true })
+          const { message } = error.response.data
+          dispatch('alert/error', message, { root: true })
         }
       )
   },

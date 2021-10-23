@@ -58,8 +58,9 @@ export const actions = {
         commit('localFinishedRequest')
       },
       (error) => {
+        const { message } = error.response.data
         commit('localFinishedRequest')
-        dispatch('alert/error', error, { root: true })
+        dispatch('alert/error', message, { root: true })
       })
   },
   getLocals ({ commit }) {
@@ -97,7 +98,8 @@ export const actions = {
           )
         },
         (error) => {
-          dispatch('alert/error', error, { root: true })
+          const { message } = error.response.data
+          dispatch('alert/error', message, { root: true })
         }
       )
   },
@@ -114,7 +116,8 @@ export const actions = {
           )
         },
         (error) => {
-          dispatch('alert/error', error, { root: true })
+          const { message } = error.response.data
+          dispatch('alert/error', message, { root: true })
         }
       )
   }

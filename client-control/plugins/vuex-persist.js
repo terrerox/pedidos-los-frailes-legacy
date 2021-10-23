@@ -1,7 +1,8 @@
-// eslint-disable-next-line import/no-named-as-default
-import VuexPersistence from 'vuex-persist'
+import createPersistedState from 'vuex-persistedstate'
 
 export default ({ store }) => {
-  new VuexPersistence({
-  }).plugin(store)
+  createPersistedState({
+    key: 'vuex',
+    paths: ['persistedState']
+  })(store)
 }
