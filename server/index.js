@@ -16,6 +16,7 @@ app.use('/api/locals', require('./locals/locals.controller'));
 app.use('/api/products', require('./products/products.controller'));
 app.use('/api/orders', require('./orders/orders.controller'));
 app.use('/api/deliveries', require('./deliveries/deliveries.controller'));
+app.use('/api/subscriptions', require('./subscriptions/subscriptions.controller'));
 
 expressOasGenerator.init(app, {});
 // global error handler

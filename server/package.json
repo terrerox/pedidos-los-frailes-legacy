@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "generate-vapid": "web-push generate-vapid-keys"
   },
   "author": "terrerox",
   "license": "ISC",
@@ -24,6 +25,8 @@
     "rootpath": "^0.1.2",
     "sequelize": "^6.5.0",
     "swagger-ui-express": "^4.1.6",
+    "urlsafe-base64": "^1.0.0",
+    "web-push": "^3.4.5",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

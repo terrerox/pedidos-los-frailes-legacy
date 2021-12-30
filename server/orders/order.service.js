@@ -38,7 +38,6 @@ async function create(params) {
 
 async function update(id, params) {
     const order = await getOrder(id);
-    // copy params to Order and save
     Object.assign(order, params);
     await order.save();
 

@@ -4,6 +4,7 @@ const Joi = require('joi');
 const validateRequest = require('_middleware/validate-request');
 const authorize = require('_middleware/authorize')
 const orderService = require('./order.service');
+const subscriptionService = require('../subscriptions/subscription.service');
 
 // routes
 router.post('/create', createSchema, create);
@@ -36,7 +37,19 @@ function createSchema(req, res, next) {
 
 function create(req, res, next) {
     orderService.create(req.body)
-        .then(() => res.json({ message: 'Orden creada con éxito' }))
+        .then(() => { 
+            Promise.all([
+                subscriptionService.sendPushById(req.body.LocalAccountId,{
+                    title: '¡Tienes una nueva orden!',
+                    body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
+                }),
+                subscriptionService.sendPushById(req.body.DeliveryAccountId,{
+                    title: '¡Tienes una nueva orden!',
+                    body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
+                })
+            ])
+            return res.json({ message: 'Orden creada con éxito' })
+        })
         .catch(next);
 }
 
@@ -54,7 +67,6 @@ function getLocalOrder(req, res, next) {
 }
 
 function getDeliveryOrder(req, res, next) {
-    console.log(req)
     const currentDeliveryId = req.delivery.id
     orderService.getDeliveryOrder(currentDeliveryId)
         .then(orders => res.json(orders))

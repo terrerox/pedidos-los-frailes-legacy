@@ -12,7 +12,7 @@ async function initialize() {
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
     user: process.env.DB_USER || 'terrerox',
-    password: process.env.DB_PASS || 'wendy0611',
+    password: process.env.DB_PASS || 'joanwinner0611',
     database: process.env.DB_NAME || 'pedidoslosfrailes',
   }
   const connection = await mysql.createConnection({
@@ -33,6 +33,7 @@ async function initialize() {
   db.Order = require("../orders/order.model")(sequelize);
   db.Delivery = require("../deliveries/delivery.model")(sequelize);
   db.Account = require("../accounts/account.model")(sequelize);
+  db.Subscription = require("../subscriptions/subscription.model")(sequelize);
 
   db.Account.hasOne(db.Delivery, { foreignKey: 'accountId' });
   db.Delivery.belongsTo(db.Account, { foreignKey: 'accountId' });
@@ -48,6 +49,10 @@ async function initialize() {
 
   db.Delivery.hasOne(db.Order);
   db.Order.belongsTo(db.Delivery);
+
+  db.Account.hasOne(db.Subscription, { foreignKey: 'accountId' });
+  db.Subscription.belongsTo(db.Account, { foreignKey: 'accountId' });
+
 
   // sync all models with database
   await sequelize.sync();
