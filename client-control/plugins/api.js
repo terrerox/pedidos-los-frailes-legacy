@@ -14,7 +14,7 @@ export default function ({ $axios, store }, inject) {
     return config
   })
 
-  api.setBaseURL('http://localhost:4000/api/')
+  api.setBaseURL('https://api.pedidoslosfrailes.com/api/')
 
   inject('api', api)
 }
