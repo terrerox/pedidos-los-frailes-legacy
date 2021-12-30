@@ -4,6 +4,7 @@
 
 <script>
 import LocalInfoForm from '@/components/local/LocalInfoForm'
+
 export default {
   name: 'LocalInfo',
 

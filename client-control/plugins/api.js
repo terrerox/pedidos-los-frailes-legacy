@@ -5,13 +5,16 @@ export default function ({ $axios, store }, inject) {
     return res.data
   })
   api.onRequest((config) => {
+    if (config.url === '/subscriptions/key') {
+      config.responseType = 'arraybuffer'
+    }
     if (store.state.account.user) {
       config.headers.Authorization = 'Bearer ' + store.state.account.user.token
     }
     return config
   })
 
-  api.setBaseURL('https://api.pedidoslosfrailes.com/api/')
+  api.setBaseURL('http://localhost:4000/api/')
 
   inject('api', api)
 }

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AllowNotificationsModal v-if="!isSubscribed" />
     <div>
       <div class="flex h-screen bg-gray-100 dark:bg-gray-800 font-roboto">
         <SideBar :sidebar-open="sidebarOpen" @sidebarOpen="sidebarOpen = false" />
@@ -18,13 +19,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapState } from 'vuex'
 import Header from '../components/delivery/Header'
 import SideBar from '../components/delivery/SideBar'
+import AllowNotificationsModal from '@/components/shared/AllowNotificationsModal'
+
 export default {
   name: 'Delivery',
 
-  components: { Header, SideBar },
+  components: { Header, SideBar, AllowNotificationsModal },
   data () {
     return {
       sidebarOpen: false
@@ -42,13 +45,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('delivery', ['loggedDelivery'])
+    ...mapGetters('delivery', ['loggedDelivery']),
+    ...mapState('push', ['isSubscribed'])
   },
   mounted () {
     this.getLoggedDelivery()
   },
+  created () {
+    this.getSubscription()
+  },
   methods: {
-    ...mapActions('delivery', ['getLoggedDelivery'])
+    ...mapActions('delivery', ['getLoggedDelivery']),
+    ...mapActions('push', ['getSubscription'])
   }
 }
 </script>

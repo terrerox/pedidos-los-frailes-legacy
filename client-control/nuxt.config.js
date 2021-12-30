@@ -13,10 +13,6 @@ export default {
     ]
   },
 
-  router: {
-    routeNameSplitter: '-'
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -24,8 +20,9 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuex-persist', mode: 'client' },
-    { src: '~/plugins/api', mode: 'client' },
-    { src: '~/plugins/vue-tooltip', mode: 'client' }
+    { src: '~/plugins/api' },
+    { src: '~/plugins/vue-tooltip', mode: 'client' },
+    { src: '~/plugins/sw-ref', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -71,6 +68,12 @@ export default {
     icon: {
       fileName: 'app-icon.png'
     }
+  },
+
+  workbox: {
+    importScripts: [
+      'custom-sw.js'
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
