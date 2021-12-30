@@ -49,7 +49,6 @@ async function sendPushToAll(body) {
 
 async function sendPushById(id, data) {
     const subscriptions = await findSubscriptions(id)
-    console.log(subscriptions)
 
     subscriptions.forEach(subscription => {
         const { endpoint, expirationTime, p256dh, auth } = subscription
@@ -63,8 +62,7 @@ async function sendPushById(id, data) {
         }
         webpush.sendNotification(subscriptionData, JSON.stringify(data))
             .then(res => {
-                console.log(res)
-                console.log('Notificacion enviada ')
+                return res
             })
             .catch( err => {
 
