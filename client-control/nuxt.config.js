@@ -48,6 +48,9 @@ export default {
     '@nuxtjs/auth-next'
   ],
 
+  publicRuntimeConfig: {
+    baseUrl: process.env.BASE_URL
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.BASE_URL

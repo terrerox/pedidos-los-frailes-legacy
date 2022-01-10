@@ -1,4 +1,4 @@
-export default function ({ $axios, $auth }, inject) {
+export default function ({ $axios, $auth, $config: { baseUrl } }, inject) {
   const api = $axios.create()
 
   api.onResponse((res) => {
@@ -12,7 +12,7 @@ export default function ({ $axios, $auth }, inject) {
     return config
   })
 
-  api.setBaseURL(process.env.BASE_URL)
+  api.setBaseURL(baseUrl)
 
   inject('api', api)
 }
