@@ -2,17 +2,10 @@ import accountService from '@/services/account'
 import localService from '@/services/local'
 import deliveryService from '@/services/delivery'
 
-let userToken
-
-if (process.browser) {
-  userToken = JSON.parse(localStorage.getItem('account'))
-}
-
-export const state = () => (
-  userToken
-    ? { status: { loggedIn: true }, loggedUser: {} }
-    : { status: { }, userToken: null }
-)
+export const state = () => ({
+  status: {},
+  userToken: null
+})
 
 export const mutations = {
   setLogged (state, loggedUser) {
@@ -49,9 +42,11 @@ export const actions = {
   login ({ dispatch, commit }, { userName, password }) {
     commit('loginRequest', { userName })
 
-    accountService.login(userName, password, this.$api)
+    this.$auth.loginWith('local', { data: { userName, password } })
       .then(
-        (user) => {
+        (resp) => {
+          const user = resp.data
+          this.$auth.setUser(user)
           commit('loginSuccess', user)
           if (user.role === 'Local') {
             localService.getLogged(this.$api).then((res) => {
@@ -77,7 +72,7 @@ export const actions = {
       })
   },
   logout ({ commit }) {
-    accountService.logout()
+    this.$auth.logout()
     commit('logout')
   },
   register ({ dispatch, commit }, userData) {

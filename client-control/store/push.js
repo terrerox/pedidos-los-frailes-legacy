@@ -14,7 +14,7 @@ export const actions = {
   getPublicKey ({ dispatch }) {
     return pushService.getKey(this.$api)
       .then((key) => {
-        this.$sw.pushManager.subscribe({
+        process.client && this.$sw.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey: key
         })
@@ -30,14 +30,14 @@ export const actions = {
   },
 
   getSubscription ({ commit }) {
-    this.$sw.pushManager.getSubscription().then((subscription) => {
+    process.client && this.$sw.pushManager.getSubscription().then((subscription) => {
       subscription
         ? commit('setIsSubscribed', true)
         : commit('setIsSubscribed', false)
     })
   },
   destroySubscription ({ commit }) {
-    this.$sw.pushManager.getSubscription().then((subscription) => {
+    process.client && this.$sw.pushManager.getSubscription().then((subscription) => {
       subscription.unsubscribe().then(() => commit('setIsSubscribed', false))
     })
   }

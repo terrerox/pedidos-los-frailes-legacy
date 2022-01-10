@@ -1,13 +1,8 @@
-export default function ({ store, redirect }) {
-  // const { status, user } = store.state.account
-  // if (status.loggedIn) {
-  //   const USER_ROLES = {
-  //     Admin: () => redirect(`admin/${user.id}`),
-  //     Local: () => redirect(`local/${user.id}/products`),
-  //     Delivery: () => redirect(`delivery/${user.id}/orders`)
-  //   }
-  //   console.log(USER_ROLES)
-  //   console.log(status)
-  // }
-  // console.log(store.state)
+// eslint-disable-next-line require-await
+export default async function ({ $auth, store, redirect }) {
+  const isLogged = $auth.loggedIn
+  if (!isLogged) {
+    store.dispatch('alert/error', 'La sesión expiró, inicie sesión nuevamente')
+    return redirect('/')
+  }
 }

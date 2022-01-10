@@ -10,7 +10,8 @@ export default {
 
   components: { LocalInfoForm },
 
-  middleware: 'not-authenticated',
+  middleware: 'authenticated',
+
   head () {
     return {
       title: 'Completa tu registro | Pedidos Los Frailes',

@@ -85,7 +85,6 @@ import chefImg from '../assets/img/chef.svg'
 
 export default {
   components: { LoginForm, Alert, Header },
-  middleware: 'authenticated',
 
   data () {
     return {

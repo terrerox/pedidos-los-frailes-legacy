@@ -74,7 +74,7 @@ export default {
 
   layout: 'local',
 
-  middleware: 'not-authenticated',
+  middleware: 'authenticated',
 
   data () {
     return {

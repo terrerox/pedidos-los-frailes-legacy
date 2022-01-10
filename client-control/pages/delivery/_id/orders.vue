@@ -88,7 +88,7 @@ export default {
 
   layout: 'delivery',
 
-  middleware: 'not-authenticated',
+  middleware: 'authenticated',
 
   data () {
     return {

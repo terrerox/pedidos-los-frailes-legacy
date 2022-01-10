@@ -1,4 +1,4 @@
-export default function ({ $axios, store }, inject) {
+export default function ({ $axios, $auth }, inject) {
   const api = $axios.create()
 
   api.onResponse((res) => {
@@ -8,13 +8,11 @@ export default function ({ $axios, store }, inject) {
     if (config.url === '/subscriptions/key') {
       config.responseType = 'arraybuffer'
     }
-    if (store.state.account.user) {
-      config.headers.Authorization = 'Bearer ' + store.state.account.user.token
-    }
+    config.headers.Authorization = $auth.strategies.local.token.get()
     return config
   })
 
-  api.setBaseURL('https://api.pedidoslosfrailes.com/api/')
+  api.setBaseURL(process.env.BASE_URL)
 
   inject('api', api)
 }
