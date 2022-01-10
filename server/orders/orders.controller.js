@@ -38,13 +38,16 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     orderService.create(req.body)
         .then(() => { 
+            const { LocalAccountId, DeliveryAccountId } = req.body
             Promise.all([
-                subscriptionService.sendPushById(req.body.LocalAccountId,{
+                subscriptionService.sendPushById(LocalAccountId,{
                     title: '¡Tienes una nueva orden!',
+                    openUrl:`/local/${LocalAccountId}/orders`,
                     body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
                 }),
-                subscriptionService.sendPushById(req.body.DeliveryAccountId,{
+                subscriptionService.sendPushById(DeliveryAccountId,{
                     title: '¡Tienes una nueva orden!',
+                    openUrl:`/local/${DeliveryAccountId}/orders`,
                     body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
                 })
             ])

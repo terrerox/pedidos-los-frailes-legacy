@@ -65,7 +65,7 @@ async function sendPushById(id, data) {
                 return res
             })
             .catch( err => {
-
+                
                 if ( err.statusCode === 410 ) {
                     _delete(subscription)
                 }
