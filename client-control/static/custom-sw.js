@@ -21,8 +21,8 @@ self.addEventListener('notificationclick', (e) => {
 
   // eslint-disable-next-line no-undef
   const response = clients.matchAll()
-    .then((clients) => {
-      const client = clients.find((c) => {
+    .then((c) => {
+      const client = c.find((c) => {
         return c.visibilityState === 'visible'
       })
 
@@ -30,6 +30,7 @@ self.addEventListener('notificationclick', (e) => {
         client.navigate(notification.data.url)
         client.focus()
       } else {
+        // eslint-disable-next-line no-undef
         clients.openWindow(notification.data.url)
       }
 
