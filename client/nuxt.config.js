@@ -42,12 +42,28 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.BASE_URL
+  },
+
+  auth: {
+    strategies: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        codeChallengeMethod: '',
+        responseType: 'token',
+        redirectUri: 'http://localhost:4500',
+        endpoints: {
+          token: 'http://localhost:4000/api/accounts/google-auth', // somm backend url to resolve your auth with google and give you the token back
+          userInfo: 'http://localhost:4000/api/accounts/logged' // the endpoint to get the user info after you recived the token
+        }
+      }
+    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
