@@ -47,7 +47,7 @@ function create(req, res, next) {
                 }),
                 subscriptionService.sendPushById(DeliveryAccountId,{
                     title: '¡Tienes una nueva orden!',
-                    openUrl:`/local/${DeliveryAccountId}/orders`,
+                    openUrl:`/delivery/${DeliveryAccountId}/orders`,
                     body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
                 })
             ])
