@@ -20,7 +20,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuex-persist', mode: 'client' },
-    { src: '~/plugins/vue-tooltip', mode: 'client' }
+    { src: '~/plugins/vue-tooltip', mode: 'client' },
+    { src: '~/plugins/pwa-update', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

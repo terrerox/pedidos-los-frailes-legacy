@@ -100,12 +100,26 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     orderService.update(req.params.id, req.body)
-        .then(order => res.json(order))
+        .then(async(order) => { 
+            const { LocalAccountId, status } = order
+            
+            status === 'confirmed'
+                && (
+                    await subscriptionService.sendPushById(LocalAccountId,{
+                        title: '¡El delivery confirmó la orden!',
+                        openUrl:`/local/${LocalAccountId}/orders`,
+                        body: 'Revisa ordenes para mas información',
+                    })
+                )
+            return res.json(order)
+        })
         .catch(next);
 }
 
 function _delete(req, res, next) {
     orderService.delete(req.params.id)
-        .then(() => res.json({ message: 'Orden eliminada con éxito' }))
+        .then(() => { 
+            res.json({ message: 'Orden eliminada con éxito' }) 
+        })
         .catch(next);
 }
