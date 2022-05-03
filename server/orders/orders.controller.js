@@ -47,7 +47,7 @@ function create(req, res, next) {
                 }),
                 subscriptionService.sendPushById(DeliveryAccountId,{
                     title: '¡Tienes una nueva orden!',
-                    openUrl:`/local/${DeliveryAccountId}/orders`,
+                    openUrl:`/delivery/${DeliveryAccountId}/orders`,
                     body: 'Ha llegado una nueva orden, revisa ordenes para mas información',
                 })
             ])
@@ -100,12 +100,26 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     orderService.update(req.params.id, req.body)
-        .then(order => res.json(order))
+        .then(async(order) => { 
+            const { LocalAccountId, status } = order
+            
+            status === 'confirmed'
+                && (
+                    await subscriptionService.sendPushById(LocalAccountId,{
+                        title: '¡El delivery confirmó la orden!',
+                        openUrl:`/local/${LocalAccountId}/orders`,
+                        body: 'Revisa ordenes para mas información',
+                    })
+                )
+            return res.json(order)
+        })
         .catch(next);
 }
 
 function _delete(req, res, next) {
     orderService.delete(req.params.id)
-        .then(() => res.json({ message: 'Orden eliminada con éxito' }))
+        .then(() => { 
+            res.json({ message: 'Orden eliminada con éxito' }) 
+        })
         .catch(next);
 }

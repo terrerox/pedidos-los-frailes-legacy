@@ -8,6 +8,7 @@ const accountService = require('./account.service');
 
 // routes
 router.post('/authenticate', authenticateSchema, authenticate);
+router.get('/google-auth', googleAuthentication);
 router.post('/register', registerSchema, register);
 router.get('/all', getAll);
 router.get('/logged', authorize(), getLogged);
@@ -23,6 +24,14 @@ function authenticateSchema(req, res, next) {
         password: Joi.string().required()
     });
     validateRequest(req, next, schema);
+}
+
+function googleAuthentication(req, res, next) {
+    const { code } = req.body
+    console.log(req)
+    accountService.googleAuth(code)
+        .then(account => res.json(account))
+        .catch(next);
 }
 
 function authenticate(req, res, next) {

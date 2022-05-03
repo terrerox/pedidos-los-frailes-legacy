@@ -1,10 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
+const client = require("_helpers/google-auth");
 require('dotenv').config()
 
 module.exports = {
   authenticate,
+  googleAuth,
   create,
   update,
   getAll,
@@ -18,6 +20,23 @@ async function getAll() {
 
 async function getById(id) {
   return await getAccount(id);
+}
+
+async function googleAuth(token) {
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: process.env.GOOGLE_CLIENT_ID
+  });
+  console.log(token)
+  const { name, email, picture } = ticket.getPayload();    
+  const account = await db.Account.upsert({ 
+      where: { userName: email },
+      update: {},
+      create: { userName: email, role: 'client' }
+  })
+
+  console.log(account)
+  return account
 }
 
 async function authenticate({ userName, password }) {
