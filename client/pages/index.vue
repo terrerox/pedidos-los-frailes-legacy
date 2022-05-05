@@ -22,22 +22,6 @@
                   Una plataforma de pedidos en linea y delivery exclusivamente
                   para Los Frailes
                 </p>
-                <button
-                  v-show="!installed"
-                  class="bg-white shadow-md px-3 py-2 m-auto mt-6 rounded-lg flex items-center space-x-4"
-                  @click="installPWA"
-                >
-                  <div class="image">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <div class="text">
-                    <p class="text-xs font-semibold text-gray-900">
-                      Instalar aplicación
-                    </p>
-                  </div>
-                </button>
               </div>
 
               <!-- hero image -->
@@ -114,12 +98,6 @@ import Local from '@/components/index/Local'
 import ComingSoonLocal from '@/components/index/ComingSoonLocal'
 import SearchInput from '@/components/shared/SearchInput'
 
-let prompt
-process.client && window.addEventListener('beforeinstallprompt', function (e) {
-  e.preventDefault()
-  prompt = e
-})
-
 export default {
   name: 'Home',
 
@@ -129,8 +107,7 @@ export default {
 
   data () {
     return {
-      search: '',
-      installed: false
+      search: ''
     }
   },
 
@@ -166,30 +143,9 @@ export default {
   },
   created () {
     this.getLocals()
-    this.isPWAInstalled()
-    this.installed = process.client && localStorage.getItem('installed')
   },
   methods: {
     ...mapActions('local', ['getLocals']),
-    async installPWA () {
-      prompt.prompt()
-      const result = await prompt.userChoice
-      if (result && result.outcome === 'accepted') {
-        this.installed = true
-      }
-    },
-    async isPWAInstalled () {
-      if (process.client) {
-        if ('getInstalledRelatedApps' in window.navigator) {
-          const relatedApps = await window.navigator.getInstalledRelatedApps()
-          if (relatedApps.length > 0) {
-            localStorage.setItem('installed', true)
-          } else {
-            localStorage.setItem('installed', false)
-          }
-        }
-      }
-    },
     logInGoogle () {
       this.$auth.loginWith('google')
     }

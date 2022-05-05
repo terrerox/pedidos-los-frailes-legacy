@@ -51,10 +51,18 @@
       </div>
       <div v-if="!onCheckout" class="max-w-sm my-4 m-auto hidden lg:block">
         <nuxt-link
+          v-if="authenticated"
           class="block w-full px-6 py-4 text-xs font-medium font-bold leading-6 text-center text-white uppercase transition color-primary rounded shadow ripple btn-hover focus:outline-none"
           :to="{ name: 'shop-id-checkout', params: { id: $route.params.id }}"
         >
           Ordena ya
+        </nuxt-link>
+        <nuxt-link
+          v-else
+          class="block w-full px-6 py-4 text-xs font-medium font-bold leading-6 text-center text-white uppercase transition bg-gray-500 rounded shadow ripple focus:outline-none"
+          to="/login"
+        >
+          Inicia sesión para ordenar
         </nuxt-link>
       </div>
     </template>
@@ -63,7 +71,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import CartItem from './CartItem'
 import EmptyCart from './EmptyCart'
 import { currency } from '@/helpers'
@@ -76,12 +84,13 @@ export default {
     }
   },
   computed: {
-    title () {
-      return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
-    },
+    ...mapState('authentication', ['authenticated']),
     ...mapGetters('local', {
       currentLocal: 'currentLocal'
     }),
+    title () {
+      return !this.onCheckout ? 'Mi carrito' : 'Review de carrito'
+    },
     cartItems () {
       return this.$store.getters['cart/productsOnCart'].filter(
         (item) => {
