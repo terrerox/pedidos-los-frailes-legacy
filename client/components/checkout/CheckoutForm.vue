@@ -7,14 +7,14 @@
       </div>
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.name"
         required
         label="Nombre *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.phoneNumber"
         v-mask="'+1 ###-###-####'"
         required
@@ -24,7 +24,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.street"
         type="text"
         required
@@ -32,14 +32,14 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.numberOfHouse"
         required
         label="Número de casa *"
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.reference"
         required
         type="text"
@@ -47,14 +47,14 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.apartment"
         type="text"
         label="Edificio/Apto/Extensión"
       />
     </div>
     <div class="col-span-2 mt-2 pr-1">
-      <material-input
+      <MaterialInput
         v-model="orderInfo.additionalNotes"
         type="text"
         label="Notas adicionales"

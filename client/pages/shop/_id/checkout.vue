@@ -22,6 +22,8 @@ export default {
   name: 'Checkout',
   components: { Cart, CheckoutForm, Header },
 
+  middleware: 'authenticated',
+
   head () {
     return {
       title: 'Checkout | Pedidos Los Frailes',
