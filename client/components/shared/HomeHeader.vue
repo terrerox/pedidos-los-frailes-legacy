@@ -16,17 +16,12 @@
         <navbar class="navbar block">
           <ul class="flex space-x-8 items-baseline text-sm">
             <li v-show="!authenticated">
-              <a href="#" class="hover:text-orange-500 hover:border-b-2 hover:border-orange-500">
-                Regístrate
-              </a>
-            </li>
-            <li v-show="!authenticated">
               <button
                 class="color-primary text-xs md:text-sm text-gray-100 p-2 rounded-full tracking-wide
                 font-semibold font-display focus:outline-none focus:shadow-outline btn-hover shadow-lg"
                 @click="goToLogin"
               >
-                Inicia sesión
+                Inicia con nosotros
               </button>
             </li>
             <li>

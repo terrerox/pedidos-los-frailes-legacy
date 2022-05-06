@@ -13,7 +13,7 @@
         type="submit"
       >
         <Loader v-show="isLoading" />
-        <span v-show="!isLoading">Inicia sesión</span>
+        <span v-show="!isLoading">Inicia sesión / Regístrate</span>
       </button>
     </div>
   </form>
@@ -30,22 +30,6 @@ export default {
   data () {
     return {
       email: ''
-    }
-  },
-
-  head () {
-    return {
-      title: 'Login | Pedidos Los Frailes',
-      meta: [
-        {
-          hid: 'Login',
-          name: 'Login',
-          content: 'Loguea para realizar pedidos'
-        }
-      ],
-      htmlAttrs: {
-        lang: 'en'
-      }
     }
   },
 

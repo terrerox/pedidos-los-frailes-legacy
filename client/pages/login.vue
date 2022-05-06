@@ -13,9 +13,12 @@
     <section class="mt-8">
       <LoginForm />
     </section>
-    <section class="flex justify-between mt-8 text-gray-500 text-sm leading-relaxed">
-      <div>¿No tienes una cuenta?</div>
-      <a>Regístrate</a>
+    <section class="text-center mt-8 text-gray-500 text-sm leading-relaxed">
+      <div class="text-xs">
+        &copy; {{ new Date().getFullYear() }} Alerta <span
+          class="text-color-primary"
+        > Los Frailes</span>
+      </div>
     </section>
   </main>
 </template>
@@ -24,6 +27,27 @@ import LoginForm from '../components/login/LoginForm'
 import Header from '../components/login/Header'
 
 export default {
-  components: { LoginForm, Header }
+  components: { LoginForm, Header },
+  head () {
+    return {
+      title: 'Login | Pedidos Los Frailes',
+      meta: [
+        {
+          hid: 'Login',
+          name: 'Login',
+          content: 'Loguea para realizar pedidos'
+        }
+      ],
+      htmlAttrs: {
+        lang: 'en'
+      }
+    }
+  },
+
+  methods: {
+    goToRegister () {
+      this.$router.push('/register')
+    }
+  }
 }
 </script>
