@@ -18,10 +18,11 @@
         {{ user.email }}
       </h2>
       <a
-        class="block px-4 py-2 cursor-pointer text-sm text-gray-700 btn-hover hover:text-white"
+        class="block px-4 py-2 cursor-pointer flex justify-center text-sm color-primary btn-hover text-white"
         @click="logoutButton"
       >
-        Cerrar sesión
+        <Loader v-show="isLoading" />
+        <span v-show="!isLoading">Cerrar sesión</span>
       </a>
     </div>
   </div>
@@ -30,16 +31,20 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import ProfilePlaceholder from '@/assets/profile-placeholder.png'
+import Loader from '@/components/shared/Loader'
 export default {
+  name: 'Profile',
+
+  components: { Loader },
+
   data () {
     return {
       dropdownOpen: false,
       placeholder: ProfilePlaceholder
     }
   },
-  computed: {
-    ...mapState('authentication', ['user'])
-  },
+  computed: mapState('authentication', ['user', 'isLoading']),
+
   methods: {
     ...mapActions('authentication', {
       logoutButton: 'logout'

@@ -69,7 +69,7 @@ process.client && window.addEventListener('beforeinstallprompt', function (e) {
 })
 
 export default {
-  name: 'Header',
+  name: 'HomeHeader',
 
   components: { Profile },
 

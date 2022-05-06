@@ -59,7 +59,7 @@ body * {
     background-color: #eff2fb;
 }
 .btn-hover:hover {
-    background-color: #ec1f28;
+    background-color: #e01e27;
     @apply hover:shadow-xl;
 }
 .sidebar-btn:hover {
