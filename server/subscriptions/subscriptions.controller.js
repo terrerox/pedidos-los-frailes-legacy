@@ -15,7 +15,7 @@ function getPublicKey(req, res, next) {
 }
 
 function addSubscription(req, res, next) {
-    req.body.accountId = req.user.sub
+    req.body.accountId = req.user.dataValues.id
     subscriptionService.addSubscription(req.body)
         .then(() => {
             return res.json({ message: 'Subscripción completada' })
