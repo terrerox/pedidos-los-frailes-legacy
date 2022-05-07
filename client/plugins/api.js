@@ -1,18 +1,18 @@
-export default function ({ $axios, store, $config: { baseUrl } }, inject) {
+export default function ({ $axios, store }, inject) {
   const api = $axios.create()
   const { token } = store.state.authentication
 
   api.onResponse((res) => {
-    console.log(res)
     return res.data
   })
-  api.onRequest((re) => {
-    console.log(re)
-    return re
+
+  api.onRequest((config) => {
+    if (config.url === '/subscriptions/key') {
+      config.responseType = 'arraybuffer'
+    }
   })
 
-  api.setToken(token, 'Bearer', ['post', 'delete'])
-  console.log(token)
+  api.setToken(token, 'Bearer')
   api.setBaseURL(process.env.BASE_URL)
 
   inject('api', api)

@@ -1,5 +1,6 @@
 <template>
   <div class="background-canvas">
+    <AllowNotificationsModal v-show="!isSubscribed && authenticated" />
     <HomeHeader />
     <nuxt />
     <Footer />
@@ -7,11 +8,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import Footer from '@/components/shared/Footer'
 import HomeHeader from '@/components/shared/HomeHeader'
+import AllowNotificationsModal from '@/components/shared/AllowNotificationsModal'
 
 export default {
-  components: { Footer, HomeHeader },
+  components: { Footer, HomeHeader, AllowNotificationsModal },
 
   head () {
     return {
@@ -22,7 +25,17 @@ export default {
         }
       ]
     }
-  }
+  },
+  computed: {
+    ...mapState('push', ['isSubscribed']),
+    ...mapState('authentication', ['authenticated'])
+  },
+
+  created () {
+    this.getSubscription()
+  },
+
+  methods: mapActions('push', ['getSubscription'])
 }
 </script>
 

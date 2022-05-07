@@ -22,6 +22,7 @@ export default {
     { src: '~/plugins/vuex-persist', mode: 'client' },
     { src: '~/plugins/api' },
     { src: '~/plugins/vue-tooltip', mode: 'client' },
+    { src: '~/plugins/sw-ref', mode: 'client' },
     { src: '~/plugins/pwa-update', mode: 'client' }
   ],
 

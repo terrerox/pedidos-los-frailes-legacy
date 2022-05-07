@@ -15,6 +15,11 @@
 
         <navbar class="navbar block">
           <ul class="flex space-x-8 items-baseline text-sm">
+            <li v-show="!installed">
+              <a class="hover:text-orange-500 hover:border-b-2 hover:border-orange-500" @click="installPWA">
+                Instalar app
+              </a>
+            </li>
             <li v-show="!authenticated">
               <button
                 class="color-primary text-xs md:text-sm text-gray-100 p-2 rounded-full tracking-wide
@@ -22,24 +27,6 @@
                 @click="goToLogin"
               >
                 Inicia con nosotros
-              </button>
-            </li>
-            <li>
-              <button
-                v-show="!installed"
-                class="bg-white shadow-md px-3 py-2 m-auto mt-6 rounded-lg flex items-center space-x-4"
-                @click="installPWA"
-              >
-                <div class="image">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <div class="text">
-                  <p class="text-xs font-semibold text-gray-900">
-                    Instalar aplicación
-                  </p>
-                </div>
               </button>
             </li>
             <li v-show="authenticated">
