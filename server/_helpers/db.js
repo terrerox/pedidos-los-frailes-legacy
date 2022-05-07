@@ -15,13 +15,22 @@ async function initialize() {
     password: process.env.DB_PASS || 'joanwinner0611',
     database: process.env.DB_NAME || 'pedidoslosfrailes',
   }
+  const {
+    host,
+    port,
+    user,
+    password,
+    database,
+  } = connectionData
+  
   const connection = await mysql.createConnection({
-    host: connectionData.host,
-    port: connectionData.port,
-    user: connectionData.user,
-    password: connectionData.password,
-    database: connectionData.database,
+    host,
+    port,
+    user,
+    password,
+    database,
   });
+  
   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${connectionData.database}\`;`);
 
   const sequelize = new Sequelize(connectionData.database, connectionData.user, connectionData.password, {
@@ -49,6 +58,9 @@ async function initialize() {
 
   db.Delivery.hasOne(db.Order);
   db.Order.belongsTo(db.Delivery);
+
+  db.Account.hasOne(db.Order);
+  db.Order.belongsTo(db.Account);
 
   db.Account.hasOne(db.Subscription, { foreignKey: 'accountId' });
   db.Subscription.belongsTo(db.Account, { foreignKey: 'accountId' });

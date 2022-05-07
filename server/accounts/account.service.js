@@ -1,14 +1,9 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const db = require("_helpers/db");
-const client = require("_helpers/google-auth");
 require('dotenv').config()
 
 module.exports = {
-  authenticate,
-  googleAuth,
-  create,
-  update,
+  join,
   getAll,
   getById,
   delete: _delete,
@@ -22,75 +17,21 @@ async function getById(id) {
   return await getAccount(id);
 }
 
-async function googleAuth(token) {
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience: process.env.GOOGLE_CLIENT_ID
-  });
-  console.log(token)
-  const { name, email, picture } = ticket.getPayload();    
-  const account = await db.Account.upsert({ 
-      where: { userName: email },
-      update: {},
-      create: { userName: email, role: 'client' }
-  })
-
-  console.log(account)
-  return account
-}
-
-async function authenticate({ userName, password }) {
-  const account = await db.Account.scope("withHash").findOne({
-    where: { userName },
+async function join({ email, role }) {
+  const account = await db.Account.findOne({
+    where: { email },
   });
 
-  if (!account || !(await bcrypt.compare(password, account.hash)))
-    throw "Usuario o contraseña incorrectas";
+  if(!account) {
+    const account = await db.Account.create({ email, role });
+    const { id } = account.dataValues
+    const token = generateToken(id)
+    return { token }
+  }
 
-  // authentication successful
-  const token = jwt.sign({ sub: account.id }, process.env.SECRET_TOKEN, {
-    expiresIn: "7d",
-  });
-  return { ...omitHash(account.get()), token };
-}
-
-async function create(params) {
-    // validate
-    if (await db.Account.findOne({ where: { userName: params.userName } })) {
-        throw 'Usuario "' + params.userName + '" ya existe';
-    }
-
-    // hash password
-    if (params.password) {
-        params.hash = await bcrypt.hash(params.password, 10);
-    }
-
-    // save account
-    await db.Account.create(params);
-}
-
-async function update(id, params) {
-    const account = await getAccount(id);
-  
-    // validate
-    const userNameChanged = params.userName && account.userName !== params.userName;
-    if (
-      userNameChanged &&
-      (await db.Account.findOne({ where: { userName: params.userName } }))
-    ) {
-      throw 'Usuario "' + params.userName + '" ya existe';
-    }
-  
-    // hash password if it was entered
-    if (params.password) {
-      params.hash = await bcrypt.hash(params.password, 10);
-    }
-  
-    // copy params to account and save
-    Object.assign(account, params);
-    await account.save();
-  
-    return omitHash(account.get());
+  const { id } = account.dataValues
+  const token = generateToken(id)
+  return { token }
 }
 
 async function _delete(id) {
@@ -104,7 +45,8 @@ async function getAccount(id) {
     return account;
 }
 
-function omitHash(account) {
-    const { hash, ...accountWithoutHash } = account;
-    return accountWithoutHash;
+function generateToken(id) {
+  return jwt.sign({ sub: id }, process.env.SECRET_TOKEN, {
+    expiresIn: "7d",
+  });
 }

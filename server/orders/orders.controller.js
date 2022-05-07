@@ -7,7 +7,7 @@ const orderService = require('./order.service');
 const subscriptionService = require('../subscriptions/subscription.service');
 
 // routes
-router.post('/create', createSchema, create);
+router.post('/create', authorize(), createSchema, create);
 router.get('/all', authorize(), getAll);
 router.get('/', authorize(), getLocalOrder);
 router.get('/delivery', authorize(), getDeliveryOrder);
@@ -36,9 +36,10 @@ function createSchema(req, res, next) {
 }
 
 function create(req, res, next) {
+    req.body.AccountId = req.user.dataValues.id
     orderService.create(req.body)
-        .then(() => { 
-            const { LocalAccountId, DeliveryAccountId } = req.body
+        .then(res => {
+            const { LocalAccountId, DeliveryAccountId } = res.dataValues
             Promise.all([
                 subscriptionService.sendPushById(LocalAccountId,{
                     title: '¡Tienes una nueva orden!',

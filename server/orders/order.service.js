@@ -33,7 +33,7 @@ async function getById(id) {
 }
 
 async function create(params) {
-    await db.Order.create(params);
+    return await db.Order.create(params);
 }
 
 async function update(id, params) {
