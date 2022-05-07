@@ -2,7 +2,7 @@ const orderService = {}
 
 orderService.update = (order, api) => {
   return api.put(`/orders/${order.id}`, order)
-    .then(res => res.data)
+    .then(res => res)
 }
 
 orderService.deleteOrder = (id, api) => {

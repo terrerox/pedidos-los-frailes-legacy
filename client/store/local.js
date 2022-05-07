@@ -23,7 +23,7 @@ export const mutations = {
 
 export const actions = {
   getLocals ({ commit }) {
-    return localService.getAll(this.$axios)
+    return localService.getAll(this.$api)
       .then((res) => {
         commit('setLocals', res)
       })
@@ -31,7 +31,7 @@ export const actions = {
   },
   getLocal ({ commit }, id) {
     commit('localRequest')
-    return localService.getById(id, this.$axios)
+    return localService.getById(id, this.$api)
       .then((res) => {
         commit('setCurrentLocal', res)
         commit('localFinishedRequest')

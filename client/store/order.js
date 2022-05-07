@@ -23,15 +23,15 @@ export const actions = {
     const { cartItems, ...order } = orderWithCartItems
     const cartItemsString = JSON.stringify(cartItems)
     order.cartItems = cartItemsString
-    return orderService.addOrder(order, this.$axios)
+    return orderService.addOrder(order, this.$api)
   },
 
   updateOrder ({ commit }, order) {
-    return orderService.update(order, this.$axios)
+    return orderService.update(order, this.$api)
   },
 
   deleteOrder ({ commit }, id) {
-    return orderService.deleteOrder(id, this.$axios).then(() => {
+    return orderService.deleteOrder(id, this.$api).then(() => {
       commit('removeOrder', id)
     })
   }

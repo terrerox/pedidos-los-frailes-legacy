@@ -20,6 +20,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuex-persist', mode: 'client' },
+    { src: '~/plugins/api' },
     { src: '~/plugins/vue-tooltip', mode: 'client' },
     { src: '~/plugins/pwa-update', mode: 'client' }
   ],
@@ -43,29 +44,11 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/pwa'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: process.env.BASE_URL
-  },
-
-  auth: {
-    strategies: {
-      google: {
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        codeChallengeMethod: '',
-        responseType: 'token',
-        redirectUri: 'http://localhost:4500',
-        endpoints: {
-          token: 'http://localhost:4000/api/accounts/google-auth', // somm backend url to resolve your auth with google and give you the token back
-          userInfo: 'http://localhost:4000/api/accounts/logged' // the endpoint to get the user info after you recived the token
-        }
-      }
-    }
-  },
+  axios: {},
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

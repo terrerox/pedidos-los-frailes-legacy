@@ -30,9 +30,10 @@
             </div>
             <div
               class="sticky inset-x-0 bottom-0 mt-8 pb-2 lg:hidden"
-              :class="cartItems.length ? '' : 'hidden'"
+              :class="!cartItems.length && 'hidden'"
             >
               <nuxt-link
+                v-if="authenticated"
                 class="block w-full px-6 py-4 text-xs font-medium leading-6 text-center text-white uppercase transition color-primary rounded shadow btn-hover focus:outline-none"
                 :to="{ name: 'shop-id-checkout', params: { id: $route.params.id }}"
               >
@@ -45,6 +46,13 @@
                     $ {{ cartTotal }}
                   </div>
                 </div>
+              </nuxt-link>
+              <nuxt-link
+                v-else
+                class="block w-full px-6 py-4 text-xs font-medium font-bold leading-6 text-center text-white uppercase transition bg-gray-500 rounded shadow ripple focus:outline-none"
+                to="/login"
+              >
+                Inicia sesión para ordenar
               </nuxt-link>
             </div>
           </div>
@@ -97,6 +105,7 @@ export default {
       currentLocal: 'currentLocal'
     }),
     ...mapState('local', ['status']),
+    ...mapState('authentication', ['authenticated']),
     sectionTitle () {
       return this.currentLocal.Products.length ? 'Productos 🍔' : 'No hay productos 😬'
     },

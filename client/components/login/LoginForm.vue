@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin({email})">
+  <form @submit.prevent="handleLogin(email)">
     <MaterialInput
       v-model="email"
       required

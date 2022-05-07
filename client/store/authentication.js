@@ -1,8 +1,10 @@
 import { magic } from '../plugins/magic'
+import accountService from '@/services/account'
 
 export const state = () => ({
   user: {},
   authenticated: false,
+  token: '',
   isLoading: false
 })
 
@@ -13,8 +15,12 @@ export const mutations = {
   },
   clearUserData (state) {
     state.user = {}
+    state.token = ''
     state.authenticated = false
     this.$router.push('/')
+  },
+  setToken (state, token) {
+    state.token = token
   },
   request (state, ctx) {
     state.isLoading = true
@@ -28,13 +34,14 @@ export const actions = {
   async login ({ commit }, email) {
     try {
       commit('request')
-      await magic.auth.loginWithMagicLink(email)
+      await magic.auth.loginWithMagicLink({ email })
       const userData = await magic.user.getMetadata()
       commit('setUserData', userData)
+      const { token } = await accountService.join(this.$api, email, 'Client')
+      commit('setToken', token)
       commit('endRequest')
       this.$router.push('/')
     } catch (err) {
-      console.log(err)
       commit('endRequest')
     }
   },

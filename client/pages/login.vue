@@ -28,6 +28,7 @@ import Header from '../components/login/Header'
 
 export default {
   components: { LoginForm, Header },
+
   head () {
     return {
       title: 'Login | Pedidos Los Frailes',
@@ -41,6 +42,12 @@ export default {
       htmlAttrs: {
         lang: 'en'
       }
+    }
+  },
+  mounted () {
+    const { authenticated } = this.$store.state.authentication
+    if (authenticated) {
+      this.$router.push('/')
     }
   },
 

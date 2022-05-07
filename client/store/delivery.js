@@ -39,7 +39,7 @@ export const mutations = {
 }
 export const actions = {
   getDeliveries ({ commit }) {
-    return deliveryService.getAll(this.$axios)
+    return deliveryService.getAll(this.$api)
       .then((deliveries) => {
         commit('setDeliveries', deliveries)
         commit('deliveryFinishedRequest')
@@ -47,7 +47,7 @@ export const actions = {
   },
   updateDelivery ({ commit, dispatch }, delivery) {
     commit('deliveryRequest')
-    return deliveryService.update(delivery, this.$axios)
+    return deliveryService.update(delivery, this.$api)
       .then(
         (res) => {
           commit('setEditedDelivery', res)
@@ -63,7 +63,7 @@ export const actions = {
       )
   },
   updateDeliveryStatus ({ commit }, delivery) {
-    return deliveryService.update(delivery, this.$axios)
+    return deliveryService.update(delivery, this.$api)
       .then(res => commit('setVerifiedDelivery', res))
   }
 }

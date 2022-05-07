@@ -6,9 +6,7 @@
     <div
       class="cursor-pointer flex items-center"
     >
-      <div>
-        <img class="w-12 md:w-16" :src="icon">
-      </div>
+      <img class="w-12 md:w-16" :src="icon">
       <div class="text-sm md:text-2xl text-gray-600 tracking-wide md:ml-2">
         Pedidos <span class="text-color-primary">Los Frailes</span>
       </div>
@@ -18,6 +16,7 @@
 
 <script>
 import icon from '@/assets/logo.png'
+
 export default {
   name: 'Header',
   data () {
