@@ -39,11 +39,14 @@ async function sendPushToAll(body) {
             }
         }
         webpush.sendNotification(subscriptionData, JSON.stringify(body))
-            .then(res => {
-                console.log(res)
-                console.log('Notificacion enviada ')
-            })
-            .catch(console.log)
+            .then(res => res)
+            .catch( err => {
+                
+                if ( err.statusCode === 410 ) {
+                    _delete(subscription)
+                }
+
+            });
     });
 }
 
@@ -61,9 +64,7 @@ async function sendPushById(id, data) {
             }
         }
         webpush.sendNotification(subscriptionData, JSON.stringify(data))
-            .then(res => {
-                return res
-            })
+            .then(res => res)
             .catch( err => {
                 
                 if ( err.statusCode === 410 ) {
