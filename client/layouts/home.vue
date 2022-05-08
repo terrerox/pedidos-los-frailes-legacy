@@ -28,14 +28,22 @@ export default {
   },
   computed: {
     ...mapState('push', ['isSubscribed']),
-    ...mapState('authentication', ['authenticated'])
+    ...mapState('authentication', ['authenticated', 'token'])
   },
 
   created () {
-    this.getSubscription()
+    this.setToken()
   },
 
-  methods: mapActions('push', ['getSubscription'])
+  methods: {
+    setToken () {
+      if (this.authenticated) {
+        this.$api.setToken(this.token, 'Bearer')
+        this.getSubscription()
+      }
+    },
+    ...mapActions('push', ['getSubscription'])
+  }
 }
 </script>
 
