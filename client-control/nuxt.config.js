@@ -45,7 +45,6 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    '@nuxtjs/auth-next',
     ['nuxt-twa-module', {
       /* module options */
       defaultUrl: 'https://control.pedidoslosfrailes.com',
@@ -71,26 +70,6 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: process.env.BASE_URL
-  },
-
-  auth: {
-    plugins: ['~/plugins/api.js'],
-    strategies: {
-      local: {
-        token: {
-          property: 'token',
-          global: true
-        },
-        user: {
-          property: 'user'
-        },
-        endpoints: {
-          login: { url: 'accounts/authenticate', method: 'post' },
-          logout: {},
-          user: false
-        }
-      }
-    }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

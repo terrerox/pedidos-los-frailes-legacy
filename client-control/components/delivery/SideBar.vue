@@ -30,17 +30,21 @@
           {{ item.title }}
         </nuxt-link>
       </nav>
+      <div class="flex justify-center">
+        <PedidosLosFrailes />
+      </div>
     </div>
   </Fragment>
 </template>
 
 <script>
 import { Fragment } from 'vue-fragment'
+import PedidosLosFrailes from '@/components/shared/PedidosLosFrailes'
 
 export default {
   name: 'SideBar',
 
-  components: { Fragment },
+  components: { Fragment, PedidosLosFrailes },
 
   props: {
     sidebarOpen: { type: Boolean, required: true }

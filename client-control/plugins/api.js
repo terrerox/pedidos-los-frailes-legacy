@@ -1,4 +1,4 @@
-export default function ({ $axios, $auth, $config: { baseUrl } }, inject) {
+export default function ({ $axios, store }, inject) {
   const api = $axios.create()
 
   api.onResponse((res) => {
@@ -8,11 +8,11 @@ export default function ({ $axios, $auth, $config: { baseUrl } }, inject) {
     if (config.url === '/subscriptions/key') {
       config.responseType = 'arraybuffer'
     }
-    config.headers.Authorization = $auth.strategies.local.token.get()
+    config.headers.Authorization = store.state.authentication.authenticated
     return config
   })
 
-  api.setBaseURL(baseUrl)
+  api.setBaseURL(process.env.BASE_URL)
 
   inject('api', api)
 }

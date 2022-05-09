@@ -31,11 +31,7 @@
         </nuxt-link>
       </nav>
       <div class="flex justify-center">
-        <div class="absolute bottom-0 text-xs">
-          &copy; {{ new Date().getFullYear() }} Alerta <span
-            class="text-color-primary"
-          > Los Frailes</span>
-        </div>
+        <PedidosLosFrailes />
       </div>
     </div>
   </Fragment>
@@ -43,11 +39,12 @@
 
 <script>
 import { Fragment } from 'vue-fragment'
+import PedidosLosFrailes from '@/components/shared/PedidosLosFrailes'
 
 export default {
   name: 'SideBar',
 
-  components: { Fragment },
+  components: { Fragment, PedidosLosFrailes },
 
   props: {
     sidebarOpen: { type: Boolean, required: true }

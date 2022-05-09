@@ -1,7 +1,7 @@
 <template>
   <div class="lg:flex">
     <section class="lg:w-1/2 xl:max-w-screen-sm">
-      <LocalSection />
+      <DeliverySection />
     </section>
     <section
       class="
@@ -16,7 +16,7 @@
       <h1 class="ml-6 font-black text-6xl text-gray-600 leading-relaxed xl:text-8xl">
         Donde están <br>
         los mejores <br>
-        <span class="text-color-primary">locales</span> <br>
+        <span class="text-color-primary">deliveries</span> <br>
         del mundo.
       </h1>
     </section>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import LocalSection from '../components/auth/LocalSection'
+import DeliverySection from '../components/auth/DeliverySection'
 
 let prompt
 process.client && window.addEventListener('beforeinstallprompt', function (e) {
@@ -33,7 +33,7 @@ process.client && window.addEventListener('beforeinstallprompt', function (e) {
 })
 
 export default {
-  components: { LocalSection },
+  components: { DeliverySection },
 
   data () {
     return {
@@ -42,12 +42,12 @@ export default {
   },
   head () {
     return {
-      title: '¡Bienvenido local! | Pedidos Los Frailes',
+      title: '¡Bienvenido delivery! | Pedidos Los Frailes',
       meta: [
         {
-          hid: '¡Bienvenido local!',
-          name: '¡Bienvenido local!',
-          content: 'Inicia sesión o registrate como local en Pedidos Los Frailes'
+          hid: '¡Bienvenido delivery!',
+          name: '¡Bienvenido delivery!',
+          content: 'Inicia sesión o registrate como delivery en Pedidos Los Frailes'
         }
       ],
       htmlAttrs: {

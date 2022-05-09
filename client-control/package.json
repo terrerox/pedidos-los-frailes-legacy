@@ -11,12 +11,12 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "5.0.0-1640716105.da0587d",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vercel-builder": "^0.22.1",
     "core-js": "^3.15.1",
+    "magic-sdk": "^8.1.1",
     "nuxt": "^2.15.7",
     "nuxt-route-meta": "^2.3.2",
     "nuxt-sweetalert2": "^1.0.0",
