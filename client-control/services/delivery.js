@@ -15,7 +15,7 @@ deliveryService.getById = (id, api) => {
 }
 
 deliveryService.update = (delivery, api) => {
-  return api.put(`/deliveries/${delivery.accountId}`, delivery)
+  return api.put('/deliveries', delivery)
     .then(res => res)
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleLogin(email)">
+  <form @submit.prevent="handleLogin({email, role})">
     <MaterialInput
       v-model="email"
       required
@@ -29,7 +29,8 @@ export default {
   components: { MaterialInput, Loader },
   data () {
     return {
-      email: ''
+      email: '',
+      role: 'Local'
     }
   },
 

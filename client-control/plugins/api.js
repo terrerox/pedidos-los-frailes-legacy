@@ -8,7 +8,7 @@ export default function ({ $axios, store }, inject) {
     if (config.url === '/subscriptions/key') {
       config.responseType = 'arraybuffer'
     }
-    config.headers.Authorization = store.state.authentication.authenticated
+    console.log(config)
     return config
   })
 

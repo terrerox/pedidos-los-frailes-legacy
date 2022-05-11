@@ -44,24 +44,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
-    ['nuxt-twa-module', {
-      /* module options */
-      defaultUrl: 'https://control.pedidoslosfrailes.com',
-      hostName: 'your-url.com',
-      sha256Fingerprints: ['DD9D1FA58B10266659E59C31D80A5934778CC63603511EE765F84DBF73DC3427'],
-      applicationId: 'com.control.pedidoslosfrailes',
-      launcherName: 'Pedidos Los Frailes Control',
-      versionCode: 1,
-      versionName: '1.0',
-      statusBarColor: '#eff2fb',
-
-      /* optional */
-      /* overwrite default location for icon */
-      iconPath: '/static/icon.png',
-      /* Overwrite folder where to put .wellknown */
-      distFolder: '/.nuxt/dist/client'
-    }]
+    '@nuxtjs/pwa'
   ],
 
   publicRuntimeConfig: {

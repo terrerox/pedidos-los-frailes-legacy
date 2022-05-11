@@ -162,9 +162,8 @@ export default {
           if (result.value) {
             this.$swal('Entregada', 'Orden entragada con éxito', 'success')
             this.$store.dispatch('order/deleteDeliveryOrder', { id })
-            const deliveryId = Number(this.$route.params.id)
+
             this.$store.dispatch('delivery/updateDelivery', {
-              accountId: deliveryId,
               status: 'active'
             })
           }

@@ -17,21 +17,22 @@ async function getById(id) {
   return await getAccount(id);
 }
 
-async function join({ email, role }) {
+async function join(accountParams) {
+  const { email } = accountParams
   const account = await db.Account.findOne({
     where: { email },
   });
 
   if(!account) {
-    const account = await db.Account.create({ email, role });
-    const { id } = account.dataValues
+    const account = await db.Account.create(accountParams);
+    const { id, role } = account.dataValues
     const token = generateToken(id)
-    return { token }
+    return { token, role }
   }
 
-  const { id } = account.dataValues
+  const { id, role } = account.dataValues
   const token = generateToken(id)
-  return { token }
+  return { token, role }
 }
 
 async function _delete(id) {

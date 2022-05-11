@@ -1,5 +1,7 @@
 import { magic } from '../plugins/magic'
 import accountService from '@/services/account'
+import localService from '@/services/local'
+import deliveryService from '@/services/delivery'
 
 export const state = () => ({
   user: {},
@@ -31,16 +33,32 @@ export const mutations = {
 }
 
 export const actions = {
-  async login ({ commit }, email) {
+  async login ({ commit }, payload) {
+    const { email } = payload
     try {
       commit('request')
       await magic.auth.loginWithMagicLink({ email })
       const userData = await magic.user.getMetadata()
-      commit('setUserData', userData)
-      const { token } = await accountService.join(this.$api, email, 'Client')
+      const { token, role } = await accountService.join(this.$api, payload.email, payload.role)
+      commit('setUserData', { role, ...userData })
       commit('setToken', token)
+      this.$api.setToken(token, 'Bearer')
+      if (role === 'Local') {
+        localService.getLogged(this.$api).then((res) => {
+          res.notFound
+            ? this.$router.push('/local/info')
+            : this.$router.push('/local/products')
+        })
+      } else if (role === 'Delivery') {
+        deliveryService.getLogged(this.$api).then((res) => {
+          res.notFound
+            ? this.$router.push('/delivery/info')
+            : this.$router.push('/delivery/orders')
+        })
+      } else {
+        this.$router.push('/admin')
+      }
       commit('endRequest')
-      this.$router.push('/')
     } catch (err) {
       commit('endRequest')
     }

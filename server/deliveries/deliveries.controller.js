@@ -67,6 +67,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
+    req.body.accountId = req.delivery.id
     deliveryService.update(req.params.id, req.body)
         .then(delivery => res.json(delivery))
         .catch(next);
