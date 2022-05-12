@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "vercel-build": "yarn global add node-gyp",
     "dev": "nuxt",
     "build-app": "nuxt build",
     "run-app": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
-    "lint": "yarn run lint:js"
+    "lint": "npm run lint:js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
