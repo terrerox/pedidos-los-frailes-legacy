@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "vercel-build": "yarn global add bufferutil",
+    "vercel-build": "yarn global add node-gyp-build",
     "dev": "nuxt",
     "build-app": "nuxt build",
     "run-app": "nuxt start",
