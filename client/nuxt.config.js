@@ -17,10 +17,16 @@ export default {
   css: [
   ],
 
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL,
+    magicApiSecret: process.env.MAGIC_PUBLISHABLE_KEY
+  },
+
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/vuex-persist', mode: 'client' },
     { src: '~/plugins/api' },
+    { src: '~/plugins/magic', mode: 'client' },
     { src: '~/plugins/vue-tooltip', mode: 'client' },
     { src: '~/plugins/sw-ref', mode: 'client' },
     { src: '~/plugins/pwa-update', mode: 'client' }
@@ -34,8 +40,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

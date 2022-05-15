@@ -1,4 +1,3 @@
-import { magic } from '../plugins/magic'
 import accountService from '@/services/account'
 
 export const state = () => ({
@@ -34,8 +33,8 @@ export const actions = {
   async login ({ commit }, email) {
     try {
       commit('request')
-      await magic.auth.loginWithMagicLink({ email })
-      const userData = await magic.user.getMetadata()
+      await this.$magic.auth.loginWithMagicLink({ email })
+      const userData = await this.$magic.user.getMetadata()
       commit('setUserData', userData)
       const { token } = await accountService.join(this.$api, email, 'Client')
       commit('setToken', token)
@@ -48,7 +47,7 @@ export const actions = {
   async logout ({ commit }) {
     try {
       commit('request')
-      await magic.user.logout()
+      await this.$magic.user.logout()
       commit('clearUserData')
       commit('endRequest')
     } catch (error) {

@@ -1,9 +1,11 @@
 import { Magic } from 'magic-sdk'
 
-// Create client-side Magic instance
-const createMagic = (key) => {
-  return typeof window !== 'undefined' && new Magic(key)
-}
+export default function ({ $config: { magicApiSecret, baseURL } }, inject) {
+  const createMagic = (key) => {
+    return typeof window !== 'undefined' && new Magic(key)
+  }
 
-console.log(process.env.MAGIC_PUBLISHABLE_KEY)
-export const magic = createMagic(process.env.MAGIC_PUBLISHABLE_KEY)
+  console.log({ baseURL, magicApiSecret })
+  const magic = createMagic(magicApiSecret)
+  inject('magic', magic)
+}
