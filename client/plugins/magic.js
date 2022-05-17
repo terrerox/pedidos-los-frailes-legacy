@@ -2,7 +2,7 @@ import { Magic } from 'magic-sdk'
 
 export default function ({ $config: { magicApiSecret, baseURL } }, inject) {
   const createMagic = (key) => {
-    return typeof window !== 'undefined' && new Magic(key)
+    return typeof window !== 'undefined' && new Magic(key, { locale: 'es' })
   }
 
   const magic = createMagic(magicApiSecret)
