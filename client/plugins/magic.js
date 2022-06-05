@@ -1,6 +1,6 @@
 import { Magic } from 'magic-sdk'
 
-export default function ({ $config: { magicApiSecret, baseURL } }, inject) {
+export default function ({ $config: { magicApiSecret } }, inject) {
   const createMagic = (key) => {
     return typeof window !== 'undefined' && new Magic(key)
   }
