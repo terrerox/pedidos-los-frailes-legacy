@@ -1,4 +1,11 @@
 # Created by .ignore support plugin (hsz.mobi)
+.yarn
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 ### Node template
 # Logs
 /logs
