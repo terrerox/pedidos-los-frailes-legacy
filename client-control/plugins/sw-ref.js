@@ -1,3 +1,6 @@
 export default function (context, inject) {
-  return inject('sw', 'sw.m')
+  return window.$workbox
+    .then((sw) => {
+      sw && inject('sw', sw.m)
+    })
 }
