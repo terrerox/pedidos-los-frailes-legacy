@@ -1,6 +1,7 @@
 const jwt = require('express-jwt');
-const { secret } = require('config.json');
 const db = require('_helpers/db');
+require('dotenv').config()
+
 
 module.exports = authorize;
 
@@ -12,13 +13,12 @@ function authorize(roles = []) {
 
     return [
         // authenticate JWT token and attach decoded token to request as req.user
-        jwt({ secret, algorithms: ['HS256'] }),
+        jwt({ secret: process.env.SECRET_TOKEN, algorithms: ['HS256'] }),
 
         // attach full user record to request object
         async (req, res, next) => {
             // get user with id from token 'sub' (subject) property
             const account = await db.Account.findByPk(req.user.sub);
-            console.log(account)
 
             if (!account || (roles.length && !roles.includes(account.role))) {
                 // account no longer exists or role not authorized

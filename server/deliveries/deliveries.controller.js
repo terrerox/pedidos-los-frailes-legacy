@@ -11,7 +11,7 @@ router.post('/create', authorize(Role.Delivery), createSchema, create);
 router.get('/all', getAll);
 router.get('/logged',  authorize(Role.Delivery), getLogged);
 router.get('/:id', getById);
-router.put('/:id', updateSchema, update);
+router.put('/', updateSchema, update);
 router.delete('/:id', authorize(Role.Delivery), _delete);
 
 module.exports = router;
@@ -56,6 +56,7 @@ function getLogged(req, res, next) {
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
+        accountId: Joi.number().empty(''),
         name: Joi.string().empty(''),
         nationalId: Joi.string().empty(''),
         lastName: Joi.string().empty(''),
@@ -67,8 +68,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    req.body.accountId = req.delivery.id
-    deliveryService.update(req.params.id, req.body)
+    deliveryService.update(req.body)
         .then(delivery => res.json(delivery))
         .catch(next);
 }

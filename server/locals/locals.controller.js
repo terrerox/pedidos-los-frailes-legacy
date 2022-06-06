@@ -43,8 +43,9 @@ function getAll(req, res, next) {
 }
 
 function getLogged(req, res, next) {
-    req.local.Local
-        ? res.json(req.local)
+    const loggedLocal = req.local.Local
+    loggedLocal
+        ? res.json(loggedLocal.dataValues)
         : res.json({ notFound: true })
 }
 
@@ -70,7 +71,7 @@ function updateSchema(req, res, next) {
 }
 
 function update(req, res, next) {
-    const id = req.body.id ? req.body.id : req.local.id
+    const id = req.local.id || req.body.id
     localService.update(id, req.body)
         .then(local => res.json(local))
         .catch(next);

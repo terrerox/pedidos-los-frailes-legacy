@@ -30,9 +30,9 @@ async function getById(id) {
     return await getDelivery(id);
 }
 
-async function update(id, params) {
-    const delivery = await getDelivery(id);
-    const { image, ...deliveryWithoutImage } = params
+async function update(params) {
+    const { image, accountId, ...deliveryWithoutImageAndId } = params
+    const delivery = await getDelivery(accountId);
 
     if (params.image) {
         const cloudinaryResponse = await cloudinary.uploader.upload(params.image, {
@@ -41,11 +41,11 @@ async function update(id, params) {
         const cloudinaryContent = {
             imageUrl: cloudinaryResponse.secure_url
         }
-        const updatedDelivery = { ...deliveryWithoutImage, ...cloudinaryContent }
+        const updatedDelivery = { ...deliveryWithoutImageAndId, ...cloudinaryContent }
         Object.assign(delivery, updatedDelivery);
 
     } else {
-        Object.assign(delivery, deliveryWithoutImage);
+        Object.assign(delivery, deliveryWithoutImageAndId);
     }
 
     await delivery.save();

@@ -71,7 +71,7 @@ async function getLocal(id) {
     ],
   }
   );
-  if (!local) throw "Locale no encontrado";
+  if (!local) throw "Local no encontrado";
   return local;
 }
 
