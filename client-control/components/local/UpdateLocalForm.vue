@@ -1,14 +1,22 @@
 <template>
   <form ref="localForm" class="grid grid-cols-2 gap-2">
+    <div class="col-span-2">
+      <MaterialInput
+        v-model="user.email"
+        type="text"
+        label="Correo"
+        disabled
+      />
+    </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.title"
         type="text"
         label="Nombre del local"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-select
+      <MaterialSelect
         v-model="local.category"
         label="Categoria"
         :content="categoryItems"
@@ -24,21 +32,21 @@
       >
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.description"
         type="text"
         label="Descripción"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.address"
         type="text"
         label="Dirección"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.phoneNumber"
         v-mask="'+1 ###-###-####'"
         type="tel"
@@ -80,7 +88,8 @@ export default {
   },
 
   computed: {
-    ...mapState('local', ['loggedLocal'])
+    ...mapState('local', ['loggedLocal']),
+    ...mapState('authentication', ['user'])
   },
 
   created () {
@@ -121,7 +130,7 @@ export default {
     },
 
     setLocalInfo () {
-      const { description, title, phoneNumber, address, category, image } = this.loggedLocal.Local
+      const { description, title, phoneNumber, address, category, image } = this.loggedLocal
       this.local.description = description
       this.local.title = title
       this.local.phoneNumber = phoneNumber

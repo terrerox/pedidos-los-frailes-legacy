@@ -5,7 +5,7 @@
       ¡Completa tu registro!
     </p>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.nationalId"
         v-mask="'###-#######-#'"
         required
@@ -15,7 +15,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.name"
         required
         type="text"
@@ -23,7 +23,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.lastName"
         required
         type="text"
@@ -31,7 +31,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.phoneNumber"
         v-mask="'+1 ###-###-####'"
         required

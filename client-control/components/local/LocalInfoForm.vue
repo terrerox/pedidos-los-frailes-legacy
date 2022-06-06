@@ -5,7 +5,7 @@
       ¡Completa tu registro!
     </p>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.title"
         required
         type="text"
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-select
+      <MaterialSelect
         v-model="local.category"
         required
         :content="selectItems"
@@ -31,7 +31,7 @@
       >
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.description"
         required
         type="text"
@@ -39,7 +39,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.address"
         required
         type="text"
@@ -47,7 +47,7 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="local.phoneNumber"
         v-mask="'+1 ###-###-####'"
         required

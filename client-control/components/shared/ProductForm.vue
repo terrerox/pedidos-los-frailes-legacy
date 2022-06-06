@@ -3,14 +3,14 @@
     <Alert class="mb-5" />
     <form ref="form" class="grid grid-cols-2 gap-2">
       <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-        <material-input
+        <MaterialInput
           v-model="product.title"
           required
           label="Nombre del producto"
         />
       </div>
       <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-        <material-input
+        <MaterialInput
           v-model="product.price"
           required
           type="number"
@@ -18,14 +18,14 @@
         />
       </div>
       <div class="col-span-2 lg:col-span-2 mt-2 pr-1">
-        <material-select
+        <MaterialSelect
           v-model="product.category"
           :content="selectCategory"
           label="Categoria"
         />
       </div>
       <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-        <material-input
+        <MaterialInput
           v-model="product.prepTimeValue"
           required
           type="number"
@@ -33,7 +33,7 @@
         />
       </div>
       <div class="col-span-2 lg:col-span-1 mt-2 pr-1">
-        <material-select
+        <MaterialSelect
           v-model="product.prepTimeUnit"
           :content="selectPrepTimeUnit"
           label="Unidad de preparación"

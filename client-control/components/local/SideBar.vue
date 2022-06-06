@@ -30,9 +30,7 @@
           {{ item.title }}
         </nuxt-link>
       </nav>
-      <div class="flex justify-center">
-        <PedidosLosFrailes />
-      </div>
+      <PedidosLosFrailes class="flex justify-center" />
     </div>
   </Fragment>
 </template>
@@ -56,7 +54,7 @@ export default {
     return {
       items: [
         { title: 'Productos', path: 'products' },
-        { title: 'Ordenes', path: 'orders' }
+        { title: 'Órdenes', path: 'orders' }
       ]
     }
   }

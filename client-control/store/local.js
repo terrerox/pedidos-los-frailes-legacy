@@ -34,14 +34,14 @@ export const mutations = {
       status
     } = editedLocal
 
-    const { Local } = state.loggedLocal
-    Local.title = title
-    Local.category = category
-    Local.description = description
-    Local.address = address
-    Local.phoneNumber = phoneNumber
-    Local.imageUrl = imageUrl
-    Local.status = status
+    const { loggedLocal } = state
+    loggedLocal.title = title
+    loggedLocal.category = category
+    loggedLocal.description = description
+    loggedLocal.address = address
+    loggedLocal.phoneNumber = phoneNumber
+    loggedLocal.imageUrl = imageUrl
+    loggedLocal.status = status
   },
   setVerifiedLocal (state, verifiedLocal) {
     const local = state.locals.find(local => local.accountId === verifiedLocal.accountId)

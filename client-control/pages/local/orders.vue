@@ -45,7 +45,7 @@
       </div>
       <div v-else>
         <div class="text-center text-2xl text-gray-600 leading-tight">
-          No hay ordenes
+          No hay órdenes
         </div>
         <img
           class="w-full lg:w-1/2 m-auto mt-5 lg:mt-12"
@@ -74,17 +74,17 @@ export default {
   middleware: 'authenticated',
 
   meta: {
-    title: 'Ordenes'
+    title: 'Órdenes'
   },
 
   head () {
     return {
-      title: 'Ordenes | Pedidos Los Frailes Control',
+      title: 'Órdenes | Pedidos Los Frailes Control',
       meta: [
         {
-          hid: 'Ordenes',
-          name: 'Ordenes',
-          content: 'Revisa las ordenes de tu local'
+          hid: 'Órdenes',
+          name: 'Órdenes',
+          content: 'Revisa las órdenes de tu local'
         }
       ],
       htmlAttrs: {

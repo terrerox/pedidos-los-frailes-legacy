@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AllowNotificationsModal v-if="!isSubscribed" />
+    <AllowNotificationsModal v-show="!isSubscribed" />
     <div>
       <div class="flex h-screen bg-gray-100 dark:bg-gray-800 font-roboto">
         <SideBar :sidebar-open="sidebarOpen" @sidebarOpen="sidebarOpen = false" />
@@ -44,17 +44,24 @@ export default {
   },
   computed: {
     ...mapGetters('local', ['loggedLocal']),
-    ...mapState('push', ['isSubscribed'])
+    ...mapState('push', ['isSubscribed']),
+    ...mapState('authentication', ['authenticated', 'token'])
   },
   created () {
-    this.getSubscription()
+    this.setToken()
   },
   mounted () {
     this.getLoggedLocal()
   },
   methods: {
     ...mapActions('local', ['getLoggedLocal']),
-    ...mapActions('push', ['getSubscription'])
+    ...mapActions('push', ['getSubscription']),
+    setToken () {
+      if (this.authenticated) {
+        this.$api.setToken(this.token, 'Bearer')
+        this.getSubscription()
+      }
+    }
   }
 }
 </script>

@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       items: [
-        { title: 'Ordenes', path: 'orders' }
+        { title: 'Órdenes', path: 'orders' }
       ]
     }
   }

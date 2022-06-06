@@ -62,10 +62,11 @@
             Editar Perfil
           </nuxt-link>
           <a
-            class="block px-4 py-2 cursor-pointer text-sm text-gray-700 btn-hover hover:text-white"
+            class="block px-4 py-2 cursor-pointer flex justify-center text-sm color-primary btn-hover text-white"
             @click="logoutButton"
           >
-            Cerrar sesión
+            <Loader v-show="isLoading" />
+            <span v-show="!isLoading">Cerrar sesión</span>
           </a>
         </div>
       </div>
@@ -74,10 +75,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import Loader from '../shared/Loader'
 
 export default {
   name: 'Header',
+
+  components: { Loader },
 
   props: {
     loggedDelivery: { type: Object, required: true }
@@ -92,13 +96,14 @@ export default {
   },
 
   computed: {
+    ...mapState('authentication', ['isLoading']),
     title () {
       return this.$route.meta.title
     }
   },
 
   methods: {
-    ...mapActions('account', ['logout']),
+    ...mapActions('authentication', ['logout']),
 
     logoutButton () {
       this.$swal({
@@ -110,7 +115,6 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.logout()
-          this.$router.push('/')
         }
       })
     }

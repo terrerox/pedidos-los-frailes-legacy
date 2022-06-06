@@ -1,7 +1,15 @@
 <template>
   <form ref="deliveryForm" class="grid grid-cols-2 gap-2" @submit.prevent="submit">
+    <div class="col-span-2">
+      <MaterialInput
+        v-model="user.email"
+        type="text"
+        label="Correo"
+        disabled
+      />
+    </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.nationalId"
         v-mask="'###-#######-#'"
         type="text"
@@ -10,21 +18,21 @@
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.name"
         type="text"
         label="Nombre"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.lastName"
         type="text"
         label="Apellido"
       />
     </div>
     <div class="col-span-2 lg:col-span-1">
-      <material-input
+      <MaterialInput
         v-model="delivery.phoneNumber"
         v-mask="'+1 ###-###-####'"
         type="tel"
@@ -73,7 +81,8 @@ export default {
   },
 
   computed: {
-    ...mapState('delivery', ['loggedDelivery'])
+    ...mapState('delivery', ['loggedDelivery']),
+    ...mapState('authentication', ['user'])
   },
 
   created () {

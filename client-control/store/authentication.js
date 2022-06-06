@@ -1,4 +1,3 @@
-import { magic } from '../plugins/magic'
 import accountService from '@/services/account'
 import localService from '@/services/local'
 import deliveryService from '@/services/delivery'
@@ -37,8 +36,8 @@ export const actions = {
     const { email } = payload
     try {
       commit('request')
-      await magic.auth.loginWithMagicLink({ email })
-      const userData = await magic.user.getMetadata()
+      await this.$magic.auth.loginWithMagicLink({ email })
+      const userData = await this.$magic.user.getMetadata()
       const { token, role } = await accountService.join(this.$api, payload.email, payload.role)
       commit('setUserData', { role, ...userData })
       commit('setToken', token)
@@ -66,8 +65,9 @@ export const actions = {
   async logout ({ commit }) {
     try {
       commit('request')
-      await magic.user.logout()
+      await this.$magic.user.logout()
       commit('clearUserData')
+      this.$router.push('/')
       commit('endRequest')
     } catch (error) {
       commit('endRequest')

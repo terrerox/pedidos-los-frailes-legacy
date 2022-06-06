@@ -7,6 +7,7 @@
         class="md-input"
         :type="type"
         :required="required"
+        :disabled="disabled"
         min="0"
         :pattern="pattern"
         :placeholder="placeholder || label"
@@ -51,6 +52,10 @@ export default {
       default: randomId
     },
     required: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
       type: Boolean,
       default: false
     },

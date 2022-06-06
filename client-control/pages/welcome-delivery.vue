@@ -59,6 +59,13 @@ export default {
     this.isPWAInstalled()
     this.installed = process.client && localStorage.getItem('installed')
   },
+  mounted () {
+    const { authenticated, user: { role } } = this.$store.state.authentication
+    if (!authenticated) { return }
+    if (role === 'Delivery') { return this.$router.push('/delivery/orders') }
+    if (role === 'Local') { return this.$router.push('/local/products') }
+    this.$router.push('/admin')
+  },
 
   methods: {
     async installPWA () {

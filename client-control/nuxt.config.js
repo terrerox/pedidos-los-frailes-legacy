@@ -22,6 +22,7 @@ export default {
     { src: '~/plugins/vuex-persist', mode: 'client' },
     { src: '~/plugins/api' },
     { src: '~/plugins/vue-tooltip', mode: 'client' },
+    { src: '~/plugins/magic', mode: 'client' },
     { src: '~/plugins/sw-ref', mode: 'client' }
   ],
 
@@ -33,8 +34,7 @@ export default {
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/tailwindcss'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,7 +48,8 @@ export default {
   ],
 
   publicRuntimeConfig: {
-    baseUrl: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    magicApiSecret: process.env.MAGIC_PUBLISHABLE_KEY
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

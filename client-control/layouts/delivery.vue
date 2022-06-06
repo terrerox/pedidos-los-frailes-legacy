@@ -46,17 +46,24 @@ export default {
   },
   computed: {
     ...mapGetters('delivery', ['loggedDelivery']),
-    ...mapState('push', ['isSubscribed'])
+    ...mapState('push', ['isSubscribed']),
+    ...mapState('authentication', ['authenticated', 'token'])
   },
   mounted () {
     this.getLoggedDelivery()
   },
   created () {
-    this.getSubscription()
+    this.setToken()
   },
   methods: {
     ...mapActions('delivery', ['getLoggedDelivery']),
-    ...mapActions('push', ['getSubscription'])
+    ...mapActions('push', ['getSubscription']),
+    setToken () {
+      if (this.authenticated) {
+        this.$api.setToken(this.token, 'Bearer')
+        this.getSubscription()
+      }
+    }
   }
 }
 </script>

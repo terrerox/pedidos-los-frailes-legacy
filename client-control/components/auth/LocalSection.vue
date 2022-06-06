@@ -2,13 +2,13 @@
   <main class="mt-10 md:mt-0 md:h-screen grid place-content-center">
     <Header />
     <h2
-      class="
+      class="block lg:hidden
             text-center text-2xl md:text-3xl text-gray-600
             leading-tight
           "
     >
-      Bienvenido de nuevo, <br>
-      ¡Te extrañamos!
+      Los mejores <br>
+      <span class="text-color-primary">locales</span> del mundo.
     </h2>
     <section class="mt-8">
       <LocalForm />
