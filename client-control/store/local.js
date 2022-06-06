@@ -54,7 +54,7 @@ export const actions = {
     commit('localRequest')
     return localService.create(local, this.$api)
       .then((res) => {
-        this.$router.push(`/local/${res.id}/products`)
+        this.$router.push('/local/products')
         commit('localFinishedRequest')
       },
       (error) => {

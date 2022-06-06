@@ -50,7 +50,7 @@ export const actions = {
     return deliveryService.create(delivery, this.$api)
       .then((res) => {
         commit('deliveryFinishedRequest')
-        this.$router.push(`/delivery/${res.id}/orders`)
+        this.$router.push('/delivery/orders')
       },
       (error) => {
         const { message } = error.response.data
