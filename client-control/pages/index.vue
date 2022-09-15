@@ -57,7 +57,6 @@ export default {
   },
   created () {
     this.isPWAInstalled()
-    this.installed = process.client && localStorage.getItem('installed')
   },
 
   mounted () {
@@ -81,9 +80,9 @@ export default {
         if ('getInstalledRelatedApps' in window.navigator) {
           const relatedApps = await window.navigator.getInstalledRelatedApps()
           if (relatedApps.length > 0) {
-            localStorage.setItem('installed', true)
+            this.installed = true
           } else {
-            localStorage.setItem('installed', false)
+            this.installed = false
           }
         }
       }
