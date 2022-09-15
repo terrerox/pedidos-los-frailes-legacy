@@ -24,6 +24,14 @@
     <section class="text-center mt-8 text-gray-500 text-sm leading-relaxed">
       <PedidosLosFrailes />
     </section>
+    <button
+      v-show="!isInstalled"
+      class="text-xs md:text-sm text-gray-500 p-2 rounded-full
+                font-semibold font-display focus:outline-none focus:shadow-outline shadow-lg"
+      @click="installPWA"
+    >
+      Instala la app
+    </button>
   </main>
 </template>
 
@@ -34,7 +42,11 @@ import PedidosLosFrailes from '@/components/shared/PedidosLosFrailes'
 
 export default {
   name: 'DeliverySection',
-  components: { DeliveryForm, Header, PedidosLosFrailes }
+  components: { DeliveryForm, Header, PedidosLosFrailes },
+  props: {
+    isInstalled: Boolean,
+    installPWA: Function
+  }
 }
 </script>
 

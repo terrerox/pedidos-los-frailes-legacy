@@ -1,7 +1,7 @@
 <template>
   <div class="lg:flex">
     <section class="lg:w-1/2 xl:max-w-screen-sm">
-      <LocalSection />
+      <LocalSection :isInstalled="installed" :installPWA="installPWA" />
     </section>
     <section
       class="

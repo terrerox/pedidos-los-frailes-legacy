@@ -1,7 +1,7 @@
 <template>
   <div class="lg:flex lg:flex-row-reverse">
     <section class="lg:w-1/2 xl:max-w-screen-sm">
-      <DeliverySection />
+      <DeliverySection :isInstalled="installed" :installPWA="installPWA"/>
     </section>
     <section
       class="
