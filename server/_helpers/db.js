@@ -22,7 +22,13 @@ async function initialize() {
     password,
     database,
   } = connectionData
-  
+  console.log({
+    host,
+    port,
+    user,
+    password,
+    database,
+  })
   const connection = await mysql.createConnection({
     host,
     port,
