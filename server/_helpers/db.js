@@ -37,6 +37,7 @@ async function initialize() {
     database,
   });
   
+  console.log(connection)
   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${connectionData.database}\`;`);
 
   const sequelize = new Sequelize(connectionData.database, connectionData.user, connectionData.password, {
