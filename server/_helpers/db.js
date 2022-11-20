@@ -22,7 +22,20 @@ async function initialize() {
     password,
     database,
   } = connectionData
-  const sequelize = new Sequelize(connectionData.database, connectionData.user, connectionData.password, {
+
+  const connection = await mysql.createConnection({
+    host,
+    port,
+    user,
+    password,
+    database,
+  });
+  
+  await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
+
+  const sequelize = new Sequelize(database, user, password, {
+    host,
+    port, 
     dialect: "mysql",
   });
 
@@ -53,4 +66,7 @@ async function initialize() {
 
   db.Account.hasOne(db.Subscription, { foreignKey: 'accountId' });
   db.Subscription.belongsTo(db.Account, { foreignKey: 'accountId' });
+
+  // sync all models with database
+  await sequelize.sync();
 }
